@@ -526,6 +526,64 @@ a { color: inherit; text-decoration: none; }
 .partner-toggle svg { transition: transform var(--transition); }
 .partner-toggle.open svg { transform: rotate(180deg); }
 
+/* ── RECOMMENDED PATH HERO ──────────────────────────── */
+.rec-hero {
+  background: var(--color-primary-bg);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-2xl); box-shadow: var(--shadow-md);
+  padding: var(--space-8); margin-bottom: var(--space-8);
+}
+.rec-hero-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-5);
+}
+.rec-hero-badge {
+  font-size: var(--text-xs); font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--color-success);
+  background: var(--color-success-bg); border: 1px solid var(--color-success);
+  border-radius: 99px; padding: 0.2rem 0.75rem; white-space: nowrap;
+}
+.rec-hero-title {
+  font-family: var(--font-display); font-size: var(--text-xl);
+  font-weight: 800; color: var(--color-text); line-height: 1.15;
+  margin-bottom: var(--space-2);
+}
+.rec-hero-sub {
+  font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6;
+  max-width: 68ch; margin-bottom: var(--space-6);
+}
+.rec-hero-stack {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--space-2); margin-bottom: var(--space-6);
+}
+.rec-stack-node {
+  font-family: var(--font-display); font-size: var(--text-xs); font-weight: 800;
+  padding: var(--space-2) var(--space-4); border-radius: var(--radius-lg);
+  border: 1.5px solid; white-space: nowrap;
+}
+.rec-stack-arrow {
+  color: var(--color-text-faint); font-size: 1rem; font-weight: 400;
+}
+.rec-hero-reasons {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3);
+}
+.rec-reason {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--space-4);
+}
+.rec-reason-label {
+  font-size: var(--text-xs); font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--color-primary); margin-bottom: var(--space-2);
+}
+.rec-reason-text {
+  font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.55;
+}
+.section-intro {
+  font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.65;
+  margin-bottom: var(--space-4); max-width: 72ch;
+}
+
 /* ── ABOUT / TEAM SECTION ────────────────────────────── */
 .about-blurb {
   font-size: var(--text-base); color: var(--color-text-muted); line-height: 1.7;
@@ -582,6 +640,26 @@ a { color: inherit; text-decoration: none; }
 .team-bio {
   font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6;
 }
+
+/* ── IDEAL STATE TABS ────────────────────────────────── */
+.ideal-tabs {
+  display: flex; gap: var(--space-1); margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-divider); padding-bottom: 0;
+}
+.ideal-tab {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-body); font-size: var(--text-xs); font-weight: 700;
+  color: var(--color-text-muted); padding: var(--space-2) var(--space-3);
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+.ideal-tab:hover { color: var(--color-text); }
+.ideal-tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+.ideal-diagram { display: none; }
+.ideal-diagram.active { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+.flow-diagram { display: none; }
+.flow-diagram.active { display: block; }
 
 /* ── IMPLEMENTATION & TRACKING ──────────────────────── */
 .impl-phases {
@@ -732,6 +810,12 @@ a { color: inherit; text-decoration: none; }
   display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;
   justify-content: center;
 }
+.flow-note {
+  margin-top: var(--space-4); font-size: var(--text-sm); color: var(--color-muted);
+  background: var(--color-bg); border-left: 3px solid var(--color-border);
+  padding: var(--space-3) var(--space-4); border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  line-height: 1.6;
+}
 .flow-node {
   display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
   text-align: center; min-width: 90px;
@@ -862,9 +946,84 @@ a { color: inherit; text-decoration: none; }
   .timeline-phase:nth-child(4), .timeline-phase:nth-child(5) { display: none; }
   .dataflow-compare { grid-template-columns: 1fr; }
 }
+/* ── PASSWORD GATE ───────────────────────────────────── */
+#pw-gate {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--color-bg);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-6);
+}
+#pw-gate.hidden { display: none; }
+.pw-box {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-10) var(--space-10);
+  width: 100%; max-width: 420px;
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-6);
+  text-align: center;
+}
+.pw-logo {
+  width: 52px; height: 52px; border-radius: var(--radius-lg);
+  object-fit: contain; background: #fff;
+}
+.pw-title {
+  font-family: var(--font-display); font-size: var(--text-lg);
+  font-weight: 800; color: var(--color-text); line-height: 1.2;
+}
+.pw-subtitle {
+  font-size: var(--text-sm); color: var(--color-text-muted);
+  margin-top: calc(var(--space-1) * -1);
+}
+.pw-form {
+  width: 100%; display: flex; flex-direction: column; gap: var(--space-3);
+}
+.pw-input {
+  width: 100%; padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body); font-size: var(--text-sm);
+  background: var(--color-bg); color: var(--color-text);
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  outline: none; transition: border-color var(--transition), box-shadow var(--transition);
+  text-align: center; letter-spacing: 0.06em;
+}
+.pw-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+.pw-input.error { border-color: var(--color-error); }
+.pw-btn {
+  width: 100%; padding: var(--space-3) var(--space-4);
+  background: var(--color-primary); color: #fff;
+  font-family: var(--font-body); font-size: var(--text-sm); font-weight: 700;
+  border: none; border-radius: var(--radius-lg); cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.pw-btn:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-md); }
+.pw-error {
+  font-size: var(--text-xs); color: var(--color-error);
+  min-height: 1.2em; transition: opacity var(--transition);
+}
 </style>
 </head>
 <body>
+
+<div id="pw-gate">
+  <div class="pw-box">
+    <img src="rocketrez_logo.jpeg" alt="RocketRez" class="pw-logo">
+    <div>
+      <div class="pw-title">Premier Parks Platform Review</div>
+      <div class="pw-subtitle">Enter the access password to continue</div>
+    </div>
+    <form class="pw-form" onsubmit="checkPassword(event)">
+      <input id="pw-input" class="pw-input" type="password" placeholder="Password" autocomplete="current-password" autofocus>
+      <button class="pw-btn" type="submit">Access Document</button>
+      <div id="pw-error" class="pw-error"></div>
+    </form>
+  </div>
+</div>
+
+<div id="pw-protected" style="display:none">
 
 <header class="header">
   <div class="header-left">
@@ -1042,13 +1201,21 @@ a { color: inherit; text-decoration: none; }
 <div class="arch-view" id="arch-2">
   <div class="section-crumb"><span class="section-crumb-dot"></span>Step 1 of 7 — Executive Case</div>
 
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">EX</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Executive Case: What Premier Parks Is Solving</div>
+      <div class="arch-subtitle">Unified guest experience, modernized operations, and enterprise-ready reporting</div>
+    </div>
+  </div>
+
   <div class="dataflow-compare">
     <div class="dataflow-panel">
       <div class="dataflow-panel-label dataflow-label-current">Current State</div>
       <div class="dataflow-panel-body">
         <p class="dataflow-caption">Fragmented, point-to-point systems with no unified entitlement layer, no central guest record, and no consistent operational model across properties.</p>
         <div class="dataflow-img">
-          <img src="Screenshot 2026-04-14 at 9.14.00 PM.png" alt="Current state: fragmented technology landscape across Premier Parks properties">
+          <img src="./Screenshot 2026-04-14 at 9.14.00 PM.png" alt="Current state: fragmented technology landscape across Premier Parks properties">
         </div>
       </div>
     </div>
@@ -1056,16 +1223,24 @@ a { color: inherit; text-decoration: none; }
     <div class="dataflow-panel">
       <div class="dataflow-panel-label dataflow-label-ideal">Ideal State</div>
       <div class="dataflow-panel-body">
-        <p class="dataflow-caption">RocketRez as the unified entitlement and commerce backbone, connected to best-in-class partners through clean, well-governed APIs.</p>
-        <div class="hub-diagram">
+
+        <div class="ideal-tabs">
+          <button class="ideal-tab active" onclick="showIdealTab('online', this)">Online Booking</button>
+          <button class="ideal-tab" onclick="showIdealTab('mobile', this)">Mobile App</button>
+          <button class="ideal-tab" onclick="showIdealTab('inperson', this)">In-Person</button>
+        </div>
+
+        <!-- ONLINE BOOKING -->
+        <div class="ideal-diagram active" id="ideal-online">
+          <p class="dataflow-caption">Guest builds a package online — lodging, tickets, spa, campground — through a single cart orchestrated by Inntopia, with RocketRez issuing entitlements at confirmation.</p>
           <div class="hub-full node-muted" style="max-width:220px">
-            Guest
-            <span class="hub-sub">Web · Mobile · On-Property</span>
+            Guest (Web)
+            <span class="hub-sub">Browser · Mobile Web</span>
           </div>
           <div class="hub-connector">↓</div>
           <div class="hub-full node-primary" style="max-width:220px">
             Commerce Orchestration
-            <span class="hub-sub">Booking · Packages · Bundles</span>
+            <span class="hub-sub">Inntopia · Booking &amp; Packages</span>
           </div>
           <div class="hub-bidir-label">
             <div class="hub-connector">↕</div>
@@ -1097,15 +1272,90 @@ a { color: inherit; text-decoration: none; }
             <span class="hub-sub">NetSuite · Oracle</span>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="arch-header">
-    <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">EX</div>
-    <div class="arch-title-block">
-      <div class="arch-title">Executive Case: What Premier Parks Is Solving</div>
-      <div class="arch-subtitle">Unified guest experience, modernized operations, and enterprise-ready reporting</div>
+        <!-- MOBILE APP -->
+        <div class="ideal-diagram" id="ideal-mobile">
+          <p class="dataflow-caption">The guest app is the on-property remote — displaying entitlements, enabling mobile F&amp;B ordering, managing the loyalty wallet, and surfacing real-time queue and availability data.</p>
+          <div class="hub-full node-muted" style="max-width:220px">
+            Guest (Mobile App)
+            <span class="hub-sub">iOS · Android · Native</span>
+          </div>
+          <div class="hub-connector">↓</div>
+          <div class="hub-full node-primary" style="max-width:220px">
+            Mobile Platform
+            <span class="hub-sub">Spotlio or Vantage · App &amp; CRM</span>
+          </div>
+          <div class="hub-bidir-label">
+            <div class="hub-connector">↕</div>
+            <span>entitlement reads · wallet updates · push triggers</span>
+          </div>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue">PMS<span class="hub-sub">Stay Context &amp; Room Key</span></div>
+              <div class="hub-node node-purple">Loyalty / Wallet<span class="hub-sub">Cashless &amp; Rewards</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">
+              RocketRez
+              <span class="hub-sub" style="opacity:1">Pass Display · QR<br>Entitlement Validation</span>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold">Mobile F&amp;B Order<span class="hub-sub">Pre-Order &amp; Pay</span></div>
+              <div class="hub-node node-gold">Activity Booking<span class="hub-sub">Spa · Cabana · Rental</span></div>
+            </div>
+          </div>
+          <div class="hub-source-connector">
+            <div class="hub-connector">↓</div>
+            <span class="hub-source-label">All transactions sync to guest folio</span>
+            <div class="hub-connector">↓</div>
+          </div>
+          <div class="hub-full node-muted" style="max-width:220px">
+            Guest Folio &amp; Reporting
+            <span class="hub-sub">Opera PMS · NetSuite</span>
+          </div>
+        </div>
+
+        <!-- IN-PERSON -->
+        <div class="ideal-diagram" id="ideal-inperson">
+          <p class="dataflow-caption">At the gate, F&amp;B stand, retail shop, or activities desk — every touchpoint validates entitlements from a single source, posts charges to the guest folio, and settles through one payment layer.</p>
+          <div class="hub-full node-muted" style="max-width:220px">
+            Guest Arrives On-Property
+            <span class="hub-sub">Walk-Up · Lodging Guest · Group</span>
+          </div>
+          <div class="hub-connector">↓</div>
+          <div class="hub-row" style="gap:var(--space-2)">
+            <div class="hub-side">
+              <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit</span></div>
+              <div class="hub-node node-gold">F&amp;B / Retail POS<span class="hub-sub">Toast · Lightspeed</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">
+              RocketRez
+              <span class="hub-sub" style="opacity:1">Entitlement Source<br>Access Control</span>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-purple">Activities Desk<span class="hub-sub">Spa · Cabana · Rental</span></div>
+              <div class="hub-node node-blue">Room Charge<span class="hub-sub">Opera PMS Folio</span></div>
+            </div>
+          </div>
+          <div class="hub-bidir-label" style="margin-top:var(--space-1)">
+            <div class="hub-connector">↓</div>
+            <span>all charges post through unified payment layer</span>
+          </div>
+          <div class="hub-full node-primary" style="max-width:220px">
+            Payments &amp; Settlement
+            <span class="hub-sub">Abstracted · Unified · Reconciled</span>
+          </div>
+          <div class="hub-connector">↓</div>
+          <div class="hub-full node-muted" style="max-width:220px">
+            Finance &amp; Reporting
+            <span class="hub-sub">NetSuite · Oracle</span>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -1565,50 +1815,82 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <div class="rec-bar">
-    <div class="rec-content">
-      <div class="rec-title">Preferred Path: Option 1 (Inntopia + Ticketing Core + Toast)</div>
-      <div class="rec-text">
-        This path gives Premier Parks the strongest near-term execution confidence for September go-live by combining proven package orchestration, a centralized entitlement backbone, and dedicated F&B depth. It also preserves flexibility to layer identity and loyalty enhancements in a controlled Phase 2/3 expansion.
+  <!-- HERO: RECOMMENDED PATH -->
+  <div class="rec-hero">
+    <div class="rec-hero-top">
+      <div>
+        <div class="rec-hero-title">Option 1 — Inntopia + RocketRez + Toast</div>
+        <p class="rec-hero-sub">The strongest combination of package orchestration depth, entitlement control, and F&amp;B capability against the September go-live constraint. Proven components, clear ownership at every layer, and a defined path to financial cutover in October.</p>
+      </div>
+      <span class="rec-hero-badge">Recommended Path</span>
+    </div>
+    <div class="rec-hero-stack">
+      <div class="rec-stack-node" style="background:var(--color-primary-bg);border-color:var(--color-primary);color:var(--color-primary)">Inntopia<span class="hub-sub">Commerce Orchestration</span></div>
+      <span class="rec-stack-arrow">→</span>
+      <div class="rec-stack-node" style="background:var(--color-blue-bg);border-color:var(--color-blue);color:var(--color-blue)">Opera PMS<span class="hub-sub">Guest &amp; Stay Record</span></div>
+      <span class="rec-stack-arrow">↔</span>
+      <div class="rec-stack-node" style="background:var(--color-success-bg);border-color:var(--color-success);color:var(--color-success)">RocketRez<span class="hub-sub">Ticketing &amp; Entitlements</span></div>
+      <span class="rec-stack-arrow">+</span>
+      <div class="rec-stack-node" style="background:var(--color-warning-bg);border-color:var(--color-warning);color:var(--color-warning)">Toast<span class="hub-sub">F&amp;B &amp; Restaurant POS</span></div>
+    </div>
+    <div class="rec-hero-reasons">
+      <div class="rec-reason">
+        <div class="rec-reason-label">Package Depth</div>
+        <div class="rec-reason-text">Inntopia is purpose-built for lodging + activities bundles — the exact use case at Valcartier, Nashville Shores, and Elitch Gardens. No other tool does this at scale.</div>
+      </div>
+      <div class="rec-reason">
+        <div class="rec-reason-label">September Confidence</div>
+        <div class="rec-reason-text">All three vendors have known integration paths with RocketRez. Lower cold-start risk means the timeline is achievable without heroic effort.</div>
+      </div>
+      <div class="rec-reason">
+        <div class="rec-reason-label">F&amp;B Without Compromise</div>
+        <div class="rec-reason-text">Toast handles restaurant complexity natively — recipe depletion, kitchen display, room charge — so RocketRez stays focused on the entitlement layer.</div>
+      </div>
+      <div class="rec-reason">
+        <div class="rec-reason-label">Phase 2 Flexibility</div>
+        <div class="rec-reason-text">The architecture supports layering Vantage identity/loyalty or Spotlio dynamic pricing as controlled additions after go-live stabilizes.</div>
       </div>
     </div>
   </div>
 
-  <div class="compare-table-wrap">
+  <!-- ALL OPTIONS COMPARISON -->
+  <div class="section-label" style="margin-bottom:var(--space-2)">All Options at a Glance</div>
+  <p class="section-intro">Four architecture paths evaluated against Premier Parks' portfolio, timeline, and strategic priorities. Option 1 is the recommended delivery path for 2026 — the others are viable alternatives by property profile or future expansion phase.</p>
+  <div class="compare-table-wrap" style="margin-bottom:var(--space-8)">
     <table class="compare-table">
       <thead>
         <tr>
           <th>Option</th>
           <th>Architecture</th>
           <th>Best Fit</th>
-          <th>Strengths</th>
-          <th>Key Risks</th>
-          <th>Recommendation</th>
+          <th>Key Strength</th>
+          <th>Primary Risk</th>
+          <th>Verdict</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Option 1</td>
-          <td>Inntopia + Ticketing Core + Toast + Opera</td>
+          <td><strong>Option 1</strong></td>
+          <td>Inntopia + RocketRez + Toast + Opera</td>
           <td>Resort and package-heavy properties</td>
-          <td>Strong package orchestration, clear entitlement ownership, operationally realistic for timeline</td>
-          <td>Booking UX and integration complexity must be actively managed</td>
-          <td><span class="tag tag-green">Preferred Path</span></td>
+          <td>Package orchestration, clear entitlement ownership, realistic timeline</td>
+          <td>Booking UX and integration complexity must be actively governed</td>
+          <td><span class="tag tag-green">Recommended</span></td>
         </tr>
         <tr>
           <td>Option 2</td>
-          <td>Spotlio + Ticketing Core + Toast (+ Inntopia where needed)</td>
+          <td>Spotlio + RocketRez + Toast (+ Inntopia where needed)</td>
           <td>Ticket-driven parks with pricing and app focus</td>
-          <td>Stronger digital UX and dynamic pricing upside</td>
+          <td>Stronger digital UX, dynamic pricing, and mobile native</td>
           <td>Additional integration burden and roadmap certainty checks</td>
           <td><span class="tag tag-blue">Strong Alternative</span></td>
         </tr>
         <tr>
           <td>Option 3</td>
-          <td>Vantage + Toast (+ Ticketing Core as needed)</td>
-          <td>Cashless/identity-forward experiences</td>
-          <td>Differentiated identity and wallet model</td>
-          <td>Bandwidth, scale maturity, and regional compliance validation</td>
+          <td>Vantage + Toast (+ RocketRez as needed)</td>
+          <td>Cashless and identity-forward experiences</td>
+          <td>Differentiated wallet, loyalty, and unified guest identity</td>
+          <td>Bandwidth, scale maturity, and Quebec compliance validation</td>
           <td><span class="tag tag-purple">Innovation Track</span></td>
         </tr>
         <tr>
@@ -1616,16 +1898,17 @@ a { color: inherit; text-decoration: none; }
           <td>Segmented hybrid by property type</td>
           <td>Portfolio tailoring by business model</td>
           <td>Best local fit per property</td>
-          <td>Highest governance and integration complexity</td>
+          <td>Highest governance overhead and integration complexity</td>
           <td><span class="tag tag-orange">Conditional</span></td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <hr class="divider">
-
-  <div class="compare-table-wrap">
+  <!-- DOMAIN OWNERSHIP -->
+  <div class="section-label" style="margin-bottom:var(--space-2)">System Ownership by Domain</div>
+  <p class="section-intro">Who owns what in the recommended architecture — the system of record for each domain, how it integrates, and where decisions are still open.</p>
+  <div class="compare-table-wrap" style="margin-bottom:var(--space-8)">
     <table class="compare-table">
       <thead>
         <tr>
@@ -1633,7 +1916,7 @@ a { color: inherit; text-decoration: none; }
           <th>System of Record</th>
           <th>Integration Pattern</th>
           <th>Why It Matters</th>
-          <th>Decision Status</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
@@ -1653,14 +1936,14 @@ a { color: inherit; text-decoration: none; }
         </tr>
         <tr>
           <td>Ticketing + Entitlements</td>
-          <td>Ticketing Core</td>
+          <td>RocketRez</td>
           <td>Real-time issuance and validation APIs</td>
           <td>Core control point for access, benefit enforcement, and revenue integrity</td>
           <td><span class="tag tag-green">Core Position</span></td>
         </tr>
         <tr>
-          <td>Onsite POS / F&B</td>
-          <td>POS Domain Systems</td>
+          <td>Onsite POS / F&amp;B</td>
+          <td>Toast (primary) / Lightspeed (Canada)</td>
           <td>Entitlement validation + room-charge posting integration</td>
           <td>Ensures fast operations without sacrificing accounting traceability</td>
           <td><span class="tag tag-gold">Finalize Vendor</span></td>
@@ -1676,36 +1959,60 @@ a { color: inherit; text-decoration: none; }
     </table>
   </div>
 
-  <div class="rec-bar">
-    <div class="rec-content">
-      <div class="rec-title">Recommendation: Option 1 as primary path</div>
-      <div class="rec-text">
-        Keep ticketing and entitlement as the control plane, and run Option 1 as the core delivery path for 2026. Maintain the other three options as
-        targeted alternatives by property profile and strategic objective.
-      </div>
-    </div>
-  </div>
-
+  <!-- OPTION DETAIL TABS -->
+  <div class="section-label" style="margin-bottom:var(--space-4)">Explore Each Option in Detail</div>
   <div class="option-switcher">
-    <button class="option-switch active" onclick="showOptionDetail(0)">Option 1 — Inntopia + RocketRez + Toast (Preferred)</button>
-    <button class="option-switch" onclick="showOptionDetail(1)">Option 2 — Spotlio + RocketRez + Toast</button>
-    <button class="option-switch" onclick="showOptionDetail(2)">Option 3 — Vantage + Toast</button>
-    <button class="option-switch" onclick="showOptionDetail(3)">Option 4 — Hybrid Mix</button>
+    <button class="option-switch active" onclick="showOptionDetail(0)">Option 1 — Recommended</button>
+    <button class="option-switch" onclick="showOptionDetail(1)">Option 2 — Spotlio</button>
+    <button class="option-switch" onclick="showOptionDetail(2)">Option 3 — Vantage</button>
+    <button class="option-switch" onclick="showOptionDetail(3)">Option 4 — Hybrid</button>
   </div>
 
   <div class="option-view visible">
-    <div class="flow-section">
+    <div class="flow-section" id="flow-o1">
       <div class="flow-title">Data Flow — Option 1</div>
-      <div class="flow-nodes">
-        <div class="flow-node"><div class="node-box node-muted">Guest Website</div><div class="node-label">Entry Point</div></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node"><div class="node-box node-primary">Inntopia</div><div class="node-label">Booking Hub</div></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node"><div class="node-box node-blue">Opera PMS</div><div class="node-label">Guest Record</div></div>
-        <div class="flow-arrow">↔</div>
-        <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticketing + POS</div></div>
-        <div class="flow-arrow">+</div>
-        <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&B</div></div>
+      <div class="ideal-tabs">
+        <button class="ideal-tab active" onclick="showFlowTab('flow-o1','fo1-online',this)">Online Booking</button>
+        <button class="ideal-tab" onclick="showFlowTab('flow-o1','fo1-mobile',this)">Mobile App</button>
+        <button class="ideal-tab" onclick="showFlowTab('flow-o1','fo1-inperson',this)">In-Person</button>
+      </div>
+      <div class="flow-diagram active" id="fo1-online">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-muted">Guest (Web)</div><div class="node-label">Browser</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-primary">Inntopia</div><div class="node-label">Package &amp; Booking</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-blue">Opera PMS</div><div class="node-label">Guest Record</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticket Issuance</div></div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&amp;B Pre-Order</div></div>
+        </div>
+      </div>
+      <div class="flow-diagram" id="fo1-mobile">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-muted">Guest (Mobile Web)</div><div class="node-label">No dedicated app</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Pass Display + QR</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-blue">Opera PMS</div><div class="node-label">Stay Context</div></div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">Mobile Order</div></div>
+        </div>
+        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">Option 1 relies on mobile web for guest-facing interactions. A dedicated app layer (Spotlio or Vantage) can be added as a Phase 2 enhancement without disrupting the core stack.</p>
+      </div>
+      <div class="flow-diagram" id="fo1-inperson">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-muted">Guest Arrives</div><div class="node-label">Walk-Up · Lodging · Group</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez Gate</div><div class="node-label">Scan · Validate · Admit</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-gold">Toast POS</div><div class="node-label">F&amp;B · Retail</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-blue">Opera PMS</div><div class="node-label">Room Charge + Folio</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-muted">Settlement</div><div class="node-label">Unified Payment Layer</div></div>
+        </div>
       </div>
     </div>
     <div class="partners-grid">
@@ -1725,16 +2032,52 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <div class="option-view">
-    <div class="flow-section">
+    <div class="flow-section" id="flow-o2">
       <div class="flow-title">Data Flow — Option 2</div>
-      <div class="flow-nodes">
-        <div class="flow-node"><div class="node-box node-blue">Spotlio Web + App</div><div class="node-label">Commerce + Loyalty</div></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node"><div class="node-box node-primary">Inntopia (optional)</div><div class="node-label">Lodging packaging</div></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticketing + POS</div></div>
-        <div class="flow-arrow">+</div>
-        <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&B</div></div>
+      <div class="ideal-tabs">
+        <button class="ideal-tab active" onclick="showFlowTab('flow-o2','fo2-online',this)">Online Booking</button>
+        <button class="ideal-tab" onclick="showFlowTab('flow-o2','fo2-mobile',this)">Mobile App</button>
+        <button class="ideal-tab" onclick="showFlowTab('flow-o2','fo2-inperson',this)">In-Person</button>
+      </div>
+      <div class="flow-diagram active" id="fo2-online">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-muted">Guest (Web)</div><div class="node-label">Browser</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-gold">Spotlio</div><div class="node-label">Commerce + Dynamic Pricing</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-primary">Inntopia (lodging)</div><div class="node-label">Resort Packages</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticket Issuance</div></div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&amp;B</div></div>
+        </div>
+      </div>
+      <div class="flow-diagram" id="fo2-mobile">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-muted">Guest</div><div class="node-label">iOS · Android</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-gold">Spotlio App</div><div class="node-label">Native App · CRM · Pricing</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Pass + Entitlement Validation</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-blue">Opera PMS</div><div class="node-label">Stay Context</div></div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">Mobile F&amp;B Order</div></div>
+        </div>
+        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">Spotlio's native app is a key differentiator over Option 1 — push notifications, in-app ticket display, dynamic pricing visibility, and loyalty CRM all included without a second vendor.</p>
+      </div>
+      <div class="flow-diagram" id="fo2-inperson">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-muted">Guest Arrives</div><div class="node-label">Walk-Up · Lodging · Group</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez Gate</div><div class="node-label">Scan · Validate · Admit</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-gold">Spotlio App</div><div class="node-label">On-Property Upsell + Nav</div></div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-node"><div class="node-box node-gold">Toast POS</div><div class="node-label">F&amp;B · Retail</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-blue">Opera PMS</div><div class="node-label">Room Charge + Folio</div></div>
+        </div>
       </div>
     </div>
     <div class="partners-grid">
@@ -1754,16 +2097,54 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <div class="option-view">
-    <div class="flow-section">
+    <div class="flow-section" id="flow-o3">
       <div class="flow-title">Data Flow — Option 3</div>
-      <div class="flow-nodes">
-        <div class="flow-node"><div class="node-box node-purple">Vantage App/Web</div><div class="node-label">Identity + Wallet</div></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node"><div class="node-box node-purple">Vantage Platform</div><div class="node-label">Cashless + Loyalty</div></div>
-        <div class="flow-arrow">↔</div>
-        <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Guest Record</div></div>
-        <div class="flow-arrow">+</div>
-        <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&B</div></div>
+      <div class="ideal-tabs">
+        <button class="ideal-tab active" onclick="showFlowTab('flow-o3','fo3-online',this)">Online Booking</button>
+        <button class="ideal-tab" onclick="showFlowTab('flow-o3','fo3-mobile',this)">Mobile App</button>
+        <button class="ideal-tab" onclick="showFlowTab('flow-o3','fo3-inperson',this)">In-Person</button>
+      </div>
+      <div class="flow-diagram active" id="fo3-online">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-muted">Guest (Web)</div><div class="node-label">Browser</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-purple">Vantage Platform</div><div class="node-label">Identity + Commerce</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Guest Record</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez (opt.)</div><div class="node-label">Ticketing</div></div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&amp;B</div></div>
+        </div>
+        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">Vantage can own ticketing natively or delegate to RocketRez — entitlement ownership must be defined before build begins.</p>
+      </div>
+      <div class="flow-diagram" id="fo3-mobile">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-muted">Guest</div><div class="node-label">iOS · Android</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-purple">Vantage App</div><div class="node-label">Wallet · Loyalty · Pass</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-purple">Cashless Wallet</div><div class="node-label">Stored Value · Rewards</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Room Key + Stay</div></div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">Mobile F&amp;B Order</div></div>
+        </div>
+        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">The strongest mobile story of the four options. Vantage natively unifies the guest wallet, loyalty account, digital pass, and room key into a single app experience.</p>
+      </div>
+      <div class="flow-diagram" id="fo3-inperson">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-muted">Guest Arrives</div><div class="node-label">NFC · QR · Wristband</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-purple">Vantage Reader</div><div class="node-label">Tap · Validate · Admit</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-purple">Cashless Wallet</div><div class="node-label">Spend · Redeem · Earn</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-gold">Toast POS</div><div class="node-label">F&amp;B · Retail</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Folio Settlement</div></div>
+        </div>
+        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">The most differentiated in-person experience — every touchpoint from admission to F&amp;B to retail runs through one guest identity and wallet. Requires operational change management at scale.</p>
       </div>
     </div>
     <div class="partners-grid">
@@ -1779,16 +2160,57 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <div class="option-view">
-    <div class="flow-section">
+    <div class="flow-section" id="flow-o4">
       <div class="flow-title">Data Flow — Option 4 (Hybrid)</div>
-      <div class="flow-nodes">
-        <div class="flow-node"><div class="node-box node-orange">Segment by Property</div><div class="node-label">Portfolio strategy</div></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node"><div class="node-box node-primary">Inntopia / Spotlio</div><div class="node-label">Commerce layer split</div></div>
-        <div class="flow-arrow">↔</div>
-        <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticketing backbone</div></div>
-        <div class="flow-arrow">+</div>
-        <div class="flow-node"><div class="node-box node-purple">Vantage</div><div class="node-label">Selective cashless</div></div>
+      <div class="ideal-tabs">
+        <button class="ideal-tab active" onclick="showFlowTab('flow-o4','fo4-online',this)">Online Booking</button>
+        <button class="ideal-tab" onclick="showFlowTab('flow-o4','fo4-mobile',this)">Mobile App</button>
+        <button class="ideal-tab" onclick="showFlowTab('flow-o4','fo4-inperson',this)">In-Person</button>
+      </div>
+
+      <div class="flow-diagram active" id="fo4-online">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-blue">Guest Browser</div><div class="node-label">Dated or package purchase</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-primary">Inntopia or Spotlio</div><div class="node-label">Commerce layer by property segment</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticket issuance + entitlement</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-orange">Opera PMS</div><div class="node-label">Guest record + lodging sync</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-purple">NetSuite</div><div class="node-label">Financial roll-up</div></div>
+        </div>
+        <div class="flow-note">Commerce platform routing is determined by property type — resort properties use Inntopia for package bundling; dated-ticket parks route through Spotlio for yield-optimized web checkout.</div>
+      </div>
+
+      <div class="flow-diagram" id="fo4-mobile">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-blue">Guest Mobile App</div><div class="node-label">RocketRez or Spotlio app</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Entitlement lookup + park access</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-purple">Vantage</div><div class="node-label">Cashless wallet + stored value (select sites)</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-orange">Opera PMS</div><div class="node-label">Stay context for resort guests</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-primary">NetSuite</div><div class="node-label">Aggregated reporting</div></div>
+        </div>
+        <div class="flow-note">Mobile experience varies by deployment segment — Vantage cashless and loyalty features are active only at pilot sites (2–3 properties) until portfolio-wide ROI is validated.</div>
+      </div>
+
+      <div class="flow-diagram" id="fo4-inperson">
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="node-box node-blue">Gate / Kiosk</div><div class="node-label">Admissions scan</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Entitlement validation (portfolio-wide)</div></div>
+          <div class="flow-arrow">↔</div>
+          <div class="flow-node"><div class="node-box node-purple">Vantage (Pilot)</div><div class="node-label">Cashless NFC + loyalty tap</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-warning">POS (F&B / Retail)</div><div class="node-label">Toast or Lightspeed by segment</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="node-box node-orange">Opera PMS</div><div class="node-label">Room charge posting for resort stays</div></div>
+        </div>
+        <div class="flow-note">On-property experience uses RocketRez as the shared entitlement backbone across all properties. POS selection and cashless enablement vary by site — complexity is highest in this option, requiring strong governance to prevent fragmentation.</div>
       </div>
     </div>
     <div class="partners-grid">
@@ -1884,6 +2306,209 @@ a { color: inherit; text-decoration: none; }
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(7)">
       6. Implementation &amp; Tracking
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="arch-view" id="arch-7">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 6 of 7 — Implementation &amp; Tracking</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-success-bg);color:var(--color-success)">IT</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Implementation Process &amp; Portfolio Visibility</div>
+      <div class="arch-subtitle">How we run multi-property rollouts — and how Premier Parks leadership stays informed at every level</div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-bottom:var(--space-5)">Our Implementation Methodology</div>
+  <div class="impl-phases">
+    <div class="impl-phase">
+      <div class="impl-phase-num">Phase 01</div>
+      <div class="impl-phase-title">Discovery &amp; Scoping</div>
+      <ul class="impl-phase-items">
+        <li>Property-by-property kickoff with operations and IT leads</li>
+        <li>Current state system audit and data mapping</li>
+        <li>Integration dependency matrix finalized per park</li>
+        <li>Go-live criteria defined and agreed upon</li>
+      </ul>
+    </div>
+    <div class="impl-phase">
+      <div class="impl-phase-num">Phase 02</div>
+      <div class="impl-phase-title">Configuration &amp; Build</div>
+      <ul class="impl-phase-items">
+        <li>Catalog setup: products, pricing tiers, season passes, packages</li>
+        <li>Access control and entitlement rules configured</li>
+        <li>Integration endpoints built and validated per property</li>
+        <li>Payment processing connected and tested</li>
+      </ul>
+    </div>
+    <div class="impl-phase">
+      <div class="impl-phase-num">Phase 03</div>
+      <div class="impl-phase-title">Testing &amp; Validation</div>
+      <ul class="impl-phase-items">
+        <li>End-to-end scenario testing against go-live criteria</li>
+        <li>Load and throughput testing for peak capacity</li>
+        <li>Staff training and ops team walkthrough</li>
+        <li>Parallel run period with existing systems where needed</li>
+      </ul>
+    </div>
+    <div class="impl-phase">
+      <div class="impl-phase-num">Phase 04</div>
+      <div class="impl-phase-title">Go-Live &amp; Stabilization</div>
+      <ul class="impl-phase-items">
+        <li>Dedicated launch support team on-site or on-call</li>
+        <li>Real-time monitoring during first-week operations</li>
+        <li>Rapid response SLA for any critical issues</li>
+        <li>Post-launch retrospective and handoff to support</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-bottom:var(--space-5)">Portfolio Visibility Model</div>
+  <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-6);max-width:72ch;">Premier Parks management gets two distinct views — an aggregate roll-up across the full portfolio for executive oversight, and a drill-down per property for operational detail. Both are live, not emailed reports.</p>
+
+  <div class="visibility-grid">
+    <div class="visibility-panel">
+      <div class="visibility-panel-header">
+        <div class="visibility-panel-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">AG</div>
+        <div>
+          <div class="visibility-panel-title">Portfolio Roll-Up</div>
+          <div class="visibility-panel-subtitle">Enterprise view across all properties</div>
+        </div>
+      </div>
+      <div class="visibility-panel-body">
+        <div class="visibility-row">
+          <div class="visibility-item">
+            <div class="visibility-item-dot"></div>
+            <div>
+              <div class="visibility-item-label">Program Health Dashboard</div>
+              <div class="visibility-item-desc">Single view showing overall implementation status across every park — percent complete, open blockers, and go-live readiness by property.</div>
+            </div>
+          </div>
+          <div class="visibility-item">
+            <div class="visibility-item-dot"></div>
+            <div>
+              <div class="visibility-item-label">Milestone Burn-Down</div>
+              <div class="visibility-item-desc">Aggregated milestone progress tracked against the master program timeline — Phase 1 through go-live across the full portfolio.</div>
+            </div>
+          </div>
+          <div class="visibility-item">
+            <div class="visibility-item-dot"></div>
+            <div>
+              <div class="visibility-item-label">Risk &amp; Blocker Log</div>
+              <div class="visibility-item-desc">Cross-property issues escalated to the portfolio level — with owner, resolution status, and impact on go-live date.</div>
+            </div>
+          </div>
+          <div class="visibility-item">
+            <div class="visibility-item-dot"></div>
+            <div>
+              <div class="visibility-item-label">Weekly Executive Summary</div>
+              <div class="visibility-item-desc">Structured weekly update delivered to Premier Parks leadership — RAG status, key decisions needed, and week-ahead priorities.</div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-dashboard" style="margin-top:var(--space-5)">
+          <div class="mock-dash-row">
+            <span class="mock-dash-park">Valcartier VVV</span>
+            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:72%"></div></div>
+            <span class="mock-dash-pct">72%</span>
+            <span class="mock-dash-status" style="background:var(--color-warning-bg);color:var(--color-warning)">In Progress</span>
+          </div>
+          <div class="mock-dash-row">
+            <span class="mock-dash-park">Nashville Shores</span>
+            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:55%"></div></div>
+            <span class="mock-dash-pct">55%</span>
+            <span class="mock-dash-status" style="background:var(--color-warning-bg);color:var(--color-warning)">In Progress</span>
+          </div>
+          <div class="mock-dash-row">
+            <span class="mock-dash-park">Elitch Gardens</span>
+            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:38%"></div></div>
+            <span class="mock-dash-pct">38%</span>
+            <span class="mock-dash-status" style="background:var(--color-primary-bg);color:var(--color-primary)">Config</span>
+          </div>
+          <div class="mock-dash-row">
+            <span class="mock-dash-park">City Museum</span>
+            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:91%"></div></div>
+            <span class="mock-dash-pct">91%</span>
+            <span class="mock-dash-status" style="background:var(--color-success-bg);color:var(--color-success)">UAT</span>
+          </div>
+          <div class="mock-dash-row">
+            <span class="mock-dash-park">Calypso</span>
+            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:20%"></div></div>
+            <span class="mock-dash-pct">20%</span>
+            <span class="mock-dash-status" style="background:var(--color-surface-dynamic);color:var(--color-text-muted)">Discovery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="visibility-panel">
+      <div class="visibility-panel-header">
+        <div class="visibility-panel-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">PR</div>
+        <div>
+          <div class="visibility-panel-title">Property-Level Drill-Down</div>
+          <div class="visibility-panel-subtitle">Operational detail per park</div>
+        </div>
+      </div>
+      <div class="visibility-panel-body">
+        <div class="visibility-row">
+          <div class="visibility-item">
+            <div class="visibility-item-dot" style="background:var(--color-gold)"></div>
+            <div>
+              <div class="visibility-item-label">Task Board by Workstream</div>
+              <div class="visibility-item-desc">Per-property task tracking across Config, Integration, Testing, and Training workstreams — with assignees, due dates, and completion status.</div>
+            </div>
+          </div>
+          <div class="visibility-item">
+            <div class="visibility-item-dot" style="background:var(--color-gold)"></div>
+            <div>
+              <div class="visibility-item-label">Open Decisions Log</div>
+              <div class="visibility-item-desc">Every unresolved configuration or design decision tracked with owner, options, and deadline — nothing falls through the cracks between meetings.</div>
+            </div>
+          </div>
+          <div class="visibility-item">
+            <div class="visibility-item-dot" style="background:var(--color-gold)"></div>
+            <div>
+              <div class="visibility-item-label">Integration Status Board</div>
+              <div class="visibility-item-desc">Live status per integration endpoint — not started, in development, in testing, validated. Each row links to the spec and test results.</div>
+            </div>
+          </div>
+          <div class="visibility-item">
+            <div class="visibility-item-dot" style="background:var(--color-gold)"></div>
+            <div>
+              <div class="visibility-item-label">Go-Live Readiness Checklist</div>
+              <div class="visibility-item-desc">Criteria-based checklist that must reach 100% before a property launches. Premier Parks can see exactly what is and isn't signed off at any point.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-bottom:var(--space-4)">Communication Cadence</div>
+  <div class="quick-grid" style="margin-bottom:var(--space-8)">
+    <article class="quick-card">
+      <h3>Daily Standups</h3>
+      <p>Short working-level syncs with property implementation teams to surface blockers before they compound. Async option available for distributed teams.</p>
+    </article>
+    <article class="quick-card">
+      <h3>Weekly Executive Briefing</h3>
+      <p>Structured update for Premier Parks leadership — portfolio RAG status, milestone progress, decisions needed, and any items requiring escalation.</p>
+    </article>
+    <article class="quick-card">
+      <h3>Milestone Gates</h3>
+      <p>Formal sign-off checkpoints at the end of each phase. No property advances to the next phase without meeting defined readiness criteria.</p>
+    </article>
+    <article class="quick-card">
+      <h3>Shared Workspace</h3>
+      <p>A single shared project workspace — accessible to both RocketRez and Premier Parks — housing all specs, decisions, test results, and status boards in one place.</p>
+    </article>
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(8)">
+      7. Decision Appendix
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
@@ -2056,6 +2681,21 @@ function syncActiveNav(index) {
   });
 }
 
+function showFlowTab(containerId, tabId, btn) {
+  const c = document.getElementById(containerId);
+  c.querySelectorAll('.flow-diagram').forEach(el => el.classList.remove('active'));
+  c.querySelectorAll('.ideal-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function showIdealTab(name, btn) {
+  document.querySelectorAll('.ideal-diagram').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.ideal-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('ideal-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
 function togglePartner(id, btn) {
   const el = document.getElementById(id);
   const isOpen = el.classList.contains('open');
@@ -2071,6 +2711,32 @@ function togglePartner(id, btn) {
   });
   syncActiveNav(0);
 })();
+
+function checkPassword(e) {
+  e.preventDefault();
+  const input = document.getElementById('pw-input');
+  const error = document.getElementById('pw-error');
+  if (input.value === 'rocketrez') {
+    sessionStorage.setItem('rr_auth', '1');
+    document.getElementById('pw-gate').classList.add('hidden');
+    document.getElementById('pw-protected').style.display = '';
+  } else {
+    input.classList.add('error');
+    error.textContent = 'Incorrect password. Please try again.';
+    input.value = '';
+    input.focus();
+    setTimeout(() => { input.classList.remove('error'); }, 1200);
+  }
+}
+
+(function() {
+  if (sessionStorage.getItem('rr_auth') === '1') {
+    document.getElementById('pw-gate').classList.add('hidden');
+    document.getElementById('pw-protected').style.display = '';
+  }
+})();
 </script>
+
+</div><!-- /#pw-protected -->
 </body>
 </html>
