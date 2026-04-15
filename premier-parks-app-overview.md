@@ -88,7 +88,7 @@ Establish system ownership, finalize integration architecture, and align data mo
 
 ### Phase 2: Configuration and Integration Build (May - July)
 
-Configure NetSuite, Opera PMS, Inntopia, Ticketing, POS, and website. Begin integration development and initial testing.
+Configure NetSuite, Opera Cloud, Inntopia, Ticketing, POS, and website. Begin integration development and initial testing.
 
 ### Phase 3: Testing and Training (July - August)
 
@@ -134,7 +134,7 @@ Stabilize operations and transition financial reporting and control to NetSuite.
 
 ## System Ownership and Design Rules
 
-- **Opera PMS** owns the guest record and is the guest system of record
+- **Opera Cloud** owns the guest record and is the guest system of record
 - **Inntopia** is the primary orchestration layer for package and bundled bookings
 - **TBD Ticketing** owns catalog, issuance, and entitlements
 - **TBD POS** owns onsite F&B, retail, and commerce transactions
@@ -145,15 +145,15 @@ Stabilize operations and transition financial reporting and control to NetSuite.
 ## Core Integration and API Flows
 
 - Website -> Inntopia (booking request and package creation)
-- Inntopia -> Opera PMS (lodging reservation + guest context)
+- Inntopia -> Opera Cloud (lodging reservation + guest context)
 - Inntopia -> TBD Ticketing (ticket issuance)
 - Inntopia -> Booker (spa booking)
 - Inntopia -> Anemone (campground booking)
-- Opera PMS -> TBD Ticketing (guest sync, stay context, ticket linkage)
-- Opera PMS -> TBD POS (room charge, guest identity, stay context)
+- Opera Cloud -> TBD Ticketing (guest sync, stay context, ticket linkage)
+- Opera Cloud -> TBD POS (room charge, guest identity, stay context)
 - TBD Ticketing -> TBD POS (entitlement validation)
-- Booker / Anemone -> Opera PMS (guest matching or guest reference alignment, as needed)
-- Opera PMS / TBD Ticketing / TBD POS -> Payments layer
+- Booker / Anemone -> Opera Cloud (guest matching or guest reference alignment, as needed)
+- Opera Cloud / TBD Ticketing / TBD POS -> Payments layer
 
 ## Architecture Principles
 
