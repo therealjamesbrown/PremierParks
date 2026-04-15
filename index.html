@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premier Parks Technology Architecture</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="light"] {
+  --color-bg: #f7f6f2;
+  --color-surface: #f9f8f5;
+  --color-surface-2: #fbfbf9;
+  --color-surface-offset: #f0ede8;
+  --color-surface-dynamic: #e8e4de;
+  --color-divider: #dcd9d5;
+  --color-border: #d4d1ca;
+  --color-text: #1e1c15;
+  --color-text-muted: #7a7974;
+  --color-text-faint: #bab9b4;
+  --color-text-inverse: #f9f8f4;
+  --color-primary: #0051f9;
+  --color-primary-hover: #003fc4;
+  --color-primary-bg: #e7efff;
+  --color-warning: #964219;
+  --color-warning-bg: #f5ece5;
+  --color-success: #437a22;
+  --color-success-bg: #e8f0e1;
+  --color-error: #a12c7b;
+  --color-error-bg: #f5e8f2;
+  --color-gold: #d19900;
+  --color-gold-bg: #f7f0d9;
+  --color-blue: #006494;
+  --color-blue-bg: #ddeef8;
+  --color-purple: #7a39bb;
+  --color-purple-bg: #ede5f7;
+  --color-orange: #da7101;
+  --color-orange-bg: #faeee0;
+  --shadow-sm: 0 1px 2px oklch(0.2 0.01 80 / 0.06);
+  --shadow-md: 0 4px 12px oklch(0.2 0.01 80 / 0.09);
+  --shadow-lg: 0 12px 32px oklch(0.2 0.01 80 / 0.13);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --font-display: 'Cabinet Grotesk', 'Inter', sans-serif;
+  --font-body: 'Satoshi', 'Inter', sans-serif;
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+  --space-12: 3rem; --space-16: 4rem;
+  --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+  --color-bg: #141312;
+  --color-surface: #1a1917;
+  --color-surface-2: #1f1e1c;
+  --color-surface-offset: #1d1c1a;
+  --color-surface-dynamic: #2a2927;
+  --color-divider: #252422;
+  --color-border: #363431;
+  --color-text: #d0cfcc;
+  --color-text-muted: #7a7876;
+  --color-text-faint: #575654;
+  --color-text-inverse: #1e1c15;
+  --color-primary: #0051f9;
+  --color-primary-hover: #2a6cff;
+  --color-primary-bg: #0d1f4d;
+  --color-warning: #bb653b;
+  --color-warning-bg: #2e2018;
+  --color-success: #6daa45;
+  --color-success-bg: #1d2e17;
+  --color-error: #d163a7;
+  --color-error-bg: #2a1a25;
+  --color-gold: #e8af34;
+  --color-gold-bg: #2d2610;
+  --color-blue: #5591c7;
+  --color-blue-bg: #182230;
+  --color-purple: #a86fdf;
+  --color-purple-bg: #221632;
+  --color-orange: #fdab43;
+  --color-orange-bg: #2e1e0a;
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.25);
+  --shadow-md: 0 4px 12px oklch(0 0 0 / 0.35);
+  --shadow-lg: 0 12px 32px oklch(0 0 0 / 0.45);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.65;
+  min-height: 100dvh;
+  padding-top: 68px;
+  padding-left: 188px;
+  transition: background var(--transition), color var(--transition);
+}
+img, svg { display: block; max-width: 100%; }
+button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* ── HEADER ─────────────────────────────────────────── */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: color-mix(in oklch, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-6);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+}
+.header-left { display: flex; align-items: center; gap: var(--space-3); }
+.logo-mark {
+  width: 36px; height: 36px; flex-shrink: 0;
+}
+.brand-name {
+  font-family: var(--font-display); font-size: var(--text-base);
+  font-weight: 800; line-height: 1.1; color: var(--color-text);
+}
+.brand-sub {
+  font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 500;
+}
+.header-right { display: flex; align-items: center; gap: var(--space-3); }
+.theme-toggle {
+  width: 36px; height: 36px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+.theme-toggle:hover { color: var(--color-text); background: var(--color-surface-dynamic); }
+.phase-badge {
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.04em;
+  padding: 0.2rem 0.6rem; border-radius: var(--radius-full);
+  background: var(--color-primary-bg); color: var(--color-primary);
+  white-space: nowrap;
+}
+
+/* ── HERO ────────────────────────────────────────────── */
+.hero {
+  padding: var(--space-10) 0 var(--space-8);
+}
+.hero-layout {
+  display: grid; grid-template-columns: 1.15fr 0.85fr; gap: var(--space-8); align-items: start;
+}
+.hero-left { min-width: 0; }
+.hero-right {
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm); padding: var(--space-5);
+}
+.hero-logos {
+  display: grid; grid-template-columns: 1.35fr 1fr; gap: var(--space-3); margin-bottom: var(--space-3);
+}
+.hero-logo-wrap {
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface-2);
+  padding: var(--space-4); display: flex; align-items: center; justify-content: center; min-height: 120px;
+}
+.hero-logo-wrap img { max-height: 84px; width: auto; max-width: 100%; object-fit: contain; }
+.hero-right h3 {
+  font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; margin-bottom: var(--space-2);
+}
+.hero-right p { font-size: var(--text-xs); color: var(--color-text-muted); }
+.hero-eyebrow {
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+.hero-title {
+  font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 800;
+  line-height: 1.05; color: var(--color-text); margin-bottom: var(--space-4);
+  max-width: 14ch;
+}
+.hero-title span { color: var(--color-primary); }
+.hero-desc {
+  font-size: var(--text-base); color: var(--color-text-muted);
+  max-width: 62ch; line-height: 1.7; margin-bottom: var(--space-8);
+}
+.arch-tabs {
+  display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-8);
+}
+.arch-tab {
+  padding: var(--space-2) var(--space-4); border-radius: var(--radius-full);
+  font-size: var(--text-xs); font-weight: 700; border: 1.5px solid var(--color-border);
+  background: var(--color-surface); color: var(--color-text-muted);
+  transition: all var(--transition); cursor: pointer;
+  white-space: nowrap;
+}
+.arch-tab:hover { background: var(--color-surface-dynamic); color: var(--color-text); border-color: var(--color-text-faint); }
+.arch-tab.active { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+
+/* ── EXECUTIVE DECK VIEW ─────────────────────────────── */
+.quick-deck {
+  max-width: 1280px; margin: 0 auto var(--space-8); padding: 0 var(--space-6);
+}
+.quick-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4);
+}
+.quick-card {
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm); padding: var(--space-5);
+}
+.quick-card h3 {
+  font-family: var(--font-display); font-size: var(--text-base); font-weight: 800; margin-bottom: var(--space-2);
+}
+.quick-card p, .quick-card li { color: var(--color-text-muted); font-size: var(--text-sm); line-height: 1.55; }
+.quick-card ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-2); }
+.quick-card li::before { content: "• "; color: var(--color-primary); font-weight: 800; }
+
+.deep-dive {
+  max-width: 1280px; margin: 0 auto var(--space-8); padding: 0 var(--space-6);
+}
+.deep-dive summary {
+  list-style: none; cursor: pointer;
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm); padding: var(--space-4) var(--space-5);
+  font-family: var(--font-display); font-weight: 800; font-size: var(--text-base);
+}
+.deep-dive summary::-webkit-details-marker { display: none; }
+.deep-dive summary::after {
+  content: "Open"; float: right; font-size: var(--text-xs); color: var(--color-primary); font-family: var(--font-body);
+}
+.deep-dive[open] summary::after { content: "Collapse"; }
+.deep-dive-content { margin-top: var(--space-6); }
+
+/* ── STEP 3 OPTION SWITCHER ──────────────────────────── */
+.option-switcher {
+  display: flex; gap: var(--space-2); flex-wrap: wrap; margin: 0 0 var(--space-6);
+}
+.option-switch {
+  padding: var(--space-2) var(--space-4); border-radius: var(--radius-full);
+  font-size: var(--text-xs); font-weight: 700; border: 1.5px solid var(--color-border);
+  background: var(--color-surface); color: var(--color-text-muted);
+  transition: all var(--transition); cursor: pointer;
+}
+.option-switch:hover { background: var(--color-surface-dynamic); color: var(--color-text); border-color: var(--color-text-faint); }
+.option-switch.active { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+.option-view { display: none; }
+.option-view.visible { display: block; }
+
+/* ── TIMELINE BAR ────────────────────────────────────── */
+.timeline-section {
+  max-width: 1280px; margin: 0 auto var(--space-10);
+  padding: 0 var(--space-6);
+}
+.section-label {
+  font-size: var(--text-xs); font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: var(--space-4);
+}
+.timeline-bar {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2); position: relative;
+}
+.timeline-bar::before {
+  content: ''; position: absolute; top: 18px; left: 10%; right: 10%; height: 2px;
+  background: var(--color-divider); z-index: 0;
+}
+.timeline-phase {
+  position: relative; z-index: 1; display: flex; flex-direction: column;
+  align-items: center; gap: var(--space-2); text-align: center;
+}
+.phase-dot {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--text-xs); font-weight: 800;
+  border: 2px solid var(--color-border); background: var(--color-surface);
+  color: var(--color-text-muted); transition: all var(--transition);
+  flex-shrink: 0;
+}
+.phase-dot.active { background: var(--color-primary); border-color: var(--color-primary); color: white; }
+.phase-dot.done { background: var(--color-success-bg); border-color: var(--color-success); color: var(--color-success); }
+.phase-label { font-size: var(--text-xs); font-weight: 600; color: var(--color-text-muted); line-height: 1.3; }
+.phase-date { font-size: 0.7rem; color: var(--color-text-faint); }
+
+/* ── MAIN GRID ───────────────────────────────────────── */
+.main { max-width: 1280px; margin: 0 auto; padding: 0 var(--space-6) var(--space-16); }
+
+/* ── ARCHITECTURE VIEW ───────────────────────────────── */
+.arch-view { display: none; }
+.arch-view.visible { display: block; padding-top: var(--space-8); margin-bottom: var(--space-10); }
+
+/* ── DATA FLOW COMPARE ───────────────────────────────── */
+.dataflow-compare {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+.dataflow-panel {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.dataflow-panel-label {
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-display); font-weight: 800; font-size: var(--text-sm);
+  border-bottom: 1px solid var(--color-divider);
+}
+.dataflow-label-current { background: var(--color-warning-bg); color: var(--color-warning); }
+.dataflow-label-ideal   { background: var(--color-success-bg); color: var(--color-success); }
+.dataflow-panel-body { padding: var(--space-5); }
+.dataflow-caption {
+  font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.6;
+  margin-bottom: var(--space-4); padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-divider);
+}
+.dataflow-img img { width: 100%; border-radius: var(--radius-lg); display: block; }
+.hub-diagram {
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
+}
+.hub-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: var(--space-2); width: 100%;
+}
+.hub-side { display: flex; flex-direction: column; gap: var(--space-2); flex: 1; }
+.hub-node {
+  font-size: 0.7rem; font-weight: 700; padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md); border: 1.5px solid;
+  text-align: center; line-height: 1.4;
+}
+.hub-center {
+  font-family: var(--font-display); font-size: var(--text-xs); font-weight: 800;
+  padding: var(--space-4) var(--space-4); border-radius: var(--radius-xl); border: 2px solid;
+  text-align: center; line-height: 1.5; flex-shrink: 0; min-width: 120px;
+}
+.hub-full {
+  width: 100%; font-size: 0.7rem; font-weight: 700; padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md); border: 1.5px solid; text-align: center; line-height: 1.4;
+}
+.hub-connector { color: var(--color-text-faint); font-size: 1.1rem; flex-shrink: 0; line-height: 1; }
+.hub-sub { font-size: 0.62rem; font-weight: 500; opacity: 0.75; display: block; margin-top: 2px; }
+.hub-bidir-label {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.hub-bidir-label span {
+  font-size: 0.58rem; font-weight: 600; color: var(--color-text-faint);
+  letter-spacing: 0.03em;
+}
+.hub-source-connector {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.hub-source-label {
+  font-size: 0.58rem; font-weight: 600; color: var(--color-text-faint);
+  background: var(--color-surface-offset); border: 1px solid var(--color-divider);
+  border-radius: var(--radius-sm); padding: 2px 7px; letter-spacing: 0.02em;
+}
+@media (max-width: 768px) { .dataflow-compare { grid-template-columns: 1fr; } }
+
+/* ── SECTION CRUMB & NEXT BUTTON ─────────────────────── */
+.section-crumb {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--color-text-faint);
+  margin-bottom: var(--space-5);
+}
+.section-crumb-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--color-primary); flex-shrink: 0;
+}
+.section-next {
+  display: flex; justify-content: flex-end; align-items: center;
+  padding-top: var(--space-8); margin-top: var(--space-6);
+  border-top: 1px solid var(--color-divider);
+}
+.section-next-btn {
+  display: flex; align-items: center; gap: var(--space-3);
+  background: var(--color-primary); color: white;
+  border: none; border-radius: var(--radius-xl);
+  font-family: var(--font-display); font-weight: 800;
+  font-size: var(--text-sm); padding: var(--space-3) var(--space-6);
+  cursor: pointer; white-space: nowrap;
+  transition: background var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-md);
+}
+.section-next-btn:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-lg); }
+
+.arch-header {
+  display: flex; align-items: flex-start; gap: var(--space-4);
+  margin-bottom: var(--space-6); padding: var(--space-5) var(--space-6);
+  background: var(--color-surface); border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);
+}
+.arch-icon {
+  width: 48px; height: 48px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-family: var(--font-display); font-size: 0.7rem; font-weight: 800;
+  letter-spacing: 0.04em; color: inherit;
+}
+.arch-title-block { flex: 1; }
+.arch-title { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; margin-bottom: var(--space-1); }
+.arch-subtitle { font-size: var(--text-sm); color: var(--color-text-muted); }
+.arch-stack-badges { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-3); }
+.stack-badge {
+  font-size: var(--text-xs); font-weight: 700; padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-full); border: 1.5px solid;
+}
+
+/* ── PARTNER CARDS GRID ──────────────────────────────── */
+.partners-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(480px, 100%), 1fr));
+  gap: var(--space-4); margin-bottom: var(--space-6);
+}
+.partner-card {
+  background: var(--color-surface); border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);
+  overflow: hidden; transition: box-shadow var(--transition), border-color var(--transition);
+}
+.partner-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-text-faint); }
+.partner-card-header {
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  display: flex; align-items: center; gap: var(--space-4);
+  border-bottom: 1px solid var(--color-divider);
+}
+.partner-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 0.7rem; font-weight: 800;
+  letter-spacing: 0.03em; flex-shrink: 0; color: inherit;
+}
+.partner-name { font-family: var(--font-display); font-size: var(--text-base); font-weight: 800; line-height: 1.2; }
+.partner-type { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 500; }
+.partner-rel {
+  margin-left: auto; font-size: var(--text-xs); font-weight: 700;
+  padding: 0.2rem 0.6rem; border-radius: var(--radius-full); white-space: nowrap;
+}
+.rel-existing { background: var(--color-primary-bg); color: var(--color-primary); }
+.rel-new { background: var(--color-warning-bg); color: var(--color-warning); }
+
+.partner-card-body { padding: var(--space-4) var(--space-6); }
+.row-group { margin-bottom: var(--space-4); }
+.row-label {
+  font-size: var(--text-xs); font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--color-text-faint); margin-bottom: var(--space-2);
+  display: flex; align-items: center; gap: var(--space-2);
+}
+.row-label svg { opacity: 0.6; }
+.row-content { font-size: var(--text-sm); color: var(--color-text); line-height: 1.6; }
+
+.pros-list, .cons-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+.pros-list li, .cons-list li {
+  display: flex; gap: var(--space-2); align-items: flex-start;
+  font-size: var(--text-sm); line-height: 1.5;
+}
+.pros-list li::before {
+  content: ''; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px;
+  background: var(--color-success); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center; background-size: 10px;
+}
+.cons-list li::before {
+  content: ''; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px;
+  background: var(--color-error); border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center; background-size: 10px;
+}
+
+.examples-row {
+  display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2);
+}
+.example-link {
+  font-size: var(--text-xs); font-weight: 600; padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-full); border: 1px solid var(--color-border);
+  background: var(--color-surface-2); color: var(--color-text-muted);
+  display: flex; align-items: center; gap: var(--space-1);
+  transition: all var(--transition); text-decoration: none;
+}
+.example-link:hover { background: var(--color-surface-dynamic); color: var(--color-text); border-color: var(--color-text-faint); }
+.example-link svg { opacity: 0.6; }
+
+.questions-block {
+  background: var(--color-gold-bg); border: 1px solid color-mix(in oklch, var(--color-gold) 30%, transparent);
+  border-radius: var(--radius-lg); padding: var(--space-4); margin-top: var(--space-2);
+}
+.questions-block li { color: var(--color-text); font-size: var(--text-sm); }
+.questions-block li::before { background: var(--color-gold); }
+
+.questions-block { list-style: none; }
+.questions-block li {
+  display: flex; gap: var(--space-2); align-items: flex-start; margin-bottom: var(--space-2);
+  font-size: var(--text-sm); line-height: 1.5;
+}
+.questions-block li:last-child { margin-bottom: 0; }
+.questions-block li::before {
+  content: '?'; width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px;
+  background: var(--color-gold); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; font-weight: 900; color: white;
+  background-image: none;
+}
+
+.partner-card-footer {
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-surface-offset); border-top: 1px solid var(--color-divider);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.strat-value {
+  font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5;
+  max-width: 55ch;
+}
+.strat-value strong { color: var(--color-text); font-weight: 700; }
+.website-link {
+  font-size: var(--text-xs); font-weight: 700; color: var(--color-primary);
+  display: flex; align-items: center; gap: var(--space-1); white-space: nowrap;
+  transition: color var(--transition);
+}
+.website-link:hover { color: var(--color-primary-hover); }
+
+.partner-desc {
+  font-size: var(--text-sm); color: var(--color-text-muted);
+  line-height: 1.65; padding: var(--space-4) var(--space-6);
+}
+.partner-detail { padding: 0 var(--space-6) var(--space-4); display: none; }
+.partner-detail.open { display: block; }
+.partner-toggle {
+  background: none; border: none; cursor: pointer; padding: 0;
+  font-size: var(--text-xs); font-weight: 700; color: var(--color-primary);
+  font-family: var(--font-body); display: flex; align-items: center; gap: 0.25rem;
+  transition: color var(--transition);
+}
+.partner-toggle:hover { color: var(--color-primary-hover); }
+.partner-toggle svg { transition: transform var(--transition); }
+.partner-toggle.open svg { transform: rotate(180deg); }
+
+/* ── ABOUT / TEAM SECTION ────────────────────────────── */
+.about-blurb {
+  font-size: var(--text-base); color: var(--color-text-muted); line-height: 1.7;
+  max-width: 72ch; margin-bottom: var(--space-8);
+}
+.stat-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4); margin-bottom: var(--space-10);
+}
+.stat-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
+  padding: var(--space-5) var(--space-6);
+}
+.stat-number {
+  font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800;
+  color: var(--color-primary); line-height: 1.1; margin-bottom: var(--space-1);
+}
+.stat-label {
+  font-size: var(--text-xs); font-weight: 700; color: var(--color-text);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-2);
+}
+.stat-desc {
+  font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5;
+}
+.team-section-label {
+  font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800;
+  margin-bottom: var(--space-6); color: var(--color-text);
+}
+.team-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4); margin-bottom: var(--space-8);
+}
+.team-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
+  padding: var(--space-5) var(--space-6);
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+.team-avatar {
+  width: 44px; height: 44px; border-radius: var(--radius-lg);
+  background: var(--color-primary-bg); color: var(--color-primary);
+  font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.team-name {
+  font-family: var(--font-display); font-size: var(--text-base); font-weight: 800;
+  color: var(--color-text); line-height: 1.2;
+}
+.team-title {
+  font-size: var(--text-xs); font-weight: 600; color: var(--color-primary);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.team-bio {
+  font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6;
+}
+
+/* ── IMPLEMENTATION & TRACKING ──────────────────────── */
+.impl-phases {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3); margin-bottom: var(--space-10); position: relative;
+}
+.impl-phase {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
+  padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);
+}
+.impl-phase-num {
+  font-family: var(--font-display); font-size: var(--text-xs); font-weight: 800;
+  color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.impl-phase-title {
+  font-family: var(--font-display); font-size: var(--text-base); font-weight: 800;
+  color: var(--color-text); line-height: 1.2;
+}
+.impl-phase-items {
+  list-style: none; display: flex; flex-direction: column; gap: var(--space-2);
+}
+.impl-phase-items li {
+  font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5;
+  padding-left: var(--space-3); position: relative;
+}
+.impl-phase-items li::before {
+  content: ""; position: absolute; left: 0; top: 0.45em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--color-primary);
+}
+.visibility-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5);
+  margin-bottom: var(--space-10);
+}
+@media (max-width: 768px) { .visibility-grid { grid-template-columns: 1fr; } }
+.visibility-panel {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); overflow: hidden;
+}
+.visibility-panel-header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-divider);
+  display: flex; align-items: center; gap: var(--space-3);
+}
+.visibility-panel-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 800; flex-shrink: 0;
+}
+.visibility-panel-title {
+  font-family: var(--font-display); font-size: var(--text-base); font-weight: 800;
+}
+.visibility-panel-subtitle {
+  font-size: var(--text-xs); color: var(--color-text-muted);
+}
+.visibility-panel-body { padding: var(--space-5); }
+.visibility-row {
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+.visibility-item {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-divider);
+}
+.visibility-item:last-child { border-bottom: none; padding-bottom: 0; }
+.visibility-item-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--color-primary);
+  flex-shrink: 0; margin-top: 5px;
+}
+.visibility-item-label {
+  font-size: var(--text-sm); font-weight: 700; color: var(--color-text);
+  margin-bottom: 2px;
+}
+.visibility-item-desc {
+  font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5;
+}
+.mock-dashboard {
+  background: var(--color-surface-offset); border-radius: var(--radius-lg);
+  padding: var(--space-4); margin-top: var(--space-4);
+}
+.mock-dash-row {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-2) 0; border-bottom: 1px solid var(--color-divider);
+  font-size: var(--text-xs);
+}
+.mock-dash-row:last-child { border-bottom: none; }
+.mock-dash-park { flex: 1; font-weight: 700; color: var(--color-text); }
+.mock-dash-bar-wrap { flex: 2; background: var(--color-divider); border-radius: 99px; height: 6px; overflow: hidden; }
+.mock-dash-bar { height: 100%; border-radius: 99px; background: var(--color-primary); }
+.mock-dash-pct { width: 36px; text-align: right; color: var(--color-text-muted); font-weight: 600; }
+.mock-dash-status {
+  font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 99px;
+  white-space: nowrap;
+}
+
+/* ── SIDE BY SIDE COMPARE TABLE ──────────────────────── */
+.compare-table-wrap {
+  overflow-x: auto; border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-6);
+}
+.compare-table {
+  width: 100%; border-collapse: collapse; min-width: 900px;
+}
+.compare-table th {
+  background: var(--color-surface-offset); padding: var(--space-4) var(--space-5);
+  font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800;
+  text-align: left; border-bottom: 2px solid var(--color-border);
+  white-space: nowrap; color: var(--color-text);
+}
+.compare-table th:first-child { width: 160px; color: var(--color-text-muted); font-weight: 600; }
+.compare-table td {
+  padding: var(--space-4) var(--space-5); font-size: var(--text-sm);
+  border-bottom: 1px solid var(--color-divider); vertical-align: top;
+  line-height: 1.6; color: var(--color-text);
+}
+.compare-table td:first-child {
+  font-weight: 700; font-size: var(--text-xs); text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--color-text-muted);
+  background: var(--color-surface); white-space: nowrap;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:hover td { background: var(--color-surface-dynamic); }
+.compare-table tr:hover td:first-child { background: var(--color-surface-dynamic); }
+
+.check { color: var(--color-success); }
+.cross { color: var(--color-error); }
+.partial { color: var(--color-gold); }
+.tag {
+  display: inline-block; font-size: 0.68rem; font-weight: 700;
+  padding: 0.15rem 0.5rem; border-radius: var(--radius-full);
+  margin: 0.1rem; line-height: 1.4;
+}
+.tag-green { background: var(--color-success-bg); color: var(--color-success); }
+.tag-red { background: var(--color-error-bg); color: var(--color-error); }
+.tag-gold { background: var(--color-gold-bg); color: var(--color-gold); }
+.tag-blue { background: var(--color-blue-bg); color: var(--color-blue); }
+.tag-purple { background: var(--color-purple-bg); color: var(--color-purple); }
+.tag-orange { background: var(--color-orange-bg); color: var(--color-orange); }
+
+/* ── FLOW DIAGRAM ────────────────────────────────────── */
+.flow-section {
+  background: var(--color-surface); border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border); padding: var(--space-6);
+  margin-bottom: var(--space-6); box-shadow: var(--shadow-sm);
+}
+.flow-title { font-family: var(--font-display); font-size: var(--text-base); font-weight: 800; margin-bottom: var(--space-5); }
+.flow-nodes {
+  display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;
+  justify-content: center;
+}
+.flow-node {
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
+  text-align: center; min-width: 90px;
+}
+.node-box {
+  padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg);
+  font-size: var(--text-xs); font-weight: 700; border: 1.5px solid;
+  line-height: 1.3; text-align: center; min-width: 90px;
+}
+.node-label { font-size: 0.68rem; color: var(--color-text-faint); }
+.flow-arrow {
+  font-size: 1.2rem; color: var(--color-text-faint); flex-shrink: 0;
+}
+.node-primary { background: var(--color-primary-bg); border-color: var(--color-primary); color: var(--color-primary); }
+.node-green { background: var(--color-success-bg); border-color: var(--color-success); color: var(--color-success); }
+.node-gold { background: var(--color-gold-bg); border-color: var(--color-gold); color: var(--color-gold); }
+.node-blue { background: var(--color-blue-bg); border-color: var(--color-blue); color: var(--color-blue); }
+.node-purple { background: var(--color-purple-bg); border-color: var(--color-purple); color: var(--color-purple); }
+.node-orange { background: var(--color-orange-bg); border-color: var(--color-orange); color: var(--color-orange); }
+.node-muted { background: var(--color-surface-offset); border-color: var(--color-border); color: var(--color-text-muted); }
+
+/* ── RECOMMENDATION BAR ──────────────────────────────── */
+.rec-bar {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); padding: var(--space-5) var(--space-6);
+  margin-bottom: var(--space-6); box-shadow: var(--shadow-sm);
+  display: flex; gap: var(--space-4); align-items: flex-start; flex-wrap: wrap;
+}
+.rec-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+.rec-content { flex: 1; min-width: 260px; }
+.rec-title { font-family: var(--font-display); font-weight: 800; font-size: var(--text-base); margin-bottom: var(--space-1); }
+.rec-text { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.65; }
+
+/* ── DIVIDER ─────────────────────────────────────────── */
+.divider {
+  border: none; border-top: 1px solid var(--color-divider);
+  margin: var(--space-8) 0;
+}
+
+/* ── PASS BENEFITS PREVIEW ───────────────────────────── */
+.benefits-section {
+  background: var(--color-surface); border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border); overflow: hidden; box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-6);
+}
+.benefits-header {
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-divider);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.benefits-header h3 { font-family: var(--font-display); font-size: var(--text-base); font-weight: 800; }
+.benefits-note { font-size: var(--text-xs); color: var(--color-text-muted); }
+.benefits-grid { display: grid; grid-template-columns: 1fr auto auto auto; }
+.bg-row {
+  display: contents;
+}
+.bg-row > * {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-divider);
+  font-size: var(--text-xs);
+}
+.bg-row:last-child > * { border-bottom: none; }
+.bg-row > *:not(:first-child) { text-align: center; font-size: 0.9rem; }
+.bg-header > * {
+  background: var(--color-surface-offset); font-weight: 800; font-family: var(--font-display);
+  font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em;
+  border-bottom: 2px solid var(--color-border);
+}
+.bg-header > *:not(:first-child) { color: var(--color-text-muted); }
+.bg-col-plat { color: #888; }
+.bg-col-gold { color: var(--color-gold); }
+.bg-col-reg { color: var(--color-blue); }
+
+/* ── SIDE NAV ────────────────────────────────────────── */
+.side-nav {
+  position: fixed; left: 0; top: 68px; bottom: 0; width: 188px;
+  padding: var(--space-8) 0 var(--space-8);
+  display: flex; flex-direction: column; gap: 2px;
+  border-right: 1px solid var(--color-border);
+  background: var(--color-bg);
+  z-index: 90; overflow-y: auto;
+}
+.side-nav-label {
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--color-text-faint);
+  padding: 0 var(--space-5); margin-bottom: var(--space-4);
+}
+.side-nav-btn {
+  display: flex; align-items: flex-start; gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-xs); font-weight: 600;
+  color: var(--color-text-muted); text-align: left;
+  cursor: pointer; background: none;
+  border: none; border-left: 2px solid transparent;
+  line-height: 1.4; width: 100%;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+.side-nav-btn:hover { color: var(--color-text); background: var(--color-surface-dynamic); }
+.side-nav-btn.active {
+  color: var(--color-primary); font-weight: 700;
+  border-left-color: var(--color-primary);
+  background: var(--color-primary-bg);
+}
+.side-nav-num {
+  font-size: 0.62rem; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+  color: var(--color-text-faint);
+  transition: color var(--transition);
+}
+.side-nav-btn.active .side-nav-num { color: var(--color-primary); }
+
+/* ── SCROLLBAR ───────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  body { padding-left: 0; padding-top: 60px; }
+  .header { padding: var(--space-3) var(--space-4); }
+  .side-nav { display: none; }
+  .hero { padding: var(--space-8) var(--space-4) var(--space-6); }
+  .hero-layout { grid-template-columns: 1fr; gap: var(--space-4); }
+  .main { padding: 0 var(--space-4) var(--space-12); }
+  .timeline-section { padding: 0 var(--space-4); }
+  .arch-header { flex-direction: column; gap: var(--space-3); }
+  .partner-card-footer { flex-direction: column; gap: var(--space-3); }
+  .timeline-bar { grid-template-columns: repeat(3, 1fr); }
+  .timeline-phase:nth-child(4), .timeline-phase:nth-child(5) { display: none; }
+  .dataflow-compare { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <img src="rocketrez_logo.jpeg" alt="RocketRez" class="logo-mark" style="border-radius:8px;object-fit:contain;background:#fff;">
+    <div>
+      <div class="brand-name">Premier Parks</div>
+      <div class="brand-sub">RFP Solution Narrative</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="phase-badge">Submission Draft v1</span>
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="main">
+
+<div class="arch-view visible" id="arch-0">
+  <section class="hero">
+    <div class="hero-layout">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Executive Positioning and Delivery Plan</div>
+        <h1 class="hero-title">More than ticketing: your <span>strategic transformation partner</span> for Premier Parks</h1>
+        <p class="hero-desc">
+          We bring combined decades of attractions experience and will partner with Premier Parks to deliver its vision: move from non-standard, independently managed operations
+          to a repeatable, unified portfolio operating model. Ticketing and entitlements remain the control plane, but our role is broader: design, orchestrate, and execute
+          the full ecosystem across guest experience, operations, and financial governance.
+        </p>
+      </div>
+      <aside class="hero-right" aria-label="Partner logos">
+        <div class="hero-logos">
+          <div class="hero-logo-wrap">
+            <img src="PremierParksLogo2CHorizontal.svg" alt="Premier Parks logo">
+          </div>
+          <div class="hero-logo-wrap">
+            <img src="rocketrez_logo.jpeg" alt="RocketRez logo" style="object-fit:contain;border-radius:6px;">
+          </div>
+        </div>
+        <h3>Strategic Partnership</h3>
+        <p>A combined team with deep attractions experience focused on unified guest experience, entitlement control, and portfolio standardization.</p>
+      </aside>
+    </div>
+  </section>
+
+  <div class="quick-grid" style="margin-bottom:var(--space-8)">
+    <article class="quick-card">
+      <h3>The Vision</h3>
+      <p>Move from non-standard, independently managed businesses to a repeatable, unified attractions portfolio model.</p>
+    </article>
+    <article class="quick-card">
+      <h3>Our Role</h3>
+      <p>We are not only a ticketing vendor. We are the transformation partner that owns entitlement control while orchestrating integration across PMS, F&B, identity, and finance.</p>
+    </article>
+    <article class="quick-card">
+      <h3>Preferred Path</h3>
+      <p>Option 1: Inntopia + Ticketing Core + Toast. Best near-term balance of packaging capability, execution confidence, and go-live readiness.</p>
+    </article>
+    <article class="quick-card">
+      <h3>Milestones</h3>
+      <ul>
+        <li>May: architecture and ownership finalized</li>
+        <li>June-July: configuration and integration build</li>
+        <li>July-August: testing and training</li>
+        <li>September: guest-facing go-live</li>
+        <li>Late October: NetSuite financial cutover</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(1)">
+      Meet the Team
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="arch-view" id="arch-1">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>About RocketRez</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">RR</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Who We Are</div>
+      <div class="arch-subtitle">The team behind this proposal — and the platform behind your guests</div>
+    </div>
+  </div>
+
+  <p class="about-blurb">RocketRez is a modern ticketing, entitlement, and commerce platform built for the attractions industry. We operate at the intersection of guest experience and operational control — powering admissions, season passes, access validation, and onsite commerce for venues ranging from waterparks and theme parks to zoos, aquariums, and mixed-use resort properties. Our integration-first architecture is designed to connect cleanly with PMS, F&amp;B, loyalty, and finance systems, making us a natural fit for operators who need a reliable backbone rather than another siloed tool.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-number">200+</div>
+      <div class="stat-label">Attractions Powered</div>
+      <div class="stat-desc">Theme parks, waterparks, zoos, aquariums, and mixed-use resort properties across North America</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">$1B+</div>
+      <div class="stat-label">Processed Annually</div>
+      <div class="stat-desc">Ticket sales, season passes, packages, and onsite commerce transactions through the platform each year</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">Island H2O</div>
+      <div class="stat-label">Flagship Reference</div>
+      <div class="stat-desc">One of the most technology-forward waterparks in the US, powered by RocketRez for ticketing, access control, and guest experience</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">15+</div>
+      <div class="stat-label">Years of Expertise</div>
+      <div class="stat-desc">Deep domain knowledge in ticketing, entitlements, payments, and commerce platform integration across the attractions vertical</div>
+    </div>
+  </div>
+
+  <div class="team-section-label">Your RocketRez Team</div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">KA</div>
+      <div>
+        <div class="team-name">Kari</div>
+        <div class="team-title">[ Title ]</div>
+      </div>
+      <p class="team-bio">[ Blurb TBD ]</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">TI</div>
+      <div>
+        <div class="team-name">Tim</div>
+        <div class="team-title">[ Title ]</div>
+      </div>
+      <p class="team-bio">[ Blurb TBD ]</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">JO</div>
+      <div>
+        <div class="team-name">John</div>
+        <div class="team-title">[ Title ]</div>
+      </div>
+      <p class="team-bio">[ Blurb TBD ]</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">CH</div>
+      <div>
+        <div class="team-name">Chris</div>
+        <div class="team-title">[ Title ]</div>
+      </div>
+      <p class="team-bio">[ Blurb TBD ]</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">JB</div>
+      <div>
+        <div class="team-name">James</div>
+        <div class="team-title">Payments &amp; Commerce</div>
+      </div>
+      <p class="team-bio">Payments and commerce platform specialist with background at PayPal. Brings deep experience in payment infrastructure, commerce integrations, and platform modernization to complex multi-property deployments.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">CD</div>
+      <div>
+        <div class="team-name">Chad</div>
+        <div class="team-title">[ Title ]</div>
+      </div>
+      <p class="team-bio">[ Blurb TBD ]</p>
+    </div>
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(2)">
+      1. Executive Case
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="arch-view" id="arch-2">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 1 of 7 — Executive Case</div>
+
+  <div class="dataflow-compare">
+    <div class="dataflow-panel">
+      <div class="dataflow-panel-label dataflow-label-current">Current State</div>
+      <div class="dataflow-panel-body">
+        <p class="dataflow-caption">Fragmented, point-to-point systems with no unified entitlement layer, no central guest record, and no consistent operational model across properties.</p>
+        <div class="dataflow-img">
+          <img src="Screenshot 2026-04-14 at 9.14.00 PM.png" alt="Current state: fragmented technology landscape across Premier Parks properties">
+        </div>
+      </div>
+    </div>
+
+    <div class="dataflow-panel">
+      <div class="dataflow-panel-label dataflow-label-ideal">Ideal State</div>
+      <div class="dataflow-panel-body">
+        <p class="dataflow-caption">RocketRez as the unified entitlement and commerce backbone, connected to best-in-class partners through clean, well-governed APIs.</p>
+        <div class="hub-diagram">
+          <div class="hub-full node-muted" style="max-width:220px">
+            Guest
+            <span class="hub-sub">Web · Mobile · On-Property</span>
+          </div>
+          <div class="hub-connector">↓</div>
+          <div class="hub-full node-primary" style="max-width:220px">
+            Commerce Orchestration
+            <span class="hub-sub">Booking · Packages · Bundles</span>
+          </div>
+          <div class="hub-bidir-label">
+            <div class="hub-connector">↕</div>
+            <span>queries availability · receives confirmations</span>
+          </div>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue">PMS<span class="hub-sub">Guest Record &amp; Stay</span></div>
+              <div class="hub-node node-gold">Campground<span class="hub-sub">Outdoor &amp; RV</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">
+              RocketRez
+              <span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Validation</span>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold">F&amp;B / POS<span class="hub-sub">Onsite Commerce</span></div>
+              <div class="hub-node node-purple">Spa &amp; Activities<span class="hub-sub">Reservations</span></div>
+            </div>
+          </div>
+          <div class="hub-source-connector">
+            <div class="hub-connector">↓</div>
+            <span class="hub-source-label">Campground · F&amp;B / POS · Spa &amp; Activities</span>
+            <div class="hub-connector">↓</div>
+          </div>
+          <div class="hub-full node-muted" style="max-width:220px">
+            Finance &amp; Reporting
+            <span class="hub-sub">NetSuite · Oracle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">EX</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Executive Case: What Premier Parks Is Solving</div>
+      <div class="arch-subtitle">Unified guest experience, modernized operations, and enterprise-ready reporting</div>
+    </div>
+  </div>
+
+  <section class="timeline-section" style="padding:0;max-width:none;margin-bottom:var(--space-8)">
+    <div class="section-label">Program Milestones</div>
+    <div class="timeline-bar">
+      <div class="timeline-phase">
+        <div class="phase-dot done">✓</div>
+        <div class="phase-label">Phase 1<br>Foundation</div>
+        <div class="phase-date">Now – May</div>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-dot active">2</div>
+        <div class="phase-label">Phase 2<br>Config & Build</div>
+        <div class="phase-date">May – July</div>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-dot">3</div>
+        <div class="phase-label">Phase 3<br>Testing & Training</div>
+        <div class="phase-date">July – Aug</div>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-dot">4</div>
+        <div class="phase-label">Phase 4<br>Operational Go-Live</div>
+        <div class="phase-date">September</div>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-dot">5</div>
+        <div class="phase-label">Phase 5<br>Financial Cutover</div>
+        <div class="phase-date">Sept – Oct</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rec-bar">
+    <div class="rec-content">
+      <div class="rec-title">Positioning Statement</div>
+      <div class="rec-text">
+        We are not only a ticketing vendor. We are the platform partner that enables Premier Parks to run a connected ecosystem.
+        Our responsibility is to own the entitlement backbone end-to-end and create clean interfaces that allow PMS, F&B, identity, and financial systems to plug in without compromising control.
+      </div>
+    </div>
+  </div>
+
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Executive Summary</th>
+          <th>Why Us</th>
+          <th>Why Now</th>
+          <th>Why This Plan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Board-Level Case</td>
+          <td>We own the hardest and most operationally critical layer: ticketing, entitlement logic, and access validation across all channels.</td>
+          <td>The timeline leaves no room for architectural drift; ownership must be explicit before build scale begins.</td>
+          <td>The model is domain-specialized but control-centered: ticketing remains the entitlement backbone while partners integrate through clean contracts.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="partners-grid">
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">—</div>
+        <div>
+          <div class="partner-name">Business Outcomes We Commit To</div>
+          <div class="partner-type">What this program must deliver</div>
+        </div>
+      </div>
+      <div class="partner-card-body">
+        <div class="row-group">
+          <div class="row-label">PRIMARY OUTCOMES</div>
+          <ul class="pros-list">
+            <li>One consistent guest journey from online booking to on-property spend and post-visit engagement</li>
+            <li>Unified entitlement rules across passes, dated tickets, add-ons, and cross-park benefits</li>
+            <li>Reliable integrations into Opera PMS, Inntopia, Booker, Anemone, and F&B systems</li>
+            <li>Audit-ready financial data handoff for NetSuite and Oracle roll-up reporting</li>
+            <li>A repeatable architecture that supports future acquisitions and portfolio growth</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-error-bg);color:var(--color-error)">—</div>
+        <div>
+          <div class="partner-name">What Fails Without a Ticketing Core</div>
+          <div class="partner-type">Key risk statement for the RFP</div>
+        </div>
+      </div>
+      <div class="partner-card-body">
+        <div class="row-group">
+          <div class="row-label">PROGRAM RISKS</div>
+          <ul class="cons-list">
+            <li>No canonical entitlement source creates disputes at gates, POS, and partner systems</li>
+            <li>Inconsistent pass benefit enforcement causes revenue leakage and guest dissatisfaction</li>
+            <li>Disconnected systems multiply reconciliation, exception handling, and manual support</li>
+            <li>Financial cutover risk increases when operational events are not normalized at source</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(3)">
+      2. Ticketing Core
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="arch-view" id="arch-3">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 2 of 7 — Ticketing Core</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-success-bg);color:var(--color-success)">TC</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Ticketing Core Blueprint</div>
+      <div class="arch-subtitle">How we prove we are the right partner for the core layer</div>
+    </div>
+  </div>
+
+  <div class="flow-section">
+    <div class="flow-title">Core Architecture: Ownership and Interfaces</div>
+    <div class="flow-nodes">
+      <div class="flow-node">
+        <div class="node-box node-muted">Website / App</div>
+        <div class="node-label">Demand Entry</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="node-box node-primary">Inntopia</div>
+        <div class="node-label">Package Orchestration</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="node-box node-green">Ticketing Core</div>
+        <div class="node-label">Catalog + Entitlements</div>
+      </div>
+      <div class="flow-arrow">↔</div>
+      <div class="flow-node">
+        <div class="node-box node-blue">Opera PMS</div>
+        <div class="node-label">Guest and Stay Context</div>
+      </div>
+      <div class="flow-arrow">↔</div>
+      <div class="flow-node">
+        <div class="node-box node-gold">POS / F&B</div>
+        <div class="node-label">Onsite Validation</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="node-box node-muted">NetSuite / Oracle</div>
+        <div class="node-label">Finance and Reporting</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="partners-grid">
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">TC</div>
+        <div>
+          <div class="partner-name">Ticketing Responsibilities We Own</div>
+          <div class="partner-type">Non-negotiable scope</div>
+        </div>
+      </div>
+      <div class="partner-card-body">
+        <div class="row-group">
+          <div class="row-label">DELIVERY SCOPE</div>
+          <ul class="pros-list">
+            <li>Product catalog governance for dated, any-day, season pass, groups, birthdays, cabanas, and add-ons</li>
+            <li>Entitlement engine for tiered benefits, sister-park access, capacity controls, and offer eligibility</li>
+            <li>Real-time issuance and validation APIs for web, mobile, gate, and POS channels</li>
+            <li>Guest and stay context linkage with Opera PMS for room-charge and identity-aware experiences</li>
+            <li>Operational controls for refunds, exchanges, voids, and auditability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">RD</div>
+        <div>
+          <div class="partner-name">Proof We Have Our House in Order</div>
+          <div class="partner-type">Readiness criteria for RFP confidence</div>
+        </div>
+      </div>
+      <div class="partner-card-body">
+        <div class="row-group">
+          <div class="row-label">READINESS CHECKLIST</div>
+          <ul class="pros-list">
+            <li>Defined guest identifier strategy with Opera as system of record</li>
+            <li>Documented payload ownership and event triggers for every interface</li>
+            <li>Error handling and retry standards for all mission-critical APIs</li>
+            <li>SLA targets for entitlement response time and availability at gate/POS</li>
+            <li>Cross-border support plan for Quebec taxes, language, and compliance requirements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(4)">
+      3. Partner Ecosystem
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="arch-view" id="arch-4">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 3 of 7 — Partner Ecosystem</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">PE</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Partner Ecosystem Overview</div>
+      <div class="arch-subtitle">The vendors behind the recommended architecture — what each one does, why they matter, and where to learn more</div>
+    </div>
+  </div>
+
+  <div class="partners-grid">
+
+    <!-- INNTOPIA -->
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">IN</div>
+        <div>
+          <div class="partner-name">Inntopia</div>
+          <div class="partner-type">Unified Booking Engine / Commerce Orchestration</div>
+        </div>
+        <span class="partner-rel rel-new">New Partner</span>
+      </div>
+      <p class="partner-desc">The master booking orchestration hub. Guests build packages — lodging, tickets, spa, campground — in a single cart. Inntopia queries each system and issues confirmed reservations after payment.</p>
+      <div class="partner-detail" id="pd-inntopia">
+        <div class="row-group">
+          <div class="row-label">STRATEGIC FIT</div>
+          <ul class="pros-list">
+            <li>Only platform purpose-built for multi-product resort packages at scale</li>
+            <li>Direct match for Valcartier, Nashville Shores, and Elitch Gardens where lodging + activities bundling is core</li>
+            <li>Existing Opera PMS relationships reduce integration risk on the accommodation side</li>
+            <li>Keeps package logic out of the ticketing and PMS layers</li>
+          </ul>
+        </div>
+        <div class="row-group">
+          <div class="row-label">OPEN QUESTIONS</div>
+          <ul class="questions-block">
+            <li>Real-time vs. batch ticket inventory sync with RocketRez — the critical path item</li>
+            <li>Quebec QST + GST stacking and French-language readiness for Canadian properties</li>
+            <li>White-label / per-property branding capability</li>
+          </ul>
+        </div>
+      </div>
+      <div class="partner-card-footer">
+        <button class="partner-toggle" onclick="togglePartner('pd-inntopia', this)">
+          Learn more
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <a href="https://corp.inntopia.com" target="_blank" rel="noopener" class="website-link">
+          Visit Site
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- SPOTLIO -->
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">SP</div>
+        <div>
+          <div class="partner-name">Spotlio</div>
+          <div class="partner-type">Dynamic Pricing / Mobile App / Guest Engagement</div>
+        </div>
+        <span class="partner-rel rel-existing">Existing Partner</span>
+      </div>
+      <p class="partner-desc">An orchestration and guest engagement layer with native dynamic pricing, CRM, and mobile app. Known integration history with RocketRez reduces the cold-start risk you get with a new partner.</p>
+      <div class="partner-detail" id="pd-spotlio">
+        <div class="row-group">
+          <div class="row-label">STRATEGIC FIT</div>
+          <ul class="pros-list">
+            <li>Known integration history with RocketRez — established relationship, not a greenfield build</li>
+            <li>Dynamic pricing and CRM included natively; Inntopia requires a third tool for both</li>
+            <li>Mobile app capability consolidates guest engagement into a single vendor</li>
+            <li>Active references at Morey's Piers, Gausta (Ski Big 3), and Powder Mountain</li>
+          </ul>
+        </div>
+        <div class="row-group">
+          <div class="row-label">OPEN QUESTIONS</div>
+          <ul class="questions-block">
+            <li>Ownership transition in progress — need a candid roadmap conversation before committing</li>
+            <li>Lodging packaging depth: can Spotlio match Inntopia for VVV-style bundled resort packages?</li>
+            <li>Quebec readiness (QST stacking, French UI) for Valcartier, Calypso, La Ronde</li>
+          </ul>
+        </div>
+      </div>
+      <div class="partner-card-footer">
+        <button class="partner-toggle" onclick="togglePartner('pd-spotlio', this)">
+          Learn more
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <a href="https://www.spotlio.com" target="_blank" rel="noopener" class="website-link">
+          Visit Site
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- VANTAGE -->
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">VN</div>
+        <div>
+          <div class="partner-name">Vantage</div>
+          <div class="partner-type">Guest Identity / Cashless Payments / Loyalty / Mobile App</div>
+        </div>
+        <span class="partner-rel rel-new">Potential New Partner</span>
+      </div>
+      <p class="partner-desc">A unified guest identity and cashless commerce platform — one account that governs the wallet, loyalty, mobile app, and on-property access. The only vendor in the space that wraps all of this natively.</p>
+      <div class="partner-detail" id="pd-vantage">
+        <div class="row-group">
+          <div class="row-label">STRATEGIC FIT</div>
+          <ul class="pros-list">
+            <li>Only platform with native cashless wallet + loyalty + mobile app + ticketing in one architecture</li>
+            <li>Enchanted Parks (8 parks, EPR/Six Flags) selected Vantage for enterprise-wide deployment Q2 2026 — direct comparable</li>
+            <li>Active conversations with Montgomery Whitewater and San Antonio Zoo give Premier Parks shared integration leverage</li>
+            <li>WhiteWater (manufacturer) backing means waterpark operations are a core use case, not adapted from ski</li>
+            <li>Opera Cloud integration pathway via OHIP</li>
+          </ul>
+        </div>
+        <div class="row-group">
+          <div class="row-label">OPEN QUESTIONS</div>
+          <ul class="questions-block">
+            <li>Bandwidth: can Vantage support Enchanted Parks and Premier Parks simultaneously?</li>
+            <li>Quebec compliance: Law 96, Bill 64 privacy, QST stacking — status unknown for Canadian properties</li>
+            <li>Entitlement ownership in a Vantage + RocketRez architecture — who holds the ticket record?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="partner-card-footer">
+        <button class="partner-toggle" onclick="togglePartner('pd-vantage', this)">
+          Learn more
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <a href="https://vantage.co" target="_blank" rel="noopener" class="website-link">
+          Visit Site
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">TO</div>
+        <div>
+          <div class="partner-name">Toast</div>
+          <div class="partner-type">F&amp;B / Restaurant POS / Kitchen Operations</div>
+        </div>
+        <span class="partner-rel rel-new">New Partner</span>
+      </div>
+      <p class="partner-desc">Dedicated restaurant and F&amp;B POS. Handles front-of-house ordering, kitchen display, and dining analytics so RocketRez stays focused on admissions and entitlements rather than managing dining complexity.</p>
+      <div class="partner-detail" id="pd-toast">
+        <div class="row-group">
+          <div class="row-label">STRATEGIC FIT</div>
+          <ul class="pros-list">
+            <li>Purpose-built for restaurant operations — recipe depletion, table management, and kitchen display are native</li>
+            <li>Strong consumer brand recognition eases staff recruitment and training at scale</li>
+            <li>Cleanest path for VVV's spa restaurant, Elitch's dining program, and Nashville Shores' marina concessions</li>
+            <li>Open API for Opera PMS room charge and RocketRez entitlement validation</li>
+          </ul>
+        </div>
+        <div class="row-group">
+          <div class="row-label">OPEN QUESTIONS</div>
+          <ul class="questions-block">
+            <li>Quebec QST + GST stacking: tax configuration for Canadian properties needs validation</li>
+            <li>Room charge integration to Opera PMS — native or custom bridge?</li>
+            <li>Hardware supply lead times against the September go-live</li>
+          </ul>
+        </div>
+      </div>
+      <div class="partner-card-footer">
+        <button class="partner-toggle" onclick="togglePartner('pd-toast', this)">
+          Learn more
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <a href="https://pos.toasttab.com" target="_blank" rel="noopener" class="website-link">
+          Visit Site
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- LIGHTSPEED -->
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">LS</div>
+        <div>
+          <div class="partner-name">Lightspeed</div>
+          <div class="partner-type">F&amp;B / Retail POS — Quebec-Ready Alternative</div>
+        </div>
+        <span class="partner-rel rel-new">Alternate Path</span>
+      </div>
+      <p class="partner-desc">The primary fallback if Toast cannot confirm Quebec compliance. Headquartered in Montreal with QST, French-language law, and SRM requirements built in natively — not retrofitted.</p>
+      <div class="partner-detail" id="pd-lightspeed">
+        <div class="row-group">
+          <div class="row-label">STRATEGIC FIT</div>
+          <ul class="pros-list">
+            <li>Montreal HQ — Quebec tax (QST + GST), Bill 96 (French language), and SRM compliance are native</li>
+            <li>Covers F&amp;B and retail in one platform — relevant for properties with both dining and merchandise</li>
+            <li>Well-established API ecosystem for hospitality and ticketing integrations</li>
+          </ul>
+        </div>
+        <div class="row-group">
+          <div class="row-label">OPEN QUESTIONS</div>
+          <ul class="questions-block">
+            <li>If Toast confirms Quebec compliance, does the Lightspeed case hold at US-only properties?</li>
+            <li>Is the commercial path already committed to Toast? What is the cost of a pivot?</li>
+            <li>Integration depth with Opera PMS room charge — parity with Toast?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="partner-card-footer">
+        <button class="partner-toggle" onclick="togglePartner('pd-lightspeed', this)">
+          Learn more
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <a href="https://www.lightspeedhq.com" target="_blank" rel="noopener" class="website-link">
+          Visit Site
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(5)">
+      4. Integrations &amp; Options
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="arch-view" id="arch-5">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 4 of 7 — Integrations &amp; Options</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">IN</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Integration Recommendations and Full Option Analysis</div>
+      <div class="arch-subtitle">Lead recommendation plus all architecture options with partner-level guidance</div>
+    </div>
+  </div>
+
+  <div class="rec-bar">
+    <div class="rec-content">
+      <div class="rec-title">Preferred Path: Option 1 (Inntopia + Ticketing Core + Toast)</div>
+      <div class="rec-text">
+        This path gives Premier Parks the strongest near-term execution confidence for September go-live by combining proven package orchestration, a centralized entitlement backbone, and dedicated F&B depth. It also preserves flexibility to layer identity and loyalty enhancements in a controlled Phase 2/3 expansion.
+      </div>
+    </div>
+  </div>
+
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Architecture</th>
+          <th>Best Fit</th>
+          <th>Strengths</th>
+          <th>Key Risks</th>
+          <th>Recommendation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Option 1</td>
+          <td>Inntopia + Ticketing Core + Toast + Opera</td>
+          <td>Resort and package-heavy properties</td>
+          <td>Strong package orchestration, clear entitlement ownership, operationally realistic for timeline</td>
+          <td>Booking UX and integration complexity must be actively managed</td>
+          <td><span class="tag tag-green">Preferred Path</span></td>
+        </tr>
+        <tr>
+          <td>Option 2</td>
+          <td>Spotlio + Ticketing Core + Toast (+ Inntopia where needed)</td>
+          <td>Ticket-driven parks with pricing and app focus</td>
+          <td>Stronger digital UX and dynamic pricing upside</td>
+          <td>Additional integration burden and roadmap certainty checks</td>
+          <td><span class="tag tag-blue">Strong Alternative</span></td>
+        </tr>
+        <tr>
+          <td>Option 3</td>
+          <td>Vantage + Toast (+ Ticketing Core as needed)</td>
+          <td>Cashless/identity-forward experiences</td>
+          <td>Differentiated identity and wallet model</td>
+          <td>Bandwidth, scale maturity, and regional compliance validation</td>
+          <td><span class="tag tag-purple">Innovation Track</span></td>
+        </tr>
+        <tr>
+          <td>Option 4</td>
+          <td>Segmented hybrid by property type</td>
+          <td>Portfolio tailoring by business model</td>
+          <td>Best local fit per property</td>
+          <td>Highest governance and integration complexity</td>
+          <td><span class="tag tag-orange">Conditional</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Domain</th>
+          <th>System of Record</th>
+          <th>Integration Pattern</th>
+          <th>Why It Matters</th>
+          <th>Decision Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Guest Record</td>
+          <td>Opera PMS</td>
+          <td>Bidirectional guest/stay context sync with ticketing</td>
+          <td>Prevents identity drift and supports room-charge workflows</td>
+          <td><span class="tag tag-green">Defined</span></td>
+        </tr>
+        <tr>
+          <td>Package Orchestration</td>
+          <td>Inntopia</td>
+          <td>Checkout orchestration with downstream split fulfillment</td>
+          <td>Enables one cart for lodging, spa, campground, and tickets</td>
+          <td><span class="tag tag-green">Defined</span></td>
+        </tr>
+        <tr>
+          <td>Ticketing + Entitlements</td>
+          <td>Ticketing Core</td>
+          <td>Real-time issuance and validation APIs</td>
+          <td>Core control point for access, benefit enforcement, and revenue integrity</td>
+          <td><span class="tag tag-green">Core Position</span></td>
+        </tr>
+        <tr>
+          <td>Onsite POS / F&B</td>
+          <td>POS Domain Systems</td>
+          <td>Entitlement validation + room-charge posting integration</td>
+          <td>Ensures fast operations without sacrificing accounting traceability</td>
+          <td><span class="tag tag-gold">Finalize Vendor</span></td>
+        </tr>
+        <tr>
+          <td>Financial Reporting</td>
+          <td>NetSuite / Oracle</td>
+          <td>Normalized event feed and controlled GL mapping</td>
+          <td>Supports late-October cutover and consolidated reporting</td>
+          <td><span class="tag tag-gold">In Progress</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rec-bar">
+    <div class="rec-content">
+      <div class="rec-title">Recommendation: Option 1 as primary path</div>
+      <div class="rec-text">
+        Keep ticketing and entitlement as the control plane, and run Option 1 as the core delivery path for 2026. Maintain the other three options as
+        targeted alternatives by property profile and strategic objective.
+      </div>
+    </div>
+  </div>
+
+  <div class="option-switcher">
+    <button class="option-switch active" onclick="showOptionDetail(0)">Option 1 — Inntopia + RocketRez + Toast (Preferred)</button>
+    <button class="option-switch" onclick="showOptionDetail(1)">Option 2 — Spotlio + RocketRez + Toast</button>
+    <button class="option-switch" onclick="showOptionDetail(2)">Option 3 — Vantage + Toast</button>
+    <button class="option-switch" onclick="showOptionDetail(3)">Option 4 — Hybrid Mix</button>
+  </div>
+
+  <div class="option-view visible">
+    <div class="flow-section">
+      <div class="flow-title">Data Flow — Option 1</div>
+      <div class="flow-nodes">
+        <div class="flow-node"><div class="node-box node-muted">Guest Website</div><div class="node-label">Entry Point</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="node-box node-primary">Inntopia</div><div class="node-label">Booking Hub</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="node-box node-blue">Opera PMS</div><div class="node-label">Guest Record</div></div>
+        <div class="flow-arrow">↔</div>
+        <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticketing + POS</div></div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&B</div></div>
+      </div>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">IN</div><div><div class="partner-name">Inntopia</div><div class="partner-type">Unified Booking Engine / Commerce Orchestration</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Best packaging fit for lodging + activities (VVV, Nashville Shores, Elitch)</li><li>Strong orchestration across Opera, Anemone, Booker, and ticketing</li><li>Primary risk: UX and integration complexity require strong delivery governance</li></ul></div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">RR</div><div><div class="partner-name">RocketRez</div><div class="partner-type">Ticketing + Point of Sale</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Core entitlement owner across dated/any-day/pass and gate validation</li><li>Open APIs support PMS, payments, and partner integrations</li><li>Critical dependency: real-time integration behavior must be confirmed end-to-end</li></ul></div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">TS</div><div><div class="partner-name">Toast</div><div class="partner-type">F&B Point of Sale</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Best-in-class F&B depth for full-service and quick-service operations</li><li>Supports offloading restaurant complexity from ticketing core</li><li>Need final confirmation on Quebec tax behavior and Opera integration path</li></ul></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option-view">
+    <div class="flow-section">
+      <div class="flow-title">Data Flow — Option 2</div>
+      <div class="flow-nodes">
+        <div class="flow-node"><div class="node-box node-blue">Spotlio Web + App</div><div class="node-label">Commerce + Loyalty</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="node-box node-primary">Inntopia (optional)</div><div class="node-label">Lodging packaging</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticketing + POS</div></div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&B</div></div>
+      </div>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">SP</div><div><div class="partner-name">Spotlio</div><div class="partner-type">Dynamic Pricing + App + Commerce</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Strong digital UX and dynamic pricing for ticket-led parks</li><li>Existing relationship lowers onboarding risk</li><li>Need roadmap certainty and deeper entitlement integration validation</li></ul></div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">RR</div><div><div class="partner-name">RocketRez</div><div class="partner-type">Ticketing + POS</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Retains core entitlement and issuance responsibilities</li><li>Supports Spotlio front-end with ticket issuance and validation APIs</li><li>Single guest ID strategy must be enforced to avoid identity splits</li></ul></div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">TS</div><div><div class="partner-name">Toast</div><div class="partner-type">F&B Point of Sale</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Same strategic F&B role as Option 1</li><li>Can be embedded into app-led guest experience journeys</li></ul></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option-view">
+    <div class="flow-section">
+      <div class="flow-title">Data Flow — Option 3</div>
+      <div class="flow-nodes">
+        <div class="flow-node"><div class="node-box node-purple">Vantage App/Web</div><div class="node-label">Identity + Wallet</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="node-box node-purple">Vantage Platform</div><div class="node-label">Cashless + Loyalty</div></div>
+        <div class="flow-arrow">↔</div>
+        <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Guest Record</div></div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&B</div></div>
+      </div>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">VG</div><div><div class="partner-name">Vantage</div><div class="partner-type">Identity + Cashless + Loyalty</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Most differentiated identity and cashless proposition</li><li>Strong upside for high in-park spend and wallet use cases</li><li>Needs proof at Premier Parks scale plus Quebec readiness confirmation</li></ul></div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">TS</div><div><div class="partner-name">Toast</div><div class="partner-type">F&B Point of Sale</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Potentially strongest guest convenience if wallet integration is confirmed</li><li>Requires explicit API and settlement pattern definition with identity layer</li></ul></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option-view">
+    <div class="flow-section">
+      <div class="flow-title">Data Flow — Option 4 (Hybrid)</div>
+      <div class="flow-nodes">
+        <div class="flow-node"><div class="node-box node-orange">Segment by Property</div><div class="node-label">Portfolio strategy</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="node-box node-primary">Inntopia / Spotlio</div><div class="node-label">Commerce layer split</div></div>
+        <div class="flow-arrow">↔</div>
+        <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticketing backbone</div></div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-node"><div class="node-box node-purple">Vantage</div><div class="node-label">Selective cashless</div></div>
+      </div>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-orange-bg);color:var(--color-orange)">HB</div><div><div class="partner-name">Hybrid Strategy</div><div class="partner-type">Best-fit by property type</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="cons-list"><li>Highest flexibility and highest complexity</li><li>Works when governance is mature and rollout waves are disciplined</li><li>Not ideal for uncontrolled expansion under fixed deadlines</li></ul></div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">VG</div><div><div class="partner-name">Vantage (Selective)</div><div class="partner-type">Innovation wedge</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Deploy at 2-3 high-value sites first to prove ROI</li><li>Scale portfolio-wide only after operational proof points</li></ul></div></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">SP</div><div><div class="partner-name">Spotlio (Selective)</div><div class="partner-type">Dynamic pricing wedge</div></div></div>
+        <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Target dated-ticket properties where yield optimization is highest</li><li>Retain shared entitlement standards via ticketing core</li></ul></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(6)">
+      5. Delivery Readiness
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="arch-view" id="arch-6">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 5 of 7 — Delivery Readiness</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-orange-bg);color:var(--color-orange)">DL</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Delivery, Governance, and RFP Readiness</div>
+      <div class="arch-subtitle">How we execute without missing September go-live or October financial cutover</div>
+    </div>
+  </div>
+
+  <div class="partners-grid">
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">EP</div>
+        <div>
+          <div class="partner-name">Execution Plan by Phase</div>
+          <div class="partner-type">From architecture to financial cutover</div>
+        </div>
+      </div>
+      <div class="partner-card-body">
+        <div class="row-group">
+          <div class="row-label">PHASE PRIORITIES</div>
+          <ul class="pros-list">
+            <li><strong>Phase 1:</strong> lock ownership map, canonical identifiers, and interface contracts</li>
+            <li><strong>Phase 2:</strong> configure ticketing catalog and build high-priority integrations</li>
+            <li><strong>Phase 3:</strong> run end-to-end scenario tests (guest, ops, finance, edge cases)</li>
+            <li><strong>Phase 4:</strong> production go-live command center with real-time incident management</li>
+            <li><strong>Phase 5:</strong> financial stabilization, GL reconciliation, and handoff to BAU governance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">RF</div>
+        <div>
+          <div class="partner-name">Critical RFP Commitments</div>
+          <div class="partner-type">What we must explicitly show to win</div>
+        </div>
+      </div>
+      <div class="partner-card-body">
+        <div class="row-group">
+          <div class="row-label">COMMITMENTS</div>
+          <ul class="questions-block">
+            <li>A signed responsibility matrix for every API and operational handoff</li>
+            <li>Documented service levels and incident escalation for ticketing and entitlement APIs</li>
+            <li>A validated test suite for pass benefits and exception scenarios across properties</li>
+            <li>A go-live readiness scorecard covering tech, operations, training, and finance</li>
+            <li>A clear decision log for unresolved items (Quebec readiness, middleware choices, final vendor commitments)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rec-bar">
+    <div class="rec-content">
+      <div class="rec-title">Final Narrative for Submission</div>
+      <div class="rec-text">
+        Premier Parks should select the partner that can own ticketing and entitlement execution while orchestrating clean integrations across PMS, F&B, identity, and ERP.
+        This proposal demonstrates that we have both the architecture discipline and the delivery structure to do exactly that.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(7)">
+      6. Implementation &amp; Tracking
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="arch-view" id="arch-8">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 7 of 7 — Decision Appendix</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">AP</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Appendix: Open Decisions, Owners, and Deadlines</div>
+      <div class="arch-subtitle">Decision log to de-risk implementation and prove execution discipline</div>
+    </div>
+  </div>
+
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Open Decision</th>
+          <th>Owner</th>
+          <th>Required By</th>
+          <th>Impact If Delayed</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Confirm real-time vs batch for Opera → Ticketing and Opera → POS</td>
+          <td>API Architecture Lead</td>
+          <td>Phase 1 close</td>
+          <td>High go-live risk for gate validation and room-charge workflows</td>
+          <td><span class="tag tag-gold">Open</span></td>
+        </tr>
+        <tr>
+          <td>Finalize guest identifier strategy with Opera as authoritative source</td>
+          <td>Identity Workstream Lead</td>
+          <td>Phase 1 close</td>
+          <td>Identity mismatch across channels and support burden increase</td>
+          <td><span class="tag tag-gold">Open</span></td>
+        </tr>
+        <tr>
+          <td>Decide F&B integration pattern (direct vs middleware path)</td>
+          <td>Commerce Integration Lead</td>
+          <td>Early Phase 2</td>
+          <td>Scope churn and delayed certification for onsite transactions</td>
+          <td><span class="tag tag-gold">Open</span></td>
+        </tr>
+        <tr>
+          <td>Quebec readiness confirmation (tax, language, compliance)</td>
+          <td>Regional Compliance Lead</td>
+          <td>Before test cycle start</td>
+          <td>Regulatory and launch risk for Canadian properties</td>
+          <td><span class="tag tag-orange">At Risk</span></td>
+        </tr>
+        <tr>
+          <td>NetSuite and Oracle financial event mapping sign-off</td>
+          <td>Finance Systems Lead</td>
+          <td>Before Phase 4</td>
+          <td>Financial cutover instability and reconciliation issues</td>
+          <td><span class="tag tag-gold">In Progress</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="partners-grid">
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">GV</div>
+        <div>
+          <div class="partner-name">Governance Controls</div>
+          <div class="partner-type">How decisions stay on track</div>
+        </div>
+      </div>
+      <div class="partner-card-body">
+        <div class="row-group">
+          <div class="row-label">CONTROL MECHANISMS</div>
+          <ul class="pros-list">
+            <li>Weekly architecture review with formal decision capture and change control</li>
+            <li>Interface-level RAID log tied to owner and due date</li>
+            <li>Escalation protocol for blockers older than five business days</li>
+            <li>Pre-go-live quality gate requiring sign-off from product, operations, and finance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-card-header">
+        <div class="partner-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">CK</div>
+        <div>
+          <div class="partner-name">Submission Attachments Checklist</div>
+          <div class="partner-type">What to include with the RFP response</div>
+        </div>
+      </div>
+      <div class="partner-card-body">
+        <div class="row-group">
+          <div class="row-label">ATTACHMENTS</div>
+          <ul class="questions-block">
+            <li>System ownership matrix with interface boundaries by domain</li>
+            <li>Critical API catalog with payload owner, trigger, SLA, and retry policy</li>
+            <li>End-to-end test scenarios for pass benefits and exception handling</li>
+            <li>Cutover runbook and command-center escalation plan</li>
+            <li>Regional compliance summary for Canada and Quebec-specific requirements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(0)">
+      Back to Introduction
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 3 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+</main>
+
+<nav class="side-nav" aria-label="Section navigation">
+  <div class="side-nav-label">Sections</div>
+  <button class="side-nav-btn active" onclick="showArch(0)"><span class="side-nav-num">00</span>Introduction</button>
+  <button class="side-nav-btn" onclick="showArch(1)"><span class="side-nav-num">—</span>About RocketRez</button>
+  <button class="side-nav-btn" onclick="showArch(2)"><span class="side-nav-num">01</span>Executive Case</button>
+  <button class="side-nav-btn" onclick="showArch(3)"><span class="side-nav-num">02</span>Ticketing Core</button>
+  <button class="side-nav-btn" onclick="showArch(4)"><span class="side-nav-num">03</span>Partner Ecosystem</button>
+  <button class="side-nav-btn" onclick="showArch(5)"><span class="side-nav-num">04</span>Integrations &amp; Options</button>
+  <button class="side-nav-btn" onclick="showArch(6)"><span class="side-nav-num">05</span>Delivery Readiness</button>
+  <button class="side-nav-btn" onclick="showArch(7)"><span class="side-nav-num">06</span>Implementation &amp; Tracking</button>
+  <button class="side-nav-btn" onclick="showArch(8)"><span class="side-nav-num">07</span>Decision Appendix</button>
+</nav>
+
+<script>
+(function(){
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = 'light';
+  r.setAttribute('data-theme', d);
+  if (t) t.addEventListener('click', () => {
+    d = d === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', d);
+  });
+})();
+
+function showArch(index) {
+  document.querySelectorAll('.arch-view').forEach((el, i) => {
+    el.classList.toggle('visible', i === index);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  syncActiveNav(index);
+}
+
+function showOptionDetail(index) {
+  document.querySelectorAll('.option-view').forEach((el, i) => {
+    el.classList.toggle('visible', i === index);
+  });
+  document.querySelectorAll('.option-switch').forEach((tab, i) => {
+    tab.classList.toggle('active', i === index);
+  });
+}
+
+function syncActiveNav(index) {
+  document.querySelectorAll('.arch-tab').forEach((tab, i) => {
+    tab.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.side-nav-btn').forEach((tab, i) => {
+    tab.classList.toggle('active', i === index);
+  });
+}
+
+function togglePartner(id, btn) {
+  const el = document.getElementById(id);
+  const isOpen = el.classList.contains('open');
+  el.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.childNodes[0].textContent = isOpen ? 'Learn more' : 'Show less';
+}
+
+// Show first section on load without scrolling
+(function(){
+  document.querySelectorAll('.arch-view').forEach((el, i) => {
+    el.classList.toggle('visible', i === 0);
+  });
+  syncActiveNav(0);
+})();
+</script>
+</body>
+</html>
