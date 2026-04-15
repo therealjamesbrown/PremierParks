@@ -353,6 +353,22 @@ a { color: inherit; text-decoration: none; }
 .hub-payment-connector {
   font-size: 0.75rem; color: var(--color-success); opacity: 0.6; font-weight: 700;
 }
+.hub-orch-wrapper {
+  display: grid;
+  grid-template-columns: max-content auto;
+  grid-template-rows: auto auto;
+  justify-items: center;
+  align-items: start;
+  gap: var(--space-1) var(--space-2);
+  width: auto;
+}
+.hub-orch-wrapper > .hub-full { grid-column: 1; grid-row: 1; }
+.hub-orch-wrapper > .hub-bidir-label { grid-column: 1; grid-row: 2; }
+.hub-orch-wrapper > .hub-payment-side { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+.hub-orch-main { display: flex; flex-direction: column; align-items: center; }
+.hub-payment-side {
+  display: flex; align-items: center; gap: var(--space-2);
+}
 .hub-side { display: flex; flex-direction: column; gap: var(--space-2); flex: 1; }
 .hub-node {
   font-size: 0.7rem; font-weight: 700; padding: var(--space-2) var(--space-3);
@@ -730,7 +746,7 @@ a { color: inherit; text-decoration: none; }
 .ideal-diagram { display: none; }
 .ideal-diagram.active { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
 .flow-diagram { display: none; }
-.flow-diagram.active { display: block; }
+.flow-diagram.active { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
 
 /* ── IMPLEMENTATION & TRACKING ──────────────────────── */
 .impl-phases {
@@ -1293,7 +1309,7 @@ a { color: inherit; text-decoration: none; }
 
     <div class="dataflow-panel">
       <div class="dataflow-panel-label dataflow-label-ideal">Ideal State</div>
-      <div class="dataflow-panel-body">
+      <div class="dataflow-panel-body" id="flow-ideal">
 
         <div class="ideal-tabs">
           <button class="ideal-tab active" onclick="showIdealTab('online', this)">Online Booking</button>
@@ -1309,7 +1325,7 @@ a { color: inherit; text-decoration: none; }
             <span class="hub-sub">Browser · Mobile Web</span>
           </div>
           <div class="hub-connector">↓</div>
-          <div style="position:relative;display:flex;flex-direction:column;align-items:center;width:100%">
+          <div class="hub-orch-wrapper">
             <div class="hub-full node-primary" style="max-width:220px;margin:0">
               Commerce Orchestration
               <span class="hub-sub">Booking &amp; Package Layer · Loyalty (TBD)</span>
@@ -1319,7 +1335,7 @@ a { color: inherit; text-decoration: none; }
               <div class="hub-connector">↕</div>
               <span>queries availability · receives confirmations</span>
             </div>
-            <div style="position:absolute;right:0;top:0;display:flex;align-items:center;gap:var(--space-2)">
+            <div class="hub-payment-side">
               <span class="hub-payment-connector">→</span>
               <div class="hub-payment-tile">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
@@ -1362,7 +1378,7 @@ a { color: inherit; text-decoration: none; }
             <span class="hub-sub">iOS · Android · Native</span>
           </div>
           <div class="hub-connector">↓</div>
-          <div style="position:relative;display:flex;flex-direction:column;align-items:center;width:100%">
+          <div class="hub-orch-wrapper">
             <div class="hub-full node-primary" style="max-width:220px;margin:0">
               Mobile Platform
               <span class="hub-sub">App &amp; CRM Layer</span>
@@ -1372,7 +1388,7 @@ a { color: inherit; text-decoration: none; }
               <div class="hub-connector">↕</div>
               <span>entitlement reads · wallet updates · push triggers</span>
             </div>
-            <div style="position:absolute;right:0;top:0;display:flex;align-items:center;gap:var(--space-2)">
+            <div class="hub-payment-side">
               <span class="hub-payment-connector">→</span>
               <div class="hub-payment-tile">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
@@ -1413,7 +1429,7 @@ a { color: inherit; text-decoration: none; }
 
         <!-- IN-PERSON -->
         <div class="ideal-diagram" id="ideal-inperson">
-          <p class="dataflow-caption">At the gate, F&amp;B stand, retail shop, or activities desk — every touchpoint validates entitlements from a single source, posts charges to the guest folio, and settles through one payment layer.</p>
+          <p class="dataflow-caption">At the gate, F&amp;B stand, retail shop, or activities desk — every touchpoint validates entitlements from a single source. Payments are handled within each system independently — no unified settlement layer at this stage.</p>
           <div class="hub-full node-muted" style="max-width:220px">
             Guest Arrives On-Property
             <span class="hub-sub">Walk-Up · Lodging Guest · Group</span>
@@ -1423,8 +1439,8 @@ a { color: inherit; text-decoration: none; }
             <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
             <div class="hub-row" style="gap:var(--space-2)">
               <div class="hub-side">
-                <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span></div>
-                <div class="hub-node node-gold" data-comp="fnb">F&amp;B / Retail POS<span class="hub-sub">Onsite Commerce</span><span class="hub-partner-tag">Partner</span></div>
+                <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span><span class="hub-partner-tag">Pays via RocketRez</span></div>
+                <div class="hub-node node-gold" data-comp="fnb">F&amp;B / Retail POS<span class="hub-sub">Onsite Commerce</span><span class="hub-partner-tag">Pays via POS · Partner</span></div>
               </div>
               <div class="hub-connector">↔</div>
               <div class="hub-center node-green">
@@ -1433,20 +1449,15 @@ a { color: inherit; text-decoration: none; }
               </div>
               <div class="hub-connector">↔</div>
               <div class="hub-side">
-                <div class="hub-node node-purple" data-comp="spa">Activities Desk<span class="hub-sub">Spa · Rental</span><span class="hub-partner-tag">Partner</span></div>
-                <div class="hub-node node-blue" data-comp="pms">Room Charge<span class="hub-sub">PMS Folio</span><span class="hub-partner-tag">Partner</span></div>
+                <div class="hub-node node-purple" data-comp="spa">Activities Desk<span class="hub-sub">Spa · Rental</span><span class="hub-partner-tag">Pays via system · Partner</span></div>
+                <div class="hub-node node-blue" data-comp="pms">Room Charge<span class="hub-sub">PMS Folio</span><span class="hub-partner-tag">Pays via PMS · Partner</span></div>
               </div>
             </div>
           </div>
           <div class="hub-bidir-label" style="margin-top:var(--space-1)">
             <div class="hub-connector">↓</div>
-            <span>all charges post through unified payment layer</span>
+            <span>each system reports independently to finance</span>
           </div>
-          <div class="hub-full node-primary" style="max-width:220px">
-            Payments &amp; Settlement
-            <span class="hub-sub">Abstracted · Unified · Reconciled</span>
-          </div>
-          <div class="hub-connector">↓</div>
           <div class="hub-full node-muted" style="max-width:220px">
             Finance &amp; Reporting
             <span class="hub-sub">NetSuite · Oracle</span>
@@ -2078,51 +2089,107 @@ a { color: inherit; text-decoration: none; }
   <!-- OPTION 1: SPOTLIO -->
   <div class="option-view visible">
     <div class="flow-section" id="flow-o1">
-      <div class="flow-title">Data Flow — Option 1</div>
+      <div class="flow-title">Data Flow — Option 1: Spotlio</div>
       <div class="ideal-tabs">
         <button class="ideal-tab active" onclick="showFlowTab('flow-o1','fo1-online',this)">Online Booking</button>
         <button class="ideal-tab" onclick="showFlowTab('flow-o1','fo1-mobile',this)">Mobile App</button>
         <button class="ideal-tab" onclick="showFlowTab('flow-o1','fo1-inperson',this)">In-Person</button>
       </div>
+
       <div class="flow-diagram active" id="fo1-online">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-muted">Guest (Web)</div><div class="node-label">Browser</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-gold">Spotlio</div><div class="node-label">Commerce + Dynamic Pricing</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-primary">Inntopia (lodging)</div><div class="node-label">Resort Packages</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticket Issuance</div></div>
-          <div class="flow-arrow">+</div>
-          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&amp;B</div></div>
+        <p class="dataflow-caption">Guest books online through Spotlio's commerce layer — dynamic pricing, package building, and ticket issuance all in one flow. Inntopia handles resort-property lodging bundles where needed.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest (Web)<span class="hub-sub">Browser · Mobile Web</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-orch-wrapper">
+          <div class="hub-full node-gold" style="max-width:220px;margin:0">Spotlio<span class="hub-sub">Commerce &amp; Dynamic Pricing</span><span class="hub-partner-tag">Partner Solution</span></div>
+          <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>queries availability · receives confirmations</span></div>
+          <div class="hub-payment-side">
+            <span class="hub-payment-connector">→</span>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+          </div>
         </div>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Guest Record &amp; Stay</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-gold" data-comp="campground">Anemone<span class="hub-sub">Campground &amp; RV</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Validation</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold" data-comp="fnb">Toast<span class="hub-sub">F&amp;B / POS</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-purple" data-comp="spa">Booker<span class="hub-sub">Spa &amp; Activities</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
       </div>
+
       <div class="flow-diagram" id="fo1-mobile">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-muted">Guest</div><div class="node-label">iOS · Android</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-gold">Spotlio App</div><div class="node-label">Native App · CRM · Pricing</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Pass + Entitlement Validation</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Stay Context</div></div>
-          <div class="flow-arrow">+</div>
-          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">Mobile F&amp;B Order</div></div>
+        <p class="dataflow-caption">Spotlio's native app is the guest's on-property remote — push notifications, in-app ticket display, dynamic pricing, and loyalty CRM. RocketRez handles entitlement validation behind the scenes.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest (Mobile App)<span class="hub-sub">iOS · Android · Native</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-orch-wrapper">
+          <div class="hub-full node-gold" style="max-width:220px;margin:0">Spotlio App<span class="hub-sub">Native App · CRM · Dynamic Pricing</span><span class="hub-partner-tag">Partner Solution</span></div>
+          <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>entitlement reads · wallet updates · push triggers</span></div>
+          <div class="hub-payment-side">
+            <span class="hub-payment-connector">→</span>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+          </div>
         </div>
-        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">Spotlio's native app delivers push notifications, in-app ticket display, dynamic pricing visibility, and loyalty CRM — all in one vendor without a separate app build.</p>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Stay Context &amp; Room Key</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-purple" data-comp="loyalty">Loyalty / Wallet<span class="hub-sub">TBD</span><span class="hub-partner-tag">Partner · TBD</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Pass Display · QR<br>Entitlement Validation</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold" data-comp="fnb">Toast<span class="hub-sub">Mobile F&amp;B Order</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-gold" data-comp="spa">Booker<span class="hub-sub">Activity Booking</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-full node-muted" style="max-width:220px">Guest Folio &amp; Reporting<span class="hub-sub">Opera Cloud · NetSuite</span></div>
       </div>
+
       <div class="flow-diagram" id="fo1-inperson">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-muted">Guest Arrives</div><div class="node-label">Walk-Up · Lodging · Group</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez Gate</div><div class="node-label">Scan · Validate · Admit</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-gold">Spotlio App</div><div class="node-label">On-Property Upsell + Nav</div></div>
-          <div class="flow-arrow">+</div>
-          <div class="flow-node"><div class="node-box node-gold">Toast POS</div><div class="node-label">F&amp;B · Retail</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Room Charge + Folio</div></div>
+        <p class="dataflow-caption">RocketRez owns the entitlement layer across every on-property touchpoint. Spotlio surfaces upsell and navigation in-app. Each system handles its own payment independently.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest Arrives On-Property<span class="hub-sub">Walk-Up · Lodging Guest · Group</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row" style="gap:var(--space-2)">
+            <div class="hub-side">
+              <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span><span class="hub-partner-tag">Pays via RocketRez</span></div>
+              <div class="hub-node node-gold" data-comp="fnb">Toast POS<span class="hub-sub">F&amp;B · Retail</span><span class="hub-partner-tag">Pays via Toast · Partner</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Entitlement Source<br>Access Control</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-purple" data-comp="spa">Booker<span class="hub-sub">Activities · Spa · Rental</span><span class="hub-partner-tag">Pays via system · Partner</span></div>
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Room Charge · Folio</span><span class="hub-partner-tag">Pays via PMS · Partner</span></div>
+            </div>
+          </div>
         </div>
+        <div class="hub-bidir-label" style="margin-top:var(--space-1)"><div class="hub-connector">↓</div><span>each system reports independently to finance</span></div>
+        <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
+      </div>
+      <div class="comp-toggles">
+        <span class="comp-toggles-label">Property includes:</span>
+        <button class="comp-toggle active" data-comp="pms" onclick="toggleFlowComp('pms',this,'flow-o1')">PMS / Lodging</button>
+        <button class="comp-toggle active" data-comp="campground" onclick="toggleFlowComp('campground',this,'flow-o1')">Campground</button>
+        <button class="comp-toggle active" data-comp="fnb" onclick="toggleFlowComp('fnb',this,'flow-o1')">F&amp;B / POS</button>
+        <button class="comp-toggle active" data-comp="spa" onclick="toggleFlowComp('spa',this,'flow-o1')">Spa &amp; Activities</button>
+        <button class="comp-toggle active" data-comp="loyalty" onclick="toggleFlowComp('loyalty',this,'flow-o1')">Loyalty / Wallet</button>
       </div>
     </div>
     <div class="partners-grid">
@@ -2144,53 +2211,107 @@ a { color: inherit; text-decoration: none; }
   <!-- OPTION 2: VANTAGE -->
   <div class="option-view">
     <div class="flow-section" id="flow-o2">
-      <div class="flow-title">Data Flow — Option 2</div>
+      <div class="flow-title">Data Flow — Option 2: Vantage</div>
       <div class="ideal-tabs">
         <button class="ideal-tab active" onclick="showFlowTab('flow-o2','fo2-online',this)">Online Booking</button>
         <button class="ideal-tab" onclick="showFlowTab('flow-o2','fo2-mobile',this)">Mobile App</button>
         <button class="ideal-tab" onclick="showFlowTab('flow-o2','fo2-inperson',this)">In-Person</button>
       </div>
+
       <div class="flow-diagram active" id="fo2-online">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-muted">Guest (Web)</div><div class="node-label">Browser</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-purple">Vantage Platform</div><div class="node-label">Identity + Commerce</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Guest Record</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez (opt.)</div><div class="node-label">Ticketing</div></div>
-          <div class="flow-arrow">+</div>
-          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&amp;B</div></div>
+        <p class="dataflow-caption">Vantage anchors the guest identity and commerce layer online. RocketRez handles ticket issuance and entitlement validation. Entitlement ownership between the two must be explicitly defined before build.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest (Web)<span class="hub-sub">Browser · Mobile Web</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-orch-wrapper">
+          <div class="hub-full node-purple" style="max-width:220px;margin:0">Vantage Platform<span class="hub-sub">Identity &amp; Commerce</span><span class="hub-partner-tag">Partner Solution</span></div>
+          <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>queries availability · receives confirmations</span></div>
+          <div class="hub-payment-side">
+            <span class="hub-payment-connector">→</span>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+          </div>
         </div>
-        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">Vantage can own ticketing natively or delegate to RocketRez — entitlement ownership must be defined before build begins.</p>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Guest Record &amp; Stay</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-gold" data-comp="campground">Anemone<span class="hub-sub">Campground &amp; RV</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Validation</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold" data-comp="fnb">Toast<span class="hub-sub">F&amp;B / POS</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-purple" data-comp="spa">Booker<span class="hub-sub">Spa &amp; Activities</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
       </div>
+
       <div class="flow-diagram" id="fo2-mobile">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-muted">Guest</div><div class="node-label">iOS · Android</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-purple">Vantage App</div><div class="node-label">Wallet · Loyalty · Pass</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-purple">Cashless Wallet</div><div class="node-label">Stored Value · Rewards</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Room Key + Stay</div></div>
-          <div class="flow-arrow">+</div>
-          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">Mobile F&amp;B Order</div></div>
+        <p class="dataflow-caption">The strongest mobile story — Vantage natively unifies the guest wallet, loyalty account, digital pass, and room key into a single app. RocketRez validates entitlements behind the scenes.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest (Mobile App)<span class="hub-sub">iOS · Android · Native</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-orch-wrapper">
+          <div class="hub-full node-purple" style="max-width:220px;margin:0">Vantage App<span class="hub-sub">Wallet · Loyalty · Pass · Room Key</span><span class="hub-partner-tag">Partner Solution</span></div>
+          <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>entitlement reads · wallet updates · push triggers</span></div>
+          <div class="hub-payment-side">
+            <span class="hub-payment-connector">→</span>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+          </div>
         </div>
-        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">The strongest mobile story of the four options. Vantage natively unifies the guest wallet, loyalty account, digital pass, and room key into a single app experience.</p>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Stay Context &amp; Room Key</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-purple" data-comp="loyalty">Vantage Wallet<span class="hub-sub">Cashless &amp; Rewards</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Pass Display · QR<br>Entitlement Validation</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold" data-comp="fnb">Toast<span class="hub-sub">Mobile F&amp;B Order</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-gold" data-comp="spa">Booker<span class="hub-sub">Activity Booking</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-full node-muted" style="max-width:220px">Guest Folio &amp; Reporting<span class="hub-sub">Opera Cloud · NetSuite</span></div>
       </div>
+
       <div class="flow-diagram" id="fo2-inperson">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-muted">Guest Arrives</div><div class="node-label">NFC · QR · Wristband</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-purple">Vantage Reader</div><div class="node-label">Tap · Validate · Admit</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-purple">Cashless Wallet</div><div class="node-label">Spend · Redeem · Earn</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-gold">Toast POS</div><div class="node-label">F&amp;B · Retail</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Folio Settlement</div></div>
+        <p class="dataflow-caption">Most differentiated in-person experience — Vantage readers handle NFC tap-to-enter, cashless spend, and loyalty redemption. Each system settles payments independently. Requires operational change management at scale.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest Arrives On-Property<span class="hub-sub">NFC · QR · Wristband</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row" style="gap:var(--space-2)">
+            <div class="hub-side">
+              <div class="hub-node node-purple">Vantage Reader<span class="hub-sub">Tap · Validate · Admit · Cabana</span><span class="hub-partner-tag">Pays via Vantage · Partner</span></div>
+              <div class="hub-node node-gold" data-comp="fnb">Toast POS<span class="hub-sub">F&amp;B · Retail</span><span class="hub-partner-tag">Pays via Toast · Partner</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Entitlement Source<br>Access Control</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-purple" data-comp="spa">Booker<span class="hub-sub">Activities · Spa · Rental</span><span class="hub-partner-tag">Pays via system · Partner</span></div>
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Room Charge · Folio</span><span class="hub-partner-tag">Pays via PMS · Partner</span></div>
+            </div>
+          </div>
         </div>
-        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">The most differentiated in-person experience — every touchpoint from admission to F&amp;B to retail runs through one guest identity and wallet. Requires operational change management at scale.</p>
+        <div class="hub-bidir-label" style="margin-top:var(--space-1)"><div class="hub-connector">↓</div><span>each system reports independently to finance</span></div>
+        <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
+      </div>
+      <div class="comp-toggles">
+        <span class="comp-toggles-label">Property includes:</span>
+        <button class="comp-toggle active" data-comp="pms" onclick="toggleFlowComp('pms',this,'flow-o2')">PMS / Lodging</button>
+        <button class="comp-toggle active" data-comp="campground" onclick="toggleFlowComp('campground',this,'flow-o2')">Campground</button>
+        <button class="comp-toggle active" data-comp="fnb" onclick="toggleFlowComp('fnb',this,'flow-o2')">F&amp;B / POS</button>
+        <button class="comp-toggle active" data-comp="spa" onclick="toggleFlowComp('spa',this,'flow-o2')">Spa &amp; Activities</button>
+        <button class="comp-toggle active" data-comp="loyalty" onclick="toggleFlowComp('loyalty',this,'flow-o2')">Loyalty / Wallet</button>
       </div>
     </div>
     <div class="partners-grid">
@@ -2212,49 +2333,99 @@ a { color: inherit; text-decoration: none; }
   <!-- OPTION 3: INNTOPIA -->
   <div class="option-view">
     <div class="flow-section" id="flow-o3">
-      <div class="flow-title">Data Flow — Option 3</div>
+      <div class="flow-title">Data Flow — Option 3: Inntopia</div>
       <div class="ideal-tabs">
         <button class="ideal-tab active" onclick="showFlowTab('flow-o3','fo3-online',this)">Online Booking</button>
         <button class="ideal-tab" onclick="showFlowTab('flow-o3','fo3-mobile',this)">Mobile App</button>
         <button class="ideal-tab" onclick="showFlowTab('flow-o3','fo3-inperson',this)">In-Person</button>
       </div>
+
       <div class="flow-diagram active" id="fo3-online">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-muted">Guest (Web)</div><div class="node-label">Browser</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-primary">Inntopia</div><div class="node-label">Package &amp; Booking</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Guest Record</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticket Issuance</div></div>
-          <div class="flow-arrow">+</div>
-          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">F&amp;B Pre-Order</div></div>
+        <p class="dataflow-caption">Inntopia is the package orchestration hub — guests build lodging, tickets, spa, and campground in a single cart. Best fit for resort-heavy properties like Valcartier and Nashville Shores.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest (Web)<span class="hub-sub">Browser · Mobile Web</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-orch-wrapper">
+          <div class="hub-full node-primary" style="max-width:220px;margin:0">Inntopia<span class="hub-sub">Package &amp; Booking Orchestration</span><span class="hub-partner-tag">Partner Solution</span></div>
+          <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>queries availability · receives confirmations</span></div>
+          <div class="hub-payment-side">
+            <span class="hub-payment-connector">→</span>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+          </div>
         </div>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Guest Record &amp; Stay</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-gold" data-comp="campground">Anemone<span class="hub-sub">Campground &amp; RV</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Validation</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold" data-comp="fnb">Toast<span class="hub-sub">F&amp;B / POS</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-purple" data-comp="spa">Booker<span class="hub-sub">Spa &amp; Activities</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
       </div>
+
       <div class="flow-diagram" id="fo3-mobile">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-muted">Guest (Mobile Web)</div><div class="node-label">No dedicated app</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Pass Display + QR</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Stay Context</div></div>
-          <div class="flow-arrow">+</div>
-          <div class="flow-node"><div class="node-box node-gold">Toast</div><div class="node-label">Mobile Order</div></div>
+        <p class="dataflow-caption">No dedicated native app in this option. Guests access passes and entitlements via mobile web through RocketRez. A dedicated app layer can be added later without disrupting the core stack.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest (Mobile Web)<span class="hub-sub">Browser · No Dedicated App</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Stay Context &amp; Room Key</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-purple" data-comp="loyalty">Loyalty / Wallet<span class="hub-sub">TBD — Not included</span><span class="hub-partner-tag">Not in scope</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Pass Display · QR<br>Mobile Web Entitlement</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold" data-comp="fnb">Toast<span class="hub-sub">Mobile Web Order</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-gold" data-comp="spa">Booker<span class="hub-sub">Activity Booking</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+          </div>
         </div>
-        <p style="font-size:var(--text-xs);color:var(--color-text-muted);text-align:center;margin-top:var(--space-3);">Option 3 relies on mobile web for guest-facing interactions. A dedicated app layer can be added as a future enhancement without disrupting the core stack.</p>
+        <div class="hub-connector">↓</div>
+        <div class="hub-full node-muted" style="max-width:220px">Guest Folio &amp; Reporting<span class="hub-sub">Opera Cloud · NetSuite</span></div>
       </div>
+
       <div class="flow-diagram" id="fo3-inperson">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-muted">Guest Arrives</div><div class="node-label">Walk-Up · Lodging · Group</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez Gate</div><div class="node-label">Scan · Validate · Admit</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-gold">Toast POS</div><div class="node-label">F&amp;B · Retail</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-blue">Opera Cloud</div><div class="node-label">Room Charge + Folio</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-muted">Settlement</div><div class="node-label">Unified Payment Layer</div></div>
+        <p class="dataflow-caption">Clean and operationally straightforward. RocketRez owns admissions and entitlement validation. Toast handles F&B. Each system settles payments independently.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest Arrives On-Property<span class="hub-sub">Walk-Up · Lodging Guest · Group</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row" style="gap:var(--space-2)">
+            <div class="hub-side">
+              <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span><span class="hub-partner-tag">Pays via RocketRez</span></div>
+              <div class="hub-node node-gold" data-comp="fnb">Toast POS<span class="hub-sub">F&amp;B · Retail</span><span class="hub-partner-tag">Pays via Toast · Partner</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Entitlement Source<br>Access Control</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-purple" data-comp="spa">Booker<span class="hub-sub">Activities · Spa · Rental</span><span class="hub-partner-tag">Pays via system · Partner</span></div>
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Room Charge · Folio</span><span class="hub-partner-tag">Pays via PMS · Partner</span></div>
+            </div>
+          </div>
         </div>
+        <div class="hub-bidir-label" style="margin-top:var(--space-1)"><div class="hub-connector">↓</div><span>each system reports independently to finance</span></div>
+        <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
+      </div>
+      <div class="comp-toggles">
+        <span class="comp-toggles-label">Property includes:</span>
+        <button class="comp-toggle active" data-comp="pms" onclick="toggleFlowComp('pms',this,'flow-o3')">PMS / Lodging</button>
+        <button class="comp-toggle active" data-comp="campground" onclick="toggleFlowComp('campground',this,'flow-o3')">Campground</button>
+        <button class="comp-toggle active" data-comp="fnb" onclick="toggleFlowComp('fnb',this,'flow-o3')">F&amp;B / POS</button>
+        <button class="comp-toggle active" data-comp="spa" onclick="toggleFlowComp('spa',this,'flow-o3')">Spa &amp; Activities</button>
+        <button class="comp-toggle active" data-comp="loyalty" onclick="toggleFlowComp('loyalty',this,'flow-o3')">Loyalty / Wallet</button>
       </div>
     </div>
     <div class="partners-grid">
@@ -2275,7 +2446,7 @@ a { color: inherit; text-decoration: none; }
 
   <div class="option-view">
     <div class="flow-section" id="flow-o4">
-      <div class="flow-title">Data Flow — Option 4 (Hybrid)</div>
+      <div class="flow-title">Data Flow — Option 4: Hybrid</div>
       <div class="ideal-tabs">
         <button class="ideal-tab active" onclick="showFlowTab('flow-o4','fo4-online',this)">Online Booking</button>
         <button class="ideal-tab" onclick="showFlowTab('flow-o4','fo4-mobile',this)">Mobile App</button>
@@ -2283,48 +2454,99 @@ a { color: inherit; text-decoration: none; }
       </div>
 
       <div class="flow-diagram active" id="fo4-online">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-blue">Guest Browser</div><div class="node-label">Dated or package purchase</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-primary">Inntopia or Spotlio</div><div class="node-label">Commerce layer by property segment</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Ticket issuance + entitlement</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-orange">Opera Cloud</div><div class="node-label">Guest record + lodging sync</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-purple">NetSuite</div><div class="node-label">Financial roll-up</div></div>
+        <p class="dataflow-caption">Commerce platform is assigned by property type — resort properties use Inntopia for lodging bundles; dated-ticket parks route through Spotlio for dynamic pricing. RocketRez anchors entitlement across both tracks.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest (Web)<span class="hub-sub">Browser · Mobile Web</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-orch-wrapper">
+          <div class="hub-full node-orange" style="max-width:260px;margin:0">Inntopia <span style="opacity:0.5;font-weight:400">or</span> Spotlio<span class="hub-sub">Routed by property type</span><span class="hub-partner-tag">Partner Solution · Segmented</span></div>
+          <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>queries availability · receives confirmations</span></div>
+          <div class="hub-payment-side">
+            <span class="hub-payment-connector">→</span>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+          </div>
         </div>
-        <div class="flow-note">Commerce platform routing is determined by property type — resort properties use Inntopia for package bundling; dated-ticket parks route through Spotlio for yield-optimized web checkout.</div>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Guest Record &amp; Stay</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-gold" data-comp="campground">Anemone<span class="hub-sub">Campground &amp; RV</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Validation</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold" data-comp="fnb">Toast<span class="hub-sub">F&amp;B / POS</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-purple" data-comp="spa">Booker<span class="hub-sub">Spa &amp; Activities</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
       </div>
 
       <div class="flow-diagram" id="fo4-mobile">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-blue">Guest Mobile App</div><div class="node-label">RocketRez or Spotlio app</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Entitlement lookup + park access</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-purple">Vantage</div><div class="node-label">Cashless wallet + stored value (select sites)</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-orange">Opera Cloud</div><div class="node-label">Stay context for resort guests</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-primary">NetSuite</div><div class="node-label">Aggregated reporting</div></div>
+        <p class="dataflow-caption">Mobile app varies by segment — Spotlio app for dated-ticket parks, RocketRez mobile web for resort properties. Vantage cashless is piloted at 2–3 high-value sites pending ROI validation.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest (Mobile App)<span class="hub-sub">iOS · Android · Native</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-orch-wrapper">
+          <div class="hub-full node-orange" style="max-width:260px;margin:0">Spotlio App <span style="opacity:0.5;font-weight:400">or</span> RocketRez Mobile<span class="hub-sub">App experience segmented by property type</span><span class="hub-partner-tag">Partner Solution · Segmented</span></div>
+          <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>entitlement reads · wallet updates · push triggers</span></div>
+          <div class="hub-payment-side">
+            <span class="hub-payment-connector">→</span>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+          </div>
         </div>
-        <div class="flow-note">Mobile experience varies by deployment segment — Vantage cashless and loyalty features are active only at pilot sites (2–3 properties) until portfolio-wide ROI is validated.</div>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row">
+            <div class="hub-side">
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Stay Context &amp; Room Key</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-purple" data-comp="loyalty">Vantage Wallet<span class="hub-sub">Pilot Sites Only</span><span class="hub-partner-tag">Partner · Selective</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Pass Display · QR<br>Entitlement Validation</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-gold" data-comp="fnb">Toast<span class="hub-sub">Mobile F&amp;B Order</span><span class="hub-partner-tag">Partner</span></div>
+              <div class="hub-node node-gold" data-comp="spa">Booker<span class="hub-sub">Activity Booking</span><span class="hub-partner-tag">Partner</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-full node-muted" style="max-width:220px">Guest Folio &amp; Reporting<span class="hub-sub">Opera Cloud · NetSuite</span></div>
       </div>
 
       <div class="flow-diagram" id="fo4-inperson">
-        <div class="flow-nodes">
-          <div class="flow-node"><div class="node-box node-blue">Gate / Kiosk</div><div class="node-label">Admissions scan</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-green">RocketRez</div><div class="node-label">Entitlement validation (portfolio-wide)</div></div>
-          <div class="flow-arrow">↔</div>
-          <div class="flow-node"><div class="node-box node-purple">Vantage (Pilot)</div><div class="node-label">Cashless NFC + loyalty tap</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-warning">POS (F&B / Retail)</div><div class="node-label">Toast or Lightspeed by segment</div></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-node"><div class="node-box node-orange">Opera Cloud</div><div class="node-label">Room charge posting for resort stays</div></div>
+        <p class="dataflow-caption">RocketRez is the shared entitlement backbone across all properties. Vantage NFC readers are deployed selectively at pilot sites. POS varies by property. Strong governance required to prevent fragmentation.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest Arrives On-Property<span class="hub-sub">Walk-Up · Lodging Guest · Group</span></div>
+        <div class="hub-connector">↓</div>
+        <div class="hub-ecosystem">
+          <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+          <div class="hub-row" style="gap:var(--space-2)">
+            <div class="hub-side">
+              <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span><span class="hub-partner-tag">Pays via RocketRez</span></div>
+              <div class="hub-node node-gold" data-comp="fnb">Toast POS<span class="hub-sub">F&amp;B · Retail</span><span class="hub-partner-tag">Pays via Toast · Partner</span></div>
+            </div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Entitlement Source<br>Access Control</span></div>
+            <div class="hub-connector">↔</div>
+            <div class="hub-side">
+              <div class="hub-node node-purple" data-comp="spa">Booker<span class="hub-sub">Activities · Spa · Rental</span><span class="hub-partner-tag">Pays via system · Partner</span></div>
+              <div class="hub-node node-blue" data-comp="pms">Opera Cloud<span class="hub-sub">Room Charge · Folio</span><span class="hub-partner-tag">Pays via PMS · Partner</span></div>
+            </div>
+          </div>
         </div>
-        <div class="flow-note">On-property experience uses RocketRez as the shared entitlement backbone across all properties. POS selection and cashless enablement vary by site — complexity is highest in this option, requiring strong governance to prevent fragmentation.</div>
+        <div class="hub-bidir-label" style="margin-top:var(--space-1)"><div class="hub-connector">↓</div><span>each system reports independently to finance</span></div>
+        <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
+      </div>
+      <div class="comp-toggles">
+        <span class="comp-toggles-label">Property includes:</span>
+        <button class="comp-toggle active" data-comp="pms" onclick="toggleFlowComp('pms',this,'flow-o4')">PMS / Lodging</button>
+        <button class="comp-toggle active" data-comp="campground" onclick="toggleFlowComp('campground',this,'flow-o4')">Campground</button>
+        <button class="comp-toggle active" data-comp="fnb" onclick="toggleFlowComp('fnb',this,'flow-o4')">F&amp;B / POS</button>
+        <button class="comp-toggle active" data-comp="spa" onclick="toggleFlowComp('spa',this,'flow-o4')">Spa &amp; Activities</button>
+        <button class="comp-toggle active" data-comp="loyalty" onclick="toggleFlowComp('loyalty',this,'flow-o4')">Loyalty / Wallet</button>
       </div>
     </div>
     <div class="partners-grid">
@@ -2810,13 +3032,15 @@ function showIdealTab(name, btn) {
   btn.classList.add('active');
 }
 
-function toggleIdealComp(comp, btn) {
+function toggleFlowComp(comp, btn, scopeId) {
   btn.classList.toggle('active');
   const active = btn.classList.contains('active');
-  document.querySelectorAll('[data-comp="' + comp + '"]:not(.comp-toggle)').forEach(function(el) {
+  var scope = scopeId ? document.getElementById(scopeId) : document;
+  (scope || document).querySelectorAll('[data-comp="' + comp + '"]:not(.comp-toggle)').forEach(function(el) {
     el.classList.toggle('comp-inactive', !active);
   });
 }
+function toggleIdealComp(comp, btn) { toggleFlowComp(comp, btn, 'flow-ideal'); }
 
 function togglePartner(id, btn) {
   const el = document.getElementById(id);
