@@ -892,6 +892,61 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--color-border); padding: var(--space-6);
   margin-bottom: var(--space-6); box-shadow: var(--shadow-sm);
 }
+/* Capability mapping */
+.cap-mapping {
+  background: var(--color-surface); border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border); padding: var(--space-6);
+  margin-bottom: var(--space-6); box-shadow: var(--shadow-sm);
+}
+.cap-mapping-title {
+  font-family: var(--font-display); font-size: var(--text-base); font-weight: 800;
+  margin-bottom: var(--space-2);
+}
+.cap-mapping-sub {
+  font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: var(--space-5); line-height: 1.5;
+}
+.cap-gap-callout {
+  background: var(--color-error-bg); border: 1.5px solid var(--color-error);
+  border-radius: var(--radius-lg); padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-5); display: flex; gap: var(--space-3); align-items: flex-start;
+}
+.cap-gap-callout-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+.cap-gap-callout-body { font-size: 0.78rem; color: var(--color-error); line-height: 1.55; }
+.cap-gap-callout-body strong { font-weight: 800; }
+.cap-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+.cap-table th {
+  text-align: left; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--color-text-faint);
+  padding: var(--space-2) var(--space-3); border-bottom: 1.5px solid var(--color-divider);
+}
+.cap-table td {
+  padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-divider);
+  vertical-align: top; line-height: 1.45;
+}
+.cap-table tr:last-child td { border-bottom: none; }
+.cap-table tr:hover td { background: var(--color-surface-offset); }
+.cap-table td:first-child { font-weight: 600; color: var(--color-text); }
+.cap-table td:nth-child(2) { color: var(--color-text-muted); }
+.cap-table .cap-endpoints { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
+.cap-endpoint {
+  font-family: 'Courier New', monospace; font-size: 0.62rem;
+  background: var(--color-surface-offset); border-radius: var(--radius-sm);
+  padding: 2px 6px; display: inline-block; color: var(--color-text-muted);
+}
+.cap-endpoint .method { font-weight: 800; color: var(--color-primary); margin-right: 4px; }
+.status-pill {
+  display: inline-block; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; border-radius: 99px; padding: 0.15rem 0.55rem; white-space: nowrap;
+}
+.status-production { background: var(--color-success-bg); color: var(--color-success); }
+.status-indev      { background: var(--color-blue-bg);    color: var(--color-blue); }
+.status-planned    { background: var(--color-gold-bg);    color: var(--color-gold); }
+.status-gap        { background: var(--color-error-bg);   color: var(--color-error); }
+.cap-section-header {
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--color-text-faint); padding: var(--space-2) var(--space-3);
+  background: var(--color-surface-offset); border-bottom: 1px solid var(--color-divider);
+}
 .flow-title { font-family: var(--font-display); font-size: var(--text-base); font-weight: 800; margin-bottom: var(--space-5); }
 .flow-nodes {
   display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;
@@ -1340,7 +1395,7 @@ a { color: inherit; text-decoration: none; }
               <div class="hub-payment-tile">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
                 <span class="hub-payment-tile-label">Payments</span>
-                <span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span>
+                <span class="hub-payment-tile-sub">Unified settlement</span>
               </div>
             </div>
           </div>
@@ -1393,7 +1448,7 @@ a { color: inherit; text-decoration: none; }
               <div class="hub-payment-tile">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
                 <span class="hub-payment-tile-label">Payments</span>
-                <span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span>
+                <span class="hub-payment-tile-sub">Unified settlement</span>
               </div>
             </div>
           </div>
@@ -2105,7 +2160,7 @@ a { color: inherit; text-decoration: none; }
           <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>queries availability · receives confirmations</span></div>
           <div class="hub-payment-side">
             <span class="hub-payment-connector">→</span>
-            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Unified settlement</span></div>
           </div>
         </div>
         <div class="hub-ecosystem">
@@ -2137,7 +2192,7 @@ a { color: inherit; text-decoration: none; }
           <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>entitlement reads · wallet updates · push triggers</span></div>
           <div class="hub-payment-side">
             <span class="hub-payment-connector">→</span>
-            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Unified settlement</span></div>
           </div>
         </div>
         <div class="hub-ecosystem">
@@ -2227,7 +2282,7 @@ a { color: inherit; text-decoration: none; }
           <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>queries availability · receives confirmations</span></div>
           <div class="hub-payment-side">
             <span class="hub-payment-connector">→</span>
-            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Unified settlement</span></div>
           </div>
         </div>
         <div class="hub-ecosystem">
@@ -2259,7 +2314,7 @@ a { color: inherit; text-decoration: none; }
           <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>entitlement reads · wallet updates · push triggers</span></div>
           <div class="hub-payment-side">
             <span class="hub-payment-connector">→</span>
-            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Unified settlement</span></div>
           </div>
         </div>
         <div class="hub-ecosystem">
@@ -2283,15 +2338,15 @@ a { color: inherit; text-decoration: none; }
       </div>
 
       <div class="flow-diagram" id="fo2-inperson">
-        <p class="dataflow-caption">Most differentiated in-person experience — Vantage readers handle NFC tap-to-enter, cashless spend, and loyalty redemption. Each system settles payments independently. Requires operational change management at scale.</p>
-        <div class="hub-full node-muted" style="max-width:220px">Guest Arrives On-Property<span class="hub-sub">NFC · QR · Wristband</span></div>
+        <p class="dataflow-caption">RocketRez owns gate, admissions, and cabana validation directly — its own access control, same as every other option. Vantage is not in the validation loop. Where Vantage adds value here is as a cashless and loyalty middleware that Toast and other POS vendors call into for SmartPay wallet charges and entitlement redemption. Each system settles payments independently.</p>
+        <div class="hub-full node-muted" style="max-width:220px">Guest Arrives On-Property<span class="hub-sub">QR · Barcode · Season Pass</span></div>
         <div class="hub-connector">↓</div>
         <div class="hub-ecosystem">
           <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
           <div class="hub-row" style="gap:var(--space-2)">
             <div class="hub-side">
-              <div class="hub-node node-purple">Vantage Reader<span class="hub-sub">Tap · Validate · Admit · Cabana</span><span class="hub-partner-tag">Pays via Vantage · Partner</span></div>
-              <div class="hub-node node-gold" data-comp="fnb">Toast POS<span class="hub-sub">F&amp;B · Retail</span><span class="hub-partner-tag">Pays via Toast · Partner</span></div>
+              <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span><span class="hub-partner-tag">Pays via RocketRez</span></div>
+              <div class="hub-node node-gold" data-comp="fnb">Toast POS<span class="hub-sub">F&amp;B · Retail</span><span class="hub-partner-tag">Cashless via Vantage SmartPay</span></div>
             </div>
             <div class="hub-connector">↔</div>
             <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Entitlement Source<br>Access Control</span></div>
@@ -2302,7 +2357,7 @@ a { color: inherit; text-decoration: none; }
             </div>
           </div>
         </div>
-        <div class="hub-bidir-label" style="margin-top:var(--space-1)"><div class="hub-connector">↓</div><span>each system reports independently to finance</span></div>
+        <div class="hub-bidir-label" style="margin-top:var(--space-1)"><div class="hub-connector">↓</div><span style="text-align:center">Toast calls Vantage SmartPay for cashless wallet charges &amp; loyalty — Vantage does not touch gate or admissions</span></div>
         <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
       </div>
       <div class="comp-toggles">
@@ -2328,6 +2383,231 @@ a { color: inherit; text-decoration: none; }
         <div class="partner-card-body"><div class="row-group"><div class="row-label">KEY NOTES</div><ul class="pros-list"><li>Potentially strongest guest convenience if wallet integration is confirmed</li><li>Requires explicit API and settlement pattern definition with identity layer</li></ul></div></div>
       </div>
     </div>
+
+    <!-- VANTAGE CAPABILITY MAPPING -->
+    <div class="cap-mapping">
+      <div class="cap-mapping-title">Vantage API &amp; Capability Mapping</div>
+      <div class="cap-mapping-sub">Based on Vantage platform documentation (April 9, 2026 · Prepared by Charlie Hill, Head of Product · Confidential under NDA). Endpoint details are provided for scope and reference — actual contracts subject to change during onboarding.</div>
+
+      <div class="cap-gap-callout">
+        <div class="cap-gap-callout-icon">⚠</div>
+        <div class="cap-gap-callout-body">
+          <strong>Online Ecommerce Gap:</strong> Vantage does not have a web-based booking engine. Their commerce layer is limited to MyCart (in-app mobile purchases only), entitlement bundles (auto-issue logic, not a guest-facing cart), and SmartPay (in-park cashless). There is no web checkout, no package builder for lodging + tickets + spa online, and no equivalent to Spotlio or Inntopia's booking orchestration. For the online channel, Vantage would need to be paired with RocketRez's own ecomm or another booking layer — or push all pre-arrival purchasing into the GuestVue mobile app.
+        </div>
+      </div>
+
+      <table class="cap-table">
+        <thead>
+          <tr>
+            <th>Premier Parks Use Case</th>
+            <th>Vantage Capability</th>
+            <th>API / Mechanism</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="4" class="cap-section-header">Online &amp; Pre-Arrival</td></tr>
+          <tr>
+            <td>Web booking / online checkout</td>
+            <td>No web booking engine. MyCart is in-app only.</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>No endpoint</span></td>
+            <td><span class="status-pill status-gap">Gap</span></td>
+          </tr>
+          <tr>
+            <td>Package builder (lodging + tickets + spa)</td>
+            <td>Entitlement bundles auto-issue linked products on trigger — not a guest-facing cart flow</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Admin config via Vue360</span></td>
+            <td><span class="status-pill status-gap">Gap</span></td>
+          </tr>
+          <tr>
+            <td>In-app purchase / add-ons (mobile)</td>
+            <td>MyCart — full e-commerce module inside GuestVue app</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>In-app (GuestVue)</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+
+          <tr><td colspan="4" class="cap-section-header">Mobile App</td></tr>
+          <tr>
+            <td>White-label guest mobile app</td>
+            <td>GuestVue — branded via portal, published to App Store + Google Play within weeks</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Branding portal config</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Multi-property app (all parks in one app)</td>
+            <td>Multi-site selector — one download, guests switch properties. Active at Enchanted Parks (6 sites).</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Vue360 multi-site config</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Digital pass / QR display in app</td>
+            <td>GuestVue digital wallet — displays passes, QR codes, season cards</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>GuestVue wallet</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>NFC wristband linking</td>
+            <td>Guest links wristband in app or at staffed station — used for SmartPay cashless spend and loyalty, not for gate/admissions validation</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>In-app linking flow</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Push notifications (in-park, post-visit)</td>
+            <td>SmartNotify + Rules Engine — no-code campaigns, event-triggered, Liquid templates</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Rules Engine config</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+
+          <tr><td colspan="4" class="cap-section-header">Admissions &amp; Access Control</td></tr>
+          <tr>
+            <td>Gate entry / admissions / cabana validation</td>
+            <td><strong>RocketRez handles this directly</strong> — its own access control hardware and APIs. Vantage is not in the gate validation loop for this integration.</td>
+            <td><span class="cap-endpoint"><span class="method">RR</span>Native access control</span></td>
+            <td><span class="status-pill status-production">RocketRez</span></td>
+          </tr>
+          <tr>
+            <td>Vantage entitlement validation (FlexConnect)</td>
+            <td>Available capability — Vantage can consume RocketRez APIs to validate entitlements. Not used for gate in this integration; may apply to loyalty triggers or bundle logic.</td>
+            <td>
+              <div class="cap-endpoints">
+                <span class="cap-endpoint"><span class="method">RR API</span>Lookup / validate / redeem</span>
+              </div>
+            </td>
+            <td><span class="status-pill status-planned">Available if needed</span></td>
+          </tr>
+          <tr>
+            <td>Cross-property season pass access rules</td>
+            <td>Entitlement rules engine — configure which passes grant entry at which sites</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Vue360 access rules</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Comp / programmatic entitlement issuance</td>
+            <td>Create entitlement via RocketRez API — triggered by bundles or rules engine</td>
+            <td><span class="cap-endpoint"><span class="method">RR API</span>Create entitlement instance</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+
+          <tr><td colspan="4" class="cap-section-header">F&amp;B, Retail &amp; On-Site POS (Partner Consumes Vantage)</td></tr>
+          <tr>
+            <td>Guest lookup at POS by wristband / QR</td>
+            <td>POS identifies guest, returns payment method status and spending limits</td>
+            <td><span class="cap-endpoint"><span class="method">POST</span>/api/v1/guests/lookup</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Entitlement lookup at POS (voucher redemption)</td>
+            <td>Returns all available entitlements for a guest at a venue (e.g., "Free Lunch" voucher)</td>
+            <td><span class="cap-endpoint"><span class="method">POST</span>/api/v1/entitlements/lookup</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Voucher / entitlement redemption at POS</td>
+            <td>Marks entitlement as consumed at point of sale</td>
+            <td><span class="cap-endpoint"><span class="method">POST</span>/api/v1/entitlements/redeem</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Cashless wallet payment (SmartPay)</td>
+            <td>Charges guest's stored wallet by wristband or QR; requires 4-digit PIN</td>
+            <td>
+              <div class="cap-endpoints">
+                <span class="cap-endpoint"><span class="method">POST</span>/api/v1/smart-pay/checkout</span>
+                <span class="cap-endpoint"><span class="method">POST</span>/api/v1/smart-pay/refund</span>
+              </div>
+            </td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Transaction reporting / line items</td>
+            <td>Submit order line items after checkout for analytics and reconciliation</td>
+            <td>
+              <div class="cap-endpoints">
+                <span class="cap-endpoint"><span class="method">POST</span>/api/v1/transactions/lookup</span>
+                <span class="cap-endpoint"><span class="method">POST</span>/api/v1/transactions/{id}/items</span>
+              </div>
+            </td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Toast POS integration</td>
+            <td>Toast-specific integration using POS Partner APIs — build effort required</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>~2–4 weeks build once APIs exchanged</span></td>
+            <td><span class="status-pill status-indev">Needs Build</span></td>
+          </tr>
+
+          <tr><td colspan="4" class="cap-section-header">Loyalty &amp; Guest Engagement</td></tr>
+          <tr>
+            <td>Points earning (admission, purchases, challenges)</td>
+            <td>MyPerks — configurable via Rules Engine; any system event can trigger award</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Rules Engine config</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Rewards redemption / catalog</td>
+            <td>Guests browse and purchase rewards in GuestVue app; physical, digital, or experiential</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>GuestVue + MyPerks catalog</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>Cross-property loyalty balance</td>
+            <td>Points earned at any property are available across all sites</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Multi-site identity config</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+
+          <tr><td colspan="4" class="cap-section-header">PMS / Lodging Integration</td></tr>
+          <tr>
+            <td>Opera Cloud connector</td>
+            <td>FlexConnect PMS — Opera API consumption, guest provisioning, wristband issuance at check-in</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Target completion: next few weeks</span></td>
+            <td><span class="status-pill status-indev">In Dev</span></td>
+          </tr>
+          <tr>
+            <td>Hotel guest auto-entitlement (room package)</td>
+            <td>PMS check-in event triggers Vantage to create guest account + issue bundled entitlements</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Bundles + Rules (depends on PMS connector)</span></td>
+            <td><span class="status-pill status-indev">In Dev</span></td>
+          </tr>
+          <tr>
+            <td>Room charge to hotel folio</td>
+            <td>Requires PMS charge-back API + Opera access + authorization model definition</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>4–6 weeks once Opera API access confirmed</span></td>
+            <td><span class="status-pill status-planned">Roadmap</span></td>
+          </tr>
+
+          <tr><td colspan="4" class="cap-section-header">Reporting &amp; Financial</td></tr>
+          <tr>
+            <td>Operational reporting (admissions, transactions)</td>
+            <td>Vue360 + Redash embedded dashboards — admission counts, redemption rates, revenue</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>Vue360 admin portal</span></td>
+            <td><span class="status-pill status-production">Production</span></td>
+          </tr>
+          <tr>
+            <td>NetSuite / Oracle financial integration</td>
+            <td>Standard REST API — no architectural barriers but not started</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>4–6 weeks; needs NetSuite API specs</span></td>
+            <td><span class="status-pill status-gap">Not Started</span></td>
+          </tr>
+
+          <tr><td colspan="4" class="cap-section-header">Compliance &amp; Localization</td></tr>
+          <tr>
+            <td>Quebec tax rules</td>
+            <td>Platform designed for multi-geography; Quebec-specific rules need to be added</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>~1–2 weeks; needs tax specs</span></td>
+            <td><span class="status-pill status-gap">Not Started</span></td>
+          </tr>
+          <tr>
+            <td>Canadian French / Bill 96</td>
+            <td>Localization supported on platform; Canadian French translation content needed</td>
+            <td><span class="cap-endpoint"><span class="method">—</span>~2–3 weeks; needs translation content</span></td>
+            <td><span class="status-pill status-gap">Not Started</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- END VANTAGE CAPABILITY MAPPING -->
+
   </div>
 
   <!-- OPTION 3: INNTOPIA -->
@@ -2349,7 +2629,7 @@ a { color: inherit; text-decoration: none; }
           <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>queries availability · receives confirmations</span></div>
           <div class="hub-payment-side">
             <span class="hub-payment-connector">→</span>
-            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Unified settlement</span></div>
           </div>
         </div>
         <div class="hub-ecosystem">
@@ -2462,7 +2742,7 @@ a { color: inherit; text-decoration: none; }
           <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>queries availability · receives confirmations</span></div>
           <div class="hub-payment-side">
             <span class="hub-payment-connector">→</span>
-            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Unified settlement</span></div>
           </div>
         </div>
         <div class="hub-ecosystem">
@@ -2494,7 +2774,7 @@ a { color: inherit; text-decoration: none; }
           <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>entitlement reads · wallet updates · push triggers</span></div>
           <div class="hub-payment-side">
             <span class="hub-payment-connector">→</span>
-            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Multi-entity settlement (TBD)</span></div>
+            <div class="hub-payment-tile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span class="hub-payment-tile-label">Payments</span><span class="hub-payment-tile-sub">Unified settlement</span></div>
           </div>
         </div>
         <div class="hub-ecosystem">
