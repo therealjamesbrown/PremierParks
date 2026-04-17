@@ -404,16 +404,62 @@ a { color: inherit; text-decoration: none; }
   margin-right: var(--space-1); white-space: nowrap;
 }
 .comp-toggle {
-  font-size: 0.65rem; font-weight: 600; border-radius: 99px;
-  padding: 0.15rem 0.6rem; cursor: pointer;
+  font-size: 0.65rem; font-weight: 600; border-radius: 6px;
+  padding: 0.22rem 0.65rem 0.22rem 0.45rem; cursor: pointer;
   border: 1px solid var(--color-border);
   background: transparent; color: var(--color-text-faint);
   transition: all 0.15s ease; line-height: 1.6;
+  display: inline-flex; align-items: center; gap: 0.32rem;
 }
-.comp-toggle:hover { color: var(--color-text-muted); border-color: var(--color-text-muted); }
-.comp-toggle.active {
-  background: var(--color-surface-dynamic);
-  color: var(--color-text); border-color: var(--color-border);
+.comp-toggle::before {
+  content: '';
+  display: inline-block;
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid currentColor; opacity: 0.4;
+  transition: background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+}
+.comp-toggle:hover { border-color: var(--color-text-muted); color: var(--color-text-muted); }
+.comp-toggle.active { font-weight: 700; }
+
+/* PMS / Lodging — blue */
+.comp-toggle[data-comp="pms"].active {
+  background: var(--color-blue-bg); border-color: var(--color-blue); color: var(--color-blue);
+}
+.comp-toggle[data-comp="pms"].active::before {
+  background: var(--color-blue); border-color: var(--color-blue); opacity: 1;
+  box-shadow: 0 0 0 2px var(--color-blue-bg);
+}
+/* Campground — gold */
+.comp-toggle[data-comp="campground"].active {
+  background: var(--color-gold-bg); border-color: var(--color-gold); color: var(--color-gold);
+}
+.comp-toggle[data-comp="campground"].active::before {
+  background: var(--color-gold); border-color: var(--color-gold); opacity: 1;
+  box-shadow: 0 0 0 2px var(--color-gold-bg);
+}
+/* F&B / POS — warning/orange */
+.comp-toggle[data-comp="fnb"].active {
+  background: var(--color-warning-bg); border-color: var(--color-warning); color: var(--color-warning);
+}
+.comp-toggle[data-comp="fnb"].active::before {
+  background: var(--color-warning); border-color: var(--color-warning); opacity: 1;
+  box-shadow: 0 0 0 2px var(--color-warning-bg);
+}
+/* Spa & Activities — purple */
+.comp-toggle[data-comp="spa"].active {
+  background: var(--color-purple-bg); border-color: var(--color-purple); color: var(--color-purple);
+}
+.comp-toggle[data-comp="spa"].active::before {
+  background: var(--color-purple); border-color: var(--color-purple); opacity: 1;
+  box-shadow: 0 0 0 2px var(--color-purple-bg);
+}
+/* Loyalty / Wallet — purple */
+.comp-toggle[data-comp="loyalty"].active {
+  background: var(--color-purple-bg); border-color: var(--color-purple); color: var(--color-purple);
+}
+.comp-toggle[data-comp="loyalty"].active::before {
+  background: var(--color-purple); border-color: var(--color-purple); opacity: 1;
+  box-shadow: 0 0 0 2px var(--color-purple-bg);
 }
 [data-comp].comp-inactive {
   opacity: 0.18; filter: grayscale(1); pointer-events: none;
@@ -909,6 +955,38 @@ a { color: inherit; text-decoration: none; }
 .cap-mapping-sub {
   font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: var(--space-5); line-height: 1.5;
 }
+.cap-mapping-pending {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--space-3); padding: var(--space-8) var(--space-6); text-align: center;
+  border: 1.5px dashed var(--color-border); border-radius: var(--radius-lg);
+  background: var(--color-surface-raised);
+}
+.cap-mapping-pending-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--color-surface-dynamic); display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-faint); font-size: 1.1rem;
+}
+.cap-mapping-pending-title {
+  font-size: 0.8rem; font-weight: 700; color: var(--color-text-muted);
+}
+.cap-mapping-pending-sub {
+  font-size: 0.72rem; color: var(--color-text-faint); max-width: 420px; line-height: 1.55;
+}
+.cap-mapping-pending-rows {
+  width: 100%; max-width: 600px; border-top: 1px solid var(--color-divider); padding-top: var(--space-4);
+  display: flex; flex-direction: column; gap: var(--space-2);
+}
+.cap-mapping-pending-row {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface); border-radius: var(--radius-md);
+  border: 1px solid var(--color-divider);
+  font-size: 0.72rem; color: var(--color-text-muted);
+}
+.cap-mapping-pending-row .cap-row-label { font-weight: 600; color: var(--color-text); }
+.cap-mapping-pending-row .status-pill.status-pending {
+  background: var(--color-surface-dynamic); color: var(--color-text-faint);
+}
 .cap-gap-callout {
   background: var(--color-error-bg); border: 1.5px solid var(--color-error);
   border-radius: var(--radius-lg); padding: var(--space-3) var(--space-4);
@@ -1199,7 +1277,7 @@ a { color: inherit; text-decoration: none; }
         <h1 class="hero-title">More than ticketing: your <span>strategic transformation partner</span> for Premier Parks</h1>
         <p class="hero-desc">
           We bring combined decades of attractions experience and will partner with Premier Parks to deliver its vision: move from non-standard, independently managed operations
-          to a repeatable, unified portfolio operating model. Ticketing and entitlements remain the control plane, but our role is broader: design, orchestrate, and execute
+          to a repeatable, unified portfolio operating model. Ticketing and entitlements remain the control plane, but our role is broader: design, orchestrate, and support
           the full ecosystem across guest experience, operations, and financial governance.
         </p>
       </div>
@@ -1261,23 +1339,23 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <p class="about-blurb">RocketRez is a modern ticketing, entitlement, and commerce platform built for the attractions industry. We operate at the intersection of guest experience and operational control — powering admissions, season passes, access validation, and onsite commerce for venues ranging from waterparks and theme parks to zoos, aquariums, and mixed-use resort properties. Our integration-first architecture is designed to connect cleanly with PMS, F&amp;B, loyalty, and finance systems, making us a natural fit for operators who need a reliable backbone rather than another siloed tool.</p>
+  <p class="about-blurb">RocketRez is a modern ticketing, entitlement, and commerce platform built for the attractions industry. We operate at the intersection of guest experience and operational control — powering admissions, season passes, access validation, and onsite commerce for venues ranging from waterparks and theme parks to zoos and aquariums. Our integration-first architecture is designed to connect cleanly with PMS, F&amp;B, loyalty, and finance systems, making us a natural fit for operators who need a reliable backbone rather than another siloed tool.</p>
 
   <div class="stat-grid">
     <div class="stat-card">
       <div class="stat-number">200+</div>
       <div class="stat-label">Attractions Powered</div>
-      <div class="stat-desc">Theme parks, waterparks, zoos, aquariums, and mixed-use resort properties across North America</div>
+      <div class="stat-desc">Theme parks, waterparks, zoos, and aquariums across North America</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">$1B+</div>
-      <div class="stat-label">Processed Annually</div>
-      <div class="stat-desc">Ticket sales, season passes, packages, and onsite commerce transactions through the platform each year</div>
+      <div class="stat-label">Processed in Transactions</div>
+      <div class="stat-desc">Processed in ticket sales, season passes, packages, and onsite commerce transactions across the platform</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">Island H2O</div>
+      <div class="stat-number">Multi-Park</div>
       <div class="stat-label">Flagship Reference</div>
-      <div class="stat-desc">One of the most technology-forward waterparks in the US, powered by RocketRez for ticketing, access control, and guest experience</div>
+      <div class="stat-desc">Proven at scale across multi-property attractions operators — ticketing, access control, and commerce running in live production environments</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">15+</div>
@@ -1291,50 +1369,50 @@ a { color: inherit; text-decoration: none; }
     <div class="team-card">
       <div class="team-avatar">KA</div>
       <div>
-        <div class="team-name">Kari</div>
-        <div class="team-title">[ Title ]</div>
+        <div class="team-name">Kari Manev</div>
+        <div class="team-title">Enterprise Account Executive</div>
       </div>
-      <p class="team-bio">[ Blurb TBD ]</p>
+      <p class="team-bio">Enterprise relationship lead with deep experience managing complex multi-property accounts in the attractions space. Kari owns the Premier Parks relationship from first conversation through long-term success — ensuring alignment across stakeholders, timelines, and delivery milestones.</p>
     </div>
     <div class="team-card">
       <div class="team-avatar">TI</div>
       <div>
-        <div class="team-name">Tim</div>
-        <div class="team-title">[ Title ]</div>
+        <div class="team-name">Tim Samson</div>
+        <div class="team-title">Head of Product</div>
       </div>
-      <p class="team-bio">[ Blurb TBD ]</p>
+      <p class="team-bio">Leads RocketRez product strategy and roadmap. Tim brings deep domain expertise in ticketing, entitlement management, and guest experience platforms — translating complex operator requirements into product decisions that scale across diverse portfolio environments.</p>
     </div>
     <div class="team-card">
       <div class="team-avatar">JO</div>
       <div>
-        <div class="team-name">John</div>
-        <div class="team-title">[ Title ]</div>
+        <div class="team-name">John Pendergrast</div>
+        <div class="team-title">CEO</div>
       </div>
-      <p class="team-bio">[ Blurb TBD ]</p>
+      <p class="team-bio">Founder and CEO of RocketRez. John has spent his career at the intersection of technology and the attractions industry — building a platform purpose-built for operators who need more than a point-of-sale and less than a custom enterprise project.</p>
     </div>
     <div class="team-card">
       <div class="team-avatar">CH</div>
       <div>
-        <div class="team-name">Chris</div>
-        <div class="team-title">[ Title ]</div>
+        <div class="team-name">Chris Whitmore</div>
+        <div class="team-title">VP Engineering</div>
       </div>
-      <p class="team-bio">[ Blurb TBD ]</p>
+      <p class="team-bio">Leads the engineering team responsible for building and maintaining RocketRez's platform. Chris brings technical depth across API architecture, systems integration, and scalable commerce infrastructure — critical for the multi-system build Premier Parks requires.</p>
     </div>
     <div class="team-card">
       <div class="team-avatar">JB</div>
       <div>
-        <div class="team-name">James</div>
-        <div class="team-title">Payments &amp; Commerce</div>
+        <div class="team-name">James Brown</div>
+        <div class="team-title">Director of Implementation</div>
       </div>
-      <p class="team-bio">Payments and commerce platform specialist with background at PayPal. Brings deep experience in payment infrastructure, commerce integrations, and platform modernization to complex multi-property deployments.</p>
+      <p class="team-bio">Leads both the presales solutions engineering team and the implementation team of project managers and analysts. Background in full-stack web development, fintech, and four years deep in the attractions industry at RocketRez — bridging technical architecture and real-world delivery for complex, multi-property rollouts.</p>
     </div>
     <div class="team-card">
-      <div class="team-avatar">CD</div>
+      <div class="team-avatar">BN</div>
       <div>
-        <div class="team-name">Chad</div>
-        <div class="team-title">[ Title ]</div>
+        <div class="team-name">Bill Nason</div>
+        <div class="team-title">VP Operations</div>
       </div>
-      <p class="team-bio">[ Blurb TBD ]</p>
+      <p class="team-bio">Leads operational delivery and client success across RocketRez's portfolio. Bill ensures that implementation programs are executed with precision — from configuration and integration build through launch and ongoing support. His focus is hands-on execution and operational readiness.</p>
     </div>
   </div>
 
@@ -1380,7 +1458,7 @@ a { color: inherit; text-decoration: none; }
 
         <!-- ONLINE BOOKING -->
         <div class="ideal-diagram active" id="ideal-online">
-          <p class="dataflow-caption">Guest builds a package online — lodging, tickets, spa, campground — through a single cart handled by the commerce orchestration layer, with entitlements issued at confirmation.</p>
+          <p class="dataflow-caption">Guest books online through the commerce orchestration layer. The orchestration partner coordinates with PMS, campground, and spa for availability and reservations — RocketRez handles ticket issuance and entitlement confirmation only.</p>
           <div class="hub-full node-muted" style="max-width:220px">
             Guest (Web)
             <span class="hub-sub">Browser · Mobile Web</span>
@@ -1406,28 +1484,27 @@ a { color: inherit; text-decoration: none; }
             </div>
           </div>
           <div class="hub-ecosystem">
-            <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+            <span class="hub-ecosystem-label">Downstream Fulfillment</span>
             <div class="hub-row">
               <div class="hub-side">
-                <div class="hub-node node-blue" data-comp="pms">PMS<span class="hub-sub">Guest Record &amp; Stay</span><span class="hub-partner-tag">Partner</span></div>
-                <div class="hub-node node-gold" data-comp="campground">Campground<span class="hub-sub">Outdoor &amp; RV</span><span class="hub-partner-tag">Partner</span></div>
+                <div class="hub-node node-blue" data-comp="pms">PMS / Lodging<span class="hub-sub">Guest Record &amp; Reservation</span><span class="hub-partner-tag">Via Orchestration</span></div>
+                <div class="hub-node node-gold" data-comp="campground">Campground<span class="hub-sub">Outdoor &amp; RV</span><span class="hub-partner-tag">Via Orchestration</span></div>
               </div>
-              <div class="hub-connector">↔</div>
+              <div class="hub-connector">→</div>
               <div class="hub-center node-green">
                 RocketRez
-                <span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Validation</span>
+                <span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Confirmation</span>
               </div>
-              <div class="hub-connector">↔</div>
+              <div class="hub-connector">←</div>
               <div class="hub-side">
-                <div class="hub-node node-gold" data-comp="fnb">F&amp;B / POS<span class="hub-sub">Onsite Commerce</span><span class="hub-partner-tag">Partner</span></div>
-                <div class="hub-node node-purple" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Reservations</span><span class="hub-partner-tag">Partner</span></div>
+                <div class="hub-node node-purple" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Reservations</span><span class="hub-partner-tag">Via Orchestration</span></div>
               </div>
             </div>
           </div>
           <div class="hub-connector">↓</div>
-          <div class="hub-full node-muted" style="max-width:220px">
+          <div class="hub-full node-muted" style="max-width:260px">
             Finance &amp; Reporting
-            <span class="hub-sub">NetSuite · Oracle</span>
+            <span class="hub-sub">NetSuite · Oracle · PMS / Opera Cloud</span>
           </div>
         </div>
 
@@ -1528,7 +1605,7 @@ a { color: inherit; text-decoration: none; }
       </div>
 
         <div class="comp-toggles">
-          <span class="comp-toggles-label">Property includes:</span>
+          <span class="comp-toggles-label">Toggle components:</span>
           <button class="comp-toggle active" data-comp="pms" onclick="toggleIdealComp('pms',this)">PMS / Lodging</button>
           <button class="comp-toggle active" data-comp="campground" onclick="toggleIdealComp('campground',this)">Campground</button>
           <button class="comp-toggle active" data-comp="fnb" onclick="toggleIdealComp('fnb',this)">F&amp;B / POS</button>
@@ -1542,12 +1619,12 @@ a { color: inherit; text-decoration: none; }
     <div class="section-label">Program Milestones</div>
     <div class="timeline-bar">
       <div class="timeline-phase">
-        <div class="phase-dot done">✓</div>
+        <div class="phase-dot active">1</div>
         <div class="phase-label">Phase 1<br>Foundation</div>
         <div class="phase-date">Now – May</div>
       </div>
       <div class="timeline-phase">
-        <div class="phase-dot active">2</div>
+        <div class="phase-dot">2</div>
         <div class="phase-label">Phase 2<br>Config & Build</div>
         <div class="phase-date">May – July</div>
       </div>
@@ -1615,7 +1692,8 @@ a { color: inherit; text-decoration: none; }
           <ul class="pros-list">
             <li>One consistent guest journey from online booking to on-property spend and post-visit engagement</li>
             <li>Unified entitlement rules across passes, dated tickets, add-ons, and cross-park benefits</li>
-            <li>Reliable integrations into Opera Cloud, Inntopia, Booker, Anemone, and F&B systems</li>
+            <li>RocketRez as the primary ticketing and entitlement platform across the core portfolio, with an orchestration integration role at Valcartier Vacation Village</li>
+            <li>Reliable integrations into Opera Cloud, Booker, Anemone, and F&B systems</li>
             <li>Audit-ready financial data handoff for NetSuite and Oracle roll-up reporting</li>
             <li>A repeatable architecture that supports future acquisitions and portfolio growth</li>
           </ul>
@@ -1669,11 +1747,6 @@ a { color: inherit; text-decoration: none; }
       <div class="flow-node">
         <div class="node-box node-muted">Website / App</div>
         <div class="node-label">Demand Entry</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node">
-        <div class="node-box node-primary">Inntopia</div>
-        <div class="node-label">Package Orchestration</div>
       </div>
       <div class="flow-arrow">→</div>
       <div class="flow-node">
@@ -1780,7 +1853,7 @@ a { color: inherit; text-decoration: none; }
           <div class="row-label">STRATEGIC FIT</div>
           <ul class="pros-list">
             <li>Only platform purpose-built for multi-product resort packages at scale</li>
-            <li>Direct match for Valcartier, Nashville Shores, and Elitch Gardens where lodging + activities bundling is core</li>
+            <li>Direct match for Valcartier Vacation Village where lodging + activities bundling is core to the guest experience</li>
             <li>Existing Opera Cloud relationships reduce integration risk on the accommodation side</li>
             <li>Keeps package logic out of the ticketing and PMS layers</li>
           </ul>
@@ -1791,6 +1864,7 @@ a { color: inherit; text-decoration: none; }
             <li>Real-time vs. batch ticket inventory sync with RocketRez — the critical path item</li>
             <li>Quebec QST + GST stacking and French-language readiness for Canadian properties</li>
             <li>White-label / per-property branding capability</li>
+            <li>Integration bandwidth is spoken for on the Inntopia side — the RocketRez team would need to handle the majority of the integration build</li>
           </ul>
         </div>
       </div>
@@ -1816,13 +1890,13 @@ a { color: inherit; text-decoration: none; }
         </div>
         <span class="partner-rel rel-existing">Existing Partner</span>
       </div>
-      <p class="partner-desc">An orchestration and guest engagement layer with native dynamic pricing, CRM, and mobile app. Known integration history with RocketRez reduces the cold-start risk you get with a new partner.</p>
+      <p class="partner-desc">An orchestration and guest engagement layer with native dynamic pricing and mobile app capabilities. CRM is available through an integrated third-party partner. Known integration history with RocketRez reduces the cold-start risk you get with a new partner.</p>
       <div class="partner-detail" id="pd-spotlio">
         <div class="row-group">
           <div class="row-label">STRATEGIC FIT</div>
           <ul class="pros-list">
             <li>Known integration history with RocketRez — established relationship, not a greenfield build</li>
-            <li>Dynamic pricing and CRM included natively; Inntopia requires a third tool for both</li>
+            <li>Dynamic pricing native to the platform; CRM capabilities available via Cognitiv, a third-party bolt-on integrated with Spotlio</li>
             <li>Mobile app capability consolidates guest engagement into a single vendor</li>
             <li>Active references at Morey's Piers, Gausta (Ski Big 3), and Powder Mountain</li>
           </ul>
@@ -1830,8 +1904,6 @@ a { color: inherit; text-decoration: none; }
         <div class="row-group">
           <div class="row-label">OPEN QUESTIONS</div>
           <ul class="questions-block">
-            <li>Ownership transition in progress — need a candid roadmap conversation before committing</li>
-            <li>Lodging packaging depth: can Spotlio match Inntopia for VVV-style bundled resort packages?</li>
             <li>Quebec readiness (QST stacking, French UI) for Valcartier, Calypso, La Ronde</li>
           </ul>
         </div>
@@ -1863,9 +1935,8 @@ a { color: inherit; text-decoration: none; }
         <div class="row-group">
           <div class="row-label">STRATEGIC FIT</div>
           <ul class="pros-list">
-            <li>Only platform with native cashless wallet + loyalty + mobile app + ticketing in one architecture</li>
+            <li>Only platform with native cashless wallet + loyalty + mobile app in one architecture</li>
             <li>Enchanted Parks (8 parks, EPR/Six Flags) selected Vantage for enterprise-wide deployment Q2 2026 — direct comparable</li>
-            <li>Active conversations with Montgomery Whitewater and San Antonio Zoo give Premier Parks shared integration leverage</li>
             <li>WhiteWater (manufacturer) backing means waterpark operations are a core use case, not adapted from ski</li>
             <li>Opera Cloud integration pathway via OHIP</li>
           </ul>
@@ -1873,9 +1944,8 @@ a { color: inherit; text-decoration: none; }
         <div class="row-group">
           <div class="row-label">OPEN QUESTIONS</div>
           <ul class="questions-block">
-            <li>Bandwidth: can Vantage support Enchanted Parks and Premier Parks simultaneously?</li>
-            <li>Quebec compliance: Law 96, Bill 64 privacy, QST stacking — status unknown for Canadian properties</li>
-            <li>Entitlement ownership in a Vantage + RocketRez architecture — who holds the ticket record?</li>
+            <li>Has not previously integrated an online cart with both Opera Cloud and a ticketing solution — open to scoping and has no current objection to completing this work</li>
+            <li>Quebec compliance: Law 96, Bill 64 privacy, QST stacking — status needs validation for Canadian properties</li>
           </ul>
         </div>
       </div>
@@ -1906,9 +1976,8 @@ a { color: inherit; text-decoration: none; }
         <div class="row-group">
           <div class="row-label">STRATEGIC FIT</div>
           <ul class="pros-list">
-            <li>Purpose-built for restaurant operations — recipe depletion, table management, and kitchen display are native</li>
+            <li>Purpose-built for restaurant operations — table management and kitchen display are native</li>
             <li>Strong consumer brand recognition eases staff recruitment and training at scale</li>
-            <li>Cleanest path for VVV's spa restaurant, Elitch's dining program, and Nashville Shores' marina concessions</li>
             <li>Open API for Opera Cloud room charge and RocketRez entitlement validation</li>
           </ul>
         </div>
@@ -1917,7 +1986,7 @@ a { color: inherit; text-decoration: none; }
           <ul class="questions-block">
             <li>Quebec QST + GST stacking: tax configuration for Canadian properties needs validation</li>
             <li>Room charge integration to Opera Cloud — native or custom bridge?</li>
-            <li>Hardware supply lead times against the September go-live</li>
+            <li>Toast Quebec certification is currently in flight — timeline alignment with Premier Parks' go-live needs confirmation</li>
           </ul>
         </div>
       </div>
@@ -1933,41 +2002,41 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
 
-    <!-- LIGHTSPEED -->
+    <!-- CLOVER -->
     <div class="partner-card">
       <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">LS</div>
+        <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">CL</div>
         <div>
-          <div class="partner-name">Lightspeed</div>
-          <div class="partner-type">F&amp;B / Retail POS — Quebec-Ready Alternative</div>
+          <div class="partner-name">Clover</div>
+          <div class="partner-type">F&amp;B / Retail POS — Quebec-Approved Alternative to Toast</div>
         </div>
         <span class="partner-rel rel-new">Alternate Path</span>
       </div>
-      <p class="partner-desc">The primary fallback if Toast cannot confirm Quebec compliance. Headquartered in Montreal with QST, French-language law, and SRM requirements built in natively — not retrofitted.</p>
-      <div class="partner-detail" id="pd-lightspeed">
+      <p class="partner-desc">A Quebec-approved POS alternative for properties where Toast's certification timeline creates risk. Clover is already compliant with Quebec regulatory requirements, making it a lower-friction path for Canadian properties.</p>
+      <div class="partner-detail" id="pd-clover">
         <div class="row-group">
           <div class="row-label">STRATEGIC FIT</div>
           <ul class="pros-list">
-            <li>Montreal HQ — Quebec tax (QST + GST), Bill 96 (French language), and SRM compliance are native</li>
-            <li>Covers F&amp;B and retail in one platform — relevant for properties with both dining and merchandise</li>
-            <li>Well-established API ecosystem for hospitality and ticketing integrations</li>
+            <li>Quebec-approved — meets QST, GST, and SRM regulatory requirements without waiting on certification</li>
+            <li>Flexible hardware and software options suitable for F&amp;B and retail across park environments</li>
+            <li>Open API ecosystem supports integration with Opera Cloud room charge and RocketRez entitlement validation</li>
           </ul>
         </div>
         <div class="row-group">
           <div class="row-label">OPEN QUESTIONS</div>
           <ul class="questions-block">
-            <li>If Toast confirms Quebec compliance, does the Lightspeed case hold at US-only properties?</li>
-            <li>Is the commercial path already committed to Toast? What is the cost of a pivot?</li>
             <li>Integration depth with Opera Cloud room charge — parity with Toast?</li>
+            <li>Is Clover the right long-term choice if Toast subsequently confirms Quebec compliance?</li>
+            <li>Hardware ecosystem and support availability in Canadian markets</li>
           </ul>
         </div>
       </div>
       <div class="partner-card-footer">
-        <button class="partner-toggle" onclick="togglePartner('pd-lightspeed', this)">
+        <button class="partner-toggle" onclick="togglePartner('pd-clover', this)">
           Learn more
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <a href="https://www.lightspeedhq.com" target="_blank" rel="noopener" class="website-link">
+        <a href="https://www.clover.com" target="_blank" rel="noopener" class="website-link">
           Visit Site
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
@@ -2027,7 +2096,7 @@ a { color: inherit; text-decoration: none; }
       </div>
       <div class="rec-reason">
         <div class="rec-reason-label">Inntopia as Supplement</div>
-        <div class="rec-reason-text">Inntopia remains available for resort properties where lodging + activity bundling is critical (Valcartier, Nashville Shores) — not as the portfolio-wide orchestration layer.</div>
+        <div class="rec-reason-text">Inntopia remains available for resort properties where lodging + activity bundling is critical (Valcartier Vacation Village) — not as the portfolio-wide orchestration layer.</div>
       </div>
     </div>
   </div>
@@ -2050,7 +2119,7 @@ a { color: inherit; text-decoration: none; }
       <tbody>
         <tr>
           <td><strong>Option 1</strong></td>
-          <td>Spotlio + RocketRez + Toast (+ Inntopia where needed)</td>
+          <td>Spotlio + RocketRez + Toast</td>
           <td>Ticket-driven parks with pricing and mobile app focus</td>
           <td>Stronger digital UX, dynamic pricing, and mobile native app</td>
           <td>Integration complexity and roadmap certainty checks needed</td>
@@ -2108,10 +2177,10 @@ a { color: inherit; text-decoration: none; }
         </tr>
         <tr>
           <td>Package Orchestration</td>
-          <td>Inntopia</td>
+          <td>Spotlio / Vantage / Inntopia (VVV)</td>
           <td>Checkout orchestration with downstream split fulfillment</td>
-          <td>Enables one cart for lodging, spa, campground, and tickets</td>
-          <td><span class="tag tag-green">Defined</span></td>
+          <td>Enables one cart for lodging, spa, campground, and tickets — vendor choice depends on option</td>
+          <td><span class="tag tag-gold">Finalize Vendor</span></td>
         </tr>
         <tr>
           <td>Ticketing + Entitlements</td>
@@ -2122,7 +2191,7 @@ a { color: inherit; text-decoration: none; }
         </tr>
         <tr>
           <td>Onsite POS / F&amp;B</td>
-          <td>Toast (primary) / Lightspeed (Canada)</td>
+          <td>Toast (primary) / Clover (Quebec-approved) / RocketRez (admissions &amp; access)</td>
           <td>Entitlement validation + room-charge posting integration</td>
           <td>Ensures fast operations without sacrificing accounting traceability</td>
           <td><span class="tag tag-gold">Finalize Vendor</span></td>
@@ -2130,7 +2199,7 @@ a { color: inherit; text-decoration: none; }
         <tr>
           <td>Financial Reporting</td>
           <td>NetSuite / Oracle</td>
-          <td>Normalized event feed and controlled GL mapping</td>
+          <td>Orders-based API delivering sales data, or GL journal entry reporting via CSV export — approach TBD based on NetSuite configuration</td>
           <td>Supports late-October cutover and consolidated reporting</td>
           <td><span class="tag tag-gold">In Progress</span></td>
         </tr>
@@ -2158,7 +2227,7 @@ a { color: inherit; text-decoration: none; }
       </div>
 
       <div class="flow-diagram active" id="fo1-online">
-        <p class="dataflow-caption">Guest books online through Spotlio's commerce layer — dynamic pricing, package building, and ticket issuance all in one flow. Inntopia handles resort-property lodging bundles where needed.</p>
+        <p class="dataflow-caption">Guest books online through Spotlio's commerce layer — dynamic pricing, package building, and ticket issuance all in one flow. Spotlio handles the full booking experience; RocketRez manages entitlement issuance and confirmation.</p>
         <div class="hub-full node-muted" style="max-width:220px">Guest (Web)<span class="hub-sub">Browser · Mobile Web</span></div>
         <div class="hub-connector">↓</div>
         <div class="hub-orch-wrapper">
@@ -2278,6 +2347,27 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
       </div>
+
+      <!-- SPOTLIO CAPABILITY MAPPING PLACEHOLDER -->
+      <div class="cap-mapping">
+        <div class="cap-mapping-title">Spotlio API &amp; Capability Mapping</div>
+        <div class="cap-mapping-sub">API documentation has been requested from Spotlio and is pending receipt. The table below outlines the use cases we need to validate once documentation is available.</div>
+        <div class="cap-mapping-pending">
+          <div class="cap-mapping-pending-icon">⏳</div>
+          <div class="cap-mapping-pending-title">Documentation Pending</div>
+          <div class="cap-mapping-pending-sub">Awaiting formal API documentation from Spotlio. Use cases and endpoint mapping will be completed once received. Known integration history with RocketRez provides confidence in core flows.</div>
+          <div class="cap-mapping-pending-rows">
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Online checkout / dynamic pricing</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Ticket issuance handoff to RocketRez</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Mobile app — pass display &amp; QR sync</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">CRM / Cognitiv integration layer</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Opera Cloud guest record alignment</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Quebec readiness (QST, French UI)</span><span class="status-pill status-pending">To be mapped</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- END SPOTLIO CAPABILITY MAPPING PLACEHOLDER -->
+
     </div>
   </div>
 
@@ -2654,7 +2744,7 @@ a { color: inherit; text-decoration: none; }
       </div>
 
       <div class="flow-diagram active" id="fo3-online">
-        <p class="dataflow-caption">Inntopia is the package orchestration hub — guests build lodging, tickets, spa, and campground in a single cart. Best fit for resort-heavy properties like Valcartier and Nashville Shores.</p>
+        <p class="dataflow-caption">Inntopia is the package orchestration hub — guests build lodging, tickets, spa, and campground in a single cart. Best fit for resort-heavy properties like Valcartier Vacation Village.</p>
         <div class="hub-full node-muted" style="max-width:220px">Guest (Web)<span class="hub-sub">Browser · Mobile Web</span></div>
         <div class="hub-connector">↓</div>
         <div class="hub-orch-wrapper">
@@ -2744,7 +2834,7 @@ a { color: inherit; text-decoration: none; }
       <div class="partner-card">
         <div class="partner-card-header"><div class="partner-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">IN</div><div><div class="partner-name">Inntopia</div><div class="partner-type">Unified Booking Engine / Commerce Orchestration</div></div></div>
         <div class="partner-card-body">
-          <div class="flow-tab-notes active" data-tab="online"><div class="row-group"><div class="row-label">ONLINE BOOKING</div><ul class="pros-list"><li>Package orchestration hub — lodging, tickets, spa, and campground in one cart</li><li>Queries Opera, Anemone, Booker, and RocketRez for availability; confirms on checkout</li><li>Best fit for resort properties: Valcartier, Nashville Shores, Elitch Gardens</li></ul></div></div>
+          <div class="flow-tab-notes active" data-tab="online"><div class="row-group"><div class="row-label">ONLINE BOOKING</div><ul class="pros-list"><li>Package orchestration hub — lodging, tickets, spa, and campground in one cart</li><li>Queries Opera, Anemone, Booker, and RocketRez for availability; confirms on checkout</li><li>Best fit for resort properties: Valcartier Vacation Village</li></ul></div></div>
           <div class="flow-tab-notes" data-tab="mobile"><div class="row-group"><div class="row-label">MOBILE APP</div><ul class="pros-list"><li>No dedicated native app in this option — booking confirmations via mobile web</li><li>App layer can be added in a future phase without disrupting the core stack</li></ul></div></div>
           <div class="flow-tab-notes" data-tab="inperson"><div class="row-group"><div class="row-label">IN-PERSON</div><ul class="pros-list"><li>Not involved in on-property operations</li><li>Post-purchase entitlements and reservations flow downstream to RocketRez and Opera</li></ul></div></div>
         </div>
@@ -2766,6 +2856,27 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
       </div>
+
+      <!-- INNTOPIA CAPABILITY MAPPING PLACEHOLDER -->
+      <div class="cap-mapping">
+        <div class="cap-mapping-title">Inntopia API &amp; Capability Mapping</div>
+        <div class="cap-mapping-sub">API documentation has been requested from Inntopia and is pending receipt. The table below outlines the use cases we need to validate once documentation is available.</div>
+        <div class="cap-mapping-pending">
+          <div class="cap-mapping-pending-icon">⏳</div>
+          <div class="cap-mapping-pending-title">Documentation Pending</div>
+          <div class="cap-mapping-pending-sub">Awaiting formal API documentation from Inntopia. Core integration patterns (real-time vs. batch, guest identifier strategy) are identified but require API-level confirmation before mapping is complete.</div>
+          <div class="cap-mapping-pending-rows">
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Package orchestration — lodging + tickets + spa</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Real-time vs. batch ticket inventory sync</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Guest identifier handoff to Opera Cloud</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Checkout confirmation &amp; entitlement trigger to RocketRez</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Quebec QST / GST stacking &amp; French-language support</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">White-label / per-property branding</span><span class="status-pill status-pending">To be mapped</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- END INNTOPIA CAPABILITY MAPPING PLACEHOLDER -->
+
     </div>
   </div>
 
@@ -2899,6 +3010,26 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
       </div>
+
+      <!-- HYBRID CAPABILITY MAPPING PLACEHOLDER -->
+      <div class="cap-mapping">
+        <div class="cap-mapping-title">Hybrid Option API &amp; Capability Mapping</div>
+        <div class="cap-mapping-sub">This option spans multiple partners (Inntopia, Spotlio, and Vantage selectively). Capability mapping will be compiled once individual API documentation is received from each partner and integration scope per property type is finalized.</div>
+        <div class="cap-mapping-pending">
+          <div class="cap-mapping-pending-icon">⏳</div>
+          <div class="cap-mapping-pending-title">Documentation Pending — Multiple Partners</div>
+          <div class="cap-mapping-pending-sub">The hybrid path requires capability mapping across Inntopia (resort properties), Spotlio (dated-ticket properties), and Vantage (pilot sites). Mapping will be completed in phases as documentation is received and property-level scope is confirmed.</div>
+          <div class="cap-mapping-pending-rows">
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Inntopia — resort package orchestration (VVV)</span><span class="status-pill status-pending">Docs pending</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Spotlio — dynamic pricing for dated-ticket parks</span><span class="status-pill status-pending">Docs pending</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Vantage — cashless &amp; loyalty at pilot sites</span><span class="status-pill status-indev">Partially documented</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">RocketRez entitlement handoff — all three paths</span><span class="status-pill status-pending">To be mapped</span></div>
+            <div class="cap-mapping-pending-row"><span class="cap-row-label">Governance model for property-type routing</span><span class="status-pill status-pending">To be defined</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- END HYBRID CAPABILITY MAPPING PLACEHOLDER -->
+
     </div>
   </div>
 
@@ -3246,51 +3377,6 @@ a { color: inherit; text-decoration: none; }
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <div class="partners-grid">
-    <div class="partner-card">
-      <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">GV</div>
-        <div>
-          <div class="partner-name">Governance Controls</div>
-          <div class="partner-type">How decisions stay on track</div>
-        </div>
-      </div>
-      <div class="partner-card-body">
-        <div class="row-group">
-          <div class="row-label">CONTROL MECHANISMS</div>
-          <ul class="pros-list">
-            <li>Weekly architecture review with formal decision capture and change control</li>
-            <li>Interface-level RAID log tied to owner and due date</li>
-            <li>Escalation protocol for blockers older than five business days</li>
-            <li>Pre-go-live quality gate requiring sign-off from product, operations, and finance</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="partner-card">
-      <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">CK</div>
-        <div>
-          <div class="partner-name">Submission Attachments Checklist</div>
-          <div class="partner-type">What to include with the RFP response</div>
-        </div>
-      </div>
-      <div class="partner-card-body">
-        <div class="row-group">
-          <div class="row-label">ATTACHMENTS</div>
-          <ul class="questions-block">
-            <li>System ownership matrix with interface boundaries by domain</li>
-            <li>Critical API catalog with payload owner, trigger, SLA, and retry policy</li>
-            <li>End-to-end test scenarios for pass benefits and exception handling</li>
-            <li>Cutover runbook and command-center escalation plan</li>
-            <li>Regional compliance summary for Canada and Quebec-specific requirements</li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="section-next">
