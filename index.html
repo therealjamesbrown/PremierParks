@@ -299,31 +299,32 @@ a { color: inherit; text-decoration: none; }
   padding: var(--space-3) var(--space-5);
   font-family: var(--font-display); font-weight: 800; font-size: var(--text-sm);
   border-bottom: 1px solid var(--color-divider);
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center;
 }
-.dataflow-panel.collapsed .dataflow-panel-label { border-bottom-color: transparent; }
 .dataflow-label-current { background: var(--color-warning-bg); color: var(--color-warning); }
 .dataflow-label-ideal   { background: var(--color-success-bg); color: var(--color-success); }
 .dataflow-panel-body { padding: var(--space-5); }
-.dataflow-panel.collapsed > .dataflow-panel-body { display: none; }
-.panel-label-left { display: flex; align-items: center; gap: var(--space-2); }
-.panel-collapse-btn {
-  display: flex; align-items: center; gap: 5px;
-  background: transparent; border: 1px solid currentColor; border-radius: var(--radius-md);
-  cursor: pointer; color: inherit; opacity: 0.55;
-  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-  padding: 2px 8px 2px 6px; transition: opacity var(--transition), background var(--transition);
-  font-family: var(--font-display); flex-shrink: 0;
+.dataflow-compare .uc-btn { display: none; }
+.state-panel-cols {
+  display: grid; gap: var(--space-6); align-items: start;
 }
-.panel-collapse-btn:hover { opacity: 1; background: rgba(0,0,0,0.06); }
-.panel-collapse-btn svg { transition: transform 0.2s ease; flex-shrink: 0; }
-.dataflow-panel.collapsed .panel-collapse-btn svg { transform: rotate(-90deg); }
+.state-panel-cols.current-layout { grid-template-columns: 1fr 1.6fr; }
+.state-panel-cols.ideal-layout   { grid-template-columns: 1.6fr 1fr; }
+.state-bullets-label {
+  font-size: var(--text-xs); font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--color-text-faint); margin-bottom: var(--space-3);
+}
+@media (max-width: 860px) {
+  .state-panel-cols.current-layout,
+  .state-panel-cols.ideal-layout { grid-template-columns: 1fr; }
+  .state-panel-cols.ideal-layout .state-ideal-bullets { order: -1; }
+}
 .dataflow-caption {
   font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.6;
   margin-bottom: var(--space-4); padding-bottom: var(--space-3);
   border-bottom: 1px solid var(--color-divider);
 }
-.dataflow-img img { width: 100%; border-radius: var(--radius-lg); display: block; }
+.dataflow-img { min-height: 80px; } .dataflow-img img { width: 100%; border-radius: var(--radius-lg); display: block; }
 .hub-diagram {
   display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
 }
@@ -606,6 +607,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--color-surface); border-radius: var(--radius-xl);
   border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);
   overflow: hidden; transition: box-shadow var(--transition), border-color var(--transition);
+  display: flex; flex-direction: column;
 }
 .partner-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-text-faint); }
 .partner-card-header {
@@ -695,6 +697,7 @@ a { color: inherit; text-decoration: none; }
   padding: var(--space-3) var(--space-6);
   background: var(--color-surface-offset); border-top: 1px solid var(--color-divider);
   display: flex; align-items: center; justify-content: space-between;
+  margin-top: auto;
 }
 .strat-value {
   font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5;
@@ -1544,260 +1547,246 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <div class="dataflow-compare">
-    <div class="dataflow-panel collapsed" id="panel-current">
-      <div class="dataflow-panel-label dataflow-label-current">
-        <span class="panel-label-left">Current State <button class="uc-btn" onclick="openUCModal('current-state')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></span>
-        <button class="panel-collapse-btn" onclick="togglePanel('panel-current')" title="Toggle section"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span class="panel-collapse-label">Show</span></button>
-      </div>
+    <div class="dataflow-panel" id="panel-current">
+      <div class="dataflow-panel-label dataflow-label-current">Current State</div>
       <div class="dataflow-panel-body">
-        <p class="dataflow-caption">Fragmented, point-to-point systems with no unified entitlement layer, no central guest record, and no consistent operational model across properties.</p>
-        <div class="dataflow-img">
-          <img src="./Screenshot 2026-04-14 at 9.14.00 PM.png" alt="Current state: fragmented technology landscape across Premier Parks properties">
+        <div class="state-panel-cols current-layout">
+          <div>
+            <div class="state-bullets-label">Where Premier Parks Is Today</div>
+            <ul class="cons-list">
+              <li>Each property runs a different, disconnected system with no shared entitlement layer</li>
+              <li>No central guest record — loyalty, passes, and booking data live in separate silos</li>
+              <li>Inconsistent operations across the portfolio; every park manages its own reconciliation</li>
+              <li>Financial reporting requires manual consolidation from multiple source systems</li>
+              <li>No repeatable architecture to support future acquisitions cleanly</li>
+            </ul>
+          </div>
+          <div class="dataflow-img">
+            <img src="./Screenshot 2026-04-14 at 9.14.00 PM.png" alt="Current state: fragmented technology landscape across Premier Parks properties">
+          </div>
         </div>
       </div>
     </div>
-
     <div class="dataflow-panel" id="panel-ideal">
-      <div class="dataflow-panel-label dataflow-label-ideal">
-        <span class="panel-label-left">Ideal State <button class="uc-btn" onclick="openUCModal('ideal-state')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></span>
-        <button class="panel-collapse-btn" onclick="togglePanel('panel-ideal')" title="Toggle section"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg><span class="panel-collapse-label">Hide</span></button>
-      </div>
+      <div class="dataflow-panel-label dataflow-label-ideal">Ideal State</div>
       <div class="dataflow-panel-body" id="flow-ideal">
+        <div class="state-panel-cols ideal-layout">
+          <div>
+            <div class="property-selector-wrap">
+                      <span class="property-selector-label">View by:</span>
+                      <button class="prop-type-btn active" id="pt-hotel-ideal" onclick="setPropertyType('hotel','flow-ideal','property-select','pt-hotel-ideal','pt-attraction-ideal','pt-specific-ideal')">Hotel + Park</button>
+                      <button class="prop-type-btn" id="pt-attraction-ideal" onclick="setPropertyType('attraction','flow-ideal','property-select','pt-hotel-ideal','pt-attraction-ideal','pt-specific-ideal')">Attraction Only</button>
+                      <button class="prop-type-btn" id="pt-specific-ideal" onclick="setPropertyType('specific','flow-ideal','property-select','pt-hotel-ideal','pt-attraction-ideal','pt-specific-ideal')">View by property</button>
+                      <select class="property-selector-select" id="property-select" onchange="applyPropertyConfig(this.value,'flow-ideal',this)">
+                        <option value="">— Select a property —</option>
+                        <option value="vvv">Village Vacances Valcartier</option>
+                        <option value="calypso">Calypso</option>
+                        <option value="wnw-toronto">Wild Waters Toronto</option>
+                        <option value="la-ronde">La Ronde</option>
+                        <option value="ocean-breeze">Ocean Breeze Waterpark</option>
+                        <option value="rapids">Rapids Waterpark</option>
+                        <option value="magic-springs">Magic Springs</option>
+                        <option value="nashville-shores">Nashville Shores</option>
+                        <option value="hw-colony">Hawaiian Waters — The Colony</option>
+                        <option value="hw-garland">Hawaiian Waters — Garland</option>
+                        <option value="city-museum">City Museum</option>
+                        <option value="elitch">Elitch Gardens</option>
+                        <option value="wild-waves">Wild Waves Theme &amp; Waterpark</option>
+                        <option value="wnw-hawaii">Wet N Wild Hawaii</option>
+                      </select>
+                      <span class="property-selector-note" id="property-note"></span>
+                    </div>
+            <div class="ideal-tabs">
+                      <button class="ideal-tab active" onclick="showIdealTab('online', this)">Online Booking</button>
+                      <button class="ideal-tab" onclick="showIdealTab('mobile', this)">Mobile App</button>
+                      <button class="ideal-tab" onclick="showIdealTab('inperson', this)">In-Person</button>
+                    </div>
 
-        <div class="property-selector-wrap">
-          <span class="property-selector-label">View by:</span>
-          <button class="prop-type-btn active" id="pt-attraction-ideal" onclick="setPropertyType('attraction','flow-ideal','property-select','pt-hotel-ideal','pt-attraction-ideal','pt-specific-ideal')">Attraction Only</button>
-          <button class="prop-type-btn" id="pt-hotel-ideal" onclick="setPropertyType('hotel','flow-ideal','property-select','pt-hotel-ideal','pt-attraction-ideal','pt-specific-ideal')">Hotel + Park</button>
-          <button class="prop-type-btn" id="pt-specific-ideal" onclick="setPropertyType('specific','flow-ideal','property-select','pt-hotel-ideal','pt-attraction-ideal','pt-specific-ideal')">View by property</button>
-          <select class="property-selector-select" id="property-select" onchange="applyPropertyConfig(this.value,'flow-ideal',this)">
-            <option value="">— Select a property —</option>
-            <option value="vvv">Village Vacances Valcartier</option>
-            <option value="calypso">Calypso</option>
-            <option value="wnw-toronto">Wild Waters Toronto</option>
-            <option value="la-ronde">La Ronde</option>
-            <option value="ocean-breeze">Ocean Breeze Waterpark</option>
-            <option value="rapids">Rapids Waterpark</option>
-            <option value="magic-springs">Magic Springs</option>
-            <option value="nashville-shores">Nashville Shores</option>
-            <option value="hw-colony">Hawaiian Waters — The Colony</option>
-            <option value="hw-garland">Hawaiian Waters — Garland</option>
-            <option value="city-museum">City Museum</option>
-            <option value="elitch">Elitch Gardens</option>
-            <option value="wild-waves">Wild Waves Theme &amp; Waterpark</option>
-            <option value="wnw-hawaii">Wet N Wild Hawaii</option>
-          </select>
-          <span class="property-selector-note" id="property-note"></span>
+            <div class="ideal-diagram active" id="ideal-online">
+                        <p class="dataflow-caption">Guest books online through the commerce orchestration layer. The orchestration partner coordinates with PMS, campground, and spa for availability and reservations — RocketRez handles ticket issuance and entitlement confirmation only.</p>
+                      <div class="hub-full node-muted" style="max-width:220px">
+                        Guest (Web)
+                        <span class="hub-sub">Browser · Mobile Web</span>
+                        <button class="uc-btn" onclick="openUCModal('ob-guest')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      </div>
+                      <div class="hub-connector">↓</div>
+                      <div class="hub-orch-wrapper">
+                        <div class="hub-full node-primary" id="orch-node-ideal" style="max-width:220px;margin:0">
+                          <span class="orch-hotel-label">Commerce Orchestration<span class="hub-sub">Booking &amp; Package Layer · Loyalty (TBD)</span><span class="hub-partner-tag">Partner Solution</span></span>
+                          <span class="orch-attraction-label" style="display:none">RocketRez<span class="hub-sub">Commerce &amp; Checkout Layer</span><span class="hub-partner-tag">Powered by RocketRez</span></span>
+                          <button class="uc-btn" onclick="openUCModal('ob-orch')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                        </div>
+                        <div class="hub-bidir-label">
+                          <div class="hub-connector">↕</div>
+                          <span>queries availability · receives confirmations</span>
+                        </div>
+                        <div class="hub-payment-side">
+                          <span class="hub-payment-connector">→</span>
+                          <div class="hub-payment-tile">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+                            <span class="hub-payment-tile-label">Payments</span>
+                            <span class="hub-payment-tile-sub">Unified settlement</span>
+                            <button class="uc-btn" onclick="openUCModal('ob-payments')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="hub-ecosystem">
+                        <span class="hub-ecosystem-label">Downstream Fulfillment</span>
+                        <div class="hub-row">
+                          <div class="hub-side">
+                            <div class="hub-node node-blue" data-comp="pms">PMS / Lodging<span class="hub-sub">Guest Record &amp; Reservation</span><span class="hub-partner-tag">Via Orchestration</span><button class="uc-btn" onclick="openUCModal('ob-pms')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                            <div class="hub-node node-gold" data-comp="campground">Campground<span class="hub-sub">Outdoor &amp; RV</span><span class="hub-partner-tag">Via Orchestration</span><button class="uc-btn" onclick="openUCModal('ob-campground')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                          </div>
+                          <div class="hub-connector">→</div>
+                          <div class="hub-center node-green">
+                            RocketRez
+                            <span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Confirmation</span>
+                            <button class="uc-btn" onclick="openUCModal('ob-rocketrez')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                          </div>
+                          <div class="hub-connector">←</div>
+                          <div class="hub-side">
+                            <div class="hub-node node-purple" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Reservations</span><span class="hub-partner-tag">Via Orchestration</span><button class="uc-btn" onclick="openUCModal('ob-spa')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="hub-connector">↓</div>
+                      <div class="hub-full node-muted" style="max-width:260px">
+                        Finance &amp; Reporting
+                        <span class="hub-sub">NetSuite · Oracle · PMS / Opera Cloud</span>
+                        <button class="uc-btn" onclick="openUCModal('ob-finance')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      </div>
+                    </div>
+
+            <div class="ideal-diagram" id="ideal-mobile">
+                      <p class="dataflow-caption">The guest app is the on-property remote — displaying entitlements, enabling mobile F&amp;B ordering, managing the loyalty wallet, and surfacing real-time queue and availability data.</p>
+                      <div class="hub-full node-muted" style="max-width:220px">
+                        Guest (Mobile App)
+                        <span class="hub-sub">iOS · Android · Native</span>
+                        <button class="uc-btn" onclick="openUCModal('ma-guest')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      </div>
+                      <div class="hub-connector">↓</div>
+                      <div class="hub-orch-wrapper">
+                        <div class="hub-full node-primary" style="max-width:220px;margin:0">
+                          Mobile Platform
+                          <span class="hub-sub">App &amp; CRM Layer</span>
+                          <span class="hub-partner-tag">Partner Solution</span>
+                          <button class="uc-btn" onclick="openUCModal('ma-platform')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                        </div>
+                        <div class="hub-bidir-label">
+                          <div class="hub-connector">↕</div>
+                          <span>entitlement reads · wallet updates · push triggers</span>
+                        </div>
+                        <div class="hub-payment-side">
+                          <span class="hub-payment-connector">→</span>
+                          <div class="hub-payment-tile">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+                            <span class="hub-payment-tile-label">Payments</span>
+                            <span class="hub-payment-tile-sub">Unified settlement</span>
+                            <button class="uc-btn" onclick="openUCModal('ma-payments')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="hub-ecosystem">
+                        <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+                        <div class="hub-row">
+                          <div class="hub-side">
+                            <div class="hub-node node-blue" data-comp="pms">PMS<span class="hub-sub">Stay Context</span><span class="hub-partner-tag">Partner</span><button class="uc-btn" onclick="openUCModal('ma-pms')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                            <div class="hub-node node-purple" data-comp="loyalty">Loyalty / Wallet<span class="hub-sub">Cashless &amp; Rewards</span><span class="hub-partner-tag">Partner</span><button class="uc-btn" onclick="openUCModal('ma-loyalty')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                          </div>
+                          <div class="hub-connector">↔</div>
+                          <div class="hub-center node-green">
+                            RocketRez
+                            <span class="hub-sub" style="opacity:1">Pass Display · QR<br>Entitlement Validation</span>
+                            <button class="uc-btn" onclick="openUCModal('ma-rocketrez')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                          </div>
+                          <div class="hub-connector">↔</div>
+                          <div class="hub-side">
+                            <div class="hub-node node-gold" data-comp="fnb">F&amp;B / Retail POS<span class="hub-sub">Mobile Order &amp; Pay</span><span class="hub-partner-tag">Partner</span><button class="uc-btn" onclick="openUCModal('ma-fnb')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                            <div class="hub-node node-gold" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Spa · Rental</span><span class="hub-partner-tag">Partner</span><button class="uc-btn" onclick="openUCModal('ma-spa')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="hub-source-connector">
+                        <div class="hub-connector">↓</div>
+                        <span class="hub-source-label">All transactions sync to guest folio</span>
+                        <div class="hub-connector">↓</div>
+                      </div>
+                      <div class="hub-full node-muted" style="max-width:220px">
+                        Guest Folio &amp; Reporting
+                        <span class="hub-sub">PMS · Finance Layer</span>
+                        <button class="uc-btn" onclick="openUCModal('ma-folio')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      </div>
+                    </div>
+
+            <div class="ideal-diagram" id="ideal-inperson">
+                      <p class="dataflow-caption">At the gate, F&amp;B stand, retail shop, or activities desk — every touchpoint validates entitlements from a single source. Payments are handled within each system independently — no unified settlement layer at this stage.</p>
+                      <div class="hub-full node-muted" style="max-width:220px">
+                        Guest Arrives On-Property
+                        <span class="hub-sub">Walk-Up · Lodging Guest · Group</span>
+                        <button class="uc-btn" onclick="openUCModal('ip-guest')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      </div>
+                      <div class="hub-connector">↓</div>
+                      <div class="hub-ecosystem">
+                        <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+                        <div class="hub-row" style="gap:var(--space-2)">
+                          <div class="hub-side">
+                            <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span><span class="hub-partner-tag">Pays via RocketRez</span><button class="uc-btn" onclick="openUCModal('ip-gate')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                            <div class="hub-node node-gold" data-comp="fnb">F&amp;B / Retail POS<span class="hub-sub">Onsite Commerce</span><span class="hub-partner-tag">Pays via POS · Partner</span><button class="uc-btn" onclick="openUCModal('ip-fnb')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                          </div>
+                          <div class="hub-connector">↔</div>
+                          <div class="hub-center node-green">
+                            RocketRez
+                            <span class="hub-sub" style="opacity:1">Entitlement Source<br>Access Control</span>
+                            <button class="uc-btn" onclick="openUCModal('ip-rocketrez')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                          </div>
+                          <div class="hub-connector">↔</div>
+                          <div class="hub-side">
+                            <div class="hub-node node-purple" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Spa · Rental</span><span class="hub-partner-tag">Pays via system · Partner</span><button class="uc-btn" onclick="openUCModal('ip-spa')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                            <div class="hub-node node-blue" data-comp="pms">PMS / Lodging<span class="hub-sub">Folio</span><span class="hub-partner-tag">Pays via PMS · Partner</span><button class="uc-btn" onclick="openUCModal('ip-pms')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="hub-bidir-label" style="margin-top:var(--space-1)">
+                        <div class="hub-connector">↓</div>
+                        <span>each system reports independently to finance</span>
+                      </div>
+                      <div class="hub-full node-muted" style="max-width:220px">
+                        Finance &amp; Reporting
+                        <span class="hub-sub">NetSuite · Oracle</span>
+                        <button class="uc-btn" onclick="openUCModal('ip-finance')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      </div>
+                    </div>
+
+            <div class="comp-toggles">
+                      <span class="comp-toggles-label">Toggle components:</span>
+                      <button class="comp-toggle active" data-comp="pms" onclick="toggleIdealComp('pms',this)">PMS / Lodging</button>
+                      <button class="comp-toggle active" data-comp="campground" onclick="toggleIdealComp('campground',this)">Campground</button>
+                      <button class="comp-toggle active" data-comp="fnb" onclick="toggleIdealComp('fnb',this)">F&amp;B / POS</button>
+                      <button class="comp-toggle active" data-comp="spa" onclick="toggleIdealComp('spa',this)">Spa &amp; Activities</button>
+                      <button class="comp-toggle active" data-comp="loyalty" onclick="toggleIdealComp('loyalty',this)">Loyalty / Wallet</button>
+                    </div>
+          </div>
+          <div class="state-ideal-bullets">
+            <div class="state-bullets-label">What Changes</div>
+            <ul class="pros-list">
+              <li>Single entitlement backbone across all properties — one source of truth for passes, tickets, and access</li>
+              <li>Unified guest identity from online booking through on-property spend and post-visit engagement</li>
+              <li>Partner systems (PMS, F&amp;B, loyalty) integrate through clean APIs without duplicated logic</li>
+              <li>Financial data flows automatically to NetSuite and Oracle — no manual consolidation</li>
+              <li>Repeatable architecture that scales to future acquisitions without rework</li>
+            </ul>
+          </div>
         </div>
-
-        <div class="ideal-tabs">
-          <button class="ideal-tab active" onclick="showIdealTab('online', this)">Online Booking</button>
-          <button class="ideal-tab" onclick="showIdealTab('mobile', this)">Mobile App</button>
-          <button class="ideal-tab" onclick="showIdealTab('inperson', this)">In-Person</button>
-        </div>
-
-        <!-- ONLINE BOOKING -->
-        <div class="ideal-diagram active" id="ideal-online">
-            <p class="dataflow-caption">Guest books online through the commerce orchestration layer. The orchestration partner coordinates with PMS, campground, and spa for availability and reservations — RocketRez handles ticket issuance and entitlement confirmation only.</p>
-          <div class="hub-full node-muted" style="max-width:220px">
-            Guest (Web)
-            <span class="hub-sub">Browser · Mobile Web</span>
-            <button class="uc-btn" onclick="openUCModal('ob-guest')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-          </div>
-          <div class="hub-connector">↓</div>
-          <div class="hub-orch-wrapper">
-            <div class="hub-full node-primary" id="orch-node-ideal" style="max-width:220px;margin:0">
-              <span class="orch-hotel-label">Commerce Orchestration<span class="hub-sub">Booking &amp; Package Layer · Loyalty (TBD)</span><span class="hub-partner-tag">Partner Solution</span></span>
-              <span class="orch-attraction-label" style="display:none">RocketRez<span class="hub-sub">Commerce &amp; Checkout Layer</span><span class="hub-partner-tag">Powered by RocketRez</span></span>
-              <button class="uc-btn" onclick="openUCModal('ob-orch')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-            </div>
-            <div class="hub-bidir-label">
-              <div class="hub-connector">↕</div>
-              <span>queries availability · receives confirmations</span>
-            </div>
-            <div class="hub-payment-side">
-              <span class="hub-payment-connector">→</span>
-              <div class="hub-payment-tile">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
-                <span class="hub-payment-tile-label">Payments</span>
-                <span class="hub-payment-tile-sub">Unified settlement</span>
-                <button class="uc-btn" onclick="openUCModal('ob-payments')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-              </div>
-            </div>
-          </div>
-          <div class="hub-ecosystem">
-            <span class="hub-ecosystem-label">Downstream Fulfillment</span>
-            <div class="hub-row">
-              <div class="hub-side">
-                <div class="hub-node node-blue" data-comp="pms">PMS / Lodging<span class="hub-sub">Guest Record &amp; Reservation</span><span class="hub-partner-tag">Via Orchestration</span><button class="uc-btn" onclick="openUCModal('ob-pms')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-                <div class="hub-node node-gold" data-comp="campground">Campground<span class="hub-sub">Outdoor &amp; RV</span><span class="hub-partner-tag">Via Orchestration</span><button class="uc-btn" onclick="openUCModal('ob-campground')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-              </div>
-              <div class="hub-connector">→</div>
-              <div class="hub-center node-green">
-                RocketRez
-                <span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Confirmation</span>
-                <button class="uc-btn" onclick="openUCModal('ob-rocketrez')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-              </div>
-              <div class="hub-connector">←</div>
-              <div class="hub-side">
-                <div class="hub-node node-purple" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Reservations</span><span class="hub-partner-tag">Via Orchestration</span><button class="uc-btn" onclick="openUCModal('ob-spa')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-              </div>
-            </div>
-          </div>
-          <div class="hub-connector">↓</div>
-          <div class="hub-full node-muted" style="max-width:260px">
-            Finance &amp; Reporting
-            <span class="hub-sub">NetSuite · Oracle · PMS / Opera Cloud</span>
-            <button class="uc-btn" onclick="openUCModal('ob-finance')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-          </div>
-        </div>
-
-        <!-- MOBILE APP -->
-        <div class="ideal-diagram" id="ideal-mobile">
-          <p class="dataflow-caption">The guest app is the on-property remote — displaying entitlements, enabling mobile F&amp;B ordering, managing the loyalty wallet, and surfacing real-time queue and availability data.</p>
-          <div class="hub-full node-muted" style="max-width:220px">
-            Guest (Mobile App)
-            <span class="hub-sub">iOS · Android · Native</span>
-            <button class="uc-btn" onclick="openUCModal('ma-guest')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-          </div>
-          <div class="hub-connector">↓</div>
-          <div class="hub-orch-wrapper">
-            <div class="hub-full node-primary" style="max-width:220px;margin:0">
-              Mobile Platform
-              <span class="hub-sub">App &amp; CRM Layer</span>
-              <span class="hub-partner-tag">Partner Solution</span>
-              <button class="uc-btn" onclick="openUCModal('ma-platform')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-            </div>
-            <div class="hub-bidir-label">
-              <div class="hub-connector">↕</div>
-              <span>entitlement reads · wallet updates · push triggers</span>
-            </div>
-            <div class="hub-payment-side">
-              <span class="hub-payment-connector">→</span>
-              <div class="hub-payment-tile">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
-                <span class="hub-payment-tile-label">Payments</span>
-                <span class="hub-payment-tile-sub">Unified settlement</span>
-                <button class="uc-btn" onclick="openUCModal('ma-payments')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-              </div>
-            </div>
-          </div>
-          <div class="hub-ecosystem">
-            <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
-            <div class="hub-row">
-              <div class="hub-side">
-                <div class="hub-node node-blue" data-comp="pms">PMS<span class="hub-sub">Stay Context</span><span class="hub-partner-tag">Partner</span><button class="uc-btn" onclick="openUCModal('ma-pms')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-                <div class="hub-node node-purple" data-comp="loyalty">Loyalty / Wallet<span class="hub-sub">Cashless &amp; Rewards</span><span class="hub-partner-tag">Partner</span><button class="uc-btn" onclick="openUCModal('ma-loyalty')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-              </div>
-              <div class="hub-connector">↔</div>
-              <div class="hub-center node-green">
-                RocketRez
-                <span class="hub-sub" style="opacity:1">Pass Display · QR<br>Entitlement Validation</span>
-                <button class="uc-btn" onclick="openUCModal('ma-rocketrez')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-              </div>
-              <div class="hub-connector">↔</div>
-              <div class="hub-side">
-                <div class="hub-node node-gold" data-comp="fnb">F&amp;B / Retail POS<span class="hub-sub">Mobile Order &amp; Pay</span><span class="hub-partner-tag">Partner</span><button class="uc-btn" onclick="openUCModal('ma-fnb')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-                <div class="hub-node node-gold" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Spa · Rental</span><span class="hub-partner-tag">Partner</span><button class="uc-btn" onclick="openUCModal('ma-spa')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-              </div>
-            </div>
-          </div>
-          <div class="hub-source-connector">
-            <div class="hub-connector">↓</div>
-            <span class="hub-source-label">All transactions sync to guest folio</span>
-            <div class="hub-connector">↓</div>
-          </div>
-          <div class="hub-full node-muted" style="max-width:220px">
-            Guest Folio &amp; Reporting
-            <span class="hub-sub">PMS · Finance Layer</span>
-            <button class="uc-btn" onclick="openUCModal('ma-folio')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-          </div>
-        </div>
-
-        <!-- IN-PERSON -->
-        <div class="ideal-diagram" id="ideal-inperson">
-          <p class="dataflow-caption">At the gate, F&amp;B stand, retail shop, or activities desk — every touchpoint validates entitlements from a single source. Payments are handled within each system independently — no unified settlement layer at this stage.</p>
-          <div class="hub-full node-muted" style="max-width:220px">
-            Guest Arrives On-Property
-            <span class="hub-sub">Walk-Up · Lodging Guest · Group</span>
-            <button class="uc-btn" onclick="openUCModal('ip-guest')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-          </div>
-          <div class="hub-connector">↓</div>
-          <div class="hub-ecosystem">
-            <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
-            <div class="hub-row" style="gap:var(--space-2)">
-              <div class="hub-side">
-                <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span><span class="hub-partner-tag">Pays via RocketRez</span><button class="uc-btn" onclick="openUCModal('ip-gate')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-                <div class="hub-node node-gold" data-comp="fnb">F&amp;B / Retail POS<span class="hub-sub">Onsite Commerce</span><span class="hub-partner-tag">Pays via POS · Partner</span><button class="uc-btn" onclick="openUCModal('ip-fnb')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-              </div>
-              <div class="hub-connector">↔</div>
-              <div class="hub-center node-green">
-                RocketRez
-                <span class="hub-sub" style="opacity:1">Entitlement Source<br>Access Control</span>
-                <button class="uc-btn" onclick="openUCModal('ip-rocketrez')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-              </div>
-              <div class="hub-connector">↔</div>
-              <div class="hub-side">
-                <div class="hub-node node-purple" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Spa · Rental</span><span class="hub-partner-tag">Pays via system · Partner</span><button class="uc-btn" onclick="openUCModal('ip-spa')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-                <div class="hub-node node-blue" data-comp="pms">PMS / Lodging<span class="hub-sub">Folio</span><span class="hub-partner-tag">Pays via PMS · Partner</span><button class="uc-btn" onclick="openUCModal('ip-pms')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-              </div>
-            </div>
-          </div>
-          <div class="hub-bidir-label" style="margin-top:var(--space-1)">
-            <div class="hub-connector">↓</div>
-            <span>each system reports independently to finance</span>
-          </div>
-          <div class="hub-full node-muted" style="max-width:220px">
-            Finance &amp; Reporting
-            <span class="hub-sub">NetSuite · Oracle</span>
-            <button class="uc-btn" onclick="openUCModal('ip-finance')" title="View use cases"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-          </div>
-        </div>
-
       </div>
-
-        <div class="comp-toggles">
-          <span class="comp-toggles-label">Toggle components:</span>
-          <button class="comp-toggle active" data-comp="pms" onclick="toggleIdealComp('pms',this)">PMS / Lodging</button>
-          <button class="comp-toggle active" data-comp="campground" onclick="toggleIdealComp('campground',this)">Campground</button>
-          <button class="comp-toggle active" data-comp="fnb" onclick="toggleIdealComp('fnb',this)">F&amp;B / POS</button>
-          <button class="comp-toggle active" data-comp="spa" onclick="toggleIdealComp('spa',this)">Spa &amp; Activities</button>
-          <button class="comp-toggle active" data-comp="loyalty" onclick="toggleIdealComp('loyalty',this)">Loyalty / Wallet</button>
-        </div>
     </div>
   </div>
 
-  <section class="timeline-section" style="padding:0;max-width:none;margin-bottom:var(--space-8)">
-    <div class="section-label">Program Milestones <button class="uc-btn" onclick="openUCModal('milestones')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></div>
-    <div class="timeline-bar">
-      <div class="timeline-phase">
-        <div class="phase-dot active">1</div>
-        <div class="phase-label">Phase 1<br>Foundation</div>
-        <div class="phase-date">Now – May</div>
-      </div>
-      <div class="timeline-phase">
-        <div class="phase-dot">2</div>
-        <div class="phase-label">Phase 2<br>Config & Build</div>
-        <div class="phase-date">May – July</div>
-      </div>
-      <div class="timeline-phase">
-        <div class="phase-dot">3</div>
-        <div class="phase-label">Phase 3<br>Testing & Training</div>
-        <div class="phase-date">July – Aug</div>
-      </div>
-      <div class="timeline-phase">
-        <div class="phase-dot">4</div>
-        <div class="phase-label">Phase 4<br>Operational Go-Live</div>
-        <div class="phase-date">September</div>
-      </div>
-      <div class="timeline-phase">
-        <div class="phase-dot">5</div>
-        <div class="phase-label">Phase 5<br>Financial Cutover</div>
-        <div class="phase-date">Sept – Oct</div>
-      </div>
-    </div>
-  </section>
+  <div style="padding-top:var(--space-8);border-top:1px solid var(--color-divider)">
+    <div class="section-label" style="margin-bottom:var(--space-2)">Our Position</div>
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-5);max-width:72ch;">How we frame our role as a platform partner — not just a ticketing vendor.</p>
+  </div>
 
-  <div class="rec-bar">
+  <div class="rec-bar" style="margin-bottom:var(--space-8)">
     <div class="rec-content">
       <div class="rec-title">Positioning Statement <button class="uc-btn" onclick="openUCModal('positioning')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></div>
       <div class="rec-text">
@@ -1807,7 +1796,12 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <div class="compare-table-wrap">
+  <div style="padding-top:var(--space-8);border-top:1px solid var(--color-divider)">
+    <div class="section-label" style="margin-bottom:var(--space-2)">Board-Level Case</div>
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-5);max-width:72ch;">Why us, why now, and why this architecture — summarized for executive review.</p>
+  </div>
+
+  <div class="compare-table-wrap" style="margin-bottom:var(--space-8)">
     <table class="compare-table">
       <thead>
         <tr>
@@ -1828,7 +1822,12 @@ a { color: inherit; text-decoration: none; }
     </table>
   </div>
 
-  <div class="partners-grid">
+  <div style="padding-top:var(--space-8);border-top:1px solid var(--color-divider)">
+    <div class="section-label" style="margin-bottom:var(--space-2)">Program Outcomes &amp; Risks</div>
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-5);max-width:72ch;">What this program must deliver — and what breaks down without a unified entitlement core.</p>
+  </div>
+
+  <div class="partners-grid" style="margin-bottom:var(--space-8)">
     <div class="partner-card">
       <div class="partner-card-header">
         <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">—</div>
@@ -1872,6 +1871,11 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
     </div>
+  </div>
+
+  <div style="padding-top:var(--space-8);border-top:1px solid var(--color-divider)">
+    <div class="section-label" style="margin-bottom:var(--space-2)">Our Ownership Scope</div>
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-5);max-width:72ch;">The specific capabilities and operational domains RocketRez takes full responsibility for.</p>
   </div>
 
   <div style="background:var(--color-success-bg);border:1px solid color-mix(in oklch,var(--color-success) 30%,transparent);border-radius:var(--radius-xl);padding:var(--space-5);margin-bottom:var(--space-6)">
@@ -1988,46 +1992,6 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
 
-    <!-- CLOVER -->
-    <div class="partner-card">
-      <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">CL</div>
-        <div>
-          <div class="partner-name">Clover</div>
-          <div class="partner-type">F&amp;B / Retail POS — Quebec-Approved Alternative to Toast</div>
-        </div>
-        <span class="partner-rel rel-new">Alternate Path</span>
-      </div>
-      <p class="partner-desc">A Quebec-approved POS alternative for properties where Toast's certification timeline creates risk. Clover is already compliant with Quebec regulatory requirements, making it a lower-friction path for Canadian properties.</p>
-      <div class="partner-detail" id="pd-clover">
-        <div class="row-group">
-          <div class="row-label">STRATEGIC FIT</div>
-          <ul class="pros-list">
-            <li>Quebec-approved — meets QST, GST, and SRM regulatory requirements without waiting on certification</li>
-            <li>Flexible hardware and software options suitable for F&amp;B and retail across park environments</li>
-            <li>Open API ecosystem supports integration with Opera Cloud room charge and RocketRez entitlement validation</li>
-          </ul>
-        </div>
-        <div class="row-group">
-          <div class="row-label">OPEN QUESTIONS</div>
-          <ul class="questions-block">
-            <li>Integration depth with Opera Cloud room charge — parity with Toast?</li>
-            <li>Is Clover the right long-term choice if Toast subsequently confirms Quebec compliance?</li>
-            <li>Hardware ecosystem and support availability in Canadian markets</li>
-          </ul>
-        </div>
-      </div>
-      <div class="partner-card-footer">
-        <button class="partner-toggle" onclick="togglePartner('pd-clover', this)">
-          Learn more
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <a href="https://www.clover.com" target="_blank" rel="noopener" class="website-link">
-          Visit Site
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
-    </div>
 
   </div>
 
@@ -2642,6 +2606,37 @@ a { color: inherit; text-decoration: none; }
       <div class="arch-subtitle">How we run multi-property rollouts — and how Premier Parks leadership stays informed at every level</div>
     </div>
   </div>
+
+  <section class="timeline-section" style="padding:0;max-width:none;margin-bottom:var(--space-8)">
+    <div class="section-label">Program Milestones <button class="uc-btn" onclick="openUCModal('milestones')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></div>
+    <div class="timeline-bar">
+      <div class="timeline-phase">
+        <div class="phase-dot active">1</div>
+        <div class="phase-label">Phase 1<br>Foundation</div>
+        <div class="phase-date">Now – May</div>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-dot">2</div>
+        <div class="phase-label">Phase 2<br>Config & Build</div>
+        <div class="phase-date">May – July</div>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-dot">3</div>
+        <div class="phase-label">Phase 3<br>Testing & Training</div>
+        <div class="phase-date">July – Aug</div>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-dot">4</div>
+        <div class="phase-label">Phase 4<br>Operational Go-Live</div>
+        <div class="phase-date">September</div>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-dot">5</div>
+        <div class="phase-label">Phase 5<br>Financial Cutover</div>
+        <div class="phase-date">Sept – Oct</div>
+      </div>
+    </div>
+  </section>
 
   <div class="section-label" style="margin-bottom:var(--space-5)">Our Implementation Methodology</div>
   <div class="impl-phases">
@@ -4395,7 +4390,7 @@ function toggleJE(id) {
   initCharts();
 
   // Apply default property-type state (Attraction Only) on page load
-  setPropertyType('attraction', 'flow-ideal', 'property-select', 'pt-hotel-ideal', 'pt-attraction-ideal', 'pt-specific-ideal');
+  setPropertyType('hotel', 'flow-ideal', 'property-select', 'pt-hotel-ideal', 'pt-attraction-ideal', 'pt-specific-ideal');
   setPropertyType('attraction', 'flow-o2', 'property-select-o2', 'pt-hotel-o2', 'pt-attraction-o2', 'pt-specific-o2');
 })();
 </script>
