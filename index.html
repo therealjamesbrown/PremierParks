@@ -871,6 +871,154 @@ a { color: inherit; text-decoration: none; }
 .team-avatar img.no-zoom {
   transform: none;
 }
+/* ── PERSONA TABS ────────────────────────────────────── */
+.persona-bar {
+  display: flex; align-items: center; gap: var(--space-4);
+  margin-bottom: var(--space-8); padding: var(--space-3) var(--space-5);
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); flex-wrap: wrap;
+}
+.persona-bar-label {
+  font-size: var(--text-xs); font-weight: 700; color: var(--color-text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+}
+.persona-tabs { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.persona-tab {
+  background: none; border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg); cursor: pointer;
+  font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600;
+  color: var(--color-text-muted); padding: var(--space-2) var(--space-4);
+  transition: all var(--transition);
+}
+.persona-tab:hover { color: var(--color-text); border-color: var(--color-text-muted); background: var(--color-surface-offset); }
+.persona-tab.active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+.persona-content { display: none; }
+.persona-content.visible { display: block; }
+.exec-story-header { margin-bottom: var(--space-6); }
+.exec-story-headline {
+  font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800;
+  color: var(--color-text); line-height: 1.15; margin-bottom: var(--space-3);
+}
+.exec-story-context {
+  font-size: var(--text-base); color: var(--color-text-muted); line-height: 1.65; max-width: 72ch;
+}
+.outcome-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4); margin-bottom: var(--space-8);
+}
+.outcome-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
+  padding: var(--space-5) var(--space-6);
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+.outcome-card-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-lg);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.outcome-card-title {
+  font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800;
+  color: var(--color-text); line-height: 1.3;
+}
+.outcome-card-desc {
+  font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; flex: 1;
+}
+.outcome-card-proof {
+  font-size: var(--text-xs); font-weight: 700; color: var(--color-primary);
+  text-transform: uppercase; letter-spacing: 0.04em;
+  padding-top: var(--space-2); border-top: 1px solid var(--color-divider);
+}
+/* ── SOLUTIONS ARCH TABS ─────────────────────────────── */
+.solution-tabs {
+  display: flex; gap: var(--space-1); margin-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-divider); padding-bottom: 0;
+}
+.solution-tab {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-body); font-size: var(--text-sm); font-weight: 700;
+  color: var(--color-text-muted); padding: var(--space-3) var(--space-4);
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color var(--transition), border-color var(--transition); white-space: nowrap;
+}
+.solution-tab:hover { color: var(--color-text); }
+.solution-tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+.solution-tab-content { display: none; }
+.solution-tab-content.visible { display: block; }
+.arch-stack-row {
+  display: flex; align-items: stretch; gap: var(--space-3); margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+.arch-stack-node {
+  flex: 1; min-width: 180px; background: var(--color-surface);
+  border: 2px solid var(--color-border); border-radius: var(--radius-xl);
+  padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-2);
+}
+.arch-stack-node-title {
+  font-family: var(--font-display); font-size: var(--text-base); font-weight: 800; line-height: 1.2;
+}
+.arch-stack-node-role {
+  font-size: var(--text-xs); font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--color-text-muted);
+}
+.arch-stack-node-items {
+  list-style: none; display: flex; flex-direction: column; gap: var(--space-1); margin-top: var(--space-1);
+}
+.arch-stack-node-items li {
+  font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5;
+  padding-left: var(--space-3); position: relative;
+}
+.arch-stack-node-items li::before { content: "·"; position: absolute; left: 0; color: var(--color-primary); font-weight: 700; }
+.arch-stack-plus {
+  display: flex; align-items: center; font-family: var(--font-display); font-size: var(--text-lg);
+  font-weight: 800; color: var(--color-text-muted); padding: 0 var(--space-1);
+  align-self: center;
+}
+.partner-summary-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4); margin-bottom: var(--space-8);
+}
+.partner-summary-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
+  padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);
+}
+.partner-summary-header { display: flex; align-items: center; gap: var(--space-3); }
+.partner-summary-icon {
+  width: 32px; height: 32px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-family: var(--font-display); font-size: var(--text-xs); font-weight: 800;
+}
+.partner-summary-name { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; color: var(--color-text); }
+.partner-summary-role { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.partner-summary-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+.delivery-phases-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4); margin-bottom: var(--space-8);
+}
+.delivery-phase-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
+  padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);
+}
+.delivery-phase-num { font-family: var(--font-display); font-size: var(--text-xs); font-weight: 800; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.08em; }
+.delivery-phase-title { font-family: var(--font-display); font-size: var(--text-base); font-weight: 800; color: var(--color-text); line-height: 1.2; }
+.delivery-phase-timing { font-size: var(--text-xs); font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.delivery-phase-items { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+.delivery-phase-items li { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5; padding-left: var(--space-3); position: relative; }
+.delivery-phase-items li::before { content: "→"; position: absolute; left: 0; color: var(--color-primary); font-size: 0.7em; top: 2px; }
+.integ-domain-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4); margin-bottom: var(--space-8);
+}
+.integ-domain-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); padding: var(--space-4) var(--space-5);
+  display: flex; flex-direction: column; gap: var(--space-3);
+}
+.integ-domain-title { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; color: var(--color-text); }
+.integ-domain-owner { font-size: var(--text-xs); font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.04em; }
+.integ-domain-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+
 .customer-section-label {
   font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800;
   margin-bottom: var(--space-6); color: var(--color-text);
@@ -1632,17 +1780,219 @@ a { color: inherit; text-decoration: none; }
 </div>
 
 <div class="arch-view" id="arch-2">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 1 of 5 — Executive Case</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 1 — Executive Case</div>
 
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">EX</div>
     <div class="arch-title-block">
-      <div class="arch-title">Executive Case: What Premier Parks Is Solving</div>
-      <div class="arch-subtitle">Unified guest experience, modernized operations, and enterprise-ready reporting</div>
+      <div class="arch-title">Executive Case: The Outcomes We Deliver</div>
+      <div class="arch-subtitle">Select a role to see how RocketRez delivers value across your organization</div>
     </div>
   </div>
 
-  <div class="dataflow-compare">
+  <!-- Persona selector -->
+  <div class="persona-bar">
+    <span class="persona-bar-label">Viewing as:</span>
+    <div class="persona-tabs">
+      <button class="persona-tab active" onclick="setPersona('csuite', this)">C-Suite</button>
+      <button class="persona-tab" onclick="setPersona('finance', this)">Finance</button>
+      <button class="persona-tab" onclick="setPersona('operations', this)">Operations</button>
+      <button class="persona-tab" onclick="setPersona('marketing', this)">Marketing</button>
+    </div>
+  </div>
+
+  <!-- ── C-SUITE ─────────────────────────────────────────── -->
+  <div class="persona-content visible" id="persona-csuite">
+    <div class="exec-story-header">
+      <div class="exec-story-headline">One platform across the portfolio. Clean data to corporate.</div>
+      <p class="exec-story-context">Attractions operators who standardize on a single operating platform reduce reconciliation overhead and report with confidence. RocketRez has spent over a decade building purpose-built software for this industry — not adapted from hospitality or retail, built from the ground up for how parks actually operate.</p>
+    </div>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="outcome-card-title">Portfolio Standardization</div>
+        <div class="outcome-card-desc">Every park runs the same ticketing and entitlement backbone. Operational rules are defined once and enforced portfolio-wide — no property-by-property exceptions, no reconciliation disputes between systems.</div>
+        <div class="outcome-card-proof">Proven across multi-park operators — single platform, one rule set</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-success-bg);color:var(--color-success)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="outcome-card-title">Real-Time Revenue Visibility</div>
+        <div class="outcome-card-desc">Performance data by property, channel, and product category available in real time — not at end-of-month after three rounds of manual exports. Board reporting backed by a single source of truth.</div>
+        <div class="outcome-card-proof">Direct NetSuite connectivity — no manual roll-up required</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="outcome-card-title">Operator-Grade Guest Experience</div>
+        <div class="outcome-card-desc">Guests see one consistent experience across every park — same pass logic, same entitlement rules, same purchase flow. No property-level workarounds that create guest-facing inconsistencies or support overhead.</div>
+        <div class="outcome-card-proof">Consistent guest journey across every property in the portfolio</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="outcome-card-title">Trusted Financial Data</div>
+        <div class="outcome-card-desc">Every transaction is categorized and GL-coded at point of sale. Financial data is structured for NetSuite before it ever leaves the system — no cleanup layer, no manual mapping, no risk of misclassification.</div>
+        <div class="outcome-card-proof">Sub-ledger reporting built into the platform natively</div>
+      </div>
+    </div>
+    <div class="rec-bar">
+      <div class="rec-content">
+        <div class="rec-title">Why Us, Why Now</div>
+        <div class="rec-text">RocketRez is purpose-built for multi-property attractions operators. We're not adapted from hospitality or retail — the entitlement engine, the sub-ledger, the access validation layer, and the NetSuite connector were all built for operators like Premier Parks. The timeline is tight. Architectural decisions made now determine whether this program delivers a unified platform or another collection of disconnected systems.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FINANCE ─────────────────────────────────────────── -->
+  <div class="persona-content" id="persona-finance">
+    <div class="exec-story-header">
+      <div class="exec-story-headline">Financial close in days, not weeks.</div>
+      <p class="exec-story-context">Every dollar still needs to be accounted for, reconciled, and reported. What changes is how your team spends their time getting there. RocketRez eliminates the manual data transport between source systems and NetSuite — so your team focuses on analysis and review, not entry and cleanup.</p>
+    </div>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="outcome-card-title">Sub-Ledger Built In</div>
+        <div class="outcome-card-desc">Every transaction is categorized, coded, and assigned a GL account at point of sale. There is no post-processing step, no manual mapping layer, and no spreadsheet bridge between the ticketing system and the general ledger.</div>
+        <div class="outcome-card-proof">Native sub-ledger across ticketing, admissions, retail, and F&amp;B</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="outcome-card-title">Direct NetSuite Integration</div>
+        <div class="outcome-card-desc">Structured journal entries flow from RocketRez to NetSuite on a defined schedule. No CSV exports, no copy-paste, no file drops. The integration is API-first, auditable, and runs without manual intervention.</div>
+        <div class="outcome-card-proof">Automated JE creation by revenue type, property, and GL code</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-success-bg);color:var(--color-success)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="outcome-card-title">Month-End in Hours</div>
+        <div class="outcome-card-desc">What currently requires multiple analysts over multiple days becomes a review-and-approve workflow. The system does the entry; your team does the analysis. That's not a reduction in finance — it's a promotion.</div>
+        <div class="outcome-card-proof">Finance teams report 70–80% reduction in manual close time</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="outcome-card-title">Audit-Ready Transaction Lineage</div>
+        <div class="outcome-card-desc">Full transaction history from point of sale through journal entry. Every refund, void, and adjustment carries a timestamp, user attribution, and reason code — so audit prep is a data pull, not a reconstruction.</div>
+        <div class="outcome-card-proof">Complete audit trail built in — not assembled after the fact</div>
+      </div>
+    </div>
+    <div style="background:linear-gradient(135deg,var(--color-primary-bg) 0%,var(--color-gold-bg) 100%);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5) var(--space-6);margin-bottom:var(--space-6)">
+      <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-base);margin-bottom:var(--space-2)">The work doesn't disappear. Your job gets better.</div>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin:0 0 var(--space-4)">Manual entry isn't finance expertise — it's data transport. When the systems handle the transport, your team spends its time on what actually requires expertise: reviewing, questioning, and presenting what the numbers mean to the business.</p>
+      <button class="section-next-btn" style="display:inline-flex;padding:var(--space-2) var(--space-4);font-size:var(--text-xs)" onclick="showArch(9)">
+        See the full Finance walkthrough
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── OPERATIONS ──────────────────────────────────────── -->
+  <div class="persona-content" id="persona-operations">
+    <div class="exec-story-header">
+      <div class="exec-story-headline">One entitlement engine. Every gate, every park.</div>
+      <p class="exec-story-context">Fragmented systems create guest-facing failures at exactly the wrong moment — at the gate, at the POS, at the guest services desk. RocketRez consolidates entitlement logic into a single engine so every touchpoint validates from the same source of truth, across every property.</p>
+    </div>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-success-bg);color:var(--color-success)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="outcome-card-title">Unified Entitlement Rules</div>
+        <div class="outcome-card-desc">Season pass benefits, sister-park access, capacity limits, and add-on eligibility are defined once and enforced everywhere. No gaps between what was sold and what gets honored at the gate or POS.</div>
+        <div class="outcome-card-proof">Entitlement engine across web, gate, mobile, and retail POS</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="outcome-card-title">Gate Operations That Don't Go Down</div>
+        <div class="outcome-card-desc">Real-time validation at every scan point with offline fallback caching. If the network drops, the gate keeps moving. Validation resumes automatically when connectivity restores — no manual override required.</div>
+        <div class="outcome-card-proof">Sub-100ms validation with local fallback cache at every gate</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="outcome-card-title">Train Once, Deploy Everywhere</div>
+        <div class="outcome-card-desc">Same platform, same interface, every property. New hires go through one training program. Staff transferred between parks are productive on day one. Seasonal ramp-up is faster because the system doesn't change.</div>
+        <div class="outcome-card-proof">Single staff training program covers all properties</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div class="outcome-card-title">Full Operational Audit Trail</div>
+        <div class="outcome-card-desc">Every transaction, refund, void, and override is logged with user, timestamp, and reason code. Exception handling is auditable. Disputes are resolved in seconds, not by reviewing handwritten logs.</div>
+        <div class="outcome-card-proof">Complete operational audit log by property, staff member, and event</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MARKETING ──────────────────────────────────────── -->
+  <div class="persona-content" id="persona-marketing">
+    <div class="exec-story-header">
+      <div class="exec-story-headline">Know your guest. Grow your revenue.</div>
+      <p class="exec-story-context">Marketing that doesn't know who came back, who upgraded, or who bought at the gate is marketing in the dark. RocketRez creates a unified guest record — from first purchase through repeat visit — so your campaigns are built on actual behavior, not assumptions about segments that don't exist yet.</p>
+    </div>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="outcome-card-title">Unified Guest Identity</div>
+        <div class="outcome-card-desc">One guest profile across web purchase, box office, group sales, and on-property spend. Renewals, upgrades, and cross-park purchases are all attached to the same record — no deduplication, no guessing which visit was which person.</div>
+        <div class="outcome-card-proof">Guest identity tracked from first click through final scan</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="outcome-card-title">Membership &amp; Pass Segmentation</div>
+        <div class="outcome-card-desc">Active pass holders, expired members, upgrade candidates, and first-time visitors are distinct, queryable segments. Renewal campaigns, upgrade offers, and re-engagement flows can target based on real entitlement status.</div>
+        <div class="outcome-card-proof">Real-time pass status drives list segmentation and campaign targeting</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-success-bg);color:var(--color-success)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="outcome-card-title">Channel Attribution</div>
+        <div class="outcome-card-desc">Conversion data by channel — web, mobile app, box office, group sales. Know where revenue is being generated before you decide where to invest. Attribution isn't a report you build; it's built into the platform.</div>
+        <div class="outcome-card-proof">Revenue reporting by origination channel, product, and property</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="outcome-card-title">Upsell &amp; Cross-Park Visibility</div>
+        <div class="outcome-card-desc">Guests who visited one park but not another. Guests who bought a base ticket but passed on a season pass. Upgrade opportunity data is in the platform — no manual analysis required to identify who to target and with what.</div>
+        <div class="outcome-card-proof">Cross-park and cross-product purchase behavior tracked natively</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(3)">
+      2. Solutions Architecture
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+
+  <div class="dataflow-compare" style="display:none"><!-- archived old exec case content -->
     <div class="dataflow-panel" id="panel-current">
       <div class="dataflow-panel-label dataflow-label-current">Current State</div>
       <div class="dataflow-panel-body">
@@ -1877,223 +2227,230 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <div style="padding-top:var(--space-8);border-top:1px solid var(--color-divider)">
-    <div class="section-label" style="margin-bottom:var(--space-2)">Our Position</div>
-    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-5);max-width:72ch;">How we frame our role as a platform partner — not just a ticketing vendor.</p>
-  </div>
-
-  <div class="rec-bar" style="margin-bottom:var(--space-8)">
-    <div class="rec-content">
-      <div class="rec-title">Positioning Statement <button class="uc-btn" onclick="openUCModal('positioning')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></div>
-      <div class="rec-text">
-        We are not only a ticketing vendor. We are the platform partner that enables Premier Parks to run a connected ecosystem.
-        Our responsibility is to own the entitlement backbone end-to-end and create clean interfaces that allow PMS, F&B, identity, and financial systems to plug in without compromising control.
-      </div>
-    </div>
-  </div>
-
-  <div style="padding-top:var(--space-8);border-top:1px solid var(--color-divider)">
-    <div class="section-label" style="margin-bottom:var(--space-2)">Board-Level Case</div>
-    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-5);max-width:72ch;">Why us, why now, and why this architecture — summarized for executive review.</p>
-  </div>
-
-  <div class="compare-table-wrap" style="margin-bottom:var(--space-8)">
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th>Executive Summary <button class="uc-btn" onclick="openUCModal('exec-summary')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></th>
-          <th>Why Us</th>
-          <th>Why Now</th>
-          <th>Why This Plan</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Board-Level Case</td>
-          <td>We own the hardest and most operationally critical layer: ticketing, entitlement logic, and access validation across all channels.</td>
-          <td>The timeline leaves no room for architectural drift; ownership must be explicit before build scale begins.</td>
-          <td>The model is domain-specialized but control-centered: ticketing remains the entitlement backbone while partners integrate through clean contracts.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div style="padding-top:var(--space-8);border-top:1px solid var(--color-divider)">
-    <div class="section-label" style="margin-bottom:var(--space-2)">Program Outcomes &amp; Risks</div>
-    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-5);max-width:72ch;">What this program must deliver — and what breaks down without a unified entitlement core.</p>
-  </div>
-
-  <div class="partners-grid" style="margin-bottom:var(--space-8)">
-    <div class="partner-card">
-      <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-success-bg);color:var(--color-success)">—</div>
-        <div>
-          <div class="partner-name">Business Outcomes We Commit To <button class="uc-btn" onclick="openUCModal('outcomes')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></div>
-          <div class="partner-type">What this program must deliver</div>
-        </div>
-      </div>
-      <div class="partner-card-body">
-        <div class="row-group">
-          <div class="row-label">PRIMARY OUTCOMES</div>
-          <ul class="pros-list">
-            <li>One consistent guest journey from online booking to on-property spend and post-visit engagement</li>
-            <li>Unified entitlement rules across passes, dated tickets, add-ons, and cross-park benefits</li>
-            <li>RocketRez as the primary ticketing and entitlement platform across the core portfolio, with an orchestration integration role at Village Vacances Valcartier</li>
-            <li>Reliable integrations into Opera Cloud, Booker, Anemone, and F&B systems</li>
-            <li>Audit-ready financial data handoff for NetSuite and Oracle roll-up reporting</li>
-            <li>A repeatable architecture that supports future acquisitions and portfolio growth</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="partner-card">
-      <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-error-bg);color:var(--color-error)">—</div>
-        <div>
-          <div class="partner-name">What Fails Without a Ticketing Core <button class="uc-btn" onclick="openUCModal('risks')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></div>
-          <div class="partner-type">Key risk statement for the RFP</div>
-        </div>
-      </div>
-      <div class="partner-card-body">
-        <div class="row-group">
-          <div class="row-label">PROGRAM RISKS</div>
-          <ul class="cons-list">
-            <li>No canonical entitlement source creates disputes at gates, POS, and partner systems</li>
-            <li>Inconsistent pass benefit enforcement causes revenue leakage and guest dissatisfaction</li>
-            <li>Disconnected systems multiply reconciliation, exception handling, and manual support</li>
-            <li>Financial cutover risk increases when operational events are not normalized at source</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div style="padding-top:var(--space-8);border-top:1px solid var(--color-divider)">
-    <div class="section-label" style="margin-bottom:var(--space-2)">Our Ownership Scope</div>
-    <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-5);max-width:72ch;">The specific capabilities and operational domains RocketRez takes full responsibility for.</p>
-  </div>
-
-  <div style="background:var(--color-success-bg);border:1px solid color-mix(in oklch,var(--color-success) 30%,transparent);border-radius:var(--radius-xl);padding:var(--space-5);margin-bottom:var(--space-6)">
-    <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-sm);color:var(--color-success);margin-bottom:var(--space-3)">What RocketRez Owns in Ticketing</div>
-    <ul class="pros-list" style="margin:0">
-      <li>Product catalog governance — dated, any-day, season passes, groups, birthdays, cabanas, and add-ons</li>
-      <li>Entitlement engine — tiered benefits, sister-park access, capacity controls, and offer eligibility</li>
-      <li>Real-time issuance and validation APIs across web, mobile, gate, and POS channels</li>
-      <li>Operational controls for refunds, exchanges, voids, and full auditability</li>
-      <li>Cross-border support for Quebec taxes, language, and compliance requirements</li>
-    </ul>
-  </div>
-
-  <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(3)">
-      2. Partner Ecosystem
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-</div>
 
 
 <div class="arch-view" id="arch-4">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 2 of 5 — Partner Ecosystem</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 2 — Solutions Architecture</div>
   <div class="arch-header">
-    <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">PE</div>
+    <div class="arch-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">SA</div>
     <div class="arch-title-block">
-      <div class="arch-title">Partner Ecosystem Overview</div>
-      <div class="arch-subtitle">The vendors behind the recommended architecture — what each one does, why they matter, and where to learn more</div>
+      <div class="arch-title">Solutions Architecture</div>
+      <div class="arch-subtitle">Recommended platform, partner ecosystem, integration domains, and delivery model — in one place</div>
     </div>
   </div>
 
-  <div class="partners-grid">
+  <!-- Tab nav -->
+  <div class="solution-tabs">
+    <button class="solution-tab active" onclick="showSolutionTab('platform', this)">Platform</button>
+    <button class="solution-tab" onclick="showSolutionTab('partners', this)">Partners</button>
+    <button class="solution-tab" onclick="showSolutionTab('integrations', this)">Integrations</button>
+    <button class="solution-tab" onclick="showSolutionTab('delivery', this)">Delivery</button>
+  </div>
 
-    <!-- VANTAGE -->
-    <div class="partner-card">
-      <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">VN</div>
-        <div>
-          <div class="partner-name">Vantage</div>
-          <div class="partner-type">Guest Identity / Cashless Payments / Loyalty / Mobile App</div>
-        </div>
-        <span class="partner-rel rel-new">Potential New Partner</span>
+  <!-- ── TAB: PLATFORM ─────────────────────────────── -->
+  <div class="solution-tab-content visible" id="soltab-platform">
+    <div class="section-label" style="margin-bottom:var(--space-3)">Recommended Stack</div>
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5);line-height:1.6;max-width:72ch">RocketRez is the system of record for guest commerce and operations. Vantage enhances loyalty, mobile, and guest identity. Toast provides F&amp;B flexibility without sacrificing standardization.</p>
+    <div class="arch-stack-row">
+      <div class="arch-stack-node" style="border-color:var(--color-success);background:var(--color-success-bg)">
+        <div class="arch-stack-node-role" style="color:var(--color-success)">System of Record</div>
+        <div class="arch-stack-node-title" style="color:var(--color-success)">RocketRez</div>
+        <ul class="arch-stack-node-items">
+          <li>Ticketing &amp; product catalog</li>
+          <li>Entitlement engine (passes, add-ons, access)</li>
+          <li>Admissions &amp; gate validation</li>
+          <li>Groups, retail, &amp; onsite commerce</li>
+          <li>Sub-ledger &amp; NetSuite reporting</li>
+        </ul>
       </div>
-      <p class="partner-desc">A unified guest identity and cashless commerce platform — one account that governs the wallet, loyalty, mobile app, and on-property access. The only vendor in the space that wraps all of this natively.</p>
-      <div class="partner-detail" id="pd-vantage">
-        <div class="row-group">
-          <div class="row-label">STRATEGIC FIT</div>
-          <ul class="pros-list">
-            <li>Only platform with native cashless wallet + loyalty + mobile app in one architecture</li>
-            <li>Enchanted Parks (8 parks, EPR/Six Flags) selected Vantage for enterprise-wide deployment Q2 2026 — direct comparable</li>
-            <li>WhiteWater (manufacturer) backing means waterpark operations are a core use case, not adapted from ski</li>
-            <li>Opera Cloud integration pathway via OHIP</li>
-          </ul>
-        </div>
-        <div class="row-group">
-          <div class="row-label">OPEN QUESTIONS</div>
-          <ul class="questions-block">
-            <li>Has not previously integrated an online cart with both Opera Cloud and a ticketing solution — open to scoping and has no current objection to completing this work</li>
-            <li>Quebec compliance: Law 96, Bill 64 privacy, QST stacking — status needs validation for Canadian properties</li>
-          </ul>
-        </div>
+      <div class="arch-stack-plus">+</div>
+      <div class="arch-stack-node" style="border-color:var(--color-purple);background:var(--color-purple-bg)">
+        <div class="arch-stack-node-role" style="color:var(--color-purple)">Guest Identity &amp; Loyalty</div>
+        <div class="arch-stack-node-title" style="color:var(--color-purple)">Vantage</div>
+        <ul class="arch-stack-node-items">
+          <li>Cashless wallet &amp; stored value</li>
+          <li>Loyalty program &amp; rewards</li>
+          <li>Mobile app (iOS &amp; Android)</li>
+          <li>Guest identity &amp; CRM layer</li>
+        </ul>
       </div>
-      <div class="partner-card-footer">
-        <button class="partner-toggle" onclick="togglePartner('pd-vantage', this)">
-          Learn more
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <a href="https://vantage.co" target="_blank" rel="noopener" class="website-link">
-          Visit Site
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
+      <div class="arch-stack-plus">+</div>
+      <div class="arch-stack-node" style="border-color:var(--color-warning);background:var(--color-warning-bg)">
+        <div class="arch-stack-node-role" style="color:var(--color-warning)">Optional Integration</div>
+        <div class="arch-stack-node-title" style="color:var(--color-warning)">Toast</div>
+        <ul class="arch-stack-node-items">
+          <li>Restaurant &amp; F&amp;B POS</li>
+          <li>Kitchen display system</li>
+          <li>Mobile ordering</li>
+          <li>Opera Cloud room charge bridge</li>
+        </ul>
       </div>
     </div>
-
-    <!-- TOAST -->
-    <div class="partner-card">
-      <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">TO</div>
-        <div>
-          <div class="partner-name">Toast</div>
-          <div class="partner-type">F&amp;B / Restaurant POS / Kitchen Operations</div>
-        </div>
-        <span class="partner-rel rel-new">New Partner</span>
-      </div>
-      <p class="partner-desc">Dedicated restaurant and F&amp;B POS. Handles front-of-house ordering, kitchen display, and dining analytics so RocketRez stays focused on admissions and entitlements rather than managing dining complexity.</p>
-      <div class="partner-detail" id="pd-toast">
-        <div class="row-group">
-          <div class="row-label">STRATEGIC FIT</div>
-          <ul class="pros-list">
-            <li>Purpose-built for restaurant operations — table management and kitchen display are native</li>
-            <li>Strong consumer brand recognition eases staff recruitment and training at scale</li>
-            <li>Open API for Opera Cloud room charge and RocketRez entitlement validation</li>
-          </ul>
-        </div>
-        <div class="row-group">
-          <div class="row-label">OPEN QUESTIONS</div>
-          <ul class="questions-block">
-            <li>Quebec QST + GST stacking: tax configuration for Canadian properties needs validation</li>
-            <li>Room charge integration to Opera Cloud — native or custom bridge?</li>
-            <li>Toast Quebec certification is currently in flight — timeline alignment with Premier Parks' go-live needs confirmation</li>
-          </ul>
-        </div>
-      </div>
-      <div class="partner-card-footer">
-        <button class="partner-toggle" onclick="togglePartner('pd-toast', this)">
-          Learn more
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <a href="https://pos.toasttab.com" target="_blank" rel="noopener" class="website-link">
-          Visit Site
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
+    <div class="rec-bar">
+      <div class="rec-content">
+        <div class="rec-title">Architecture Principle</div>
+        <div class="rec-text">RocketRez owns the entitlement backbone end-to-end. Partner systems integrate through clean, documented APIs — no duplicated logic, no competing sources of truth. Every channel validates from RocketRez; every financial event flows to NetSuite from a single source.</div>
       </div>
     </div>
+  </div>
 
+  <!-- ── TAB: PARTNERS ─────────────────────────────── -->
+  <div class="solution-tab-content" id="soltab-partners">
+    <div class="partner-summary-grid">
+      <div class="partner-summary-card">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-success-bg);color:var(--color-success)">RR</div>
+          <div>
+            <div class="partner-summary-name">RocketRez</div>
+            <div class="partner-summary-role">Core Platform — System of Record</div>
+          </div>
+        </div>
+        <div class="partner-summary-desc">Ticketing, entitlement control, admissions, retail, groups, sub-ledger financial reporting, and direct NetSuite connectivity. The operational backbone for every property in the portfolio.</div>
+      </div>
+      <div class="partner-summary-card">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">VN</div>
+          <div>
+            <div class="partner-summary-name">Vantage</div>
+            <div class="partner-summary-role">Guest Identity / Cashless / Loyalty / Mobile</div>
+          </div>
+        </div>
+        <div class="partner-summary-desc">The only platform with native cashless wallet, loyalty, and mobile app in one architecture. Enchanted Parks (8 parks) selected Vantage for enterprise deployment Q2 2026 — direct comparable to Premier Parks' portfolio.</div>
+      </div>
+      <div class="partner-summary-card">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">TO</div>
+          <div>
+            <div class="partner-summary-name">Toast</div>
+            <div class="partner-summary-role">F&amp;B / Restaurant POS — Optional</div>
+          </div>
+        </div>
+        <div class="partner-summary-desc">Purpose-built restaurant POS for front-of-house, kitchen display, and mobile ordering. Keeps F&amp;B operations best-in-class without forcing RocketRez to manage dining complexity.</div>
+      </div>
+      <div class="partner-summary-card">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">OC</div>
+          <div>
+            <div class="partner-summary-name">Opera Cloud</div>
+            <div class="partner-summary-role">PMS — Hotel + Park Properties</div>
+          </div>
+        </div>
+        <div class="partner-summary-desc">Property Management System for hotel+park properties. RocketRez integrates via OHIP for guest folio charges, room-key entitlement validation, and stay-context-aware ticketing.</div>
+      </div>
+      <div class="partner-summary-card">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">NS</div>
+          <div>
+            <div class="partner-summary-name">NetSuite</div>
+            <div class="partner-summary-role">Corporate Finance — ERP</div>
+          </div>
+        </div>
+        <div class="partner-summary-desc">Corporate ERP receiving structured journal entries directly from RocketRez. Financial data arrives coded and categorized — no manual import, no CSV processing layer.</div>
+      </div>
+      <div class="partner-summary-card">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-surface-offset);color:var(--color-text-muted)">BK</div>
+          <div>
+            <div class="partner-summary-name">Booker / Anemone</div>
+            <div class="partner-summary-role">Spa &amp; Activities — Property-Level</div>
+          </div>
+        </div>
+        <div class="partner-summary-desc">Spa and activity reservation systems at select properties. RocketRez integrates for entitlement validation and cross-system guest identification where applicable.</div>
+      </div>
+    </div>
+  </div>
 
+  <!-- ── TAB: INTEGRATIONS ──────────────────────────── -->
+  <div class="solution-tab-content" id="soltab-integrations">
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-6);line-height:1.6;max-width:72ch">Each integration domain has a clear owner, a defined pattern, and an explicit responsibility boundary. RocketRez owns the entitlement layer; partners connect through clean APIs.</p>
+    <div class="integ-domain-grid">
+      <div class="integ-domain-card">
+        <div class="integ-domain-title">PMS / Opera Cloud</div>
+        <div class="integ-domain-owner">Owner: RocketRez + Oracle OHIP</div>
+        <div class="integ-domain-desc">Bidirectional: RocketRez issues tickets and confirms entitlements from reservations. Room-key validation at gate. Folio charges post back to Opera via OHIP API. Real-time for gate validation; scheduled for folio settlement.</div>
+      </div>
+      <div class="integ-domain-card">
+        <div class="integ-domain-title">Finance / NetSuite</div>
+        <div class="integ-domain-owner">Owner: RocketRez (sub-ledger → JE)</div>
+        <div class="integ-domain-desc">RocketRez categorizes revenue at point of sale and generates structured journal entries by GL code, property, and revenue type. Automated delivery to NetSuite on a defined schedule — no manual intervention.</div>
+      </div>
+      <div class="integ-domain-card">
+        <div class="integ-domain-title">Guest Identity / Vantage</div>
+        <div class="integ-domain-owner">Owner: Vantage (wallet + loyalty) ↔ RocketRez (entitlements)</div>
+        <div class="integ-domain-desc">Vantage reads entitlement status from RocketRez to surface pass details in-app. Wallet transactions and loyalty events sync back. Guest identity is established at purchase and maintained through the visit lifecycle.</div>
+      </div>
+      <div class="integ-domain-card">
+        <div class="integ-domain-title">F&amp;B / Toast</div>
+        <div class="integ-domain-owner">Owner: Toast (POS) — optional integration</div>
+        <div class="integ-domain-desc">Toast handles F&amp;B ordering and kitchen operations independently. Integration to Opera Cloud for room-charge posting and to RocketRez for entitlement-based meal-plan validation where applicable.</div>
+      </div>
+      <div class="integ-domain-card">
+        <div class="integ-domain-title">Access Control / Gate Hardware</div>
+        <div class="integ-domain-owner">Owner: RocketRez</div>
+        <div class="integ-domain-desc">Real-time entitlement validation at every scan point via RocketRez API. Offline fallback caching ensures gates keep moving if connectivity drops. Validation resumes automatically on reconnect.</div>
+      </div>
+      <div class="integ-domain-card">
+        <div class="integ-domain-title">Spa &amp; Activities / Booker</div>
+        <div class="integ-domain-owner">Owner: Property-level — Booker / Anemone</div>
+        <div class="integ-domain-desc">Reservation systems for spa and activities at applicable properties. Integration scope includes guest identification for entitlement validation and folio posting where activity charges apply to the PMS record.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB: DELIVERY ──────────────────────────────── -->
+  <div class="solution-tab-content" id="soltab-delivery">
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-6);line-height:1.6;max-width:72ch">Four phases from contract through live operations. September is the guest-facing go-live; financial cutover follows in October. Each phase has defined deliverables and a clear gate before the next phase begins.</p>
+    <div class="delivery-phases-grid">
+      <div class="delivery-phase-card">
+        <div class="delivery-phase-num">Phase 1</div>
+        <div class="delivery-phase-title">Foundation &amp; Architecture</div>
+        <div class="delivery-phase-timing">Now – May</div>
+        <ul class="delivery-phase-items">
+          <li>Architecture and ownership decisions finalized</li>
+          <li>Integration scopes signed off with each partner</li>
+          <li>Product catalog structure and GL mapping defined</li>
+          <li>Project workspace and tracking opened</li>
+        </ul>
+      </div>
+      <div class="delivery-phase-card">
+        <div class="delivery-phase-num">Phase 2</div>
+        <div class="delivery-phase-title">Configuration &amp; Build</div>
+        <div class="delivery-phase-timing">May – July</div>
+        <ul class="delivery-phase-items">
+          <li>RocketRez configured per property</li>
+          <li>Integration builds: Opera Cloud, Vantage, Toast, NetSuite</li>
+          <li>Season pass and entitlement rules built and validated</li>
+          <li>Admissions hardware provisioned and tested</li>
+        </ul>
+      </div>
+      <div class="delivery-phase-card">
+        <div class="delivery-phase-num">Phase 3</div>
+        <div class="delivery-phase-title">Testing &amp; Training</div>
+        <div class="delivery-phase-timing">July – August</div>
+        <ul class="delivery-phase-items">
+          <li>End-to-end test cycles across all integration points</li>
+          <li>Staff training across admissions, POS, and guest services</li>
+          <li>UAT sign-off with Premier Parks operations leads</li>
+          <li>Go/no-go review against readiness criteria</li>
+        </ul>
+      </div>
+      <div class="delivery-phase-card">
+        <div class="delivery-phase-num">Phase 4</div>
+        <div class="delivery-phase-title">Go-Live &amp; Cutover</div>
+        <div class="delivery-phase-timing">September – October</div>
+        <ul class="delivery-phase-items">
+          <li>Guest-facing go-live — September</li>
+          <li>RocketRez team on-site or on-call for launch week</li>
+          <li>NetSuite financial cutover — October</li>
+          <li>Formal handoff to Customer Success</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(4)">
-      3. Integrations &amp; Options
+    <button class="section-next-btn" onclick="showArch(6)">
+      3. Decision Appendix
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
@@ -3007,13 +3364,11 @@ a { color: inherit; text-decoration: none; }
   <button class="side-nav-btn active" onclick="showArch(0)"><span class="side-nav-num">00</span>Introduction</button>
   <button class="side-nav-btn" onclick="showArch(1)"><span class="side-nav-num">—</span>About RocketRez</button>
   <button class="side-nav-btn" onclick="showArch(2)"><span class="side-nav-num">01</span>Executive Case</button>
-  <button class="side-nav-btn" onclick="showArch(3)"><span class="side-nav-num">02</span>Partner Ecosystem</button>
-  <button class="side-nav-btn" onclick="showArch(4)"><span class="side-nav-num">03</span>Integrations &amp; Options</button>
-  <button class="side-nav-btn" onclick="showArch(5)"><span class="side-nav-num">04</span>Delivery &amp; Implementation</button>
-  <button class="side-nav-btn" onclick="showArch(6)"><span class="side-nav-num">05</span>Decision Appendix</button>
-  <button class="side-nav-btn" onclick="showArch(7)"><span class="side-nav-num">06</span>RFP Solution Q&amp;A</button>
-  <button class="side-nav-btn" onclick="showArch(8)"><span class="side-nav-num">07</span>MoneyBags Matrix</button>
-  <button class="side-nav-btn" onclick="showArch(9)"><span class="side-nav-num">08</span>Finance: Your Time, Elevated</button>
+  <button class="side-nav-btn" onclick="showArch(3)"><span class="side-nav-num">02</span>Solutions Architecture</button>
+  <button class="side-nav-btn" onclick="showArch(6)"><span class="side-nav-num">03</span>Decision Appendix</button>
+  <button class="side-nav-btn" onclick="showArch(7)"><span class="side-nav-num">04</span>RFP Solution Q&amp;A</button>
+  <button class="side-nav-btn" onclick="showArch(8)"><span class="side-nav-num">05</span>MoneyBags Matrix</button>
+  <button class="side-nav-btn" onclick="showArch(9)"><span class="side-nav-num">06</span>Finance: Your Time, Elevated</button>
 </nav>
 
 <script>
@@ -3027,6 +3382,22 @@ a { color: inherit; text-decoration: none; }
     r.setAttribute('data-theme', d);
   });
 })();
+
+function setPersona(name, btn) {
+  document.querySelectorAll('.persona-content').forEach(el => el.classList.remove('visible'));
+  document.querySelectorAll('.persona-tab').forEach(el => el.classList.remove('active'));
+  const target = document.getElementById('persona-' + name);
+  if (target) target.classList.add('visible');
+  if (btn) btn.classList.add('active');
+}
+
+function showSolutionTab(name, btn) {
+  document.querySelectorAll('.solution-tab-content').forEach(el => el.classList.remove('visible'));
+  document.querySelectorAll('.solution-tab').forEach(el => el.classList.remove('active'));
+  const target = document.getElementById('soltab-' + name);
+  if (target) target.classList.add('visible');
+  if (btn) btn.classList.add('active');
+}
 
 function showArch(index) {
   document.querySelectorAll('.arch-view').forEach((el, i) => {
