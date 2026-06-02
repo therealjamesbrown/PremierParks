@@ -157,7 +157,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: var(--shadow-sm); padding: var(--space-5);
 }
 .hero-logos {
-  display: grid; grid-template-columns: 1.35fr 1fr; gap: var(--space-3); margin-bottom: var(--space-3);
+  display: grid; grid-template-columns: 1.35fr 1fr; gap: var(--space-6); margin-bottom: var(--space-3);
 }
 .hero-logo-wrap {
   border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface-2);
@@ -1024,15 +1024,15 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: var(--space-6); color: var(--color-text);
 }
 .customer-logos {
-  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8);
-  margin-bottom: var(--space-10);
+  display: flex; flex-wrap: nowrap; align-items: center; gap: var(--space-16);
+  margin-bottom: var(--space-10); overflow-x: auto;
 }
 .customer-logo-wrap {
   display: flex; align-items: center; justify-content: center;
-  width: 160px; height: 56px;
+  flex-shrink: 0; height: 80px;
 }
 .customer-logo-wrap img {
-  max-height: 52px; max-width: 150px; width: auto; height: auto; object-fit: contain;
+  max-height: 76px; width: auto; height: auto; object-fit: contain;
 }
 .customer-logo-placeholder {
   height: 40px; min-width: 120px; display: flex; align-items: center; justify-content: center;
@@ -1698,8 +1698,9 @@ a { color: inherit; text-decoration: none; }
     <div class="customer-logo-wrap">
       <img src="logo_wildwater_50.webp" alt="Wild Water Adventure">
     </div>
+
     <div class="customer-logo-wrap">
-      <img src="xxlogo.png" alt="Xtreme Experience" style="max-height:52px;max-width:160px;width:160px;">
+      <img src="AP_LargeLogo.png" alt="Arnolds Park Amusement Park">
     </div>
   </div>
 
@@ -1769,7 +1770,7 @@ a { color: inherit; text-decoration: none; }
 
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(2)">
-      1. Executive Case
+      Executive Case
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
@@ -1794,6 +1795,7 @@ a { color: inherit; text-decoration: none; }
       <button class="persona-tab" onclick="setPersona('finance', this)">Finance</button>
       <button class="persona-tab" onclick="setPersona('operations', this)">Operations</button>
       <button class="persona-tab" onclick="setPersona('marketing', this)">Marketing</button>
+      <button class="persona-tab" onclick="setPersona('it', this)">IT</button>
     </div>
   </div>
 
@@ -1865,16 +1867,16 @@ a { color: inherit; text-decoration: none; }
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <div class="outcome-card-title">Direct NetSuite Integration</div>
-        <div class="outcome-card-desc">Structured journal entries flow from RocketRez to NetSuite on a defined schedule. No CSV exports, no copy-paste, no file drops. The integration is API-first, auditable, and runs without manual intervention.</div>
-        <div class="outcome-card-proof">Automated JE creation by revenue type, property, and GL code</div>
+        <div class="outcome-card-desc">RocketRez passes structured sales and payment data to NetSuite on a defined schedule, enabling journal entry creation without manual exports or file drops. The integration is API-first and auditable — your finance team maps the GL structure on the NetSuite side.</div>
+        <div class="outcome-card-proof">Structured sales &amp; payment data by revenue type and property — JE mapping configured in NetSuite</div>
       </div>
       <div class="outcome-card">
         <div class="outcome-card-icon" style="background:var(--color-success-bg);color:var(--color-success)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <div class="outcome-card-title">Month-End in Hours</div>
-        <div class="outcome-card-desc">What currently requires multiple analysts over multiple days becomes a review-and-approve workflow. The system does the entry; your team does the analysis. That's not a reduction in finance — it's a promotion.</div>
-        <div class="outcome-card-proof">Finance teams report 70–80% reduction in manual close time</div>
+        <div class="outcome-card-title">Less Time on Entry, More Time on Analysis</div>
+        <div class="outcome-card-desc">When sales and payment data flows automatically into NetSuite, your team stops spending close week moving numbers between systems and starts spending it on the work that actually requires their judgment.</div>
+        <div class="outcome-card-proof">Manual data entry replaced by a review-and-approve workflow</div>
       </div>
       <div class="outcome-card">
         <div class="outcome-card-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">
@@ -1907,7 +1909,7 @@ a { color: inherit; text-decoration: none; }
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="outcome-card-title">Unified Entitlement Rules</div>
-        <div class="outcome-card-desc">Season pass benefits, sister-park access, capacity limits, and add-on eligibility are defined once and enforced everywhere. No gaps between what was sold and what gets honored at the gate or POS.</div>
+        <div class="outcome-card-desc">Season pass benefits, capacity limits, and add-on eligibility are defined once and enforced everywhere. No gaps between what was sold and what gets honored at the gate or POS.</div>
         <div class="outcome-card-proof">Entitlement engine across web, gate, mobile, and retail POS</div>
       </div>
       <div class="outcome-card">
@@ -1915,24 +1917,24 @@ a { color: inherit; text-decoration: none; }
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
         </div>
         <div class="outcome-card-title">Gate Operations That Don't Go Down</div>
-        <div class="outcome-card-desc">Real-time validation at every scan point with offline fallback caching. If the network drops, the gate keeps moving. Validation resumes automatically when connectivity restores — no manual override required.</div>
-        <div class="outcome-card-proof">Sub-100ms validation with local fallback cache at every gate</div>
+        <div class="outcome-card-desc">Real-time validation at every scan point — fast, reliable, and consistent across the portfolio. Gates require internet connectivity, but with WiFi, Starlink, and hotspot all as viable options, a redundant setup means a primary outage automatically shifts to backup — gates keep running.</div>
+        <div class="outcome-card-proof">Redundant connectivity setup eliminates single points of failure at the gate</div>
       </div>
       <div class="outcome-card">
         <div class="outcome-card-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <div class="outcome-card-title">Train Once, Deploy Everywhere</div>
-        <div class="outcome-card-desc">Same platform, same interface, every property. New hires go through one training program. Staff transferred between parks are productive on day one. Seasonal ramp-up is faster because the system doesn't change.</div>
-        <div class="outcome-card-proof">Single staff training program covers all properties</div>
+        <div class="outcome-card-title">Built for Seasonal Staff</div>
+        <div class="outcome-card-desc">The POS was designed for the realities of attractions operations — young, seasonal employees who need to be productive on day one without a week of training. The interface is simple enough that technical ability isn't a prerequisite, and consistent across every property so staff can move between parks without relearning the system.</div>
+        <div class="outcome-card-proof">Simple UX designed for high-turnover, seasonal workforces</div>
       </div>
       <div class="outcome-card">
         <div class="outcome-card-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
-        <div class="outcome-card-title">Full Operational Audit Trail</div>
-        <div class="outcome-card-desc">Every transaction, refund, void, and override is logged with user, timestamp, and reason code. Exception handling is auditable. Disputes are resolved in seconds, not by reviewing handwritten logs.</div>
-        <div class="outcome-card-proof">Complete operational audit log by property, staff member, and event</div>
+        <div class="outcome-card-title">Launch Products and Promotions Fast</div>
+        <div class="outcome-card-desc">New products, offers, and promotions can be stood up quickly — your team has direct platform access and the training to move without waiting on a support queue. When a revenue opportunity comes up mid-season, you can act on it the same day.</div>
+        <div class="outcome-card-proof">Direct platform access with hands-on training to move at your own pace</div>
       </div>
     </div>
   </div>
@@ -1979,9 +1981,51 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
+  <!-- ── IT ──────────────────────────────────────────── -->
+  <div class="persona-content" id="persona-it">
+    <div class="exec-story-header">
+      <div class="exec-story-headline">Cloud-native. No servers. No on-premise headaches.</div>
+      <p class="exec-story-context">RocketRez is fully cloud-hosted — there's no on-premise infrastructure to manage, no server room to maintain, and no update cycles to coordinate. Your team focuses on operations, not keeping software alive.</p>
+    </div>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="outcome-card-title">No Servers to Manage</div>
+        <div class="outcome-card-desc">RocketRez runs entirely in the cloud. No on-premise servers, no local databases, no infrastructure maintenance. If something breaks on our end, we fix it — your IT team isn't in the critical path.</div>
+        <div class="outcome-card-proof">Fully cloud-hosted — zero on-premise infrastructure required</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-success-bg);color:var(--color-success)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <div class="outcome-card-title">Automatic Updates</div>
+        <div class="outcome-card-desc">Platform updates ship from the cloud — no manual patching, no version coordination across properties. Every park is always on the same version.</div>
+        <div class="outcome-card-proof">All properties on the latest version automatically — no rollout coordination</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="outcome-card-title">Hardware Flexibility</div>
+        <div class="outcome-card-desc">RocketRez runs on standard off-the-shelf hardware — tablets, handheld scanners, receipt printers. No proprietary terminals locked to a single vendor. Existing compatible hardware can be reused, and replacements are easy to source.</div>
+        <div class="outcome-card-proof">Standard hardware — reuse what you have, source replacements anywhere</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="outcome-card-title">Connectivity-First Architecture</div>
+        <div class="outcome-card-desc">The platform is designed to run on lean connectivity — standard WiFi, Starlink, or hotspot. Running redundant connections at each gate makes outages a non-event. No specialized networking infrastructure required.</div>
+        <div class="outcome-card-proof">Works on standard WiFi, Starlink, or hotspot — redundancy is straightforward</div>
+      </div>
+    </div>
+  </div>
+
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(3)">
-      2. Solutions Architecture
+      Solutions Architecture
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
@@ -2239,19 +2283,19 @@ a { color: inherit; text-decoration: none; }
   <div class="solution-tabs">
     <button class="solution-tab active" onclick="showSolutionTab('platform', this)">Platform</button>
     <button class="solution-tab" onclick="showSolutionTab('partners', this)">Partners</button>
-    <button class="solution-tab" onclick="showSolutionTab('integrations', this)">Integrations</button>
+    <button class="solution-tab" onclick="showSolutionTab('diagram', this)">Integration Map</button>
     <button class="solution-tab" onclick="showSolutionTab('delivery', this)">Delivery</button>
-    <button class="solution-tab" onclick="showSolutionTab('diagram', this)">Ideal State Diagram</button>
   </div>
 
   <!-- ── TAB: PLATFORM ─────────────────────────────── -->
   <div class="solution-tab-content visible" id="soltab-platform">
     <div class="section-label" style="margin-bottom:var(--space-3)">Recommended Stack</div>
-    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5);line-height:1.6;max-width:72ch">RocketRez is the system of record for guest commerce and operations. Vantage enhances loyalty, mobile, and guest identity. Toast provides F&amp;B flexibility without sacrificing standardization.</p>
-    <div class="arch-stack-row">
-      <div class="arch-stack-node" style="border-color:var(--color-success);background:var(--color-success-bg)">
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5);line-height:1.6;max-width:72ch">RocketRez is the system of record for guest commerce and operations — covering the vast majority of what Premier Parks needs natively. Vantage is recommended to support Gold Pass Canada properties. Toast provides optional dedicated restaurant F&amp;B for properties that need it — RocketRez covers F&amp;B natively for standard operations.</p>
+    <div class="arch-stack-row" style="align-items:stretch">
+      <!-- RocketRez — primary, dominant -->
+      <div class="arch-stack-node" style="border-color:var(--color-success);background:var(--color-success-bg);flex:2.5;border-width:2px;">
         <div class="arch-stack-node-role" style="color:var(--color-success)">System of Record</div>
-        <div class="arch-stack-node-title" style="color:var(--color-success)">RocketRez</div>
+        <div class="arch-stack-node-title" style="color:var(--color-success);font-size:var(--text-lg)">RocketRez</div>
         <ul class="arch-stack-node-items">
           <li>Ticketing &amp; product catalog</li>
           <li>Entitlement engine (passes, add-ons, access)</li>
@@ -2261,18 +2305,20 @@ a { color: inherit; text-decoration: none; }
         </ul>
       </div>
       <div class="arch-stack-plus">+</div>
-      <div class="arch-stack-node" style="border-color:var(--color-purple);background:var(--color-purple-bg)">
-        <div class="arch-stack-node-role" style="color:var(--color-purple)">Guest Identity &amp; Loyalty</div>
+      <!-- Vantage — secondary -->
+      <div class="arch-stack-node" style="border-color:var(--color-purple);background:var(--color-purple-bg);flex:1;opacity:0.85;">
+        <div class="arch-stack-node-role" style="color:var(--color-purple)">Mobile App &amp; Loyalty</div>
         <div class="arch-stack-node-title" style="color:var(--color-purple)">Vantage</div>
         <ul class="arch-stack-node-items">
           <li>Cashless wallet &amp; stored value</li>
           <li>Loyalty program &amp; rewards</li>
           <li>Mobile app (iOS &amp; Android)</li>
-          <li>Guest identity &amp; CRM layer</li>
+          <li>Guest identity</li>
         </ul>
       </div>
       <div class="arch-stack-plus">+</div>
-      <div class="arch-stack-node" style="border-color:var(--color-warning);background:var(--color-warning-bg)">
+      <!-- Toast — tertiary/optional -->
+      <div class="arch-stack-node" style="border-color:var(--color-warning);background:var(--color-warning-bg);flex:1;opacity:0.75;">
         <div class="arch-stack-node-role" style="color:var(--color-warning)">Optional Integration</div>
         <div class="arch-stack-node-title" style="color:var(--color-warning)">Toast</div>
         <ul class="arch-stack-node-items">
@@ -2280,13 +2326,15 @@ a { color: inherit; text-decoration: none; }
           <li>Kitchen display system</li>
           <li>Mobile ordering</li>
           <li>Opera Cloud room charge bridge</li>
+          <li>Available: US &amp; Ontario</li>
+          <li>Quebec certification in flight</li>
         </ul>
       </div>
     </div>
-    <div class="rec-bar">
+    <div class="rec-bar" style="background:var(--color-success-bg);border-color:color-mix(in oklch,var(--color-success) 30%,transparent)">
       <div class="rec-content">
-        <div class="rec-title">Architecture Principle</div>
-        <div class="rec-text">RocketRez owns the entitlement backbone end-to-end. Partner systems integrate through clean, documented APIs — no duplicated logic, no competing sources of truth. Every channel validates from RocketRez; every financial event flows to NetSuite from a single source.</div>
+        <div class="rec-title" style="color:var(--color-success)">Architecture Principle</div>
+        <div class="rec-text">RocketRez owns the entitlement backbone end-to-end. Partner systems integrate through clean, documented APIs — no duplicated logic, no competing sources of truth. Every channel validates from RocketRez, and each system — RocketRez, Vantage, and Toast — pushes its financial data independently to NetSuite, giving your finance team a complete picture without manual consolidation.</div>
       </div>
     </div>
   </div>
@@ -2367,8 +2415,8 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <!-- ── TAB: INTEGRATIONS ──────────────────────────── -->
-  <div class="solution-tab-content" id="soltab-integrations">
+  <!-- ── TAB: INTEGRATIONS (hidden) ───────────────────── -->
+  <div class="solution-tab-content" id="soltab-integrations" style="display:none!important">
     <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-6);line-height:1.6;max-width:72ch">Each integration domain has a clear owner, a defined pattern, and an explicit responsibility boundary. RocketRez owns the entitlement layer; partners connect through clean APIs.</p>
     <div class="integ-domain-grid">
       <div class="integ-domain-card">
@@ -2406,12 +2454,34 @@ a { color: inherit; text-decoration: none; }
 
   <!-- ── TAB: DELIVERY ──────────────────────────────── -->
   <div class="solution-tab-content" id="soltab-delivery">
-    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-6);line-height:1.6;max-width:72ch">Four phases from contract through live operations. September is the guest-facing go-live; financial cutover follows in October. Each phase has defined deliverables and a clear gate before the next phase begins.</p>
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-2);line-height:1.6;max-width:72ch">Four phases across a ~4 month implementation window from contract execution through go-live.</p>
+    <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-6);line-height:1.6;max-width:80ch;font-style:italic">Timeline is indicative and subject to final scope agreement, supported use cases per phase, and contract execution. Actual dates confirmed during Phase 1.</p>
+
+    <!-- Timeline bar -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:var(--space-6);border:1px solid var(--color-border);border-radius:var(--radius-xl);overflow:hidden">
+      <div style="background:var(--color-primary-bg);padding:var(--space-2) var(--space-3);text-align:center;border-right:1px solid var(--color-border)">
+        <div style="font-size:var(--text-xs);font-weight:800;color:var(--color-primary)">Days 1–30</div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Foundation</div>
+      </div>
+      <div style="background:var(--color-surface-offset);padding:var(--space-2) var(--space-3);text-align:center;border-right:1px solid var(--color-border)">
+        <div style="font-size:var(--text-xs);font-weight:800;color:var(--color-text)">Days 30–75</div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Config &amp; Build</div>
+      </div>
+      <div style="background:var(--color-surface-offset);padding:var(--space-2) var(--space-3);text-align:center;border-right:1px solid var(--color-border)">
+        <div style="font-size:var(--text-xs);font-weight:800;color:var(--color-text)">Days 75–105</div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Testing &amp; Training</div>
+      </div>
+      <div style="background:var(--color-success-bg);padding:var(--space-2) var(--space-3);text-align:center">
+        <div style="font-size:var(--text-xs);font-weight:800;color:var(--color-success)">Days 105–120</div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Go-Live</div>
+      </div>
+    </div>
+
     <div class="delivery-phases-grid">
       <div class="delivery-phase-card">
         <div class="delivery-phase-num">Phase 1</div>
         <div class="delivery-phase-title">Foundation &amp; Architecture</div>
-        <div class="delivery-phase-timing">Now – May</div>
+        <div class="delivery-phase-timing">Days 1–30</div>
         <ul class="delivery-phase-items">
           <li>Architecture and ownership decisions finalized</li>
           <li>Integration scopes signed off with each partner</li>
@@ -2422,7 +2492,7 @@ a { color: inherit; text-decoration: none; }
       <div class="delivery-phase-card">
         <div class="delivery-phase-num">Phase 2</div>
         <div class="delivery-phase-title">Configuration &amp; Build</div>
-        <div class="delivery-phase-timing">May – July</div>
+        <div class="delivery-phase-timing">Days 30–75</div>
         <ul class="delivery-phase-items">
           <li>RocketRez configured per property</li>
           <li>Integration builds: Opera Cloud, Vantage, Toast, NetSuite</li>
@@ -2433,7 +2503,7 @@ a { color: inherit; text-decoration: none; }
       <div class="delivery-phase-card">
         <div class="delivery-phase-num">Phase 3</div>
         <div class="delivery-phase-title">Testing &amp; Training</div>
-        <div class="delivery-phase-timing">July – August</div>
+        <div class="delivery-phase-timing">Days 75–105</div>
         <ul class="delivery-phase-items">
           <li>End-to-end test cycles across all integration points</li>
           <li>Staff training across admissions, POS, and guest services</li>
@@ -2441,16 +2511,35 @@ a { color: inherit; text-decoration: none; }
           <li>Go/no-go review against readiness criteria</li>
         </ul>
       </div>
-      <div class="delivery-phase-card">
-        <div class="delivery-phase-num">Phase 4</div>
+      <div class="delivery-phase-card" style="border-color:var(--color-success);background:var(--color-success-bg)">
+        <div class="delivery-phase-num" style="color:var(--color-success)">Phase 4</div>
         <div class="delivery-phase-title">Go-Live &amp; Cutover</div>
-        <div class="delivery-phase-timing">September – October</div>
+        <div class="delivery-phase-timing">Days 105–120</div>
         <ul class="delivery-phase-items">
-          <li>Guest-facing go-live — September</li>
+          <li>Guest-facing go-live</li>
           <li>RocketRez team on-site or on-call for launch week</li>
-          <li>NetSuite financial cutover — October</li>
+          <li>NetSuite financial cutover</li>
           <li>Formal handoff to Customer Success</li>
         </ul>
+      </div>
+    </div>
+
+    <!-- Onboarding software callout -->
+    <div style="margin-top:var(--space-8);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);align-items:center;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6)">
+      <div>
+        <div style="font-family:var(--font-display);font-size:var(--text-xs);font-weight:800;color:var(--color-primary);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:var(--space-2)">Onboarding Software</div>
+        <div style="font-family:var(--font-display);font-size:var(--text-base);font-weight:800;margin-bottom:var(--space-3)">Full Visibility Across Every Property</div>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-4)">RocketRez provides a dedicated onboarding workspace that gives Premier Parks leadership visibility across every property in the program — task completion, open items, milestones, and blockers tracked in one place. No chasing status updates across email threads.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--space-2)">
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-3);position:relative"><span style="position:absolute;left:0;color:var(--color-primary);font-weight:700">·</span>Per-property progress tracked in real time</li>
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-3);position:relative"><span style="position:absolute;left:0;color:var(--color-primary);font-weight:700">·</span>Open decisions and blockers surfaced proactively</li>
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-3);position:relative"><span style="position:absolute;left:0;color:var(--color-primary);font-weight:700">·</span>Accessible to both Premier Parks and RocketRez teams</li>
+          <li style="font-size:var(--text-xs);color:var(--color-text-muted);padding-left:var(--space-3);position:relative"><span style="position:absolute;left:0;color:var(--color-primary);font-weight:700">·</span>Single source of truth from kick-off through go-live</li>
+        </ul>
+      </div>
+      <!-- Replace src with your screenshot path -->
+      <div style="background:var(--color-surface-offset);border:1px dashed var(--color-border);border-radius:var(--radius-lg);overflow:hidden;height:100%;min-height:220px;display:flex;align-items:center;justify-content:center">
+        <img src="./Screenshot 2026-06-02 at 1.29.28 PM.png">
       </div>
     </div>
   </div>
@@ -2600,7 +2689,7 @@ a { color: inherit; text-decoration: none; }
             </div>
           </div>
           <div class="state-ideal-bullets">
-            <div class="state-bullets-label">What Changes</div>
+            <div class="state-bullets-label">Ideal State Overview</div>
             <ul class="pros-list">
               <li>Single entitlement backbone across all properties — one source of truth for passes, tickets, and access</li>
               <li>Unified guest identity from online booking through on-property spend and post-visit engagement</li>
@@ -2616,7 +2705,7 @@ a { color: inherit; text-decoration: none; }
 
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(6)">
-      3. Decision Appendix
+      Decision Appendix
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
@@ -3136,7 +3225,7 @@ a { color: inherit; text-decoration: none; }
 
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(5)">
-      4. Delivery &amp; Implementation
+      Delivery &amp; Implementation
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
@@ -3448,7 +3537,7 @@ a { color: inherit; text-decoration: none; }
 
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(6)">
-      5. Decision Appendix
+      Decision Appendix
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
@@ -4727,7 +4816,7 @@ function showRfpStack(index, btn) {
   <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-lg);margin-bottom:var(--space-2)">NetSuite Journal Entry Templates — Built Once, Run Forever</div>
   <div style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5)">These replace the JEs your team is currently building manually every month. Click any to expand how it works in NetSuite.</div>
 
-  <div class="je-accordion" style="margin-bottom:var(--space-8)">
+  <div class="je-accordion" style="margin-bottom:var(--space-10)">
 
     <div class="je-item" id="je-rent">
       <button class="je-trigger" onclick="toggleJE('je-rent')">
@@ -4841,32 +4930,32 @@ function showRfpStack(index, btn) {
 
   <div class="time-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--space-4);margin-bottom:var(--space-8)">
     <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <div style="font-size:var(--text-xl);margin-bottom:var(--space-2)">📊</div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Actual Revenue Analysis</div>
       <div style="font-size:var(--text-xs);color:var(--color-text-muted)">When the data is already in NetSuite clean and on time, you can spend Monday morning asking "why is Nashville Shores F&amp;B down 8% vs. last July?" instead of entering last night's numbers.</div>
     </div>
     <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <div style="font-size:var(--text-xl);margin-bottom:var(--space-2)">🎯</div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
       <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Forecasting &amp; Budgeting</div>
       <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Real-time actuals flowing into NetSuite means your forecast model is always current. Ownership gets accurate variance reporting without a fire drill every month-end.</div>
     </div>
     <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <div style="font-size:var(--text-xl);margin-bottom:var(--space-2)">🔍</div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Exception Flagging</div>
       <div style="font-size:var(--text-xs);color:var(--color-text-muted)">When routine transactions run on autopilot, anomalies stand out. You're the one who catches the vendor overpaying, the park underreporting, or the category trending wrong before it becomes a problem.</div>
     </div>
     <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <div style="font-size:var(--text-xl);margin-bottom:var(--space-2)">📋</div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Month-End Close</div>
       <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Close gets faster — not because you're rushing, but because 80% of the entries are already done. You're reconciling and approving, not building from scratch.</div>
     </div>
     <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <div style="font-size:var(--text-xl);margin-bottom:var(--space-2)">🤝</div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
       <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Cross-Park Comparisons</div>
       <div style="font-size:var(--text-xs);color:var(--color-text-muted)">With all 11 parks posting to NetSuite on the same GL structure, you can pull a portfolio-level P&amp;L in minutes. That's a report Dave and ownership want every week — and currently don't have.</div>
     </div>
     <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <div style="font-size:var(--text-xl);margin-bottom:var(--space-2)">⚙️</div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">System Configuration</div>
       <div style="font-size:var(--text-xs);color:var(--color-text-muted)">The finance team becomes the ones who <em>configure</em> the automation — setting up templates, adjusting recognition schedules, adding new revenue centers. That's expertise, not data entry.</div>
     </div>
@@ -4965,26 +5054,54 @@ function showRfpStack(index, btn) {
 .flow-arrow { color:var(--color-text-faint);font-size:var(--text-base);flex-shrink:0; }
 
 /* ── JE Accordion ── */
-.je-item { border:1px solid var(--color-border);border-radius:var(--radius-lg);margin-bottom:var(--space-3);overflow:hidden; }
+.je-accordion { display:flex;flex-direction:column;gap:var(--space-2); }
+.je-item {
+  border:1px solid var(--color-border);border-radius:var(--radius-xl);
+  overflow:hidden;transition:box-shadow 200ms ease,border-color 200ms ease;
+}
+.je-item:hover { border-color:var(--color-text-faint);box-shadow:var(--shadow-sm); }
+.je-item.open {
+  border-color:var(--color-primary);
+  box-shadow:0 0 0 1px var(--color-primary),var(--shadow-md);
+}
 .je-trigger {
-  width:100%;display:flex;align-items:center;justify-content:space-between;
-  padding:var(--space-4) var(--space-5);
-  background:var(--color-surface);font-size:var(--text-sm);text-align:left;
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);
+  padding:var(--space-4) var(--space-6);
+  background:var(--color-surface);font-size:var(--text-sm);font-weight:600;text-align:left;
   cursor:pointer;border:none;color:var(--color-text);
   transition:background 180ms ease;
 }
 .je-trigger:hover { background:var(--color-surface-offset); }
-.je-chevron { transition:transform 300ms ease;flex-shrink:0; }
-.je-item.open .je-chevron { transform:rotate(180deg); }
-.je-body { display:none;padding:var(--space-5);background:var(--color-surface-2);border-top:1px solid var(--color-border); }
+.je-item.open .je-trigger { background:var(--color-primary-bg); }
+.je-chevron { transition:transform 300ms ease;flex-shrink:0;color:var(--color-text-muted); }
+.je-item.open .je-chevron { transform:rotate(180deg);color:var(--color-primary); }
+.je-body { display:none;padding:var(--space-6);background:var(--color-surface-2);border-top:1px solid var(--color-border); }
 .je-item.open .je-body { display:block; }
-.je-grid { display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--space-5); }
-.je-col-header { font-weight:700;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:var(--space-2);color:var(--color-text-muted); }
-.je-body p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6; }
-.je-badge { font-size:var(--text-xs);font-weight:700;padding:2px 8px;border-radius:var(--radius-full);letter-spacing:0.04em; }
+.je-grid { display:grid;grid-template-columns:1fr 1fr 1fr;gap:0; }
+.je-col {
+  padding:0 var(--space-5);border-right:1px solid var(--color-border);
+}
+.je-col:first-child { padding-left:0; }
+.je-col:last-child { padding-right:0;border-right:none; }
+.je-col-header {
+  font-weight:700;font-size:var(--text-xs);text-transform:uppercase;
+  letter-spacing:0.07em;margin-bottom:var(--space-3);
+  padding-bottom:var(--space-2);border-bottom:2px solid var(--color-border);
+  color:var(--color-text-muted);
+}
+.je-col:first-child .je-col-header { color:var(--color-warning); border-bottom-color:var(--color-warning); }
+.je-col:nth-child(2) .je-col-header { color:var(--color-primary); border-bottom-color:var(--color-primary); }
+.je-col:last-child .je-col-header { color:var(--color-success); border-bottom-color:var(--color-success); }
+.je-body p { font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6;margin:0; }
+.je-badge {
+  font-size:var(--text-xs);font-weight:700;padding:3px 10px;
+  border-radius:var(--radius-full);letter-spacing:0.05em;flex-shrink:0;
+}
 
 @media(max-width:768px) {
   .je-grid { grid-template-columns:1fr; }
+  .je-col { padding:var(--space-4) 0;border-right:none;border-bottom:1px solid var(--color-border); }
+  .je-col:last-child { border-bottom:none; }
   .fin-banner { grid-template-columns:1fr; }
 }
 </style>
