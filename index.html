@@ -1418,12 +1418,8 @@ a { color: inherit; text-decoration: none; }
   border-left-color: var(--color-primary);
   background: var(--color-primary-bg);
 }
-.side-nav-num {
-  font-size: 0.62rem; font-weight: 700; flex-shrink: 0; margin-top: 2px;
-  color: var(--color-text-faint);
-  transition: color var(--transition);
-}
-.side-nav-btn.active .side-nav-num { color: var(--color-primary); }
+.side-nav-num { display: none; }
+.side-nav-btn.active .side-nav-num { display: none; }
 
 /* ── SCROLLBAR ───────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -1780,7 +1776,7 @@ a { color: inherit; text-decoration: none; }
 </div>
 
 <div class="arch-view" id="arch-2">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 1 — Executive Case</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Executive Case</div>
 
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">EX</div>
@@ -1844,7 +1840,7 @@ a { color: inherit; text-decoration: none; }
     <div class="rec-bar">
       <div class="rec-content">
         <div class="rec-title">Why Us, Why Now</div>
-        <div class="rec-text">RocketRez is purpose-built for multi-property attractions operators. We're not adapted from hospitality or retail — the entitlement engine, the sub-ledger, the access validation layer, and the NetSuite connector were all built for operators like Premier Parks. The timeline is tight. Architectural decisions made now determine whether this program delivers a unified platform or another collection of disconnected systems.</div>
+        <div class="rec-text">Purpose-built for theme parks and waterparks — every layer of the platform, from the entitlement engine to the structured financial data handoff for NetSuite, was designed for how parks actually operate. Our open APIs connect cleanly with your existing systems without compromising control or creating new dependencies.</div>
       </div>
     </div>
   </div>
@@ -2230,7 +2226,7 @@ a { color: inherit; text-decoration: none; }
 
 
 <div class="arch-view" id="arch-4">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 2 — Solutions Architecture</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Solutions Architecture</div>
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">SA</div>
     <div class="arch-title-block">
@@ -2245,6 +2241,7 @@ a { color: inherit; text-decoration: none; }
     <button class="solution-tab" onclick="showSolutionTab('partners', this)">Partners</button>
     <button class="solution-tab" onclick="showSolutionTab('integrations', this)">Integrations</button>
     <button class="solution-tab" onclick="showSolutionTab('delivery', this)">Delivery</button>
+    <button class="solution-tab" onclick="showSolutionTab('diagram', this)">Ideal State Diagram</button>
   </div>
 
   <!-- ── TAB: PLATFORM ─────────────────────────────── -->
@@ -2357,6 +2354,16 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="partner-summary-desc">Spa and activity reservation systems at select properties. RocketRez integrates for entitlement validation and cross-system guest identification where applicable.</div>
       </div>
+      <div class="partner-summary-card">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-orange-bg);color:var(--color-orange)">HL</div>
+          <div>
+            <div class="partner-summary-name">High Level</div>
+            <div class="partner-summary-role">CRM &amp; Marketing Automation</div>
+          </div>
+        </div>
+        <div class="partner-summary-desc">CRM and marketing automation layer for guest communications, campaign management, and lifecycle marketing. Connects to RocketRez guest and membership data to power targeted outreach across the portfolio.</div>
+      </div>
     </div>
   </div>
 
@@ -2448,6 +2455,165 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
+  <!-- ── TAB: IDEAL STATE DIAGRAM ──────────────────────── -->
+  <div class="solution-tab-content" id="soltab-diagram">
+    <div class="dataflow-panel" id="panel-ideal-sa">
+      <div class="dataflow-panel-label dataflow-label-ideal">Ideal State</div>
+      <div class="dataflow-panel-body" id="flow-ideal-sa">
+        <div class="state-panel-cols ideal-layout">
+          <div>
+            <div class="property-selector-wrap">
+              <span class="property-selector-label">View by:</span>
+              <button class="prop-type-btn" id="pt-hotel-sa" onclick="setPropertyType('hotel','flow-ideal-sa','property-select-sa','pt-hotel-sa','pt-attraction-sa','pt-specific-sa')">Hotel + Park</button>
+              <button class="prop-type-btn active" id="pt-attraction-sa" onclick="setPropertyType('attraction','flow-ideal-sa','property-select-sa','pt-hotel-sa','pt-attraction-sa','pt-specific-sa')">Attraction Only</button>
+              <button class="prop-type-btn" id="pt-specific-sa" onclick="setPropertyType('specific','flow-ideal-sa','property-select-sa','pt-hotel-sa','pt-attraction-sa','pt-specific-sa')">View by property</button>
+              <select class="property-selector-select" id="property-select-sa" onchange="applyPropertyConfig(this.value,'flow-ideal-sa',this)">
+                <option value="">— Select a property —</option>
+                <option value="vvv">Village Vacances Valcartier</option>
+                <option value="calypso">Calypso</option>
+                <option value="wnw-toronto">Wild Waters Toronto</option>
+                <option value="la-ronde">La Ronde</option>
+                <option value="ocean-breeze">Ocean Breeze Waterpark</option>
+                <option value="rapids">Rapids Waterpark</option>
+                <option value="magic-springs">Magic Springs</option>
+                <option value="nashville-shores">Nashville Shores</option>
+                <option value="hw-colony">Hawaiian Waters — The Colony</option>
+                <option value="hw-garland">Hawaiian Waters — Garland</option>
+                <option value="city-museum">City Museum</option>
+                <option value="elitch">Elitch Gardens</option>
+                <option value="wild-waves">Wild Waves Theme &amp; Waterpark</option>
+                <option value="wnw-hawaii">Wet N Wild Hawaii</option>
+              </select>
+              <span class="property-selector-note" id="property-note-sa"></span>
+            </div>
+            <div class="ideal-tabs">
+              <button class="ideal-tab active" onclick="showIdealTab('online-sa', this)">Online Booking</button>
+              <button class="ideal-tab" onclick="showIdealTab('mobile-sa', this)">Mobile App</button>
+              <button class="ideal-tab" onclick="showIdealTab('inperson-sa', this)">In-Person</button>
+            </div>
+
+            <div class="ideal-diagram active" id="ideal-online-sa">
+              <p class="dataflow-caption">Guest books online through the commerce orchestration layer. The orchestration partner coordinates with PMS, campground, and spa for availability and reservations — RocketRez handles ticket issuance and entitlement confirmation only.</p>
+              <div class="hub-full node-muted" style="max-width:220px">Guest (Web)<span class="hub-sub">Browser · Mobile Web</span></div>
+              <div class="hub-connector">↓</div>
+              <div class="hub-orch-wrapper">
+                <div class="hub-full node-green" id="orch-node-sa" style="max-width:220px;margin:0">
+                  <span class="orch-hotel-label" style="display:none">Commerce Orchestration<span class="hub-sub">Booking &amp; Package Layer · Loyalty (TBD)</span><span class="hub-partner-tag">Partner Solution</span></span>
+                  <span class="orch-attraction-label">RocketRez<span class="hub-sub">Commerce &amp; Checkout Layer</span><span class="hub-partner-tag">Powered by RocketRez</span></span>
+                </div>
+                <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>queries availability · receives confirmations</span></div>
+                <div class="hub-payment-side">
+                  <span class="hub-payment-connector">→</span>
+                  <div class="hub-payment-tile">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+                    <span class="hub-payment-tile-label">Payments</span>
+                    <span class="hub-payment-tile-sub">Unified settlement</span>
+                  </div>
+                </div>
+              </div>
+              <div class="hub-ecosystem">
+                <span class="hub-ecosystem-label">Downstream Fulfillment</span>
+                <div class="hub-row">
+                  <div class="hub-side">
+                    <div class="hub-node node-blue comp-inactive" data-comp="pms">PMS / Lodging<span class="hub-sub">Guest Record &amp; Reservation</span><span class="hub-partner-tag">Via Orchestration</span></div>
+                    <div class="hub-node node-gold comp-inactive" data-comp="campground">Campground<span class="hub-sub">Outdoor &amp; RV</span><span class="hub-partner-tag">Via Orchestration</span></div>
+                  </div>
+                  <div class="hub-connector">→</div>
+                  <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Ticketing · Entitlements<br>Issuance · Confirmation</span></div>
+                  <div class="hub-connector">←</div>
+                  <div class="hub-side">
+                    <div class="hub-node node-purple comp-inactive" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Reservations</span><span class="hub-partner-tag">Via Orchestration</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="hub-connector">↓</div>
+              <div class="hub-full node-muted" style="max-width:260px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle · PMS / Opera Cloud</span></div>
+            </div>
+
+            <div class="ideal-diagram" id="ideal-mobile-sa">
+              <p class="dataflow-caption">The guest app is the on-property remote — displaying entitlements, enabling mobile F&amp;B ordering, managing the loyalty wallet, and surfacing real-time queue and availability data.</p>
+              <div class="hub-full node-muted" style="max-width:220px">Guest (Mobile App)<span class="hub-sub">iOS · Android · Native</span></div>
+              <div class="hub-connector">↓</div>
+              <div class="hub-orch-wrapper">
+                <div class="hub-full node-primary" style="max-width:220px;margin:0">Mobile Platform<span class="hub-sub">App &amp; CRM Layer</span><span class="hub-partner-tag">Partner Solution</span></div>
+                <div class="hub-bidir-label"><div class="hub-connector">↕</div><span>entitlement reads · wallet updates · push triggers</span></div>
+                <div class="hub-payment-side">
+                  <span class="hub-payment-connector">→</span>
+                  <div class="hub-payment-tile">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+                    <span class="hub-payment-tile-label">Payments</span>
+                    <span class="hub-payment-tile-sub">Unified settlement</span>
+                  </div>
+                </div>
+              </div>
+              <div class="hub-ecosystem">
+                <span class="hub-ecosystem-label">Connected Partner Ecosystem</span>
+                <div class="hub-row">
+                  <div class="hub-side">
+                    <div class="hub-node node-blue comp-inactive" data-comp="pms">PMS<span class="hub-sub">Stay Context</span><span class="hub-partner-tag">Partner</span></div>
+                    <div class="hub-node node-purple" data-comp="loyalty">Loyalty / Wallet<span class="hub-sub">Cashless &amp; Rewards</span><span class="hub-partner-tag">Partner</span></div>
+                  </div>
+                  <div class="hub-connector">↔</div>
+                  <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Pass Display · QR<br>Entitlement Validation</span></div>
+                  <div class="hub-connector">↔</div>
+                  <div class="hub-side">
+                    <div class="hub-node node-green" data-comp="fnb">Retail &amp; F&amp;B POS<span class="hub-sub">Mobile Order &amp; Pay</span><span class="hub-partner-tag">Powered by RocketRez · Toast optional</span></div>
+                    <div class="hub-node node-gold comp-inactive" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Spa · Rental</span><span class="hub-partner-tag">Partner — where applicable</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="hub-source-connector"><div class="hub-connector">↓</div><span class="hub-source-label">All transactions sync to guest folio</span><div class="hub-connector">↓</div></div>
+              <div class="hub-full node-muted" style="max-width:220px">Guest Folio &amp; Reporting<span class="hub-sub">PMS · Finance Layer</span></div>
+            </div>
+
+            <div class="ideal-diagram" id="ideal-inperson-sa">
+              <p class="dataflow-caption">RocketRez powers every on-property touchpoint — admissions, retail, and F&amp;B all transact through a single commerce layer. Toast is available as an optional add-on for dedicated restaurant operations.</p>
+              <div class="hub-full node-muted" style="max-width:220px">Guest Arrives On-Property<span class="hub-sub">Walk-Up · Lodging Guest · Group</span></div>
+              <div class="hub-connector">↓</div>
+              <div class="hub-ecosystem">
+                <span class="hub-ecosystem-label">On-Property Commerce — Powered by RocketRez</span>
+                <div class="hub-row" style="gap:var(--space-2)">
+                  <div class="hub-side">
+                    <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span><span class="hub-partner-tag">Powered by RocketRez</span></div>
+                    <div class="hub-node node-green" data-comp="fnb">Retail &amp; F&amp;B POS<span class="hub-sub">Onsite Commerce · Cashless</span><span class="hub-partner-tag">Powered by RocketRez · Toast optional</span></div>
+                  </div>
+                  <div class="hub-connector">↔</div>
+                  <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Commerce Layer<br>Entitlements · Access · POS</span></div>
+                  <div class="hub-connector">↔</div>
+                  <div class="hub-side">
+                    <div class="hub-node node-purple comp-inactive" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Spa · Rental</span><span class="hub-partner-tag">Partner — where applicable</span></div>
+                    <div class="hub-node node-blue comp-inactive" data-comp="pms">PMS / Lodging<span class="hub-sub">Folio</span><span class="hub-partner-tag">Partner — hotel properties</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="hub-bidir-label" style="margin-top:var(--space-1)"><div class="hub-connector">↓</div><span>all revenue flows to RocketRez sub-ledger → NetSuite</span></div>
+              <div class="hub-full node-muted" style="max-width:220px">Finance &amp; Reporting<span class="hub-sub">NetSuite · Oracle</span></div>
+            </div>
+
+            <div class="comp-toggles">
+              <span class="comp-toggles-label">Toggle components:</span>
+              <button class="comp-toggle" data-comp="pms" onclick="toggleIdealComp('pms',this)">PMS / Lodging</button>
+              <button class="comp-toggle" data-comp="campground" onclick="toggleIdealComp('campground',this)">Campground</button>
+              <button class="comp-toggle active" data-comp="fnb" onclick="toggleIdealComp('fnb',this)">F&amp;B / POS</button>
+              <button class="comp-toggle" data-comp="spa" onclick="toggleIdealComp('spa',this)">Spa &amp; Activities</button>
+              <button class="comp-toggle active" data-comp="loyalty" onclick="toggleIdealComp('loyalty',this)">Loyalty / Wallet</button>
+            </div>
+          </div>
+          <div class="state-ideal-bullets">
+            <div class="state-bullets-label">What Changes</div>
+            <ul class="pros-list">
+              <li>Single entitlement backbone across all properties — one source of truth for passes, tickets, and access</li>
+              <li>Unified guest identity from online booking through on-property spend and post-visit engagement</li>
+              <li>Partner systems (PMS, F&amp;B, loyalty) integrate through clean APIs without duplicated logic</li>
+              <li>Financial data flows automatically to NetSuite and Oracle — no manual consolidation</li>
+              <li>Repeatable architecture that scales to future acquisitions without rework</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(6)">
       3. Decision Appendix
@@ -2457,7 +2623,7 @@ a { color: inherit; text-decoration: none; }
 </div>
 
 <div class="arch-view" id="arch-5">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 3 of 5 — Integrations &amp; Options</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Integrations &amp; Options</div>
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">IN</div>
     <div class="arch-title-block">
@@ -2977,7 +3143,7 @@ a { color: inherit; text-decoration: none; }
 </div>
 
 <div class="arch-view" id="arch-7">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 4 of 5 — Delivery &amp; Implementation</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Delivery &amp; Implementation</div>
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-success-bg);color:var(--color-success)">DI</div>
     <div class="arch-title-block">
@@ -3289,7 +3455,7 @@ a { color: inherit; text-decoration: none; }
 </div>
 
 <div class="arch-view" id="arch-8">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 5 of 5 — Decision Appendix</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Decision Appendix</div>
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">AP</div>
     <div class="arch-title-block">
@@ -3638,8 +3804,9 @@ function applyPropertyConfig(key, scopeId, selectEl) {
 
   // Sync property-type toggle buttons and orch node when dropdown changes directly
   var btnMap = {
-    'flow-ideal': { hotel: 'pt-hotel-ideal', attraction: 'pt-attraction-ideal', specific: 'pt-specific-ideal', orch: 'orch-node-ideal', hotelClass: 'node-primary' },
-    'flow-o2':    { hotel: 'pt-hotel-o2',    attraction: 'pt-attraction-o2',    specific: 'pt-specific-o2',    orch: 'orch-node-o2',    hotelClass: 'node-purple' }
+    'flow-ideal':    { hotel: 'pt-hotel-ideal',    attraction: 'pt-attraction-ideal',    specific: 'pt-specific-ideal',    orch: 'orch-node-ideal',    hotelClass: 'node-primary' },
+    'flow-o2':       { hotel: 'pt-hotel-o2',       attraction: 'pt-attraction-o2',       specific: 'pt-specific-o2',       orch: 'orch-node-o2',       hotelClass: 'node-purple' },
+    'flow-ideal-sa': { hotel: 'pt-hotel-sa',       attraction: 'pt-attraction-sa',       specific: 'pt-specific-sa',       orch: 'orch-node-sa',       hotelClass: 'node-primary' }
   };
   var btnIds = btnMap[flowId];
   if (btnIds) {
@@ -4068,7 +4235,7 @@ function showRfpStack(index, btn) {
 <!-- ARCH-9: RFP SOLUTION Q&A                               -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="arch-view" id="arch-9">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 8 of 9 — RFP Solution Narrative</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>RFP Solution Narrative</div>
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">RFP</div>
     <div class="arch-title-block">
@@ -4134,7 +4301,7 @@ function showRfpStack(index, btn) {
 <!-- ARCH-10: MONEYBAGS ELIMINATION MATRIX                  -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="arch-view" id="arch-10">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 9 of 9 — MoneyBags Elimination Matrix</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>MoneyBags Elimination Matrix</div>
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-success-bg);color:var(--color-success)">MB</div>
     <div class="arch-title-block">
@@ -4391,7 +4558,7 @@ function showRfpStack(index, btn) {
 <!-- ARCH-11: FINANCE TEAM — YOUR TIME, ELEVATED                    -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <div class="arch-view" id="arch-11">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Step 10 — Finance Operations: Your Time, Elevated</div>
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Finance Operations: Your Time, Elevated</div>
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">FIN</div>
     <div class="arch-title-block">
