@@ -1893,7 +1893,7 @@ a { color: inherit; text-decoration: none; }
     <div style="background:linear-gradient(135deg,var(--color-primary-bg) 0%,var(--color-gold-bg) 100%);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5) var(--space-6);margin-bottom:var(--space-6)">
       <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-base);margin-bottom:var(--space-2)">The work doesn't disappear. Your job gets better.</div>
       <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin:0 0 var(--space-4)">Manual entry isn't finance expertise — it's data transport. When the systems handle the transport, your team spends its time on what actually requires expertise: reviewing, questioning, and presenting what the numbers mean to the business.</p>
-      <button class="section-next-btn" style="display:inline-flex;padding:var(--space-2) var(--space-4);font-size:var(--text-xs)" onclick="showArch(9)">
+      <button class="section-next-btn" style="display:inline-flex;padding:var(--space-2) var(--space-4);font-size:var(--text-xs)" onclick="showArch(6)">
         See the full Finance walkthrough
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
@@ -2374,9 +2374,10 @@ a { color: inherit; text-decoration: none; }
       <div class="arch-stack-plus">+</div>
       <!-- Vantage — secondary -->
       <div class="arch-stack-node" style="border-color:var(--color-purple);background:var(--color-purple-bg);flex:1;opacity:0.85;">
-        <div class="arch-stack-node-role" style="color:var(--color-purple)">Mobile App &amp; Loyalty</div>
+        <div class="arch-stack-node-role" style="color:var(--color-purple)">Optional</div>
         <div class="arch-stack-node-title" style="color:var(--color-purple)">Vantage</div>
         <ul class="arch-stack-node-items">
+          <li>White labeled (multi system) online checkout</li>
           <li>Cashless wallet &amp; stored value</li>
           <li>Loyalty program &amp; rewards</li>
           <li>Mobile app (iOS &amp; Android)</li>
@@ -2386,7 +2387,7 @@ a { color: inherit; text-decoration: none; }
       <div class="arch-stack-plus">+</div>
       <!-- Toast — tertiary/optional -->
       <div class="arch-stack-node" style="border-color:var(--color-warning);background:var(--color-warning-bg);flex:1;opacity:0.75;">
-        <div class="arch-stack-node-role" style="color:var(--color-warning)">Optional Integration</div>
+        <div class="arch-stack-node-role" style="color:var(--color-warning)">Optional</div>
         <div class="arch-stack-node-title" style="color:var(--color-warning)">Toast</div>
         <ul class="arch-stack-node-items">
           <li>Restaurant &amp; F&amp;B POS</li>
@@ -2619,11 +2620,7 @@ a { color: inherit; text-decoration: none; }
         <div class="state-panel-cols ideal-layout">
           <div>
             <div class="property-selector-wrap">
-              <span class="property-selector-label">View by:</span>
-              <button class="prop-type-btn" id="pt-hotel-sa" onclick="setPropertyType('hotel','flow-ideal-sa','property-select-sa','pt-hotel-sa','pt-attraction-sa','pt-specific-sa')">Hotel + Park</button>
-              <button class="prop-type-btn active" id="pt-attraction-sa" onclick="setPropertyType('attraction','flow-ideal-sa','property-select-sa','pt-hotel-sa','pt-attraction-sa','pt-specific-sa')">Attraction Only</button>
-              <button class="prop-type-btn" id="pt-specific-sa" onclick="setPropertyType('specific','flow-ideal-sa','property-select-sa','pt-hotel-sa','pt-attraction-sa','pt-specific-sa')">View by property</button>
-              <select class="property-selector-select" id="property-select-sa" onchange="applyPropertyConfig(this.value,'flow-ideal-sa',this)">
+              <select class="property-selector-select visible" id="property-select-sa" onchange="this.value ? applyPropertyConfig(this.value,'flow-ideal-sa',this) : applyPropertyConfig('calypso','flow-ideal-sa',null)">
                 <option value="">— Select a property —</option>
                 <option value="vvv">Village Vacances Valcartier</option>
                 <option value="calypso">Calypso</option>
@@ -2770,12 +2767,7 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(6)">
-      Decision Appendix
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
+
 </div>
 
 <div class="arch-view" id="arch-5">
@@ -3291,393 +3283,15 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(5)">
-      Delivery &amp; Implementation
+    <button class="section-next-btn" onclick="showArch(4)">
+      RFP Solution Q&amp;A
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 </div>
 
-<div class="arch-view" id="arch-7">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Delivery &amp; Implementation</div>
-  <div class="arch-header">
-    <div class="arch-icon" style="background:var(--color-success-bg);color:var(--color-success)">DI</div>
-    <div class="arch-title-block">
-      <div class="arch-title">Delivery, Implementation &amp; Portfolio Visibility</div>
-      <div class="arch-subtitle">How we execute without missing September go-live — and how Premier Parks leadership stays informed at every level</div>
-    </div>
-  </div>
 
-  <section class="timeline-section" style="padding:0;max-width:none;margin-bottom:var(--space-8)">
-    <div style="display:flex;align-items:center;gap:var(--space-4);margin-bottom:var(--space-4);flex-wrap:wrap;">
-      <div class="section-label" style="margin-bottom:0">Program Milestones <button class="uc-btn" onclick="openUCModal('milestones')" title="View use cases"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></button></div>
-      <div style="display:flex;gap:var(--space-2);">
-        <button class="prop-type-btn active" id="ms-btn-portfolio" onclick="toggleMilestoneView('portfolio')">Portfolio</button>
-        <button class="prop-type-btn" id="ms-btn-attraction" onclick="toggleMilestoneView('attraction')">By Attraction</button>
-      </div>
-    </div>
-    <div id="milestone-portfolio">
-      <div class="timeline-bar">
-        <div class="timeline-phase">
-          <div class="phase-dot active">1</div>
-          <div class="phase-label">Phase 1<br>Foundation</div>
-          <div class="phase-date">Now – May</div>
-        </div>
-        <div class="timeline-phase">
-          <div class="phase-dot">2</div>
-          <div class="phase-label">Phase 2<br>Config &amp; Build</div>
-          <div class="phase-date">May – July</div>
-        </div>
-        <div class="timeline-phase">
-          <div class="phase-dot">3</div>
-          <div class="phase-label">Phase 3<br>Testing &amp; Training</div>
-          <div class="phase-date">July – Aug</div>
-        </div>
-        <div class="timeline-phase">
-          <div class="phase-dot">4</div>
-          <div class="phase-label">Phase 4<br>Operational Go-Live</div>
-          <div class="phase-date">September</div>
-        </div>
-        <div class="timeline-phase">
-          <div class="phase-dot">5</div>
-          <div class="phase-label">Phase 5<br>Financial Cutover</div>
-          <div class="phase-date">Sept – Oct</div>
-        </div>
-      </div>
-    </div>
-    <div id="milestone-attraction" style="display:none">
-      <div class="property-selector-wrap">
-        <span class="property-selector-label">Select Park:</span>
-        <select class="property-selector-select visible" id="park-plan-select" onchange="loadParkPlan(this.value)">
-          <option value="">— choose a park to view its project plan —</option>
-          <option value="nashville-shores">Nashville Shores</option>
-          <option value="elitch-gardens">Elitch Gardens</option>
-          <option value="valcartier">Valcartier VVV</option>
-          <option value="city-museum">City Museum</option>
-          <option value="calypso">Calypso</option>
-        </select>
-      </div>
-      <div id="park-plan-view"></div>
-    </div>
-  </section>
 
-  <div class="section-label" style="margin-bottom:var(--space-5)">Execution &amp; Delivery Readiness</div>
-  <div class="partners-grid" style="margin-bottom:var(--space-8);">
-    <div class="partner-card">
-      <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">EP</div>
-        <div>
-          <div class="partner-name">Execution Plan by Phase</div>
-          <div class="partner-type">From architecture to financial cutover</div>
-        </div>
-      </div>
-      <div class="partner-card-body">
-        <div class="row-group">
-          <div class="row-label">PHASE PRIORITIES</div>
-          <ul class="pros-list">
-            <li><strong>Phase 1:</strong> lock ownership map, canonical identifiers, and interface contracts</li>
-            <li><strong>Phase 2:</strong> configure ticketing catalog and build high-priority integrations</li>
-            <li><strong>Phase 3:</strong> run end-to-end scenario tests (guest, ops, finance, edge cases)</li>
-            <li><strong>Phase 4:</strong> production go-live command center with real-time incident management</li>
-            <li><strong>Phase 5:</strong> financial stabilization, GL reconciliation, and handoff to BAU governance</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="partner-card">
-      <div class="partner-card-header">
-        <div class="partner-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">RF</div>
-        <div>
-          <div class="partner-name">Critical RFP Commitments</div>
-          <div class="partner-type">What we must explicitly show to win</div>
-        </div>
-      </div>
-      <div class="partner-card-body">
-        <div class="row-group">
-          <div class="row-label">COMMITMENTS</div>
-          <ul class="questions-block">
-            <li>A signed responsibility matrix for every API and operational handoff</li>
-            <li>Documented service levels and incident escalation for ticketing and entitlement APIs</li>
-            <li>A validated test suite for pass benefits and exception scenarios across properties</li>
-            <li>A go-live readiness scorecard covering tech, operations, training, and finance</li>
-            <li>A clear decision log for unresolved items (Quebec readiness, middleware choices, final vendor commitments)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label" style="margin-bottom:var(--space-5)">Our Implementation Methodology</div>
-  <div class="impl-phases">
-    <div class="impl-phase">
-      <div class="impl-phase-num">Phase 01</div>
-      <div class="impl-phase-title">Discovery &amp; Scoping</div>
-      <ul class="impl-phase-items">
-        <li>Property-by-property kickoff with operations and IT leads</li>
-        <li>Current state system audit and data mapping</li>
-        <li>Integration dependency matrix finalized per park</li>
-        <li>Go-live criteria defined and agreed upon</li>
-      </ul>
-    </div>
-    <div class="impl-phase">
-      <div class="impl-phase-num">Phase 02</div>
-      <div class="impl-phase-title">Configuration &amp; Build</div>
-      <ul class="impl-phase-items">
-        <li>Catalog setup: products, pricing tiers, season passes, packages</li>
-        <li>Access control and entitlement rules configured</li>
-        <li>Integration endpoints built and validated per property</li>
-        <li>Payment processing connected and tested</li>
-      </ul>
-    </div>
-    <div class="impl-phase">
-      <div class="impl-phase-num">Phase 03</div>
-      <div class="impl-phase-title">Testing &amp; Validation</div>
-      <ul class="impl-phase-items">
-        <li>End-to-end scenario testing against go-live criteria</li>
-        <li>Load and throughput testing for peak capacity</li>
-        <li>Staff training and ops team walkthrough</li>
-        <li>Parallel run period with existing systems where needed</li>
-      </ul>
-    </div>
-    <div class="impl-phase">
-      <div class="impl-phase-num">Phase 04</div>
-      <div class="impl-phase-title">Go-Live &amp; Stabilization</div>
-      <ul class="impl-phase-items">
-        <li>Dedicated launch support team on-site or on-call</li>
-        <li>Real-time monitoring during first-week operations</li>
-        <li>Rapid response SLA for any critical issues</li>
-        <li>Post-launch retrospective and handoff to support</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-label" style="margin-bottom:var(--space-5)">Portfolio Visibility Model</div>
-  <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-6);max-width:72ch;">Premier Parks management gets two distinct views — an aggregate roll-up across the full portfolio for executive oversight, and a drill-down per property for operational detail. Both are live, not emailed reports.</p>
-
-  <div class="visibility-grid">
-    <div class="visibility-panel">
-      <div class="visibility-panel-header">
-        <div class="visibility-panel-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">AG</div>
-        <div>
-          <div class="visibility-panel-title">Portfolio Roll-Up</div>
-          <div class="visibility-panel-subtitle">Enterprise view across all properties</div>
-        </div>
-      </div>
-      <div class="visibility-panel-body">
-        <div class="visibility-row">
-          <div class="visibility-item">
-            <div class="visibility-item-dot"></div>
-            <div>
-              <div class="visibility-item-label">Program Health Dashboard</div>
-              <div class="visibility-item-desc">Single view showing overall implementation status across every park — percent complete, open blockers, and go-live readiness by property.</div>
-            </div>
-          </div>
-          <div class="visibility-item">
-            <div class="visibility-item-dot"></div>
-            <div>
-              <div class="visibility-item-label">Milestone Burn-Down</div>
-              <div class="visibility-item-desc">Aggregated milestone progress tracked against the master program timeline — Phase 1 through go-live across the full portfolio.</div>
-            </div>
-          </div>
-          <div class="visibility-item">
-            <div class="visibility-item-dot"></div>
-            <div>
-              <div class="visibility-item-label">Risk &amp; Blocker Log</div>
-              <div class="visibility-item-desc">Cross-property issues escalated to the portfolio level — with owner, resolution status, and impact on go-live date.</div>
-            </div>
-          </div>
-          <div class="visibility-item">
-            <div class="visibility-item-dot"></div>
-            <div>
-              <div class="visibility-item-label">Weekly Executive Summary</div>
-              <div class="visibility-item-desc">Structured weekly update delivered to Premier Parks leadership — RAG status, key decisions needed, and week-ahead priorities.</div>
-            </div>
-          </div>
-        </div>
-        <div class="mock-dashboard" style="margin-top:var(--space-5)">
-          <div class="mock-dash-row">
-            <span class="mock-dash-park">Valcartier VVV</span>
-            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:72%"></div></div>
-            <span class="mock-dash-pct">72%</span>
-            <span class="mock-dash-status" style="background:var(--color-warning-bg);color:var(--color-warning)">In Progress</span>
-          </div>
-          <div class="mock-dash-row">
-            <span class="mock-dash-park">Nashville Shores</span>
-            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:55%"></div></div>
-            <span class="mock-dash-pct">55%</span>
-            <span class="mock-dash-status" style="background:var(--color-warning-bg);color:var(--color-warning)">In Progress</span>
-          </div>
-          <div class="mock-dash-row">
-            <span class="mock-dash-park">Elitch Gardens</span>
-            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:38%"></div></div>
-            <span class="mock-dash-pct">38%</span>
-            <span class="mock-dash-status" style="background:var(--color-primary-bg);color:var(--color-primary)">Config</span>
-          </div>
-          <div class="mock-dash-row">
-            <span class="mock-dash-park">City Museum</span>
-            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:91%"></div></div>
-            <span class="mock-dash-pct">91%</span>
-            <span class="mock-dash-status" style="background:var(--color-success-bg);color:var(--color-success)">UAT</span>
-          </div>
-          <div class="mock-dash-row">
-            <span class="mock-dash-park">Calypso</span>
-            <div class="mock-dash-bar-wrap"><div class="mock-dash-bar" style="width:20%"></div></div>
-            <span class="mock-dash-pct">20%</span>
-            <span class="mock-dash-status" style="background:var(--color-surface-dynamic);color:var(--color-text-muted)">Discovery</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="visibility-panel">
-      <div class="visibility-panel-header">
-        <div class="visibility-panel-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">PR</div>
-        <div>
-          <div class="visibility-panel-title">Property-Level Drill-Down</div>
-          <div class="visibility-panel-subtitle">Operational detail per park</div>
-        </div>
-      </div>
-      <div class="visibility-panel-body">
-        <div class="visibility-row">
-          <div class="visibility-item">
-            <div class="visibility-item-dot" style="background:var(--color-gold)"></div>
-            <div>
-              <div class="visibility-item-label">Task Board by Workstream</div>
-              <div class="visibility-item-desc">Per-property task tracking across Config, Integration, Testing, and Training workstreams — with assignees, due dates, and completion status.</div>
-            </div>
-          </div>
-          <div class="visibility-item">
-            <div class="visibility-item-dot" style="background:var(--color-gold)"></div>
-            <div>
-              <div class="visibility-item-label">Open Decisions Log</div>
-              <div class="visibility-item-desc">Every unresolved configuration or design decision tracked with owner, options, and deadline — nothing falls through the cracks between meetings.</div>
-            </div>
-          </div>
-          <div class="visibility-item">
-            <div class="visibility-item-dot" style="background:var(--color-gold)"></div>
-            <div>
-              <div class="visibility-item-label">Integration Status Board</div>
-              <div class="visibility-item-desc">Live status per integration endpoint — not started, in development, in testing, validated. Each row links to the spec and test results.</div>
-            </div>
-          </div>
-          <div class="visibility-item">
-            <div class="visibility-item-dot" style="background:var(--color-gold)"></div>
-            <div>
-              <div class="visibility-item-label">Go-Live Readiness Checklist</div>
-              <div class="visibility-item-desc">Criteria-based checklist that must reach 100% before a property launches. Premier Parks can see exactly what is and isn't signed off at any point.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label" style="margin-bottom:var(--space-4)">Communication Cadence</div>
-  <div class="quick-grid" style="margin-bottom:var(--space-8)">
-    <article class="quick-card">
-      <h3>Daily Standups</h3>
-      <p>Short working-level syncs with property implementation teams to surface blockers before they compound. Async option available for distributed teams.</p>
-    </article>
-    <article class="quick-card">
-      <h3>Weekly Executive Briefing</h3>
-      <p>Structured update for Premier Parks leadership — portfolio RAG status, milestone progress, decisions needed, and any items requiring escalation.</p>
-    </article>
-    <article class="quick-card">
-      <h3>Milestone Gates</h3>
-      <p>Formal sign-off checkpoints at the end of each phase. No property advances to the next phase without meeting defined readiness criteria.</p>
-    </article>
-    <article class="quick-card">
-      <h3>Shared Workspace</h3>
-      <p>A single shared project workspace — accessible to both RocketRez and Premier Parks — housing all specs, decisions, test results, and status boards in one place.</p>
-    </article>
-  </div>
-
-  <div class="rec-bar">
-    <div class="rec-content">
-      <div class="rec-title">Final Narrative for Submission</div>
-      <div class="rec-text">
-        Premier Parks should select the partner that can own ticketing and entitlement execution while orchestrating clean integrations across PMS, F&amp;B, identity, and ERP.
-        This proposal demonstrates that we have both the architecture discipline and the delivery structure to do exactly that.
-      </div>
-    </div>
-  </div>
-
-  <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(6)">
-      Decision Appendix
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-</div>
-
-<div class="arch-view" id="arch-8">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Decision Appendix</div>
-  <div class="arch-header">
-    <div class="arch-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">AP</div>
-    <div class="arch-title-block">
-      <div class="arch-title">Appendix: Open Decisions, Owners, and Deadlines</div>
-      <div class="arch-subtitle">Decision log to de-risk implementation and prove execution discipline</div>
-    </div>
-  </div>
-
-  <div class="compare-table-wrap">
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th>Open Decision</th>
-          <th>Owner</th>
-          <th>Required By</th>
-          <th>Impact If Delayed</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Confirm real-time vs batch for Opera → Ticketing and Opera → POS</td>
-          <td>API Architecture Lead</td>
-          <td>Phase 1 close</td>
-          <td>High go-live risk for gate validation and room-charge workflows</td>
-          <td><span class="tag tag-gold">Open</span></td>
-        </tr>
-        <tr>
-          <td>Finalize guest identifier strategy with Opera as authoritative source</td>
-          <td>Identity Workstream Lead</td>
-          <td>Phase 1 close</td>
-          <td>Identity mismatch across channels and support burden increase</td>
-          <td><span class="tag tag-gold">Open</span></td>
-        </tr>
-        <tr>
-          <td>Decide F&B integration pattern (direct vs middleware path)</td>
-          <td>Commerce Integration Lead</td>
-          <td>Early Phase 2</td>
-          <td>Scope churn and delayed certification for onsite transactions</td>
-          <td><span class="tag tag-gold">Open</span></td>
-        </tr>
-        <tr>
-          <td>Quebec readiness confirmation (tax, language, compliance)</td>
-          <td>Regional Compliance Lead</td>
-          <td>Before test cycle start</td>
-          <td>Regulatory and launch risk for Canadian properties</td>
-          <td><span class="tag tag-orange">At Risk</span></td>
-        </tr>
-        <tr>
-          <td>NetSuite and Oracle financial event mapping sign-off</td>
-          <td>Finance Systems Lead</td>
-          <td>Before Phase 4</td>
-          <td>Financial cutover instability and reconciliation issues</td>
-          <td><span class="tag tag-gold">In Progress</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(0)">
-      Back to Introduction
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 3 12 9 6"/></svg>
-    </button>
-  </div>
-</div>
 
 </main>
 
@@ -3687,12 +3301,11 @@ a { color: inherit; text-decoration: none; }
   <button class="side-nav-btn" onclick="showArch(1)"><span class="side-nav-num">—</span>About RocketRez</button>
   <button class="side-nav-btn" onclick="showArch(2)"><span class="side-nav-num">01</span>Executive Case</button>
   <button class="side-nav-btn" onclick="showArch(3)"><span class="side-nav-num">02</span>Solutions Architecture</button>
-  <button class="side-nav-btn" onclick="showArch(6)"><span class="side-nav-num">03</span>Decision Appendix</button>
-  <button class="side-nav-btn" onclick="showArch(7)"><span class="side-nav-num">04</span>RFP Solution Q&amp;A</button>
-  <button class="side-nav-btn" onclick="showArch(8)"><span class="side-nav-num">05</span>MoneyBags Matrix</button>
-  <button class="side-nav-btn" onclick="showArch(9)"><span class="side-nav-num">06</span>Finance: Your Time, Elevated</button>
+  <button class="side-nav-btn" onclick="showArch(4)"><span class="side-nav-num">04</span>RFP Solution Q&amp;A</button>
+  <button class="side-nav-btn" onclick="showArch(5)"><span class="side-nav-num">05</span>MoneyBags Matrix</button>
+  <button class="side-nav-btn" onclick="showArch(6)"><span class="side-nav-num">06</span>Finance: Your Time, Elevated</button>
   <div class="side-nav-label" style="margin-top:var(--space-4)">Demo</div>
-  <button class="side-nav-btn side-nav-btn--demo" onclick="showArch(10)"><span class="side-nav-num">—</span>Elitch Gardens</button>
+  <button class="side-nav-btn side-nav-btn--demo" onclick="showArch(7)"><span class="side-nav-num">—</span>Elitch Gardens</button>
 </nav>
 
 <script>
@@ -5166,6 +4779,7 @@ function toggleJE(id) {
   // Apply default property-type state (Attraction Only) on page load
   setPropertyType('hotel', 'flow-ideal', 'property-select', 'pt-hotel-ideal', 'pt-attraction-ideal', 'pt-specific-ideal');
   setPropertyType('attraction', 'flow-o2', 'property-select-o2', 'pt-hotel-o2', 'pt-attraction-o2', 'pt-specific-o2');
+  applyPropertyConfig('calypso', 'flow-ideal-sa', null);
 })();
 </script>
 
