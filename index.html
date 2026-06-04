@@ -1100,10 +1100,14 @@ a { color: inherit; text-decoration: none; }
 }
 .partner-summary-card {
   background: var(--color-surface); border: 1px solid var(--color-border);
+  border-left-width: 3px;
   border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
   padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);
 }
-.partner-summary-header { display: flex; align-items: center; gap: var(--space-3); }
+.partner-summary-card.is-core { border-left-color: var(--color-success); }
+.partner-summary-card.is-optional { border-left-color: var(--color-border); }
+.partner-summary-card.is-property { border-left-color: var(--color-gold); }
+.partner-summary-header { display: flex; align-items: flex-start; gap: var(--space-3); }
 .partner-summary-icon {
   width: 32px; height: 32px; border-radius: var(--radius-md);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -1112,6 +1116,34 @@ a { color: inherit; text-decoration: none; }
 .partner-summary-name { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; color: var(--color-text); }
 .partner-summary-role { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
 .partner-summary-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+.partner-tier-badge {
+  margin-left: auto; flex-shrink: 0;
+  font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 0.18rem 0.55rem; border-radius: var(--radius-full); white-space: nowrap;
+}
+.partner-tier-badge.badge-core { background: var(--color-success-bg); color: var(--color-success); }
+.partner-tier-badge.badge-optional { background: var(--color-surface-dynamic); color: var(--color-text-muted); }
+.partner-tier-badge.badge-property { background: var(--color-gold-bg); color: var(--color-gold); }
+.partner-tier-legend {
+  display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;
+  margin-bottom: var(--space-5); padding: var(--space-3) var(--space-4);
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.partner-tier-legend-label {
+  font-size: var(--text-xs); font-weight: 700; color: var(--color-text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; margin-right: var(--space-2);
+}
+.partner-tier-legend-item {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); color: var(--color-text-muted);
+}
+.partner-tier-legend-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.legend-dot-core { background: var(--color-success); }
+.legend-dot-optional { background: var(--color-border); }
+.legend-dot-property { background: var(--color-gold); }
 .delivery-phases-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--space-4); margin-bottom: var(--space-8);
@@ -1554,6 +1586,8 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 768px) {
   body { padding-left: 0; padding-top: 60px; }
   .header { padding: var(--space-3) var(--space-4); }
+  .logo-mark { width: 28px; height: 28px; }
+  .brand-sub { display: none; }
   .side-nav { display: none; }
   .hero { padding: var(--space-8) var(--space-4) var(--space-6); }
   .hero-layout { grid-template-columns: 1fr; gap: var(--space-4); }
@@ -1563,6 +1597,11 @@ a { color: inherit; text-decoration: none; }
   .partner-card-footer { flex-direction: column; gap: var(--space-3); }
   .timeline-bar { grid-template-columns: repeat(3, 1fr); }
   .timeline-phase:nth-child(4), .timeline-phase:nth-child(5) { display: none; }
+}
+@media (max-width: 480px) {
+  .logo-mark { width: 24px; height: 24px; }
+  .brand-name { font-size: var(--text-xs); }
+  .phase-badge { display: none; }
 }
 /* ── PASSWORD GATE ───────────────────────────────────── */
 #pw-gate {
@@ -1830,72 +1869,6 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <div class="platform-map" aria-label="RocketRez platform capabilities">
-    <div class="platform-map-header">
-      <div>
-        <div class="platform-map-eyebrow">Platform Capabilities</div>
-        <div class="platform-map-title">RocketRez Connects Every Guest and Revenue Touchpoint</div>
-      </div>
-      <div class="platform-map-note">A single operating layer across admissions, commerce, reporting, and guest experience.</div>
-    </div>
-    <div class="platform-map-layout">
-      <ul class="platform-feature-list">
-        <li>Ticketing &amp; Admissions</li>
-        <li>Advanced Inventory</li>
-        <li>Event Management</li>
-        <li>Retail &amp; Dining</li>
-        <li>Staffing</li>
-        <li>Point of Sale</li>
-        <li>Upsell &amp; Cross Sell Tools</li>
-        <li>Built-In eCommerce</li>
-        <li>Dynamic Pricing</li>
-        <li>AI Guest Communication</li>
-      </ul>
-      <div class="platform-wheel" aria-hidden="true">
-        <div class="platform-wheel-center">
-          <div class="platform-wheel-mark">
-            <img src="rocketrez_logo.jpeg" alt="RocketRez" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;">
-          </div>
-          RocketRez
-        </div>
-        <div class="platform-domain platform-domain--operations">
-          <div class="platform-domain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg>
-          </div>
-          Operations
-        </div>
-        <div class="platform-domain platform-domain--reporting">
-          <div class="platform-domain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          Reporting
-        </div>
-        <div class="platform-domain platform-domain--marketing">
-          <div class="platform-domain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a4 4 0 0 0 4 4h1l4 4v-4h3l6 3V4l-6 3H7a4 4 0 0 0-4 4z"/></svg>
-          </div>
-          Marketing
-        </div>
-        <div class="platform-domain platform-domain--guest">
-          <div class="platform-domain-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          Guest Experience
-        </div>
-      </div>
-      <ul class="platform-feature-list platform-feature-list--right">
-        <li>Dashboards &amp; Reporting</li>
-        <li>Power BI Integration</li>
-        <li>API Data Access</li>
-        <li>Memberships</li>
-        <li>Omnichannel Sales</li>
-        <li>OTAs &amp; Resellers</li>
-        <li>Photo Capture &amp; Share</li>
-        <li>Secure Payment Processing</li>
-      </ul>
-    </div>
-  </div>
-
   <div class="team-section-label">Your RocketRez Team</div>
   <div class="team-grid">
     <div class="team-card">
@@ -2082,7 +2055,7 @@ a { color: inherit; text-decoration: none; }
     <div style="background:linear-gradient(135deg,var(--color-primary-bg) 0%,var(--color-gold-bg) 100%);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5) var(--space-6);margin-bottom:var(--space-6)">
       <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-base);margin-bottom:var(--space-2)">The work doesn't disappear. Your job gets better.</div>
       <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin:0 0 var(--space-4)">Manual entry isn't finance expertise — it's data transport. When the systems handle the transport, your team spends its time on what actually requires expertise: reviewing, questioning, and presenting what the numbers mean to the business.</p>
-      <button class="section-next-btn" style="display:inline-flex;padding:var(--space-2) var(--space-4);font-size:var(--text-xs)" onclick="showArch(6)">
+      <button class="section-next-btn" style="display:inline-flex;padding:var(--space-2) var(--space-4);font-size:var(--text-xs)" onclick="showArch(7)">
         See the full Finance walkthrough
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
@@ -2128,6 +2101,10 @@ a { color: inherit; text-decoration: none; }
         <div class="outcome-card-desc">New products, offers, and promotions can be stood up quickly — your team has direct platform access and the training to move without waiting on a support queue. When a revenue opportunity comes up mid-season, you can act on it the same day.</div>
         <div class="outcome-card-proof">Direct platform access with hands-on training to move at your own pace</div>
       </div>
+    </div>
+    <div style="background:linear-gradient(135deg,var(--color-primary-bg) 0%,var(--color-success-bg) 100%);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5) var(--space-6);margin-bottom:var(--space-6)">
+      <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-base);margin-bottom:var(--space-2)">What Changes on the Ground</div>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin:0">Operational teams today are balancing guest expectations, revenue goals, and constant operational change. RocketRez reduces the effort required to bring new products, promotions, and experiences to market, allowing teams to focus on execution instead of administration.</p>
     </div>
   </div>
 
@@ -2285,12 +2262,50 @@ a { color: inherit; text-decoration: none; }
 
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(3)">
-      Solutions Architecture
+      Platform Features
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 </div>
 
+<div class="arch-view" id="arch-13">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Platform Features</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">PF</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Platform Features</div>
+      <div class="arch-subtitle">A walkthrough of RocketRez capabilities across every module</div>
+    </div>
+  </div>
+  <div class="pfeat-scroll">
+    <img src="content/Ticketing%20%26%20Admission.png" alt="Ticketing &amp; Admission" class="pfeat-img">
+    <img src="content/Ticketing%20%26%20Admission%20(2).png" alt="Ticketing &amp; Admission 2" class="pfeat-img">
+    <img src="content/Ticketing%20%26%20Admission%20(3).png" alt="Ticketing &amp; Admission 3" class="pfeat-img">
+    <img src="content/Ticketing%20%26%20Admission%20(4).png" alt="Ticketing &amp; Admission 4" class="pfeat-img">
+    <img src="content/Ticketing%20%26%20Admission%20(5).png" alt="Ticketing &amp; Admission 5" class="pfeat-img">
+    <img src="content/Member%20%26%20Guest%20Experience.png" alt="Member &amp; Guest Experience" class="pfeat-img">
+    <img src="content/Member%20%26%20Guest%20Experience%20continued.png" alt="Member &amp; Guest Experience continued" class="pfeat-img">
+    <img src="content/Payments%20%26%20Customizable%20Checkout.png" alt="Payments &amp; Customizable Checkout" class="pfeat-img">
+    <img src="content/Point-of-Sale.png" alt="Point of Sale" class="pfeat-img">
+    <img src="content/Point-of-Sale%20(2).png" alt="Point of Sale 2" class="pfeat-img">
+    <img src="content/Dynamic%20Pricing.png" alt="Dynamic Pricing" class="pfeat-img">
+    <img src="content/Dynamic%20Pricing%20(2).png" alt="Dynamic Pricing 2" class="pfeat-img">
+    <img src="content/Event%20Management.png" alt="Event Management" class="pfeat-img">
+    <img src="content/Group%20Sales.png" alt="Group Sales" class="pfeat-img">
+    <img src="content/Distribution.png" alt="Distribution" class="pfeat-img">
+    <img src="content/Insights.png" alt="Insights" class="pfeat-img">
+    <img src="content/Integrations.png" alt="Integrations" class="pfeat-img">
+    <img src="content/Hardware.png" alt="Hardware" class="pfeat-img">
+    <img src="content/Relay.png" alt="Relay" class="pfeat-img">
+    <img src="content/Sensible%20Weather.png" alt="Sensible Weather" class="pfeat-img">
+  </div>
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(4)">
+      Solutions Architecture
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div><!-- /#arch-13 (inline) -->
 
   <div class="dataflow-compare" style="display:none"><!-- archived old exec case content -->
     <div class="dataflow-panel" id="panel-current">
@@ -2602,76 +2617,89 @@ a { color: inherit; text-decoration: none; }
 
   <!-- ── TAB: PARTNERS ─────────────────────────────── -->
   <div class="solution-tab-content" id="soltab-partners">
+    <div class="partner-tier-legend">
+      <span class="partner-tier-legend-label">Legend</span>
+      <span class="partner-tier-legend-item"><span class="partner-tier-legend-dot legend-dot-core"></span>Core — required at every property</span>
+      <span class="partner-tier-legend-item"><span class="partner-tier-legend-dot legend-dot-optional"></span>Optional — add-on based on property needs</span>
+      <span class="partner-tier-legend-item"><span class="partner-tier-legend-dot legend-dot-property"></span>Property Specific — select properties only</span>
+    </div>
     <div class="partner-summary-grid">
-      <div class="partner-summary-card">
+      <div class="partner-summary-card is-core">
         <div class="partner-summary-header">
           <div class="partner-summary-icon" style="background:var(--color-success-bg);color:var(--color-success)">RR</div>
           <div>
             <div class="partner-summary-name">RocketRez</div>
-            <div class="partner-summary-role">Core Platform — System of Record</div>
+            <div class="partner-summary-role">System of Record — Commerce &amp; Operations</div>
           </div>
+          <span class="partner-tier-badge badge-core">Core</span>
         </div>
         <div class="partner-summary-desc">Ticketing, entitlement control, admissions, retail, groups, sub-ledger financial reporting, and direct NetSuite connectivity. The operational backbone for every property in the portfolio.</div>
       </div>
-      <div class="partner-summary-card">
-        <div class="partner-summary-header">
-          <div class="partner-summary-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">VN</div>
-          <div>
-            <div class="partner-summary-name">Vantage</div>
-            <div class="partner-summary-role">Guest Identity / Cashless / Loyalty / Mobile</div>
-          </div>
-        </div>
-        <div class="partner-summary-desc">The only platform with native cashless wallet, loyalty, and mobile app in one architecture. Enchanted Parks (8 parks) selected Vantage for enterprise deployment Q2 2026 — direct comparable to Premier Parks' portfolio.</div>
-      </div>
-      <div class="partner-summary-card">
-        <div class="partner-summary-header">
-          <div class="partner-summary-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">TO</div>
-          <div>
-            <div class="partner-summary-name">Toast</div>
-            <div class="partner-summary-role">F&amp;B / Restaurant POS — Optional</div>
-          </div>
-        </div>
-        <div class="partner-summary-desc">Purpose-built restaurant POS for front-of-house, kitchen display, and mobile ordering. Keeps F&amp;B operations best-in-class without forcing RocketRez to manage dining complexity.</div>
-      </div>
-      <div class="partner-summary-card">
-        <div class="partner-summary-header">
-          <div class="partner-summary-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">OC</div>
-          <div>
-            <div class="partner-summary-name">Opera Cloud</div>
-            <div class="partner-summary-role">PMS — Hotel + Park Properties</div>
-          </div>
-        </div>
-        <div class="partner-summary-desc">Property Management System for hotel+park properties. RocketRez integrates via OHIP for guest folio charges, room-key entitlement validation, and stay-context-aware ticketing.</div>
-      </div>
-      <div class="partner-summary-card">
+      <div class="partner-summary-card is-core">
         <div class="partner-summary-header">
           <div class="partner-summary-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">NS</div>
           <div>
             <div class="partner-summary-name">NetSuite</div>
             <div class="partner-summary-role">Corporate Finance — ERP</div>
           </div>
+          <span class="partner-tier-badge badge-core">Core</span>
         </div>
         <div class="partner-summary-desc">Corporate ERP receiving structured journal entries directly from RocketRez. Financial data arrives coded and categorized — no manual import, no CSV processing layer.</div>
       </div>
-      <div class="partner-summary-card">
-        <div class="partner-summary-header">
-          <div class="partner-summary-icon" style="background:var(--color-surface-offset);color:var(--color-text-muted)">BK</div>
-          <div>
-            <div class="partner-summary-name">Booker / Anemone</div>
-            <div class="partner-summary-role">Spa &amp; Activities — Property-Level</div>
-          </div>
-        </div>
-        <div class="partner-summary-desc">Spa and activity reservation systems at select properties. RocketRez integrates for entitlement validation and cross-system guest identification where applicable.</div>
-      </div>
-      <div class="partner-summary-card">
+      <div class="partner-summary-card is-core">
         <div class="partner-summary-header">
           <div class="partner-summary-icon" style="background:var(--color-orange-bg);color:var(--color-orange)">HL</div>
           <div>
             <div class="partner-summary-name">High Level</div>
             <div class="partner-summary-role">CRM &amp; Marketing Automation</div>
           </div>
+          <span class="partner-tier-badge badge-core">Core</span>
         </div>
         <div class="partner-summary-desc">CRM and marketing automation layer for guest communications, campaign management, and lifecycle marketing. Connects to RocketRez guest and membership data to power targeted outreach across the portfolio.</div>
+      </div>
+      <div class="partner-summary-card is-optional">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-purple-bg);color:var(--color-purple)">VN</div>
+          <div>
+            <div class="partner-summary-name">Vantage</div>
+            <div class="partner-summary-role">Guest Identity / Cashless / Loyalty / Mobile</div>
+          </div>
+          <span class="partner-tier-badge badge-optional">Optional</span>
+        </div>
+        <div class="partner-summary-desc">The only platform with native cashless wallet, loyalty, and mobile app in one architecture. Enchanted Parks (8 parks) selected Vantage for enterprise deployment Q2 2026 — direct comparable to Premier Parks' portfolio.</div>
+      </div>
+      <div class="partner-summary-card is-optional">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">TO</div>
+          <div>
+            <div class="partner-summary-name">Toast</div>
+            <div class="partner-summary-role">F&amp;B / Restaurant POS</div>
+          </div>
+          <span class="partner-tier-badge badge-optional">Optional</span>
+        </div>
+        <div class="partner-summary-desc">Purpose-built restaurant POS for front-of-house, kitchen display, and mobile ordering. Keeps F&amp;B operations best-in-class without forcing RocketRez to manage dining complexity.</div>
+      </div>
+      <div class="partner-summary-card is-property">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-surface-offset);color:var(--color-text-muted)">BK</div>
+          <div>
+            <div class="partner-summary-name">Booker / Anemone</div>
+            <div class="partner-summary-role">Spa &amp; Activities</div>
+          </div>
+          <span class="partner-tier-badge badge-property">Property Specific</span>
+        </div>
+        <div class="partner-summary-desc">Spa and activity reservation systems at select properties. RocketRez integrates for entitlement validation and cross-system guest identification where applicable.</div>
+      </div>
+      <div class="partner-summary-card is-property">
+        <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">OC</div>
+          <div>
+            <div class="partner-summary-name">Opera Cloud</div>
+            <div class="partner-summary-role">PMS — Hotel + Park Properties</div>
+          </div>
+          <span class="partner-tier-badge badge-property">Property Specific</span>
+        </div>
+        <div class="partner-summary-desc">Property Management System for hotel+park properties. RocketRez integrates via OHIP for guest folio charges, room-key entitlement validation, and stay-context-aware ticketing.</div>
       </div>
     </div>
   </div>
@@ -2962,7 +2990,7 @@ a { color: inherit; text-decoration: none; }
 
 
   <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(4)">
+    <button class="section-next-btn" onclick="showArch(5)">
       RFP Solution Q&amp;A
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
@@ -2981,12 +3009,13 @@ a { color: inherit; text-decoration: none; }
   <button class="side-nav-btn active" onclick="showArch(0)"><span class="side-nav-num">00</span>Introduction</button>
   <button class="side-nav-btn" onclick="showArch(1)"><span class="side-nav-num">—</span>About RocketRez</button>
   <button class="side-nav-btn" onclick="showArch(2)"><span class="side-nav-num">01</span>Executive Case</button>
-  <button class="side-nav-btn" onclick="showArch(3)"><span class="side-nav-num">02</span>Solutions Architecture</button>
-  <button class="side-nav-btn" onclick="showArch(4)"><span class="side-nav-num">03</span>RFP Solution Q&amp;A</button>
-  <button class="side-nav-btn" onclick="showArch(5)"><span class="side-nav-num">04</span>MoneyBags Matrix</button>
-  <button class="side-nav-btn" onclick="showArch(6)"><span class="side-nav-num">05</span>Finance: Your Time, Elevated</button>
+  <button class="side-nav-btn" onclick="showArch(3)"><span class="side-nav-num">—</span>Platform Features</button>
+  <button class="side-nav-btn" onclick="showArch(4)"><span class="side-nav-num">02</span>Solutions Architecture</button>
+  <button class="side-nav-btn" onclick="showArch(5)"><span class="side-nav-num">03</span>RFP Solution Q&amp;A</button>
+  <button class="side-nav-btn" onclick="showArch(6)"><span class="side-nav-num">04</span>MoneyBags Matrix</button>
+  <button class="side-nav-btn" onclick="showArch(7)"><span class="side-nav-num">05</span>Finance: Your Time, Elevated</button>
   <div class="side-nav-label" style="margin-top:var(--space-4)">Demo</div>
-  <button class="side-nav-btn side-nav-btn--demo" onclick="showArch(7)"><span class="side-nav-num">—</span>Elitch Gardens</button>
+  <button class="side-nav-btn side-nav-btn--demo" onclick="showArch(8)"><span class="side-nav-num">—</span>Elitch Gardens</button>
 </nav>
 
 <script>
@@ -3748,7 +3777,7 @@ function showRfpStack(index, btn) {
   </div><!-- /quick-deck -->
 
   <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(5)">
+    <button class="section-next-btn" onclick="showArch(6)">
       MoneyBags Matrix
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
@@ -4010,7 +4039,7 @@ function showRfpStack(index, btn) {
   </div>
 
   <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(6)">
+    <button class="section-next-btn" onclick="showArch(7)">
       Finance: Your Time, Elevated
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
@@ -4202,7 +4231,7 @@ function showRfpStack(index, btn) {
   </div>
 
   <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(7)">
+    <button class="section-next-btn" onclick="showArch(8)">
       Elitch Gardens Demo
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
@@ -4285,9 +4314,10 @@ function showRfpStack(index, btn) {
   </div>
 </div><!-- /#arch-12 -->
 
+
 <style>
 /* ── Arch views outside <main> — match main container ── */
-#arch-9, #arch-10, #arch-11, #arch-12 {
+#arch-9, #arch-10, #arch-11, #arch-12, #arch-13 {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
@@ -4296,8 +4326,25 @@ function showRfpStack(index, btn) {
   box-sizing: border-box;
 }
 @media(max-width: 768px) {
-  #arch-9, #arch-10, #arch-11, #arch-12 { padding-left: var(--space-4); padding-right: var(--space-4); }
+  #arch-9, #arch-10, #arch-11, #arch-12, #arch-13 { padding-left: var(--space-4); padding-right: var(--space-4); }
 }
+.pfeat-scroll {
+  height: 74vh;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+}
+.pfeat-img {
+  width: 75%;
+  display: block;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--color-divider);
+}
+.pfeat-img:last-child { border-bottom: none; }
 
 /* ── MoneyBags legend ── */
 .mb-legend {
