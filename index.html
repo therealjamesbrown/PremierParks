@@ -3446,6 +3446,8 @@ a { color: inherit; text-decoration: none; }
   <button class="side-nav-btn" onclick="showArch(5)"><span class="side-nav-num">03</span>RFP Solution Q&amp;A</button>
   <div class="side-nav-label" style="margin-top:var(--space-4)">Demo</div>
   <button class="side-nav-btn side-nav-btn--demo" onclick="showArch(6)"><span class="side-nav-num">—</span>Elitch Gardens</button>
+  <div class="side-nav-label" style="margin-top:var(--space-4)">Investment</div>
+  <button class="side-nav-btn" onclick="showArch(7)"><span class="side-nav-num">—</span>Pricing</button>
 </nav>
 
 <script>
@@ -4284,17 +4286,279 @@ function showRfpStack(index, btn) {
   </div>
 
   <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(0)">
-      Back to Introduction
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    <button class="section-next-btn" onclick="showArch(7)">
+      Investment &amp; Pricing
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 </div><!-- /#arch-12 -->
 
 
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- ARCH-14: INVESTMENT & PRICING                                   -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="arch-view" id="arch-14">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Investment</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">$</div>
+    <div class="arch-title-block">
+      <div class="arch-title">The investment — and the return</div>
+      <div class="arch-subtitle">How we fit the RFP, what it costs, and what it gives back</div>
+    </div>
+  </div>
+
+  <style>
+    .inv { padding: 0; }
+    .inv-inner { max-width: 920px; margin: 0 auto; }
+    .inv-divider { border-top: 1px solid var(--color-border); margin: 28px 0; }
+    .inv-h3 { font-size: 1.15rem; font-weight: 700; color: var(--color-text); margin: 0 0 14px; }
+    .invfit { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .invfit-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 18px 20px; }
+    .invfit-native { border-top: 3px solid var(--color-success); }
+    .invfit-partner { border-top: 3px solid var(--color-primary); }
+    .invfit-h { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+    .invfit-native .invfit-h { color: var(--color-success); }
+    .invfit-partner .invfit-h { color: var(--color-blue); }
+    .invfit-card ul { margin: 0; padding-left: 16px; font-size: 0.88rem; line-height: 1.75; color: var(--color-text); }
+    .invfit-card ul .p { color: var(--color-text-muted); }
+    .invp { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .invp-feat { text-align: left; width: 34%; padding: 10px 12px; color: var(--color-text); }
+    .invp-h-rec, .invp-h { vertical-align: top; padding: 14px 10px; }
+    .invp-h-rec { background: var(--color-primary-bg); border: 2px solid var(--color-primary); border-bottom: none; border-radius: 10px 10px 0 0; }
+    .invp-h { background: var(--color-surface); border: 1px solid var(--color-border); border-bottom: none; }
+    .invp-h-last { border-radius: 10px 10px 0 0; }
+    .invp-badge { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-blue); margin-bottom: 4px; }
+    .invp-tier { font-size: 0.92rem; font-weight: 700; color: var(--color-text); line-height: 1.3; }
+    .invp-price { font-size: 1.35rem; font-weight: 700; color: var(--color-primary); margin-top: 8px; }
+    .invp td { text-align: center; padding: 10px; }
+    .prec { background: var(--color-primary-bg); border-left: 2px solid var(--color-primary); border-right: 2px solid var(--color-primary); }
+    .pcol { border-left: 1px solid var(--color-border); border-right: 1px solid var(--color-border); }
+    .prec-b { border-bottom: 2px solid var(--color-primary); border-radius: 0 0 10px 10px; }
+    .pcol-b { border-bottom: 1px solid var(--color-border); }
+    .pcol-b-last { border-radius: 0 0 10px 10px; }
+    .invp-group td { padding: 14px 12px 6px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; text-align: left; }
+    .invp-group-native td { color: var(--color-success); }
+    .invp-group-opt td { color: var(--color-blue); }
+    .yes { color: var(--color-success); font-weight: 700; }
+    .no { color: var(--color-text-faint); }
+    .opt { color: var(--color-text-muted); font-size: 0.82rem; }
+    .sq { color: var(--color-gold); font-weight: 600; font-size: 0.82rem; }
+    .sf { color: var(--color-success); font-weight: 600; font-size: 0.82rem; }
+    .invp-note { font-size: 0.78rem; color: var(--color-text-faint); margin: 14px 0 0; line-height: 1.6; }
+    .rl-head { text-align: center; margin-bottom: 20px; }
+    .rl-label { font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 8px; }
+    .rl-big { font-size: 2.8rem; font-weight: 700; color: var(--color-primary); line-height: 1.05; }
+    .rl-uplift { font-size: 0.95rem; color: var(--color-success); margin-top: 8px; min-height: 18px; }
+    .rl-levers { display: grid; gap: 12px; max-width: 680px; margin: 0 auto; }
+    .rl-row { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 14px 18px; }
+    .rl-row-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .rl-name { font-size: 1rem; font-weight: 500; color: var(--color-text); }
+    .rl-switch { position: relative; display: inline-block; width: 42px; height: 24px; flex: none; cursor: pointer; }
+    .rl-cb { opacity: 0; width: 0; height: 0; position: absolute; }
+    .rl-track { position: absolute; inset: 0; background: var(--color-surface-2); border-radius: 999px; transition: .15s; }
+    .rl-knob { position: absolute; height: 18px; width: 18px; left: 3px; top: 3px; background: var(--color-text-muted); border-radius: 50%; transition: .15s; }
+    .rl-cb:checked ~ .rl-track { background: var(--color-primary-bg); }
+    .rl-cb:checked ~ .rl-knob { background: var(--color-primary); transform: translateX(18px); }
+    .rl-ctrl { display: none; flex-direction: column; gap: 8px; margin-top: 14px; }
+    .rl-row.open .rl-ctrl { display: flex; }
+    .rl-toprow { display: flex; align-items: center; gap: 14px; }
+    .rl-swrap { position: relative; flex: 1; height: 22px; display: flex; align-items: center; }
+    .rl-slider { width: 100%; accent-color: var(--color-primary); position: relative; z-index: 2; }
+    .rl-tick { position: absolute; top: 1px; width: 2px; height: 20px; background: var(--color-gold); z-index: 1; transform: translateX(-1px); }
+    .rl-pct { font-size: 0.9rem; font-weight: 600; color: var(--color-primary); min-width: 42px; text-align: right; }
+    .rl-dollar { font-size: 0.82rem; color: var(--color-text-muted); min-width: 92px; text-align: right; }
+    .rl-note { font-size: 0.72rem; display: flex; justify-content: space-between; }
+    .rl-bench { color: var(--color-text-muted); }
+    .rl-pass { color: var(--color-gold); font-weight: 600; visibility: hidden; }
+    .rl-cta { text-align: center; margin-top: 24px; }
+    .rl-btn { display: inline-block; background: var(--color-primary); color: #fff; font-size: 0.95rem; font-weight: 600; text-decoration: none; padding: 12px 24px; border-radius: 10px; }
+    @media (max-width: 680px) { .invfit { grid-template-columns: 1fr; } }
+  </style>
+
+  <section class="inv">
+    <div class="inv-inner">
+
+      <div class="inv-divider"></div>
+
+      <h3 class="inv-h3">How we fit the RFP — point by point</h3>
+      <div class="invfit">
+        <div class="invfit-card invfit-native">
+          <div class="invfit-h">Native to RocketRez</div>
+          <ul>
+            <li>Online + gate ticketing</li>
+            <li>Season passes &amp; memberships</li>
+            <li>Access control &amp; scanning</li>
+            <li>Groups, retail &amp; onsite commerce</li>
+            <li>F&amp;B — concessions, counter service, KDS, mobile order</li>
+            <li>Dynamic pricing</li>
+            <li>Unified cart upsell / cross-sell</li>
+            <li>Real-time reporting (Power BI)</li>
+            <li>Sub-ledger &rarr; NetSuite</li>
+            <li>Quebec tax / bilingual checkout</li>
+            <li>Role-based permissions</li>
+          </ul>
+        </div>
+        <div class="invfit-card invfit-partner">
+          <div class="invfit-h">Covered by partners</div>
+          <ul>
+            <li>Demand-pricing optimization &mdash; <span class="p">Spotlio (optional)</span></li>
+            <li>Cashless wallet &amp; loyalty &mdash; <span class="p">Vantage</span></li>
+            <li>Guest mobile app &mdash; <span class="p">Vantage</span></li>
+            <li>Guest identity &mdash; <span class="p">Vantage</span></li>
+            <li>Full-service / table-side dining &mdash; <span class="p">Toast (VVV)</span></li>
+            <li>Weather guarantee &mdash; <span class="p">Sensible</span></li>
+            <li>Buy now, pay later &mdash; <span class="p">Affirm</span></li>
+            <li>PMS / room charge &mdash; <span class="p">Opera / OHIP</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="inv-divider"></div>
+
+      <h3 class="inv-h3">Pricing — choose your scope</h3>
+      <table class="invp">
+        <thead>
+          <tr>
+            <th class="invp-feat"></th>
+            <th class="invp-h-rec">
+              <div class="invp-badge">Recommended</div>
+              <div class="invp-tier">RocketRez<br>+ Vantage (Quebec)</div>
+              <div class="invp-price">$2.7M<span style="font-size:0.55em;color:var(--color-text-muted);font-weight:400"> /yr</span></div>
+            </th>
+            <th class="invp-h">
+              <div class="invp-tier">RocketRez<br>+ Vantage (Full)</div>
+              <div class="invp-price">$3.8M<span style="font-size:0.55em;color:var(--color-text-muted);font-weight:400"> /yr</span></div>
+            </th>
+            <th class="invp-h invp-h-last">
+              <div class="invp-tier">RocketRez<br>+ Vantage + Toast</div>
+              <div class="invp-price">$4.1M<span style="font-size:0.55em;color:var(--color-text-muted);font-weight:400"> /yr</span></div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="invp-group invp-group-native"><td colspan="4">Out of the box — native RocketRez</td></tr>
+          <tr><td class="invp-feat">RocketRez platform — all 11 parks</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
+          <tr><td class="invp-feat">Ticketing · POS · access · memberships · groups</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
+          <tr><td class="invp-feat">F&amp;B — concessions · counter service · KDS · mobile ordering</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
+          <tr><td class="invp-feat">Dynamic pricing</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
+          <tr><td class="invp-feat">Sub-ledger → NetSuite · Gold Pass unification</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
+          <tr class="invp-group invp-group-opt"><td colspan="4">Optional enhancements</td></tr>
+          <tr><td class="invp-feat">Automated demand pricing — Spotlio</td><td class="prec opt">Optional</td><td class="pcol opt">Optional</td><td class="pcol opt">Optional</td></tr>
+          <tr><td class="invp-feat">Vantage — cashless wallet · loyalty · guest identity</td><td class="prec sq">Quebec (VVV)</td><td class="pcol sf">Portfolio-wide</td><td class="pcol sf">Portfolio-wide</td></tr>
+          <tr><td class="invp-feat">Vantage — guest mobile app</td><td class="prec sq">Quebec (VVV)</td><td class="pcol sf">All parks</td><td class="pcol sf">All parks</td></tr>
+          <tr><td class="invp-feat">Toast — full-service dining · table management (VVV)</td><td class="prec prec-b no">—</td><td class="pcol pcol-b no">—</td><td class="pcol pcol-b pcol-b-last yes">✓</td></tr>
+        </tbody>
+      </table>
+      <p class="invp-note">RocketRez powers attractions F&amp;B end to end — concessions, counter service, and mobile ordering. For full-service, table-side dining at properties like VVV, Toast is an optional specialist that adds table management and coursing. Toast is pending Quebec certification; our recommendation is to stay on Veloce until cutover makes sense. Pricing shown is illustrative.</p>
+
+      <div class="inv-divider"></div>
+
+      <h3 class="inv-h3" style="text-align:center;">Model the return</h3>
+      <div class="rl-head">
+        <div class="rl-label">Projected annual revenue</div>
+        <div class="rl-big" id="rlBig">$210,418,709</div>
+        <div class="rl-uplift" id="rlUplift"></div>
+      </div>
+      <div class="rl-levers" id="rlLevers"></div>
+      <div class="rl-cta">
+        <a class="rl-btn" href="https://labs.timsamson.com/impact-modeler/coi" target="_blank" rel="noopener">See the full, sourced breakdown in the Impact Modeler &#8594;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(0)">
+      Back to Introduction
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+  </div>
+</div><!-- /#arch-14 -->
+
+<script>
+(function(){
+  var TICKETING  = 135956907;
+  var ONLINE     = 135956907 * 0.55;
+  var BASE_TOTAL = 210418709;
+
+  var LEVERS = [
+    { name:'Demand-based pricing yield',            base:TICKETING, bench:4 },
+    { name:'Per-guest spend (upsell & cross-sell)', base:TICKETING, bench:4 },
+    { name:'Abandoned-cart recovery',               base:ONLINE,    bench:6 },
+    { name:'In-app & SMS push upsell',              base:ONLINE,    bench:4 },
+    { name:'Modern payment conversion',             base:ONLINE,    bench:7 }
+  ];
+  LEVERS.forEach(function(l){ l.on=false; l.pct=1; l.max=l.bench*2; });
+
+  var wrap=document.getElementById('rlLevers');
+  var big=document.getElementById('rlBig');
+  var uplift=document.getElementById('rlUplift');
+
+  function money(n){ return '$'+Math.round(n).toLocaleString(); }
+
+  function recompute(){
+    var add=0, active=0;
+    LEVERS.forEach(function(l){ if(l.on){ add+=l.base*l.pct/100; active++; } });
+    big.textContent=money(BASE_TOTAL+add);
+    uplift.textContent=active ? ('+'+money(add)+' from '+active+' lever'+(active>1?'s':'')) : '';
+  }
+
+  LEVERS.forEach(function(l){
+    var row=document.createElement('div'); row.className='rl-row';
+
+    var head=document.createElement('div'); head.className='rl-row-head';
+    var name=document.createElement('span'); name.className='rl-name'; name.textContent=l.name;
+    var sw=document.createElement('label'); sw.className='rl-switch';
+    var cb=document.createElement('input'); cb.type='checkbox'; cb.className='rl-cb';
+    var track=document.createElement('span'); track.className='rl-track';
+    var knob=document.createElement('span'); knob.className='rl-knob';
+    sw.appendChild(cb); sw.appendChild(track); sw.appendChild(knob);
+    head.appendChild(name); head.appendChild(sw);
+
+    var ctrl=document.createElement('div'); ctrl.className='rl-ctrl';
+    var toprow=document.createElement('div'); toprow.className='rl-toprow';
+    var swrap=document.createElement('div'); swrap.className='rl-swrap';
+    var slider=document.createElement('input'); slider.type='range'; slider.className='rl-slider';
+    slider.min=1; slider.max=l.max; slider.step=0.1; slider.value=1;
+    var tick=document.createElement('div'); tick.className='rl-tick';
+    tick.style.left=(l.bench/l.max*100)+'%';
+    swrap.appendChild(slider); swrap.appendChild(tick);
+    var pct=document.createElement('span'); pct.className='rl-pct'; pct.textContent='1%';
+    var dollar=document.createElement('span'); dollar.className='rl-dollar'; dollar.textContent=money(l.base*0.01);
+    toprow.appendChild(swrap); toprow.appendChild(pct); toprow.appendChild(dollar);
+
+    var note=document.createElement('div'); note.className='rl-note';
+    var bench=document.createElement('span'); bench.className='rl-bench'; bench.textContent='Benchmark: '+l.bench+'%';
+    var pass=document.createElement('span'); pass.className='rl-pass'; pass.textContent='Above benchmark';
+    note.appendChild(bench); note.appendChild(pass);
+
+    ctrl.appendChild(toprow); ctrl.appendChild(note);
+    row.appendChild(head); row.appendChild(ctrl);
+
+    cb.addEventListener('change', function(){
+      l.on=cb.checked;
+      if(cb.checked) row.classList.add('open'); else row.classList.remove('open');
+      recompute();
+    });
+    slider.addEventListener('input', function(){
+      l.pct=parseFloat(slider.value);
+      pct.textContent=l.pct.toFixed(1)+'%';
+      dollar.textContent=money(l.base*l.pct/100);
+      pass.style.visibility=l.pct>l.bench ? 'visible' : 'hidden';
+      recompute();
+    });
+
+    wrap.appendChild(row);
+  });
+
+  recompute();
+})();
+</script>
+
+
 <style>
 /* ── Arch views outside <main> — match main container ── */
-#arch-9, #arch-12, #arch-13 {
+#arch-9, #arch-12, #arch-13, #arch-14 {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
@@ -4303,7 +4567,7 @@ function showRfpStack(index, btn) {
   box-sizing: border-box;
 }
 @media(max-width: 768px) {
-  #arch-9, #arch-12, #arch-13 { padding-left: var(--space-4); padding-right: var(--space-4); }
+  #arch-9, #arch-12, #arch-13, #arch-14 { padding-left: var(--space-4); padding-right: var(--space-4); }
 }
 
 /* ── MoneyBags legend ── */
