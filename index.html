@@ -3444,10 +3444,11 @@ a { color: inherit; text-decoration: none; }
   <button class="side-nav-btn" onclick="showArch(3)"><span class="side-nav-num">—</span>Platform Features</button>
   <button class="side-nav-btn" onclick="showArch(4)"><span class="side-nav-num">02</span>Solutions Architecture</button>
   <button class="side-nav-btn" onclick="showArch(5)"><span class="side-nav-num">03</span>RFP Solution Q&amp;A</button>
+  <button class="side-nav-btn" onclick="showArch(6)"><span class="side-nav-num">04</span>Closing</button>
   <div class="side-nav-label" style="margin-top:var(--space-4)">Demo</div>
-  <button class="side-nav-btn side-nav-btn--demo" onclick="showArch(6)"><span class="side-nav-num">—</span>Elitch Gardens</button>
+  <button class="side-nav-btn side-nav-btn--demo" onclick="showArch(7)"><span class="side-nav-num">—</span>Elitch Gardens</button>
   <div class="side-nav-label" style="margin-top:var(--space-4)">Investment</div>
-  <button class="side-nav-btn" onclick="showArch(7)"><span class="side-nav-num">—</span>Pricing</button>
+  <button class="side-nav-btn" onclick="showArch(8)"><span class="side-nav-num">—</span>Pricing</button>
 </nav>
 
 <script>
@@ -4210,11 +4211,88 @@ function showRfpStack(index, btn) {
 
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(6)">
-      Elitch Gardens Demo
+      Closing
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 </div><!-- /#arch-9 -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- ARCH-15: CLOSER                                                  -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="arch-view" id="arch-15">
+  <div class="section-crumb"><span class="section-crumb-dot"></span>Closing</div>
+  <div class="arch-header">
+    <div class="arch-icon" style="background:var(--color-primary-bg);color:var(--color-primary)">→</div>
+    <div class="arch-title-block">
+      <div class="arch-title">Proven today. Building what's next.</div>
+      <div class="arch-subtitle">Why RocketRez is the right partner for Premier — now and into what comes next</div>
+    </div>
+  </div>
+
+  <style>
+    .next { padding: 0 0 32px; }
+    .next-inner { max-width: 920px; margin: 0 auto; text-align: center; }
+    .next-title { font-size: 1.9rem; font-weight: 700; color: var(--color-primary); margin: 0 0 16px; }
+    .next-lead { font-size: 1.05rem; line-height: 1.6; color: var(--color-text-muted); margin: 0 auto 32px; max-width: 780px; }
+    .next-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; text-align: left; }
+    .next-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 26px 24px; }
+    .next-tag { display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 999px; padding: 4px 14px; margin-bottom: 14px; }
+    .next-tag-now { color: var(--color-text); background: var(--color-surface-2); }
+    .next-tag-next { color: var(--color-primary); background: var(--color-primary-bg); }
+    .next-card p { font-size: 1rem; line-height: 1.65; color: var(--color-text); margin: 0; }
+    .next-balance { background: var(--color-primary-bg); border: 1px solid var(--color-primary); border-radius: 12px; padding: 22px 28px; margin: 24px 0 0; text-align: left; }
+    .next-balance p { font-size: 1rem; line-height: 1.65; color: var(--color-text); margin: 0; }
+    .next-close { font-size: 1.3rem; line-height: 1.5; font-weight: 600; color: var(--color-primary); margin: 32px auto 0; max-width: 820px; }
+    @media (max-width: 640px) { .next-cols { grid-template-columns: 1fr; } }
+  </style>
+
+  <section class="next">
+    <div class="next-inner">
+      <p class="next-lead">
+        Premier onboards onto a platform proven across 200+ attractions and delivering from day
+        one — built cloud-native, with none of the legacy bloat that slows the incumbents down.
+        We move fast, we deliver the right things, and we make the platform better under you,
+        release after release.
+      </p>
+      <div class="next-cols">
+        <div class="next-card">
+          <span class="next-tag next-tag-now">Building on today</span>
+          <p>The platform you go live on doesn't stand still. Every release makes ticketing,
+          POS, access, and reporting sharper, faster, and more capable — delivered automatically.
+          The product you buy keeps getting better the whole time you own it.</p>
+        </div>
+        <div class="next-card">
+          <span class="next-tag next-tag-next">Building for tomorrow</span>
+          <p>At the same time, we're building Orion — our next-generation platform, with
+          AI-assisted insight at its core. The foundation you establish now carries straight into
+          it, so your investment compounds forward — appreciating with every release, never
+          depreciating or holding your growth back.</p>
+        </div>
+      </div>
+      <div class="next-balance">
+        <p>We strike a balance most vendors don't. We won't bend the platform to every
+        one-off request — that's how software rots into bloat. But we won't vanish into
+        our own roadmap and leave you shouting into a support queue either. We listen, we
+        prioritize what moves the business, and we build what our partners actually need.</p>
+      </div>
+      <p class="next-close">
+        Our goal is a partnership that benefits both sides: we earn your trust by putting the
+        right things in motion now — and we keep earning it for as long as we work together.
+        That's what we're here to build with Premier. Not a transaction. A lasting
+        partnership — and it starts the moment you say go.
+      </p>
+    </div>
+  </section>
+
+  <div class="section-next">
+    <button class="section-next-btn" onclick="showArch(7)">
+      Elitch Gardens Demo
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div><!-- /#arch-15 -->
 
 
 <div class="arch-view" id="arch-12">
@@ -4286,7 +4364,7 @@ function showRfpStack(index, btn) {
   </div>
 
   <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(7)">
+    <button class="section-next-btn" onclick="showArch(8)">
       Investment &amp; Pricing
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
@@ -4558,7 +4636,7 @@ function showRfpStack(index, btn) {
 
 <style>
 /* ── Arch views outside <main> — match main container ── */
-#arch-9, #arch-12, #arch-13, #arch-14 {
+#arch-9, #arch-12, #arch-13, #arch-14, #arch-15 {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
@@ -4567,7 +4645,7 @@ function showRfpStack(index, btn) {
   box-sizing: border-box;
 }
 @media(max-width: 768px) {
-  #arch-9, #arch-12, #arch-13, #arch-14 { padding-left: var(--space-4); padding-right: var(--space-4); }
+  #arch-9, #arch-12, #arch-13, #arch-14, #arch-15 { padding-left: var(--space-4); padding-right: var(--space-4); }
 }
 
 /* ── MoneyBags legend ── */
