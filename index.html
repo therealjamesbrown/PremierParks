@@ -891,22 +891,23 @@ a { color: inherit; text-decoration: none; }
 .footprint {
   margin: var(--space-6) 0 var(--space-6);
   padding: var(--space-4) 0;
-  display: flex; align-items: center;
-  gap: var(--space-5); flex-wrap: wrap;
+  display: flex; flex-direction: column;
+  gap: var(--space-3);
 }
 .footprint-label {
   font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--color-text-muted); font-weight: 700; white-space: nowrap; flex-shrink: 0;
+  color: var(--color-text-muted); font-weight: 700;
 }
 .footprint-pills {
   list-style: none; margin: 0; padding: 0;
-  display: flex; flex-wrap: wrap; gap: var(--space-2); flex: 1;
+  display: flex; gap: var(--space-2); width: 100%;
 }
 .footprint-pills li {
+  flex: 1; text-align: center;
   font-size: var(--text-xs); font-weight: 700;
   color: var(--color-primary); background: var(--color-primary-bg);
   border: 1px solid color-mix(in oklch, var(--color-primary) 25%, transparent);
-  border-radius: var(--radius-full); padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-lg); padding: var(--space-2) var(--space-3);
   letter-spacing: 0.01em;
 }
 .about-blurb {
@@ -1894,22 +1895,9 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <div class="ptq-tile">
-    <div class="ptq-mark">"</div>
     <h3 class="ptq-title">Premier's timing, not ours</h3>
     <p class="ptq-body">Premier's timeline will be driven by business realities — seasonality, NetSuite milestones, operating windows, and leadership priorities — not by a vendor's comfort level. We understand that in this environment, delaying change can be as risky as accelerating it. The work is to match the implementation motion to the business window and then execute with discipline.</p>
   </div>
-
-  <section class="derisk">
-    <div class="derisk-inner">
-      <h2 class="derisk-title">What de-risks the transition</h2>
-      <p class="derisk-lead">We've stood this platform up across 200+ attractions and multi-park portfolios — we're not learning transition on Premier. A change this size carries real risk, and we run it on a playbook that's already been through go-live.</p>
-      <ul class="derisk-list">
-        <li><strong>Aligned before anything moves.</strong> Product, pricing, and entitlement structures are standardized up front, so you're migrating order — not chaos.</li>
-        <li><strong>Owned and proven, not assumed.</strong> Every mapping and integration — NetSuite, payments, access control — has a named owner and is tested end-to-end against your real scenarios before launch.</li>
-        <li><strong>Rehearsed, with a way back.</strong> Frontline teams are trained and the cutover is dry-run with rollback options ready. Go-live is earned against readiness criteria — never a calendar date and a prayer.</li>
-      </ul>
-    </div>
-  </section>
 
   <section class="wtad-strip">
     <div class="wtad-inner">
@@ -1940,6 +1928,18 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
+  <section class="derisk">
+    <div class="derisk-inner">
+      <h2 class="derisk-title">What de-risks the transition</h2>
+      <p class="derisk-lead">We've stood this platform up across 200+ attractions and multi-park portfolios — we're not learning transition on Premier. A change this size carries real risk, and we run it on a playbook that's already been through go-live.</p>
+      <ul class="derisk-list">
+        <li><strong>Aligned before anything moves.</strong> Product, pricing, and entitlement structures are standardized up front, so you're migrating order — not chaos.</li>
+        <li><strong>Owned and proven, not assumed.</strong> Every mapping and integration — NetSuite, payments, access control — has a named owner and is tested end-to-end against your real scenarios before launch.</li>
+        <li><strong>Rehearsed, with a way back.</strong> Frontline teams are trained and the cutover is dry-run with rollback options ready. Go-live is earned against readiness criteria — never a calendar date and a prayer.</li>
+      </ul>
+    </div>
+  </section>
+
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(1)">
       Meet the Team
@@ -1960,7 +1960,7 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <p class="about-blurb">RocketRez is a cloud-native ticketing, POS, and commerce platform built from the cloud, for the cloud, with a modern architecture that ships improvements weekly instead of in multi-year release cycles. We operate at the intersection of guest experience and operational control — powering online and onsite ticketing, season passes, access control and validation, food &amp; beverage, retail, and groups, events, and catering for venues ranging from waterparks and theme parks to zoos and aquariums. Our integration-first design connects cleanly with PMS, F&amp;B, loyalty, and finance systems, making RocketRez a reliable backbone rather than another siloed tool.</p>
+  <p class="about-blurb">RocketRez is a cloud-native ticketing, POS, and commerce platform built from the cloud, for the cloud, with a modern architecture that ships improvements weekly instead of in multi-year release cycles. We operate at the intersection of guest experience and operational control — powering online and onsite ticketing, season passes, access control and validation, food &amp; beverage, retail, groups, events, and catering for venues ranging from waterparks and theme parks to zoos and aquariums. Our integration-first design connects cleanly with PMS, F&amp;B, loyalty, and finance systems, making RocketRez a reliable backbone rather than another siloed tool.</p>
   <div class="footprint">
     <span class="footprint-label">Footprint</span>
     <ul class="footprint-pills">
@@ -2429,28 +2429,145 @@ a { color: inherit; text-decoration: none; }
       <div class="arch-subtitle">A walkthrough of RocketRez capabilities across every module</div>
     </div>
   </div>
-  <div class="pfeat-scroll">
-    <img src="content/Ticketing%20%26%20Admission.png" alt="Ticketing &amp; Admission" class="pfeat-img">
-    <img src="content/Ticketing%20%26%20Admission%20(2).png" alt="Ticketing &amp; Admission 2" class="pfeat-img">
-    <img src="content/Ticketing%20%26%20Admission%20(3).png" alt="Ticketing &amp; Admission 3" class="pfeat-img">
-    <img src="content/Ticketing%20%26%20Admission%20(4).png" alt="Ticketing &amp; Admission 4" class="pfeat-img">
-    <img src="content/Ticketing%20%26%20Admission%20(5).png" alt="Ticketing &amp; Admission 5" class="pfeat-img">
-    <img src="content/Member%20%26%20Guest%20Experience.png" alt="Member &amp; Guest Experience" class="pfeat-img">
-    <img src="content/Member%20%26%20Guest%20Experience%20continued.png" alt="Member &amp; Guest Experience continued" class="pfeat-img">
-    <img src="content/Payments%20%26%20Customizable%20Checkout.png" alt="Payments &amp; Customizable Checkout" class="pfeat-img">
-    <img src="content/Point-of-Sale.png" alt="Point of Sale" class="pfeat-img">
-    <img src="content/Point-of-Sale%20(2).png" alt="Point of Sale 2" class="pfeat-img">
-    <img src="content/Dynamic%20Pricing.png" alt="Dynamic Pricing" class="pfeat-img">
-    <img src="content/Dynamic%20Pricing%20(2).png" alt="Dynamic Pricing 2" class="pfeat-img">
-    <img src="content/Event%20Management.png" alt="Event Management" class="pfeat-img">
-    <img src="content/Group%20Sales.png" alt="Group Sales" class="pfeat-img">
-    <img src="content/Distribution.png" alt="Distribution" class="pfeat-img">
-    <img src="content/Insights.png" alt="Insights" class="pfeat-img">
-    <img src="content/Integrations.png" alt="Integrations" class="pfeat-img">
-    <img src="content/Hardware.png" alt="Hardware" class="pfeat-img">
-    <img src="content/Relay.png" alt="Relay" class="pfeat-img">
-    <img src="content/Sensible%20Weather.png" alt="Sensible Weather" class="pfeat-img">
-  </div>
+  <section class="pf">
+    <div class="pf-grid" id="pfGrid"></div>
+    <div class="pf-modal" id="pfModal" aria-hidden="true">
+      <div class="pf-modal-box" role="dialog" aria-modal="true" aria-labelledby="pfModalTitle">
+        <div class="pf-modal-head">
+          <span class="pf-modal-title" id="pfModalTitle"></span>
+          <div class="pf-modal-actions">
+            <span class="pf-modal-tabs" id="pfModalTabs"></span>
+            <button class="pf-close" id="pfClose" aria-label="Close">&#10005;</button>
+          </div>
+        </div>
+        <div class="pf-img-wrap">
+          <img class="pf-img" id="pfImg" src="" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .pf { padding: 0; }
+    .pf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
+    .pf-tile { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 22px 20px; cursor: pointer; text-align: left; transition: border-color .15s, transform .15s; min-height: 100px; display: flex; flex-direction: column; justify-content: space-between; }
+    .pf-tile:hover { border-color: var(--color-primary); transform: translateY(-2px); }
+    .pf-tile-title { font-size: 1.02rem; font-weight: 700; color: var(--color-text); margin: 0; line-height: 1.3; }
+    .pf-tile-cta { font-size: 0.8rem; font-weight: 600; color: var(--color-primary); margin-top: 16px; }
+    .pf-modal { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.7); padding: 3vh 3vw; align-items: center; justify-content: center; }
+    .pf-modal.open { display: flex; }
+    .pf-modal-box { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; width: 100%; max-width: 1000px; height: 92vh; display: flex; flex-direction: column; overflow: hidden; }
+    .pf-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--color-border); }
+    .pf-modal-title { font-size: 1.05rem; font-weight: 700; color: var(--color-text); }
+    .pf-modal-actions { display: flex; align-items: center; gap: 8px; }
+    .pf-modal-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pf-tab { font-size: 0.8rem; padding: 5px 12px; border-radius: 999px; cursor: pointer; background: var(--color-surface-2); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+    .pf-tab.active { background: var(--color-primary-bg); color: var(--color-primary); border-color: var(--color-primary); }
+    .pf-close { background: transparent; border: none; color: var(--color-text-muted); font-size: 1.1rem; cursor: pointer; padding: 4px 8px; line-height: 1; }
+    .pf-close:hover { color: var(--color-text); }
+    .pf-img-wrap { flex: 1; overflow-y: auto; background: var(--color-surface-2); }
+    .pf-img { width: 100%; height: auto; display: block; }
+    @media (max-width: 520px) { .pf-modal-box { height: 88vh; } }
+  </style>
+
+  <script>
+  (function(){
+    var CATEGORIES = [
+      { title: 'Ticketing', images: [
+        { label: 'Page 1', url: 'content/Ticketing%20%26%20Admission.png' },
+        { label: 'Page 2', url: 'content/Ticketing%20%26%20Admission%20(2).png' },
+        { label: 'Page 3', url: 'content/Ticketing%20%26%20Admission%20(3).png' },
+        { label: 'Page 4', url: 'content/Ticketing%20%26%20Admission%20(4).png' },
+        { label: 'Page 5', url: 'content/Ticketing%20%26%20Admission%20(5).png' }
+      ]},
+      { title: 'Season Pass', images: [
+        { label: 'Overview', url: 'content/Member%20%26%20Guest%20Experience.png' },
+        { label: 'Continued', url: 'content/Member%20%26%20Guest%20Experience%20continued.png' }
+      ]},
+      { title: 'POS + Mobile POS', images: [
+        { label: 'Point of Sale', url: 'content/Point-of-Sale.png' },
+        { label: 'Page 2', url: 'content/Point-of-Sale%20(2).png' },
+        { label: 'Hardware', url: 'content/Hardware.png' }
+      ]},
+      { title: 'Group Sales & Events', images: [
+        { label: 'Event Management', url: 'content/Event%20Management.png' },
+        { label: 'Group Sales', url: 'content/Group%20Sales.png' }
+      ]},
+      { title: 'Payments', images: [
+        { label: 'Overview', url: 'content/Payments%20%26%20Customizable%20Checkout.png' }
+      ]},
+      { title: 'Dynamic Pricing', images: [
+        { label: 'Overview', url: 'content/Dynamic%20Pricing.png' },
+        { label: 'Page 2', url: 'content/Dynamic%20Pricing%20(2).png' }
+      ]},
+      { title: 'Guest Communication', images: [
+        { label: 'Relay', url: 'content/Relay.png' }
+      ]},
+      { title: 'Business Intelligence', images: [
+        { label: 'Insights', url: 'content/Insights.png' }
+      ]},
+      { title: 'Weather Guarantees', images: [
+        { label: 'Overview', url: 'content/Sensible%20Weather.png' }
+      ]},
+      { title: 'Distribution & Partners', images: [
+        { label: 'Distribution', url: 'content/Distribution.png' },
+        { label: 'Integrations', url: 'content/Integrations.png' }
+      ]}
+    ];
+
+    var grid = document.getElementById('pfGrid');
+    var modal = document.getElementById('pfModal');
+    var imgEl = document.getElementById('pfImg');
+    var titleEl = document.getElementById('pfModalTitle');
+    var tabsEl = document.getElementById('pfModalTabs');
+
+    CATEGORIES.forEach(function(cat, i) {
+      var tile = document.createElement('div');
+      tile.className = 'pf-tile';
+      tile.setAttribute('role', 'button');
+      tile.setAttribute('tabindex', '0');
+      tile.innerHTML = '<p class="pf-tile-title">' + cat.title + '</p><span class="pf-tile-cta">View &#8594;</span>';
+      tile.addEventListener('click', function() { openCat(i); });
+      tile.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCat(i); } });
+      grid.appendChild(tile);
+    });
+
+    function loadImage(cat, idx) {
+      var img = cat.images[idx];
+      imgEl.src = img.url;
+      imgEl.alt = img.label;
+      Array.prototype.forEach.call(tabsEl.children, function(c, ci) { c.classList.toggle('active', ci === idx); });
+    }
+
+    function openCat(i) {
+      var cat = CATEGORIES[i];
+      titleEl.textContent = cat.title;
+      tabsEl.innerHTML = '';
+      if (cat.images.length > 1) {
+        cat.images.forEach(function(img, pi) {
+          var t = document.createElement('span');
+          t.className = 'pf-tab';
+          t.textContent = img.label;
+          t.addEventListener('click', function() { loadImage(cat, pi); });
+          tabsEl.appendChild(t);
+        });
+      }
+      loadImage(cat, 0);
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closePf() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      imgEl.src = '';
+    }
+
+    document.getElementById('pfClose').addEventListener('click', closePf);
+    modal.addEventListener('click', function(e) { if (e.target === modal) closePf(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePf(); });
+  })();
+  </script>
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(4)">
       Solutions Architecture
@@ -4480,23 +4597,6 @@ function showRfpStack(index, btn) {
 @media(max-width: 768px) {
   #arch-9, #arch-10, #arch-11, #arch-12, #arch-13 { padding-left: var(--space-4); padding-right: var(--space-4); }
 }
-.pfeat-scroll {
-  height: 74vh;
-  overflow-y: auto;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-surface);
-  display: flex;
-  flex-direction: column;
-  scroll-behavior: smooth;
-}
-.pfeat-img {
-  width: 75%;
-  display: block;
-  margin: 0 auto;
-  border-bottom: 1px solid var(--color-divider);
-}
-.pfeat-img:last-child { border-bottom: none; }
 
 /* ── MoneyBags legend ── */
 .mb-legend {
