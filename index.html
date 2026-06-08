@@ -2206,11 +2206,174 @@ a { color: inherit; text-decoration: none; }
     </div>
     <div style="background:linear-gradient(135deg,var(--color-primary-bg) 0%,var(--color-gold-bg) 100%);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5) var(--space-6);margin-bottom:var(--space-6)">
       <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-base);margin-bottom:var(--space-2)">The work doesn't disappear. Your job gets better.</div>
-      <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin:0 0 var(--space-4)">Manual entry isn't finance expertise — it's data transport. When the systems handle the transport, your team spends its time on what actually requires expertise: reviewing, questioning, and presenting what the numbers mean to the business.</p>
-      <button class="section-next-btn" style="display:inline-flex;padding:var(--space-2) var(--space-4);font-size:var(--text-xs)" onclick="showArch(7)">
-        See the full Finance walkthrough
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin:0">Manual entry isn't finance expertise — it's data transport. When the systems handle the transport, your team spends its time on what actually requires expertise: reviewing, questioning, and presenting what the numbers mean to the business.</p>
+    </div>
+
+    <!-- ─── WHERE TIME GOES TODAY vs. FUTURE ─── -->
+    <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-lg);margin-bottom:var(--space-4)">Where Does Finance Team Time Go Today vs. Tomorrow?</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-bottom:var(--space-8)">
+      <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
+        <div style="font-weight:700;font-size:var(--text-sm);color:var(--color-warning);margin-bottom:var(--space-4);display:flex;align-items:center;gap:var(--space-2)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          TODAY — Manual MoneyBags Workflow
+        </div>
+        <div style="position:relative;height:220px"><canvas id="chartToday"></canvas></div>
+        <div style="margin-top:var(--space-3);font-size:var(--text-xs);color:var(--color-text-muted)">Estimated weekly hours across all parks, all revenue streams</div>
+      </div>
+      <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
+        <div style="font-weight:700;font-size:var(--text-sm);color:var(--color-success);margin-bottom:var(--space-4);display:flex;align-items:center;gap:var(--space-2)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          FUTURE — RocketRez + NetSuite Workflow
+        </div>
+        <div style="position:relative;height:220px"><canvas id="chartFuture"></canvas></div>
+        <div style="margin-top:var(--space-3);font-size:var(--text-xs);color:var(--color-text-muted)">Same accountability, dramatically different time allocation</div>
+      </div>
+    </div>
+
+    <!-- ─── NETSUITE JE TEMPLATES ─── -->
+    <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-lg);margin-bottom:var(--space-2)">Journal Entry Automation — Configured Once</div>
+    <div style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5)">These replace manually built JEs. Click any to see how it works.</div>
+
+    <div class="je-accordion" style="margin-bottom:var(--space-10)">
+      <div class="je-item" id="je-rent">
+        <button class="je-trigger" onclick="toggleJE('je-rent')">
+          <div style="display:flex;align-items:center;gap:var(--space-3)">
+            <span class="je-badge" style="background:var(--color-blue-bg);color:var(--color-blue)">RECURRING</span>
+            <span style="font-weight:600">Monthly Rent &amp; Lease Payments (Bell Canada, JEM, Office Leases)</span>
+          </div>
+          <svg class="je-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="je-body">
+          <div class="je-grid">
+            <div class="je-col">
+              <div class="je-col-header">Today (Manual)</div>
+              <p>Finance team opens the prior month's JE, changes the date, re-enters the amount (sometimes hunting down the invoice first), re-codes the GL, and posts. Repeated for every lease at every park — every single month.</p>
+            </div>
+            <div class="je-col">
+              <div class="je-col-header">NetSuite Template</div>
+              <p>A <strong>Memorized Transaction</strong> is set up once in NetSuite per lease. It contains the vendor, GL debit/credit coding, amount, and recurrence schedule. On the 1st of every month, NetSuite creates a draft JE automatically. Finance reviews the list, spot-checks amounts against the invoice, and approves with one click. No typing. No hunting. No re-coding.</p>
+            </div>
+            <div class="je-col">
+              <div class="je-col-header">Finance Team's New Role</div>
+              <p>Reviewer and approver. Your job is to <strong>verify the amounts are correct</strong> — not to create the entry. If a lease changes, you update the template once. The system handles the rest forever.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="je-item" id="je-sponsorship">
+        <button class="je-trigger" onclick="toggleJE('je-sponsorship')">
+          <div style="display:flex;align-items:center;gap:var(--space-3)">
+            <span class="je-badge" style="background:var(--color-gold-bg);color:var(--color-gold)">DEFERRED REV</span>
+            <span style="font-weight:600">Sponsorship Revenue (Coke, Pepsi, Iolani Schools, Partners)</span>
+          </div>
+          <svg class="je-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="je-body">
+          <div class="je-grid">
+            <div class="je-col">
+              <div class="je-col-header">Today (Manual)</div>
+              <p>Check arrives from sponsor. Finance team creates a JE, manually determines how much to recognize now vs. defer, codes it, posts it — and then remembers to come back monthly to recognize the next tranche. It's a spreadsheet and a prayer.</p>
+            </div>
+            <div class="je-col">
+              <div class="je-col-header">NetSuite Revenue Recognition</div>
+              <p>When a sponsorship contract is loaded into NetSuite, the <strong>Revenue Recognition schedule is set once</strong>. NetSuite automatically creates monthly recognition entries for the contract period. When the check arrives, it's matched to the open deferred revenue balance automatically via bank feed matching. Finance sees a clean dashboard of "recognized vs. deferred" by sponsor.</p>
+            </div>
+            <div class="je-col">
+              <div class="je-col-header">Finance Team's New Role</div>
+              <p><strong>Contract input</strong> (once per sponsor, per season) and monthly <strong>revenue review</strong>. You're now analyzing whether sponsorship revenue is tracking to forecast — not manually splitting checks between accounts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="je-item" id="je-vendors">
+        <button class="je-trigger" onclick="toggleJE('je-vendors')">
+          <div style="display:flex;align-items:center;gap:var(--space-3)">
+            <span class="je-badge" style="background:var(--color-success-bg);color:var(--color-success)">AUTO-MATCH</span>
+            <span style="font-weight:600">3rd-Party Vendor Revenue (Best Lockers, Vending, ATMs)</span>
+          </div>
+          <svg class="je-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="je-body">
+          <div class="je-grid">
+            <div class="je-col">
+              <div class="je-col-header">Today (Manual)</div>
+              <p>Monthly check from Best Lockers or G&amp;H Vending arrives. Finance team creates a JE from scratch: pick the vendor, pick the GL account, enter the amount, post. Sometimes the check gets lost in a park GM's inbox first and finance finds out a week late.</p>
+            </div>
+            <div class="je-col">
+              <div class="je-col-header">NetSuite + Bank Feed</div>
+              <p>NetSuite's <strong>bank feed integration</strong> monitors the bank account. When a check or ACH from Best Lockers clears, it's automatically matched to an <strong>expected receivable</strong> that's already set up for each vendor at each park. Finance sees a "matched" notification rather than creating the entry from scratch. Unmatched items surface for human review — the exceptions, not the routine.</p>
+            </div>
+            <div class="je-col">
+              <div class="je-col-header">Finance Team's New Role</div>
+              <p>Exceptions-only review. You're looking at the <strong>3 items that didn't auto-match</strong> (vendor paid late, amount changed, wrong park), not processing the 47 that came in clean. That's a morning task, not a full day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="je-item" id="je-memberships">
+        <button class="je-trigger" onclick="toggleJE('je-memberships')">
+          <div style="display:flex;align-items:center;gap:var(--space-3)">
+            <span class="je-badge" style="background:var(--color-purple-bg);color:var(--color-purple)">DEFERRED REV</span>
+            <span style="font-weight:600">Season Pass &amp; Membership Revenue (Deferred Recognition)</span>
+          </div>
+          <svg class="je-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="je-body">
+          <div class="je-grid">
+            <div class="je-col">
+              <div class="je-col-header">Today (Manual)</div>
+              <p>Pass revenue sits in a spreadsheet until it's "earned." Finance manually moves amounts from deferred liability to earned revenue each month, or after the season, or whenever someone remembers. Auditors ask questions. It gets messy.</p>
+            </div>
+            <div class="je-col">
+              <div class="je-col-header">RocketRez + NetSuite</div>
+              <p>RocketRez recognizes season pass revenue at the time of sale and provides GL-level reporting to support your accounting workflow. Sales data is available via API to support your NetSuite integration — giving finance the detail they need without manual extraction.</p>
+            </div>
+            <div class="je-col">
+              <div class="je-col-header">Finance Team's New Role</div>
+              <p>Configuring the recognition rule once and <strong>running variance analysis</strong> — comparing deferred revenue balance to prior seasons, flagging unusually high or low recognition rates by park, and feeding that into the forecast model. That's strategic finance work.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── WHAT FINANCE DOES WITH RECOVERED TIME ─── -->
+    <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-lg);margin-bottom:var(--space-2)">Where That Time Goes</div>
+    <div style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5)">Redirected toward work that actually requires a finance professional.</div>
+
+    <div class="time-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--space-4);margin-bottom:var(--space-8)">
+      <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Revenue Analysis</div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Data already in NetSuite means Monday morning is spent asking why Nashville Shores F&amp;B is down 8% — not entering last night's numbers.</div>
+      </div>
+      <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Forecasting &amp; Budgeting</div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Real-time actuals mean your forecast model stays current. Ownership gets accurate variance reporting without a month-end fire drill.</div>
+      </div>
+      <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Portfolio Reporting</div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted)">All parks on the same GL structure means a portfolio-level P&amp;L in minutes — the report ownership wants every week and currently doesn't have.</div>
+      </div>
+      <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Faster Month-End Close</div>
+        <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Most entries are already done before close starts. The team reconciles and approves — not builds from scratch.</div>
+      </div>
+    </div>
+
+    <!-- ─── THE HONEST TRUTH CALLOUT ─── -->
+    <div style="background:var(--color-primary-bg);border:1px solid var(--color-primary);border-radius:var(--radius-xl);padding:var(--space-6);display:flex;gap:var(--space-5);align-items:flex-start">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div>
+        <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-base);margin-bottom:var(--space-2);color:var(--color-primary)">What actually changes</div>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted)">Some tasks that currently take hours get reduced to a review step. The goal isn't to eliminate the finance team — it's to make sure their time goes toward work that requires real judgment. The team that knows how the data flows, what the rules are, and where the edge cases live becomes <strong>indispensable</strong>.</p>
+      </div>
     </div>
   </div>
 
@@ -3281,10 +3444,8 @@ a { color: inherit; text-decoration: none; }
   <button class="side-nav-btn" onclick="showArch(3)"><span class="side-nav-num">—</span>Platform Features</button>
   <button class="side-nav-btn" onclick="showArch(4)"><span class="side-nav-num">02</span>Solutions Architecture</button>
   <button class="side-nav-btn" onclick="showArch(5)"><span class="side-nav-num">03</span>RFP Solution Q&amp;A</button>
-  <button class="side-nav-btn" onclick="showArch(6)"><span class="side-nav-num">04</span>MoneyBags Matrix</button>
-  <button class="side-nav-btn" onclick="showArch(7)"><span class="side-nav-num">05</span>Finance: Your Time, Elevated</button>
   <div class="side-nav-label" style="margin-top:var(--space-4)">Demo</div>
-  <button class="side-nav-btn side-nav-btn--demo" onclick="showArch(8)"><span class="side-nav-num">—</span>Elitch Gardens</button>
+  <button class="side-nav-btn side-nav-btn--demo" onclick="showArch(6)"><span class="side-nav-num">—</span>Elitch Gardens</button>
 </nav>
 
 <script>
@@ -4047,465 +4208,12 @@ function showRfpStack(index, btn) {
 
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(6)">
-      MoneyBags Matrix
+      Elitch Gardens Demo
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 </div><!-- /#arch-9 -->
 
-
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- ARCH-10: MONEYBAGS ELIMINATION MATRIX                  -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="arch-view" id="arch-10">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>MoneyBags Elimination Matrix</div>
-  <div class="arch-header">
-    <div class="arch-icon" style="background:var(--color-success-bg);color:var(--color-success)">MB</div>
-    <div class="arch-title-block">
-      <div class="arch-title">MoneyBags → Zero Manual Entry</div>
-      <div class="arch-subtitle">Every revenue stream currently uploaded to MoneyBags, how it gets there today, and how RocketRez + NetSuite eliminates the manual copy-paste loop — park by park</div>
-    </div>
-  </div>
-
-  <!-- LEGEND -->
-  <div class="mb-legend">
-    <div class="mb-legend-item"><span class="mb-legend-dot" style="background:var(--color-success)"></span> Fully automated — zero manual entry</div>
-    <div class="mb-legend-item"><span class="mb-legend-dot" style="background:var(--color-gold)"></span> Semi-automated — single scheduled task</div>
-    <div class="mb-legend-item"><span class="mb-legend-dot" style="background:var(--color-warning)"></span> Manual JE remains — but 5 min, not 2 hours</div>
-  </div>
-
-  <!-- SECTION 1: RocketRez Replaces -->
-  <div class="mb-group">
-    <div class="mb-group-label green">● RocketRez Owns These — Cortex/MoneyBags Retired</div>
-    <div class="compare-table-wrap">
-      <table class="compare-table mb-table">
-        <thead>
-          <tr>
-            <th>Revenue Stream</th>
-            <th>Parks Affected</th>
-            <th>Current MoneyBags Process</th>
-            <th>New Flow</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Admissions / Ticketing</strong></td>
-            <td>All 11 parks</td>
-            <td>Jen configures in MoneyBags; SSRS report exported daily; manually keyed into Door Report spreadsheet</td>
-            <td>RocketRez transacts → API push to NetSuite daily (summarized by GL/revenue center). Power BI dashboard replaces Door Report. Jen manages all parks in RocketRez admin</td>
-            <td><span class="tag tag-success">✓ Fully Automated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Season Passes / Memberships</strong></td>
-            <td>All 11 parks</td>
-            <td>Cortex membership module → manual export → MoneyBags upload; deferred revenue tracked on spreadsheet</td>
-            <td>RocketRez membership module → deferred revenue flag → NetSuite recognizes on redemption date automatically</td>
-            <td><span class="tag tag-success">✓ Fully Automated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Walk-up POS (Food, Retail)</strong></td>
-            <td>All 11 parks</td>
-            <td>Clover/ParkPOS daily report → manually keyed into MB by park staff</td>
-            <td>Toast (F&amp;B) + RocketRez (retail) → single daily summary → NetSuite API. No keyboarding.</td>
-            <td><span class="tag tag-success">✓ Fully Automated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Group Sales</strong></td>
-            <td>All 11 parks</td>
-            <td>Tripleseat or Cortex GS module → manual entry into MB after contract signed</td>
-            <td>RocketRez Groups module — inquiry, contract, deposit, redemption all in one system. Posts to NetSuite on payment.</td>
-            <td><span class="tag tag-success">✓ Fully Automated</span></td>
-          </tr>
-          <tr>
-            <td><strong>FanFood (Mobile Ordering)</strong></td>
-            <td>NSH, HPH, Calypso, WTH, CHFGHF</td>
-            <td>FanFood online report → manually typed into Excel spreadsheet with macros → uploaded to MoneyBags</td>
-            <td>FanFood webhook → RocketRez receives, summarizes → daily NetSuite JE via API. The macro spreadsheet dies here.</td>
-            <td><span class="tag tag-success">✓ Fully Automated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Concert / Event Ticketing (TicketSpice)</strong></td>
-            <td>MSH</td>
-            <td>TicketSpice/Webconnex report → manual entry into MB</td>
-            <td>RocketRez Events module replaces TicketSpice for owned events. Third-party events: TicketSpice API → NetSuite direct JE on settlement</td>
-            <td><span class="tag tag-success">✓ Fully Automated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Go City / Distribution Channels</strong></td>
-            <td>HPH (Go City), others</td>
-            <td>DOR import process (manual) → MB upload</td>
-            <td>RocketRez channel sales API — Go City API feeds RocketRez directly; consolidated in daily NetSuite push</td>
-            <td><span class="tag tag-success">✓ Fully Automated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Parking POS</strong></td>
-            <td>Rapids, Elitch/LAZ, Calypso</td>
-            <td>Cellular CC terminal totals → manually keyed into MB by manager</td>
-            <td>Payment processor (Freedom/Converge) scheduled API pull → daily NetSuite JE. No MB step at all.</td>
-            <td><span class="tag tag-success">✓ Fully Automated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Online Ticket Sales (eCommerce)</strong></td>
-            <td>All 11 parks</td>
-            <td>RR/Cortex ecom → MB configuration required for pricing/availability; SSRS export</td>
-            <td>RocketRez commerce engine is source of truth — pricing, availability, GL mapping all in RocketRez. Single API to NetSuite.</td>
-            <td><span class="tag tag-success">✓ Fully Automated</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- SECTION 2: NetSuite Direct (Bypass RocketRez) -->
-  <div class="mb-group">
-    <div class="mb-group-label gold">● Flows Direct to NetSuite — No RocketRez Touch, No MoneyBags</div>
-    <div class="compare-table-wrap">
-      <table class="compare-table mb-table">
-        <thead>
-          <tr>
-            <th>Revenue Stream</th>
-            <th>Parks Affected</th>
-            <th>Current MoneyBags Process</th>
-            <th>New NetSuite Flow</th>
-            <th>Automation Level</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Best Lockers</strong></td>
-            <td>All parks</td>
-            <td>Monthly check from vendor → manually entered into MB as misc revenue</td>
-            <td>Best Lockers API or CSV export → NetSuite SuiteScript auto-matches ACH to open receivable → auto-posts JE. Bank feed reconciliation catches any miss.</td>
-            <td><span class="tag tag-gold">● Scheduled Auto-JE</span></td>
-          </tr>
-          <tr>
-            <td><strong>ResNexus Lodging (NSH)</strong></td>
-            <td>NSH</td>
-            <td>GP JE in progress — still partly manual</td>
-            <td>ResNexus → NetSuite nightly scheduled import via NetSuite integrator. RocketRez handles shuttle/box office revenue separately.</td>
-            <td><span class="tag tag-gold">● Scheduled Auto-JE</span></td>
-          </tr>
-          <tr>
-            <td><strong>Dockwa Marina (NSH)</strong></td>
-            <td>NSH</td>
-            <td>Month-end manual JE in GP/MB</td>
-            <td>Dockwa API → NetSuite EOM import script. Zero human action.</td>
-            <td><span class="tag tag-gold">● Scheduled Auto-JE</span></td>
-          </tr>
-          <tr>
-            <td><strong>FareHarbor Jet Ski / Boat (NSH)</strong></td>
-            <td>NSH</td>
-            <td>Month-end manual JE</td>
-            <td>FareHarbor API → NetSuite EOM import script. Revenue recognized on activity date.</td>
-            <td><span class="tag tag-gold">● Scheduled Auto-JE</span></td>
-          </tr>
-          <tr>
-            <td><strong>Sponsorships (Coke, Pepsi, Iolani, etc.)</strong></td>
-            <td>Various</td>
-            <td>Check/ACH receipt → manually keyed into MB when received</td>
-            <td>NetSuite Revenue Recognition module — contract loaded once, system defers and recognizes per schedule automatically. ACH arrival auto-matched via bank feed.</td>
-            <td><span class="tag tag-gold">● Scheduled Auto-JE</span></td>
-          </tr>
-          <tr>
-            <td><strong>EZ Facility Dome (WTH)</strong></td>
-            <td>WTH</td>
-            <td>Painful double-entry — EZ Facility + MB separately</td>
-            <td>EZ Facility daily CSV → SuiteScript auto-import to NetSuite GL. One source, no duplication.</td>
-            <td><span class="tag tag-gold">● Scheduled Auto-JE</span></td>
-          </tr>
-          <tr>
-            <td><strong>Rent / Office Leases (Bell Canada, JEM)</strong></td>
-            <td>Various</td>
-            <td>Monthly manual JE in MB/GP</td>
-            <td>NetSuite recurring scheduled transaction — auto-posts monthly. Accountant reviews, not creates.</td>
-            <td><span class="tag tag-gold">● Scheduled Auto-JE</span></td>
-          </tr>
-          <tr>
-            <td><strong>IBC Condo Fees / Utility Reimbursements</strong></td>
-            <td>Various</td>
-            <td>Manual JE when billed</td>
-            <td>NetSuite recurring JE template. Reviewed monthly, not rebuilt monthly.</td>
-            <td><span class="tag tag-gold">● Scheduled Auto-JE</span></td>
-          </tr>
-          <tr>
-            <td><strong>J1 Housing / Uniform Sales (Authorize.net / Converge)</strong></td>
-            <td>Various</td>
-            <td>Separate payment processor reports → MB manual entry</td>
-            <td>Authorize.net / Converge API → NetSuite direct post. Categorized by GL at time of transaction.</td>
-            <td><span class="tag tag-gold">● Scheduled Auto-JE</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- SECTION 3: Stays Manual (Simplified) -->
-  <div class="mb-group">
-    <div class="mb-group-label orange">● Stays Manual — But Simpler (5-Minute JE, Not 2 Hours)</div>
-    <div class="compare-table-wrap">
-      <table class="compare-table mb-table">
-        <thead>
-          <tr>
-            <th>Revenue Stream</th>
-            <th>Parks Affected</th>
-            <th>Why It Stays Manual</th>
-            <th>How It Gets Simpler</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Vending (G&amp;H, Pepsi machines)</strong></td>
-            <td>All parks</td>
-            <td>Vendor pays by check; no API. Low frequency (monthly).</td>
-            <td>NetSuite JE template pre-built — accountant matches check to receivable in 2 minutes. MoneyBags middle step gone.</td>
-          </tr>
-          <tr>
-            <td><strong>Penny / Photo Booth / Tattoo (City Museum)</strong></td>
-            <td>City Museum</td>
-            <td>Cash/check, no digital integration possible</td>
-            <td>NetSuite JE template. One entry, posted directly, no MB relay.</td>
-          </tr>
-          <tr>
-            <td><strong>ATM Revenue (commission)</strong></td>
-            <td>All parks</td>
-            <td>ATM provider pays monthly commission by check</td>
-            <td>NetSuite recurring JE template. Match commission check to expected amount.</td>
-          </tr>
-          <tr>
-            <td><strong>Laundry Revenue</strong></td>
-            <td>NSH, VVV</td>
-            <td>Coin laundry — no API, cash collection</td>
-            <td>NetSuite manual JE at count. Pre-built template cuts entry time to under 3 minutes.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- TIME SAVINGS CALLOUT -->
-  <div style="background:var(--color-success-bg);border:1px solid color-mix(in oklch,var(--color-success) 30%,transparent);border-radius:var(--radius-xl);padding:var(--space-6);margin-bottom:var(--space-6)">
-    <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-base);color:var(--color-success);margin-bottom:var(--space-1)">The Bottom Line for Dave, Jessica, and Kieran</div>
-    <div style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-2)">Every dollar still flows to NetSuite. The difference is who carries it there.</div>
-    <div class="mb-stats">
-      <div class="mb-stat">
-        <div class="mb-stat-num" style="color:var(--color-success)">9</div>
-        <div class="mb-stat-label">revenue streams fully automated — zero human action after setup</div>
-      </div>
-      <div class="mb-stat">
-        <div class="mb-stat-num" style="color:var(--color-gold)">9</div>
-        <div class="mb-stat-label">streams on scheduled auto-JE — accountant reviews, not creates</div>
-      </div>
-      <div class="mb-stat">
-        <div class="mb-stat-num" style="color:var(--color-warning)">4</div>
-        <div class="mb-stat-label">streams stay manual — all via pre-built NetSuite templates in under 5 min each</div>
-      </div>
-      <div class="mb-stat">
-        <div class="mb-stat-num" style="color:var(--color-error)">0</div>
-        <div class="mb-stat-label">streams still going through MoneyBags — the macro spreadsheet is dead</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(7)">
-      Finance: Your Time, Elevated
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-</div><!-- /#arch-10 -->
-
-
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- ARCH-11: FINANCE TEAM — YOUR TIME, ELEVATED                    -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="arch-view" id="arch-11">
-  <div class="section-crumb"><span class="section-crumb-dot"></span>Finance Operations: Your Time, Elevated</div>
-  <div class="arch-header">
-    <div class="arch-icon" style="background:var(--color-gold-bg);color:var(--color-gold)">FIN</div>
-    <div class="arch-title-block">
-      <div class="arch-title">From Data Entry to Financial Intelligence</div>
-      <div class="arch-subtitle">The finance team becomes more valuable when the systems handle the repetitive work.</div>
-    </div>
-  </div>
-
-  <!-- ─── WHERE TIME GOES TODAY vs. FUTURE ─── -->
-  <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-lg);margin-bottom:var(--space-4)">Where Does Finance Team Time Go Today vs. Tomorrow?</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-bottom:var(--space-8)">
-    <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <div style="font-weight:700;font-size:var(--text-sm);color:var(--color-warning);margin-bottom:var(--space-4);display:flex;align-items:center;gap:var(--space-2)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        TODAY — Manual MoneyBags Workflow
-      </div>
-      <div style="position:relative;height:220px"><canvas id="chartToday"></canvas></div>
-      <div style="margin-top:var(--space-3);font-size:var(--text-xs);color:var(--color-text-muted)">Estimated weekly hours across all parks, all revenue streams</div>
-    </div>
-    <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <div style="font-weight:700;font-size:var(--text-sm);color:var(--color-success);margin-bottom:var(--space-4);display:flex;align-items:center;gap:var(--space-2)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        FUTURE — RocketRez + NetSuite Workflow
-      </div>
-      <div style="position:relative;height:220px"><canvas id="chartFuture"></canvas></div>
-      <div style="margin-top:var(--space-3);font-size:var(--text-xs);color:var(--color-text-muted)">Same accountability, dramatically different time allocation</div>
-    </div>
-  </div>
-
-  <!-- ─── NETSUITE JE TEMPLATES ─── -->
-  <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-lg);margin-bottom:var(--space-2)">Journal Entry Automation — Configured Once</div>
-  <div style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5)">These replace manually built JEs. Click any to see how it works.</div>
-
-  <div class="je-accordion" style="margin-bottom:var(--space-10)">
-
-    <div class="je-item" id="je-rent">
-      <button class="je-trigger" onclick="toggleJE('je-rent')">
-        <div style="display:flex;align-items:center;gap:var(--space-3)">
-          <span class="je-badge" style="background:var(--color-blue-bg);color:var(--color-blue)">RECURRING</span>
-          <span style="font-weight:600">Monthly Rent &amp; Lease Payments (Bell Canada, JEM, Office Leases)</span>
-        </div>
-        <svg class="je-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="je-body">
-        <div class="je-grid">
-          <div class="je-col">
-            <div class="je-col-header">Today (Manual)</div>
-            <p>Finance team opens the prior month's JE, changes the date, re-enters the amount (sometimes hunting down the invoice first), re-codes the GL, and posts. Repeated for every lease at every park — every single month.</p>
-          </div>
-          <div class="je-col">
-            <div class="je-col-header">NetSuite Template</div>
-            <p>A <strong>Memorized Transaction</strong> is set up once in NetSuite per lease. It contains the vendor, GL debit/credit coding, amount, and recurrence schedule. On the 1st of every month, NetSuite creates a draft JE automatically. Finance reviews the list, spot-checks amounts against the invoice, and approves with one click. No typing. No hunting. No re-coding.</p>
-          </div>
-          <div class="je-col">
-            <div class="je-col-header">Finance Team's New Role</div>
-            <p>Reviewer and approver. Your job is to <strong>verify the amounts are correct</strong> — not to create the entry. If a lease changes, you update the template once. The system handles the rest forever.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="je-item" id="je-sponsorship">
-      <button class="je-trigger" onclick="toggleJE('je-sponsorship')">
-        <div style="display:flex;align-items:center;gap:var(--space-3)">
-          <span class="je-badge" style="background:var(--color-gold-bg);color:var(--color-gold)">DEFERRED REV</span>
-          <span style="font-weight:600">Sponsorship Revenue (Coke, Pepsi, Iolani Schools, Partners)</span>
-        </div>
-        <svg class="je-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="je-body">
-        <div class="je-grid">
-          <div class="je-col">
-            <div class="je-col-header">Today (Manual)</div>
-            <p>Check arrives from sponsor. Finance team creates a JE, manually determines how much to recognize now vs. defer, codes it, posts it — and then remembers to come back monthly to recognize the next tranche. It's a spreadsheet and a prayer.</p>
-          </div>
-          <div class="je-col">
-            <div class="je-col-header">NetSuite Revenue Recognition</div>
-            <p>When a sponsorship contract is loaded into NetSuite, the <strong>Revenue Recognition schedule is set once</strong>. NetSuite automatically creates monthly recognition entries for the contract period. When the check arrives, it's matched to the open deferred revenue balance automatically via bank feed matching. Finance sees a clean dashboard of "recognized vs. deferred" by sponsor.</p>
-          </div>
-          <div class="je-col">
-            <div class="je-col-header">Finance Team's New Role</div>
-            <p><strong>Contract input</strong> (once per sponsor, per season) and monthly <strong>revenue review</strong>. You're now analyzing whether sponsorship revenue is tracking to forecast — not manually splitting checks between accounts.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="je-item" id="je-vendors">
-      <button class="je-trigger" onclick="toggleJE('je-vendors')">
-        <div style="display:flex;align-items:center;gap:var(--space-3)">
-          <span class="je-badge" style="background:var(--color-success-bg);color:var(--color-success)">AUTO-MATCH</span>
-          <span style="font-weight:600">3rd-Party Vendor Revenue (Best Lockers, Vending, ATMs)</span>
-        </div>
-        <svg class="je-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="je-body">
-        <div class="je-grid">
-          <div class="je-col">
-            <div class="je-col-header">Today (Manual)</div>
-            <p>Monthly check from Best Lockers or G&amp;H Vending arrives. Finance team creates a JE from scratch: pick the vendor, pick the GL account, enter the amount, post. Sometimes the check gets lost in a park GM's inbox first and finance finds out a week late.</p>
-          </div>
-          <div class="je-col">
-            <div class="je-col-header">NetSuite + Bank Feed</div>
-            <p>NetSuite's <strong>bank feed integration</strong> monitors the bank account. When a check or ACH from Best Lockers clears, it's automatically matched to an <strong>expected receivable</strong> that's already set up for each vendor at each park. Finance sees a "matched" notification rather than creating the entry from scratch. Unmatched items surface for human review — the exceptions, not the routine.</p>
-          </div>
-          <div class="je-col">
-            <div class="je-col-header">Finance Team's New Role</div>
-            <p>Exceptions-only review. You're looking at the <strong>3 items that didn't auto-match</strong> (vendor paid late, amount changed, wrong park), not processing the 47 that came in clean. That's a morning task, not a full day.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="je-item" id="je-memberships">
-      <button class="je-trigger" onclick="toggleJE('je-memberships')">
-        <div style="display:flex;align-items:center;gap:var(--space-3)">
-          <span class="je-badge" style="background:var(--color-purple-bg);color:var(--color-purple)">DEFERRED REV</span>
-          <span style="font-weight:600">Season Pass &amp; Membership Revenue (Deferred Recognition)</span>
-        </div>
-        <svg class="je-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="je-body">
-        <div class="je-grid">
-          <div class="je-col">
-            <div class="je-col-header">Today (Manual)</div>
-            <p>Pass revenue sits in a spreadsheet until it's "earned." Finance manually moves amounts from deferred liability to earned revenue each month, or after the season, or whenever someone remembers. Auditors ask questions. It gets messy.</p>
-          </div>
-          <div class="je-col">
-            <div class="je-col-header">RocketRez + NetSuite</div>
-            <p>RocketRez recognizes season pass revenue at the time of sale and provides GL-level reporting to support your accounting workflow. Sales data is available via API to support your NetSuite integration — giving finance the detail they need without manual extraction.</p>
-          </div>
-          <div class="je-col">
-            <div class="je-col-header">Finance Team's New Role</div>
-            <p>Configuring the recognition rule once and <strong>running variance analysis</strong> — comparing deferred revenue balance to prior seasons, flagging unusually high or low recognition rates by park, and feeding that into the forecast model. That's strategic finance work.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ─── WHAT FINANCE DOES WITH RECOVERED TIME ─── -->
-  <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-lg);margin-bottom:var(--space-2)">Where That Time Goes</div>
-  <div style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5)">Redirected toward work that actually requires a finance professional.</div>
-
-  <div class="time-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--space-4);margin-bottom:var(--space-8)">
-    <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-      <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Revenue Analysis</div>
-      <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Data already in NetSuite means Monday morning is spent asking why Nashville Shores F&amp;B is down 8% — not entering last night's numbers.</div>
-    </div>
-    <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-      <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Forecasting &amp; Budgeting</div>
-      <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Real-time actuals mean your forecast model stays current. Ownership gets accurate variance reporting without a month-end fire drill.</div>
-    </div>
-    <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Portfolio Reporting</div>
-      <div style="font-size:var(--text-xs);color:var(--color-text-muted)">All parks on the same GL structure means a portfolio-level P&amp;L in minutes — the report ownership wants every week and currently doesn't have.</div>
-    </div>
-    <div class="time-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="margin-bottom:var(--space-2)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--space-2)">Faster Month-End Close</div>
-      <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Most entries are already done before close starts. The team reconciles and approves — not builds from scratch.</div>
-    </div>
-  </div>
-
-  <!-- ─── THE HONEST TRUTH CALLOUT ─── -->
-  <div style="background:var(--color-primary-bg);border:1px solid var(--color-primary);border-radius:var(--radius-xl);padding:var(--space-6);display:flex;gap:var(--space-5);align-items:flex-start">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <div>
-      <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-base);margin-bottom:var(--space-2);color:var(--color-primary)">What actually changes</div>
-      <p style="font-size:var(--text-sm);color:var(--color-text-muted)">Some tasks that currently take hours get reduced to a review step. The goal isn't to eliminate the finance team — it's to make sure their time goes toward work that requires real judgment. The team that knows how the data flows, what the rules are, and where the edge cases live becomes <strong>indispensable</strong>.</p>
-    </div>
-  </div>
-
-  <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(8)">
-      Elitch Gardens Demo
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-</div><!-- /#arch-11 -->
 
 <div class="arch-view" id="arch-12">
   <div class="section-crumb"><span class="section-crumb-dot"></span>Live Demo</div>
@@ -4586,7 +4294,7 @@ function showRfpStack(index, btn) {
 
 <style>
 /* ── Arch views outside <main> — match main container ── */
-#arch-9, #arch-10, #arch-11, #arch-12, #arch-13 {
+#arch-9, #arch-12, #arch-13 {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
@@ -4595,7 +4303,7 @@ function showRfpStack(index, btn) {
   box-sizing: border-box;
 }
 @media(max-width: 768px) {
-  #arch-9, #arch-10, #arch-11, #arch-12, #arch-13 { padding-left: var(--space-4); padding-right: var(--space-4); }
+  #arch-9, #arch-12, #arch-13 { padding-left: var(--space-4); padding-right: var(--space-4); }
 }
 
 /* ── MoneyBags legend ── */
