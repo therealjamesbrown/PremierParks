@@ -4234,83 +4234,155 @@ function showRfpStack(index, btn) {
 
   <style>
     .next { padding: 0 0 var(--space-8); }
-    .next-inner { max-width: 920px; }
+    .next-inner { max-width: 980px; }
     .next-lead {
       font-size: var(--text-base); line-height: 1.65; color: var(--color-text-muted);
-      margin: 0 0 var(--space-6); max-width: 72ch;
+      margin: 0 0 var(--space-5); max-width: 72ch;
     }
-    .next-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
-    .next-card {
+    .next-lead strong { color: var(--color-text); }
+
+    /* Proof chips */
+    .nx-stats { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-8); }
+    .nx-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: var(--text-xs); font-weight: 700; color: var(--color-text);
+    }
+    .nx-chip-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--color-success); }
+
+    /* Today → Orion arc */
+    .nx-arc { display: grid; grid-template-columns: 1fr 44px 1fr; align-items: stretch; }
+    .nx-card {
       background: var(--color-surface); border: 1px solid var(--color-border);
       border-radius: var(--radius-xl); box-shadow: var(--shadow-sm);
       padding: var(--space-5) var(--space-6);
     }
-    .next-tag {
+    .nx-card-next { border-top: 3px solid var(--color-primary); }
+    .nx-tag {
       display: inline-block; font-size: var(--text-xs); font-weight: 700;
       letter-spacing: 0.04em; text-transform: uppercase;
       border-radius: 999px; padding: var(--space-1) var(--space-3); margin-bottom: var(--space-3);
     }
-    .next-tag-now { color: var(--color-text-muted); background: var(--color-surface-2); }
-    .next-tag-next { color: var(--color-primary); background: var(--color-primary-bg); }
-    .next-card p { font-size: var(--text-sm); line-height: 1.65; color: var(--color-text-muted); margin: 0; }
-    .next-card p strong { color: var(--color-text); }
-    .next-balance {
+    .nx-tag-now { color: var(--color-text-muted); background: var(--color-surface-2); }
+    .nx-tag-next { color: var(--color-primary); background: var(--color-primary-bg); }
+    .nx-card p { font-size: var(--text-sm); line-height: 1.65; color: var(--color-text-muted); margin: 0; }
+    .nx-card p strong { color: var(--color-text); }
+    .nx-arrow {
+      align-self: center; justify-self: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--color-primary-bg); color: var(--color-primary);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; flex: none;
+    }
+
+    /* Partnership callout */
+    .nx-balance {
       background: var(--color-surface); border: 1px solid var(--color-border);
       border-left: 3px solid var(--color-primary); border-radius: var(--radius-xl);
-      padding: var(--space-4) var(--space-5); margin: var(--space-4) 0 0;
+      padding: var(--space-5) var(--space-6); margin: var(--space-5) 0 0;
     }
-    .next-balance p { font-size: var(--text-sm); line-height: 1.65; color: var(--color-text-muted); margin: 0; }
-    .next-close {
-      font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800;
-      line-height: 1.4; color: var(--color-text); margin: var(--space-8) 0 0; max-width: 72ch;
+    .nx-balance-label {
+      font-size: var(--text-xs); font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; color: var(--color-primary); margin-bottom: var(--space-2);
     }
-    @media (max-width: 640px) { .next-cols { grid-template-columns: 1fr; } }
+    .nx-balance p { font-size: var(--text-sm); line-height: 1.65; color: var(--color-text-muted); margin: 0; }
+    .nx-balance p strong { color: var(--color-text); }
+
+    /* Closing moment */
+    .nx-close {
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl); box-shadow: var(--shadow-sm);
+      padding: var(--space-12) var(--space-8); margin-top: var(--space-10);
+      text-align: center;
+    }
+    .nx-close-lead {
+      font-size: var(--text-sm); line-height: 1.7; color: var(--color-text-muted);
+      max-width: 58ch; margin: 0 auto var(--space-5);
+    }
+    .nx-close-big {
+      font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800;
+      line-height: 1.25; color: var(--color-text); max-width: 24ch; margin: 0 auto;
+    }
+    .nx-close-big em { font-style: normal; color: var(--color-primary); }
+    .nx-close-go { font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-4) auto 0; }
+    .nx-ctas { display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap; margin-top: var(--space-8); }
+    .nx-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800;
+      padding: var(--space-3) var(--space-6); border-radius: var(--radius-xl);
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .nx-btn-primary { background: var(--color-primary); color: #fff; box-shadow: var(--shadow-md); }
+    .nx-btn-primary:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-lg); }
+    .nx-btn-ghost { border: 1px solid var(--color-border); background: var(--color-surface-2); color: var(--color-text); }
+    .nx-btn-ghost:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+    @media (max-width: 700px) {
+      .nx-arc { grid-template-columns: 1fr; gap: var(--space-2); }
+      .nx-arrow { transform: rotate(90deg); margin: 2px 0; }
+      .nx-close { padding: var(--space-8) var(--space-5); }
+    }
   </style>
 
   <section class="next">
     <div class="next-inner">
       <p class="next-lead">
-        Premier onboards onto a platform proven across 200+ attractions and delivering from day
+        Premier onboards onto a platform <strong>proven across 200+ attractions</strong> and delivering from day
         one — built cloud-native, with none of the legacy bloat that slows the incumbents down.
         We move fast, we deliver the right things, and we make the platform better under you,
         release after release.
       </p>
-      <div class="next-cols">
-        <div class="next-card">
-          <span class="next-tag next-tag-now">Building on today</span>
+
+      <div class="nx-stats">
+        <span class="nx-chip"><span class="nx-chip-dot"></span>200+ attractions live</span>
+        <span class="nx-chip"><span class="nx-chip-dot"></span>Cloud-native — no legacy bloat</span>
+        <span class="nx-chip"><span class="nx-chip-dot"></span>Delivering from day one</span>
+      </div>
+
+      <div class="nx-arc">
+        <div class="nx-card">
+          <span class="nx-tag nx-tag-now">Building on today</span>
           <p>The platform you go live on doesn't stand still. Every release makes ticketing,
           POS, access, and reporting sharper, faster, and more capable — delivered automatically.
-          The product you buy keeps getting better the whole time you own it.</p>
+          <strong>The product you buy keeps getting better the whole time you own it.</strong></p>
         </div>
-        <div class="next-card">
-          <span class="next-tag next-tag-next">Building for tomorrow</span>
+        <div class="nx-arrow">→</div>
+        <div class="nx-card nx-card-next">
+          <span class="nx-tag nx-tag-next">Building for tomorrow — Orion</span>
           <p>At the same time, we're building Orion — our next-generation platform, with
           AI-assisted insight at its core. The foundation you establish now carries straight into
-          it, so your investment compounds forward — appreciating with every release, never
+          it, so <strong>your investment compounds forward</strong> — appreciating with every release, never
           depreciating or holding your growth back.</p>
         </div>
       </div>
-      <div class="next-balance">
+
+      <div class="nx-balance">
+        <div class="nx-balance-label">How we partner</div>
         <p>We strike a balance most vendors don't. We won't bend the platform to every
         one-off request — that's how software rots into bloat. But we won't vanish into
-        our own roadmap and leave you shouting into a support queue either. We listen, we
-        prioritize what moves the business, and we build what our partners actually need.</p>
+        our own roadmap and leave you shouting into a support queue either. <strong>We listen, we
+        prioritize what moves the business, and we build what our partners actually need.</strong></p>
       </div>
-      <p class="next-close">
-        Our goal is a partnership that benefits both sides: we earn your trust by putting the
-        right things in motion now — and we keep earning it for as long as we work together.
-        That's what we're here to build with Premier. Not a transaction. A lasting
-        partnership — and it starts the moment you say go.
-      </p>
+
+      <div class="nx-close">
+        <p class="nx-close-lead">
+          Our goal is a partnership that benefits both sides: we earn your trust by putting the
+          right things in motion now — and we keep earning it for as long as we work together.
+          That's what we're here to build with Premier.
+        </p>
+        <p class="nx-close-big">Not a transaction. <em>A lasting partnership.</em></p>
+        <p class="nx-close-go">And it starts the moment you say go.</p>
+        <div class="nx-ctas">
+          <button class="nx-btn nx-btn-primary" onclick="showArch(7)">
+            See it live — Elitch Gardens demo
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button class="nx-btn nx-btn-ghost" onclick="showArch(8)">Review investment &amp; pricing</button>
+        </div>
+      </div>
     </div>
   </section>
-
-  <div class="section-next">
-    <button class="section-next-btn" onclick="showArch(7)">
-      Elitch Gardens Demo
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
 </div><!-- /#arch-15 -->
 
 
@@ -4379,70 +4451,95 @@ function showRfpStack(index, btn) {
 
   <style>
     .inv { padding: 0; }
-    .inv-inner { max-width: 920px; margin: 0; }
-    .inv-divider { border-top: 1px solid var(--color-divider); margin: var(--space-8) 0; }
-    .inv-h3 { font-family: var(--font-display); font-size: var(--text-base); font-weight: 800; color: var(--color-text); margin: 0 0 var(--space-4); }
+    .inv-inner { max-width: 1080px; margin: 0; }
+    .inv-divider { border-top: 1px solid var(--color-divider); margin: var(--space-10) 0; }
+    .inv-h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; color: var(--color-text); margin: 0 0 var(--space-2); }
+    .inv-sub { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0 0 var(--space-6); max-width: 68ch; line-height: 1.6; }
+
+    /* ── Fit: tally + check-list cards ── */
+    .iv-tally { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-5); }
+    .iv-tally-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 999px; padding: 6px 14px; font-size: var(--text-xs); font-weight: 700; color: var(--color-text); }
+    .iv-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
     .invfit { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
     .invfit-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: var(--space-5) var(--space-6); }
-    .invfit-native { border-top: 3px solid var(--color-success); }
-    .invfit-partner { border-top: 3px solid var(--color-primary); }
-    .invfit-h { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: var(--space-3); }
-    .invfit-native .invfit-h { color: var(--color-success); }
-    .invfit-partner .invfit-h { color: var(--color-blue); }
-    .invfit-card ul { margin: 0; padding-left: var(--space-4); font-size: var(--text-sm); line-height: 1.75; color: var(--color-text); }
-    .invfit-card ul .p { color: var(--color-text-muted); }
-    .invp { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-    .invp-feat { text-align: left; width: 34%; padding: 10px 12px; color: var(--color-text); }
-    .invp-h-rec, .invp-h { vertical-align: top; padding: 14px 10px; }
-    .invp-h-rec { background: var(--color-primary-bg); border: 2px solid var(--color-primary); border-bottom: none; border-radius: 10px 10px 0 0; }
-    .invp-h { background: var(--color-surface); border: 1px solid var(--color-border); border-bottom: none; }
-    .invp-h-last { border-radius: 10px 10px 0 0; }
-    .invp-badge { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-blue); margin-bottom: 4px; }
-    .invp-tier { font-family: var(--font-display); font-size: 0.92rem; font-weight: 800; color: var(--color-text); line-height: 1.3; }
-    .invp-price { font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: var(--color-primary); margin-top: 8px; }
-    .invp td { text-align: center; padding: 10px; }
-    .prec { background: var(--color-primary-bg); border-left: 2px solid var(--color-primary); border-right: 2px solid var(--color-primary); }
-    .pcol { border-left: 1px solid var(--color-border); border-right: 1px solid var(--color-border); }
-    .prec-b { border-bottom: 2px solid var(--color-primary); border-radius: 0 0 10px 10px; }
-    .pcol-b { border-bottom: 1px solid var(--color-border); }
-    .pcol-b-last { border-radius: 0 0 10px 10px; }
-    .invp-group td { padding: 14px 12px 6px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; text-align: left; }
-    .invp-group-native td { color: var(--color-success); }
-    .invp-group-opt td { color: var(--color-blue); }
-    .yes { color: var(--color-success); font-weight: 700; }
-    .no { color: var(--color-text-faint); }
-    .opt { color: var(--color-text-muted); font-size: 0.82rem; }
-    .sq { color: var(--color-gold); font-weight: 600; font-size: 0.82rem; }
-    .sf { color: var(--color-success); font-weight: 600; font-size: 0.82rem; }
+    .invfit-head { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-3); }
+    .invfit-title { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; }
+    .invfit-count { margin-left: auto; font-size: 0.7rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+    .invfit-native .invfit-count { background: var(--color-success-bg); color: var(--color-success); }
+    .invfit-partner .invfit-count { background: var(--color-blue-bg); color: var(--color-blue); }
+    .iv-list { list-style: none; margin: 0; padding: 0; }
+    .iv-list li { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-top: 1px solid var(--color-divider); font-size: var(--text-sm); color: var(--color-text); }
+    .iv-list li:first-child { border-top: none; }
+    .iv-check { color: var(--color-success); font-weight: 800; flex: none; }
+    .iv-li-label { flex: 1; min-width: 0; }
+    .iv-tag { flex: none; font-size: 0.68rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: var(--color-blue-bg); color: var(--color-blue); white-space: nowrap; }
+    .iv-tag.opt { background: var(--color-gold-bg); color: var(--color-gold); }
+
+    /* ── Pricing: shared base + tier ladder ── */
+    .iv-base { background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--color-success); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: var(--space-5) var(--space-6); margin-bottom: var(--space-5); }
+    .iv-base-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-success); margin-bottom: var(--space-3); }
+    .iv-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .iv-chip { font-size: var(--text-xs); font-weight: 600; padding: 4px 12px; border-radius: 999px; background: var(--color-surface-2); border: 1px solid var(--color-border); color: var(--color-text); }
+    .iv-base-note { font-size: var(--text-xs); color: var(--color-text-muted); margin: var(--space-3) 0 0; }
+    .iv-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); align-items: stretch; margin-top: var(--space-5); }
+    .iv-tier { position: relative; display: flex; flex-direction: column; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: var(--space-6); }
+    .iv-tier.rec { border: 2px solid var(--color-primary); box-shadow: var(--shadow-md); }
+    .iv-rec-badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--color-primary); color: #fff; font-family: var(--font-display); font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 14px; border-radius: 999px; white-space: nowrap; }
+    .iv-tier-eyebrow { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); margin-bottom: 6px; }
+    .iv-tier-name { font-family: var(--font-display); font-size: var(--text-base); font-weight: 800; line-height: 1.3; margin-bottom: var(--space-3); }
+    .iv-tier-price { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--color-primary); line-height: 1; font-variant-numeric: tabular-nums; }
+    .iv-tier-per { font-size: 0.45em; font-weight: 400; color: var(--color-text-muted); }
+    .iv-tier-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; margin: var(--space-3) 0 var(--space-4); }
+    .iv-incl { display: flex; align-items: center; gap: 8px; font-size: var(--text-xs); font-weight: 700; color: var(--color-success); background: var(--color-success-bg); border-radius: var(--radius-lg); padding: 8px 12px; margin-bottom: var(--space-2); margin-top: auto; }
+    .iv-adds { list-style: none; margin: 0; padding: 0; }
+    .iv-adds li { display: flex; gap: 8px; align-items: baseline; font-size: var(--text-sm); line-height: 1.5; padding: 6px 2px; }
+    .iv-plus { color: var(--color-primary); font-weight: 800; flex: none; }
     .invp-note { font-size: 0.78rem; color: var(--color-text-faint); margin: 14px 0 0; line-height: 1.6; }
-    .rl-head { text-align: left; margin-bottom: 20px; }
-    .rl-label { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 8px; }
-    .rl-big { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 800; color: var(--color-primary); line-height: 1.05; }
-    .rl-uplift { font-size: 0.95rem; color: var(--color-success); margin-top: 8px; min-height: 18px; }
-    .rl-levers { display: grid; gap: 12px; max-width: 680px; margin: 0; }
-    .rl-row { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: 14px 18px; }
-    .rl-row-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .rl-name { font-size: 1rem; font-weight: 500; color: var(--color-text); }
-    .rl-switch { position: relative; display: inline-block; width: 42px; height: 24px; flex: none; cursor: pointer; }
-    .rl-cb { opacity: 0; width: 0; height: 0; position: absolute; }
-    .rl-track { position: absolute; inset: 0; background: var(--color-surface-2); border-radius: 999px; transition: .15s; }
-    .rl-knob { position: absolute; height: 18px; width: 18px; left: 3px; top: 3px; background: var(--color-text-muted); border-radius: 50%; transition: .15s; }
-    .rl-cb:checked ~ .rl-track { background: var(--color-primary-bg); }
-    .rl-cb:checked ~ .rl-knob { background: var(--color-primary); transform: translateX(18px); }
-    .rl-ctrl { display: none; flex-direction: column; gap: 8px; margin-top: 14px; }
-    .rl-row.open .rl-ctrl { display: flex; }
-    .rl-toprow { display: flex; align-items: center; gap: 14px; }
-    .rl-swrap { position: relative; flex: 1; height: 22px; display: flex; align-items: center; }
-    .rl-slider { width: 100%; accent-color: var(--color-primary); position: relative; z-index: 2; }
-    .rl-tick { position: absolute; top: 1px; width: 2px; height: 20px; background: var(--color-gold); z-index: 1; transform: translateX(-1px); }
-    .rl-pct { font-size: 0.9rem; font-weight: 600; color: var(--color-primary); min-width: 42px; text-align: right; }
-    .rl-dollar { font-size: 0.82rem; color: var(--color-text-muted); min-width: 92px; text-align: right; }
-    .rl-note { font-size: 0.72rem; display: flex; justify-content: space-between; }
-    .rl-bench { color: var(--color-text-muted); }
-    .rl-pass { color: var(--color-gold); font-weight: 600; visibility: hidden; }
-    .rl-cta { text-align: left; margin-top: 24px; }
-    .rl-btn { display: inline-block; background: var(--color-primary); color: #fff; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; text-decoration: none; padding: var(--space-3) var(--space-6); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); transition: background var(--transition), box-shadow var(--transition); }
+
+    /* ── Model the return ── */
+    .iv-roi { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--space-5); align-items: start; }
+    .iv-roi-summary { position: sticky; top: 84px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: var(--space-6); }
+    .iv-roi-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); }
+    .iv-roi-big { font-family: var(--font-display); font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.4rem); font-weight: 800; color: var(--color-primary); line-height: 1.05; margin: 6px 0 2px; font-variant-numeric: tabular-nums; }
+    .iv-roi-uplift { font-size: var(--text-sm); font-weight: 700; color: var(--color-success); min-height: 22px; }
+    .iv-roi-rows { margin-top: var(--space-4); border-top: 1px solid var(--color-divider); }
+    .iv-roi-row { display: flex; justify-content: space-between; gap: var(--space-3); font-size: var(--text-xs); padding: 9px 0; border-bottom: 1px solid var(--color-divider); }
+    .iv-roi-row .v { font-weight: 700; font-variant-numeric: tabular-nums; }
+    .iv-roi-actions { display: flex; gap: 8px; margin-top: var(--space-4); }
+    .iv-mini-btn { font-size: var(--text-xs); font-weight: 700; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface-2); color: var(--color-text); transition: border-color var(--transition), color var(--transition); }
+    .iv-mini-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .rl-btn { display: block; text-align: center; background: var(--color-primary); color: #fff; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 800; text-decoration: none; padding: var(--space-3) var(--space-5); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); transition: background var(--transition), box-shadow var(--transition); margin-top: var(--space-4); }
     .rl-btn:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-lg); }
+    .iv-levers { display: flex; flex-direction: column; gap: 12px; }
+    .iv-lever { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: 16px 18px; transition: border-color var(--transition); }
+    .iv-lever.on { border-color: color-mix(in oklch, var(--color-primary) 45%, var(--color-border)); }
+    .iv-lever-head { display: flex; align-items: center; gap: 12px; }
+    .iv-lever-name { font-size: var(--text-sm); font-weight: 600; color: var(--color-text); flex: 1; }
+    .iv-lever-val { font-size: var(--text-xs); font-weight: 700; color: var(--color-success); font-variant-numeric: tabular-nums; visibility: hidden; }
+    .iv-lever.on .iv-lever-val { visibility: visible; }
+    .iv-switch { position: relative; display: inline-block; width: 44px; height: 24px; flex: none; cursor: pointer; }
+    .iv-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .iv-track { position: absolute; inset: 0; background: var(--color-surface-2); border: 1px solid var(--color-border); border-radius: 999px; transition: background var(--transition), border-color var(--transition); }
+    .iv-knob { position: absolute; height: 18px; width: 18px; left: 3px; top: 3px; background: #fff; border: 1px solid var(--color-border); border-radius: 50%; box-shadow: var(--shadow-sm); transition: transform var(--transition); }
+    .iv-switch input:checked ~ .iv-track { background: var(--color-primary); border-color: var(--color-primary); }
+    .iv-switch input:checked ~ .iv-knob { transform: translateX(20px); border-color: transparent; }
+    .iv-switch input:focus-visible ~ .iv-track { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    .iv-ctrl { display: none; margin-top: 14px; }
+    .iv-lever.on .iv-ctrl { display: block; }
+    .iv-slider-row { display: flex; align-items: center; gap: 14px; }
+    .iv-swrap { position: relative; flex: 1; height: 22px; display: flex; align-items: center; }
+    .iv-slider { width: 100%; accent-color: var(--color-primary); position: relative; z-index: 2; }
+    .iv-tick { position: absolute; top: 1px; width: 2px; height: 20px; background: var(--color-gold); z-index: 1; transform: translateX(-1px); }
+    .iv-pct { font-size: 0.9rem; font-weight: 700; color: var(--color-primary); min-width: 48px; text-align: right; font-variant-numeric: tabular-nums; }
+    .iv-bench-note { display: flex; justify-content: space-between; font-size: 0.72rem; margin-top: 6px; }
+    .iv-bench { color: var(--color-text-muted); }
+    .iv-pass { color: var(--color-gold); font-weight: 600; visibility: hidden; }
+
+    @media (max-width: 920px) {
+      .iv-tiers { grid-template-columns: 1fr; }
+      .iv-roi { grid-template-columns: 1fr; }
+      .iv-roi-summary { position: static; order: -1; }
+    }
     @media (max-width: 680px) { .invfit { grid-template-columns: 1fr; } }
   </style>
 
@@ -4450,34 +4547,48 @@ function showRfpStack(index, btn) {
     <div class="inv-inner">
 
       <h3 class="inv-h3">How we fit the RFP — point by point</h3>
+      <p class="inv-sub">Eleven requirements ship native in RocketRez. The rest are covered by certified partners — one contract, one integration surface.</p>
+      <div class="iv-tally">
+        <span class="iv-tally-chip">19 RFP requirements</span>
+        <span class="iv-tally-chip"><span class="iv-dot" style="background:var(--color-success)"></span>11 native to RocketRez</span>
+        <span class="iv-tally-chip"><span class="iv-dot" style="background:var(--color-blue)"></span>8 via certified partners</span>
+      </div>
       <div class="invfit">
         <div class="invfit-card invfit-native">
-          <div class="invfit-h">Native to RocketRez</div>
-          <ul>
-            <li>Online + gate ticketing</li>
-            <li>Season passes &amp; memberships</li>
-            <li>Access control &amp; scanning</li>
-            <li>Groups, retail &amp; onsite commerce</li>
-            <li>F&amp;B — concessions, counter service, KDS, mobile order</li>
-            <li>Dynamic pricing</li>
-            <li>Unified cart upsell / cross-sell</li>
-            <li>Real-time reporting (Power BI)</li>
-            <li>Sub-ledger &rarr; NetSuite</li>
-            <li>Quebec tax / bilingual checkout</li>
-            <li>Role-based permissions</li>
+          <div class="invfit-head">
+            <span class="iv-dot" style="background:var(--color-success)"></span>
+            <span class="invfit-title">Native to RocketRez</span>
+            <span class="invfit-count">11</span>
+          </div>
+          <ul class="iv-list">
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Online + gate ticketing</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Season passes &amp; memberships</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Access control &amp; scanning</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Groups, retail &amp; onsite commerce</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">F&amp;B — concessions, counter service, KDS, mobile order</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Dynamic pricing</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Unified cart upsell / cross-sell</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Real-time reporting (Power BI)</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Sub-ledger &rarr; NetSuite</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Quebec tax / bilingual checkout</span></li>
+            <li><span class="iv-check">✓</span><span class="iv-li-label">Role-based permissions</span></li>
           </ul>
         </div>
         <div class="invfit-card invfit-partner">
-          <div class="invfit-h">Covered by partners</div>
-          <ul>
-            <li>Demand-pricing optimization &mdash; <span class="p">Spotlio (optional)</span></li>
-            <li>Cashless wallet &amp; loyalty &mdash; <span class="p">Vantage</span></li>
-            <li>Guest mobile app &mdash; <span class="p">Vantage</span></li>
-            <li>Guest identity &mdash; <span class="p">Vantage</span></li>
-            <li>Full-service / table-side dining &mdash; <span class="p">Toast (VVV)</span></li>
-            <li>Weather guarantee &mdash; <span class="p">Sensible</span></li>
-            <li>Buy now, pay later &mdash; <span class="p">Affirm</span></li>
-            <li>PMS / room charge &mdash; <span class="p">Opera / OHIP</span></li>
+          <div class="invfit-head">
+            <span class="iv-dot" style="background:var(--color-blue)"></span>
+            <span class="invfit-title">Covered by partners</span>
+            <span class="invfit-count">8</span>
+          </div>
+          <ul class="iv-list">
+            <li><span class="iv-li-label">Demand-pricing optimization</span><span class="iv-tag opt">Spotlio · optional</span></li>
+            <li><span class="iv-li-label">Cashless wallet &amp; loyalty</span><span class="iv-tag">Vantage</span></li>
+            <li><span class="iv-li-label">Guest mobile app</span><span class="iv-tag">Vantage</span></li>
+            <li><span class="iv-li-label">Guest identity</span><span class="iv-tag">Vantage</span></li>
+            <li><span class="iv-li-label">Full-service / table-side dining (VVV)</span><span class="iv-tag">Toast</span></li>
+            <li><span class="iv-li-label">Weather guarantee</span><span class="iv-tag">Sensible</span></li>
+            <li><span class="iv-li-label">Buy now, pay later</span><span class="iv-tag">Affirm</span></li>
+            <li><span class="iv-li-label">PMS / room charge</span><span class="iv-tag">Opera / OHIP</span></li>
           </ul>
         </div>
       </div>
@@ -4485,52 +4596,86 @@ function showRfpStack(index, btn) {
       <div class="inv-divider"></div>
 
       <h3 class="inv-h3">Pricing — choose your scope</h3>
-      <table class="invp">
-        <thead>
-          <tr>
-            <th class="invp-feat"></th>
-            <th class="invp-h-rec">
-              <div class="invp-badge">Recommended</div>
-              <div class="invp-tier">RocketRez<br>+ Vantage (Quebec)</div>
-              <div class="invp-price">$2.7M<span style="font-size:0.55em;color:var(--color-text-muted);font-weight:400"> /yr</span></div>
-            </th>
-            <th class="invp-h">
-              <div class="invp-tier">RocketRez<br>+ Vantage (Full)</div>
-              <div class="invp-price">$3.8M<span style="font-size:0.55em;color:var(--color-text-muted);font-weight:400"> /yr</span></div>
-            </th>
-            <th class="invp-h invp-h-last">
-              <div class="invp-tier">RocketRez<br>+ Vantage + Toast</div>
-              <div class="invp-price">$4.1M<span style="font-size:0.55em;color:var(--color-text-muted);font-weight:400"> /yr</span></div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="invp-group invp-group-native"><td colspan="4">Out of the box — native RocketRez</td></tr>
-          <tr><td class="invp-feat">RocketRez platform — all 11 parks</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
-          <tr><td class="invp-feat">Ticketing · POS · access · memberships · groups</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
-          <tr><td class="invp-feat">F&amp;B — concessions · counter service · KDS · mobile ordering</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
-          <tr><td class="invp-feat">Dynamic pricing</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
-          <tr><td class="invp-feat">Sub-ledger → NetSuite · Gold Pass unification</td><td class="prec yes">✓</td><td class="pcol yes">✓</td><td class="pcol yes">✓</td></tr>
-          <tr class="invp-group invp-group-opt"><td colspan="4">Optional enhancements</td></tr>
-          <tr><td class="invp-feat">Automated demand pricing — Spotlio</td><td class="prec opt">Optional</td><td class="pcol opt">Optional</td><td class="pcol opt">Optional</td></tr>
-          <tr><td class="invp-feat">Vantage — cashless wallet · loyalty · guest identity</td><td class="prec sq">Quebec (VVV)</td><td class="pcol sf">Portfolio-wide</td><td class="pcol sf">Portfolio-wide</td></tr>
-          <tr><td class="invp-feat">Vantage — guest mobile app</td><td class="prec sq">Quebec (VVV)</td><td class="pcol sf">All parks</td><td class="pcol sf">All parks</td></tr>
-          <tr><td class="invp-feat">Toast — full-service dining · table management (VVV)</td><td class="prec prec-b no">—</td><td class="pcol pcol-b no">—</td><td class="pcol pcol-b pcol-b-last yes">✓</td></tr>
-        </tbody>
-      </table>
+      <p class="inv-sub">Every option starts from the same native base. You choose how far Vantage and Toast extend across the portfolio.</p>
+
+      <div class="iv-base">
+        <div class="iv-base-label">Every option includes — native RocketRez, all 11 parks</div>
+        <div class="iv-chips">
+          <span class="iv-chip">Ticketing &amp; gate</span>
+          <span class="iv-chip">POS &amp; retail</span>
+          <span class="iv-chip">Access control</span>
+          <span class="iv-chip">Season passes &amp; memberships</span>
+          <span class="iv-chip">Groups</span>
+          <span class="iv-chip">F&amp;B — concessions · counter · KDS · mobile order</span>
+          <span class="iv-chip">Dynamic pricing</span>
+          <span class="iv-chip">Unified cart upsell</span>
+          <span class="iv-chip">Power BI reporting</span>
+          <span class="iv-chip">Sub-ledger &rarr; NetSuite</span>
+          <span class="iv-chip">Gold Pass unification</span>
+          <span class="iv-chip">Bilingual &amp; Quebec tax</span>
+        </div>
+        <p class="iv-base-note">Automated demand pricing via Spotlio is available as an option on any tier.</p>
+      </div>
+
+      <div class="iv-tiers">
+        <div class="iv-tier">
+          <div class="iv-tier-eyebrow">Option 1</div>
+          <div class="iv-tier-name">RocketRez + Vantage (Quebec)</div>
+          <div class="iv-tier-price">$2.7M<span class="iv-tier-per"> /yr</span></div>
+          <p class="iv-tier-desc">The full platform across all 11 parks, with Vantage wallet, loyalty and guest app scoped to Quebec (VVV).</p>
+          <div class="iv-incl">✓&nbsp; Everything in the platform base</div>
+          <ul class="iv-adds">
+            <li><span class="iv-plus">+</span>Vantage wallet · loyalty · guest identity — Quebec (VVV)</li>
+            <li><span class="iv-plus">+</span>Vantage guest mobile app — Quebec (VVV)</li>
+          </ul>
+        </div>
+        <div class="iv-tier rec">
+          <div class="iv-rec-badge">Recommended</div>
+          <div class="iv-tier-eyebrow">Option 2</div>
+          <div class="iv-tier-name">RocketRez + Vantage (Full)</div>
+          <div class="iv-tier-price">$3.8M<span class="iv-tier-per"> /yr</span></div>
+          <p class="iv-tier-desc">Extends the Vantage wallet, loyalty and guest app from Quebec to every park in the portfolio.</p>
+          <div class="iv-incl">✓&nbsp; Everything in Option 1</div>
+          <ul class="iv-adds">
+            <li><span class="iv-plus">+</span>Vantage wallet · loyalty · guest identity — all 11 parks</li>
+            <li><span class="iv-plus">+</span>Vantage guest mobile app — all 11 parks</li>
+          </ul>
+        </div>
+        <div class="iv-tier">
+          <div class="iv-tier-eyebrow">Option 3</div>
+          <div class="iv-tier-name">RocketRez + Vantage + Toast</div>
+          <div class="iv-tier-price">$4.1M<span class="iv-tier-per"> /yr</span></div>
+          <p class="iv-tier-desc">Adds Toast full-service, table-side dining at VVV on top of the portfolio-wide stack.</p>
+          <div class="iv-incl">✓&nbsp; Everything in Option 2</div>
+          <ul class="iv-adds">
+            <li><span class="iv-plus">+</span>Toast full-service dining &amp; table management (VVV)</li>
+          </ul>
+        </div>
+      </div>
       <p class="invp-note">RocketRez powers attractions F&amp;B end to end — concessions, counter service, and mobile ordering. For full-service, table-side dining at properties like VVV, Toast is an optional specialist that adds table management and coursing. Toast is pending Quebec certification; our recommendation is to stay on Veloce until cutover makes sense. Pricing shown is illustrative.</p>
 
       <div class="inv-divider"></div>
 
       <h3 class="inv-h3">Model the return</h3>
-      <div class="rl-head">
-        <div class="rl-label">Projected annual revenue</div>
-        <div class="rl-big" id="rlBig">$210,418,709</div>
-        <div class="rl-uplift" id="rlUplift"></div>
-      </div>
-      <div class="rl-levers" id="rlLevers"></div>
-      <div class="rl-cta">
-        <a class="rl-btn" href="https://labs.timsamson.com/impact-modeler/coi" target="_blank" rel="noopener">See the full, sourced breakdown in the Impact Modeler &#8594;</a>
+      <p class="inv-sub">Toggle the levers RocketRez unlocks, then drag toward the industry benchmark to see what each is worth on Premier's revenue base.</p>
+
+      <div class="iv-roi">
+        <div class="iv-levers" id="rlLevers"></div>
+        <div class="iv-roi-summary">
+          <div class="iv-roi-label">Projected annual revenue</div>
+          <div class="iv-roi-big" id="rlBig">$210,418,709</div>
+          <div class="iv-roi-uplift" id="rlUplift"></div>
+          <div class="iv-roi-rows">
+            <div class="iv-roi-row"><span>Base revenue</span><span class="v">$210,418,709</span></div>
+            <div class="iv-roi-row"><span>Modeled uplift</span><span class="v" id="rlUpliftRow" style="color:var(--color-success)">$0</span></div>
+            <div class="iv-roi-row"><span>Active levers</span><span class="v" id="rlActiveRow">0 of 5</span></div>
+          </div>
+          <div class="iv-roi-actions">
+            <button class="iv-mini-btn" id="rlBenchAll" type="button">Set all to benchmark</button>
+            <button class="iv-mini-btn" id="rlReset" type="button">Reset</button>
+          </div>
+          <a class="rl-btn" href="https://labs.timsamson.com/impact-modeler/coi" target="_blank" rel="noopener">See the full, sourced breakdown &#8594;</a>
+        </div>
       </div>
 
     </div>
@@ -4557,11 +4702,13 @@ function showRfpStack(index, btn) {
     { name:'In-app & SMS push upsell',              base:ONLINE,    bench:4 },
     { name:'Modern payment conversion',             base:ONLINE,    bench:7 }
   ];
-  LEVERS.forEach(function(l){ l.on=false; l.pct=1; l.max=l.bench*2; });
+  LEVERS.forEach(function(l){ l.on=false; l.pct=l.bench; l.max=l.bench*2; });
 
   var wrap=document.getElementById('rlLevers');
   var big=document.getElementById('rlBig');
   var uplift=document.getElementById('rlUplift');
+  var upliftRow=document.getElementById('rlUpliftRow');
+  var activeRow=document.getElementById('rlActiveRow');
 
   function money(n){ return '$'+Math.round(n).toLocaleString(); }
 
@@ -4569,55 +4716,80 @@ function showRfpStack(index, btn) {
     var add=0, active=0;
     LEVERS.forEach(function(l){ if(l.on){ add+=l.base*l.pct/100; active++; } });
     big.textContent=money(BASE_TOTAL+add);
-    uplift.textContent=active ? ('+'+money(add)+' from '+active+' lever'+(active>1?'s':'')) : '';
+    uplift.textContent=active ? ('+'+money(add)+' modeled uplift') : ' ';
+    upliftRow.textContent=(add>0?'+':'')+money(add);
+    activeRow.textContent=active+' of '+LEVERS.length;
   }
 
   LEVERS.forEach(function(l){
-    var row=document.createElement('div'); row.className='rl-row';
+    var row=document.createElement('div'); row.className='iv-lever';
 
-    var head=document.createElement('div'); head.className='rl-row-head';
-    var name=document.createElement('span'); name.className='rl-name'; name.textContent=l.name;
-    var sw=document.createElement('label'); sw.className='rl-switch';
-    var cb=document.createElement('input'); cb.type='checkbox'; cb.className='rl-cb';
-    var track=document.createElement('span'); track.className='rl-track';
-    var knob=document.createElement('span'); knob.className='rl-knob';
+    var head=document.createElement('div'); head.className='iv-lever-head';
+    var name=document.createElement('span'); name.className='iv-lever-name'; name.textContent=l.name;
+    var val=document.createElement('span'); val.className='iv-lever-val';
+    var sw=document.createElement('label'); sw.className='iv-switch';
+    var cb=document.createElement('input'); cb.type='checkbox';
+    cb.setAttribute('aria-label', l.name);
+    var track=document.createElement('span'); track.className='iv-track';
+    var knob=document.createElement('span'); knob.className='iv-knob';
     sw.appendChild(cb); sw.appendChild(track); sw.appendChild(knob);
-    head.appendChild(name); head.appendChild(sw);
+    head.appendChild(name); head.appendChild(val); head.appendChild(sw);
 
-    var ctrl=document.createElement('div'); ctrl.className='rl-ctrl';
-    var toprow=document.createElement('div'); toprow.className='rl-toprow';
-    var swrap=document.createElement('div'); swrap.className='rl-swrap';
-    var slider=document.createElement('input'); slider.type='range'; slider.className='rl-slider';
-    slider.min=1; slider.max=l.max; slider.step=0.1; slider.value=1;
-    var tick=document.createElement('div'); tick.className='rl-tick';
-    tick.style.left=(l.bench/l.max*100)+'%';
+    var ctrl=document.createElement('div'); ctrl.className='iv-ctrl';
+    var srow=document.createElement('div'); srow.className='iv-slider-row';
+    var swrap=document.createElement('div'); swrap.className='iv-swrap';
+    var slider=document.createElement('input'); slider.type='range'; slider.className='iv-slider';
+    slider.min=0.5; slider.max=l.max; slider.step=0.1; slider.value=l.bench;
+    slider.setAttribute('aria-label', l.name+' uplift percent');
+    var tick=document.createElement('div'); tick.className='iv-tick';
+    tick.style.left=((l.bench-0.5)/(l.max-0.5)*100)+'%';
     swrap.appendChild(slider); swrap.appendChild(tick);
-    var pct=document.createElement('span'); pct.className='rl-pct'; pct.textContent='1%';
-    var dollar=document.createElement('span'); dollar.className='rl-dollar'; dollar.textContent=money(l.base*0.01);
-    toprow.appendChild(swrap); toprow.appendChild(pct); toprow.appendChild(dollar);
+    var pct=document.createElement('span'); pct.className='iv-pct';
+    srow.appendChild(swrap); srow.appendChild(pct);
 
-    var note=document.createElement('div'); note.className='rl-note';
-    var bench=document.createElement('span'); bench.className='rl-bench'; bench.textContent='Benchmark: '+l.bench+'%';
-    var pass=document.createElement('span'); pass.className='rl-pass'; pass.textContent='Above benchmark';
+    var note=document.createElement('div'); note.className='iv-bench-note';
+    var bench=document.createElement('span'); bench.className='iv-bench'; bench.textContent='Industry benchmark: '+l.bench+'%';
+    var pass=document.createElement('span'); pass.className='iv-pass'; pass.textContent='Above benchmark';
     note.appendChild(bench); note.appendChild(pass);
 
-    ctrl.appendChild(toprow); ctrl.appendChild(note);
+    ctrl.appendChild(srow); ctrl.appendChild(note);
     row.appendChild(head); row.appendChild(ctrl);
 
+    function sync(){
+      pct.textContent=l.pct.toFixed(1)+'%';
+      val.textContent='+'+money(l.base*l.pct/100);
+      pass.style.visibility=l.pct>l.bench ? 'visible' : 'hidden';
+    }
+
+    l.setState=function(on, pctVal){
+      l.on=on;
+      if(typeof pctVal==='number'){ l.pct=pctVal; slider.value=pctVal; }
+      cb.checked=on;
+      row.classList.toggle('on', on);
+      sync();
+    };
+
     cb.addEventListener('change', function(){
-      l.on=cb.checked;
-      if(cb.checked) row.classList.add('open'); else row.classList.remove('open');
+      l.setState(cb.checked);
       recompute();
     });
     slider.addEventListener('input', function(){
       l.pct=parseFloat(slider.value);
-      pct.textContent=l.pct.toFixed(1)+'%';
-      dollar.textContent=money(l.base*l.pct/100);
-      pass.style.visibility=l.pct>l.bench ? 'visible' : 'hidden';
+      sync();
       recompute();
     });
 
+    sync();
     wrap.appendChild(row);
+  });
+
+  document.getElementById('rlBenchAll').addEventListener('click', function(){
+    LEVERS.forEach(function(l){ l.setState(true, l.bench); });
+    recompute();
+  });
+  document.getElementById('rlReset').addEventListener('click', function(){
+    LEVERS.forEach(function(l){ l.setState(false, l.bench); });
+    recompute();
   });
 
   recompute();
