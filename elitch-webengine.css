@@ -1,0 +1,768 @@
+/**
+Name: Elitch Gardens — RocketRez Web Engine Theme
+Author: James Brown
+Purpose: Elitch-branded styling for the RocketWeb2 engine (Semantic UI)
+Based on: Demo CSS - Sales (9/25/23)
+Last modified: 6/11/26
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap");
+
+body, html {
+  background-color: transparent;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ROOT VARIABLES — Elitch Gardens brand system
+   Pulled directly from elitchgardens.com:
+   blue #0047BA · red #BA3824/#D04D36 · sky #0B86DD · ice #D6F0FA
+   gold #FDD119 · ink #3F4345 · midnight #0D2236
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  /** Primary theme color — Elitch nav blue **/
+  --primary-color: #0047BA;
+
+  /** Secondary theme color — sky blue (links, labels) **/
+  --secondary-color: #0B86DD;
+
+  /** Accent color — ice blue panels / hover washes **/
+  --accent-color: #D6F0FA;
+
+  /** Highlight — Elitch gold (selected states, attention) **/
+  --highlight-color: #FDD119;
+
+  /** Body text **/
+  --text-color: #3F4345;
+
+  /** Call to action buttons ex: proceed to cart **/
+  --cta-buttons-color: #D04D36;
+  --cta-buttons-dark: #BA3824;
+  --cta-gradient: linear-gradient(180deg, #d04d36 49%, #ba3824 51%);
+  --cta-gradient-hover: linear-gradient(180deg, #ba3824 51%, #d04d36 49%);
+
+  /** my account buttons **/
+  --nav-buttons-color: #BA3824;
+
+  /** Typography **/
+  --primary-header-font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  --primary-font-family: "Mulish", sans-serif;
+  --header-font-weight: 800;
+  --body-font-weight: 400;
+  --header-font-size: 2.4rem;
+  --primary-letter-spacing: 0.03em;
+
+  /** Surfaces **/
+  --surface-radius: 14px;
+  --surface-border: 1px solid #e3e9f2;
+
+  /** Shadows — soft layered, lighter than default **/
+  --default-box-shadow: 0 2px 6px rgba(13, 34, 54, 0.08),
+    0 12px 28px rgba(13, 34, 54, 0.10);
+  --hover-box-shadow: 0 4px 10px rgba(13, 34, 54, 0.12),
+    0 18px 38px rgba(13, 34, 54, 0.16);
+
+  /** Motion **/
+  --transition-fast: 0.18s ease;
+  --transition-med: 0.3s ease;
+}
+/**END VARIABLES**/
+
+
+/* ════════════════════════════════════════════════════════════════
+   PARENT LAYOUT
+   ════════════════════════════════════════════════════════════════ */
+
+/* This body.fullscreen class is only for modal experiences */
+body.full-screen main#main-container {
+  background-color: #fff;
+  margin: 1.5em auto;
+  border: var(--surface-border);
+  border-top: 5px solid var(--primary-color);
+  border-radius: var(--surface-radius);
+  padding: 1.5em;
+  width: 60%;
+  overflow-y: auto;
+  box-shadow: var(--default-box-shadow);
+}
+
+@media (min-width: 771px) and (max-width: 1400px) {
+  body.full-screen main#main-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 770px) {
+  body.full-screen main#main-container {
+    width: 94%;
+    padding: 1em;
+  }
+}
+
+.description {
+  margin: 0 !important;
+}
+
+/* Smooth, branded scrollbars inside the engine */
+main#main-container::-webkit-scrollbar,
+.time-segments__background::-webkit-scrollbar {
+  width: 8px;
+}
+main#main-container::-webkit-scrollbar-thumb,
+.time-segments__background::-webkit-scrollbar-thumb {
+  background: #b9c6dc;
+  border-radius: 99px;
+}
+main#main-container::-webkit-scrollbar-thumb:hover,
+.time-segments__background::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
+main#main-container::-webkit-scrollbar-track,
+.time-segments__background::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ════════════════════════════════════════════════════════════════ */
+
+p,
+label,
+.content,
+.cart-summary,
+.ccpayment-div__contact-form .ui.header,
+.credit-card-fields__title,
+.ui.header.date,
+.sub.header.times-for,
+.item-name.header,
+.ui.blue.inverted.segment.payment-header,
+.ui.segment.payment-header.amount-due,
+.ui.header {
+  font-family: var(--primary-font-family);
+  color: var(--text-color);
+}
+
+label {
+  font-size: 15px;
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+/* Page title — Montserrat heavy, Elitch blue, gold underline kick */
+#header-container .ui.large.header {
+  font-family: var(--primary-header-font-family);
+  font-weight: 900;
+  font-size: 34px;
+  line-height: 1.2;
+  color: var(--primary-color);
+  margin-bottom: 14px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+#header-container .ui.large.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--highlight-color);
+}
+
+.ui.large.header {
+  font-family: var(--primary-header-font-family);
+  font-weight: var(--header-font-weight);
+  font-size: var(--header-font-size);
+  color: var(--text-color);
+}
+
+.ui.header {
+  margin-top: 10px !important;
+}
+
+.subHeader,
+.order-complete-message {
+  text-align: center;
+}
+
+.ui.items > .item > .content > .header {
+  font-family: var(--primary-header-font-family);
+  font-weight: 700;
+  letter-spacing: var(--primary-letter-spacing);
+  color: var(--text-color);
+}
+
+.ui.items > .item > .content p {
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.ui.centered.header {
+  display: none;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   CARDS & SURFACES
+   ════════════════════════════════════════════════════════════════ */
+
+.card {
+  border-radius: var(--surface-radius) !important;
+  border: var(--surface-border) !important;
+  box-shadow: var(--default-box-shadow) !important;
+  overflow: hidden;
+  transition: transform var(--transition-med), box-shadow var(--transition-med);
+}
+
+/* Hover lift — makes product cards feel tactile */
+.ui.hover.card,
+.ui.segments > .ui.link.segment {
+  transition: transform var(--transition-med), box-shadow var(--transition-med);
+}
+
+.ui.hover.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--hover-box-shadow) !important;
+}
+
+.available-items .ui.card > .content > .header,
+.rates-item-details .ui.card > .content > .header {
+  margin: auto;
+  font-family: var(--primary-header-font-family);
+  font-weight: 700;
+}
+
+.ui.column.grid.available-items {
+  margin-top: 10px;
+}
+
+.cart-container,
+.ccpayment-div {
+  margin-top: 15px !important;
+}
+
+.ui.unstackable.divided.items.quantity-items {
+  margin-top: 10px !important;
+}
+
+div#loading-dimmer {
+  border-radius: var(--surface-radius) !important;
+  backdrop-filter: blur(2px);
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   LABELS & PRICE TAGS
+   ════════════════════════════════════════════════════════════════ */
+
+.rate-price-details > .ui.label > div:first-child {
+  background-color: var(--primary-color);
+}
+
+.ui.blue.label,
+.ui.blue.labels .label {
+  background-color: var(--primary-color) !important;
+  border-radius: 8px;
+}
+
+.ui.inverted.blue.segment {
+  background: linear-gradient(135deg, #0047BA 0%, #0B86DD 100%) !important;
+  border-radius: 10px;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   BUTTONS — CTA, nav, quantity
+   CTAs use the Elitch split-gradient red; hover flips the gradient
+   (same behavior as elitchgardens.com buttons)
+   ════════════════════════════════════════════════════════════════ */
+
+.ui.primary.button,
+button.ui.right.labeled.icon.big.primary.button,
+button.ui.disabled.right.labeled.icon.big.primary.button,
+button.ui.fluid.right.labeled.icon.large.primary.button,
+button.ui.big.green.button,
+button.ui.disabled.big.green.button,
+button.ui.large.blue.button,
+.time-confirmation__button.ui.button {
+  background: var(--cta-gradient) !important;
+  color: #fff !important;
+  font-family: var(--primary-header-font-family);
+  font-weight: 700;
+  letter-spacing: var(--primary-letter-spacing);
+  text-transform: uppercase;
+  border: none;
+  border-radius: 10px !important;
+  transition: background var(--transition-fast), transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.ui.primary.button:hover,
+button.ui.right.labeled.icon.big.primary.button:hover,
+button.ui.fluid.right.labeled.icon.large.primary.button:hover,
+button.ui.big.green.button:hover,
+button.ui.large.blue.button:hover,
+.time-confirmation__button.ui.button:hover {
+  background: var(--cta-gradient-hover) !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(186, 56, 36, 0.35);
+}
+
+.ui.primary.button:active,
+button.ui.big.green.button:active,
+.time-confirmation__button.ui.button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Keyboard focus ring for accessibility */
+.ui.button:focus-visible {
+  outline: 3px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
+.ui.blue.button,
+.ui.green.button {
+  background-color: var(--primary-color) !important;
+  border-radius: 10px;
+}
+
+/* Quantity steppers — clean white with blue accents, blue fill on hover */
+button.ui.green.icon.button.quantity-right-button,
+button.ui.red.icon.button.quantity-left-button {
+  border: 1.5px solid var(--primary-color);
+  color: var(--primary-color) !important;
+  background: #fff !important;
+  border-radius: 10px !important;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+button.ui.green.icon.button.quantity-right-button:hover,
+button.ui.red.icon.button.quantity-left-button:hover {
+  border: 1.5px solid var(--primary-color);
+  color: #fff !important;
+  background: var(--primary-color) !important;
+}
+
+button.ui.small.button.cart-button,
+button.ui.big.default.button,
+button.ui.inverted.red.button,
+button.ui.big.labeled.icon.button.navigation-buttons__back-to-cart {
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+/* Cart pill — blue, with gold count badge so it always reads */
+button.ui.small.button.cart-button {
+  border-radius: 99px !important;
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+  transition: background var(--transition-fast);
+}
+
+button.ui.small.button.cart-button:hover {
+  background-color: var(--secondary-color) !important;
+}
+
+.ui.small.button.cart-button .ui.red.label.cart-item-count,
+.ui.small.button.cart-button .ui.red.label.cart-item-count:hover {
+  background-color: var(--highlight-color) !important;
+  color: var(--text-color) !important;
+  font-weight: 800;
+  border-radius: 99px;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   TIMES & SCHEDULE
+   ════════════════════════════════════════════════════════════════ */
+
+.times-container .ui.items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  column-gap: 12px;
+  row-gap: 14px;
+}
+
+@media (max-width: 990px) {
+  .times-container .ui.items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .times-container .ui.items {
+    grid-template-columns: 1fr;
+  }
+}
+
+.schedule-container {
+  margin-top: 10px;
+}
+
+.schedule-container .times-container .ui.items > .item.time-item > .content {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  max-width: 100%;
+  margin: auto !important;
+  padding: 10% !important;
+}
+
+/* Time slots — white chips that go ice-blue on hover, blue ring when picked */
+.time-item {
+  background: #fff;
+  border: 1.5px solid #e3e9f2;
+  box-shadow: 0 1px 4px rgba(13, 34, 54, 0.08);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast),
+    transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.times-container .ui.compact.items > .hover.item.time-item {
+  box-shadow: 0 1px 4px rgba(13, 34, 54, 0.08) !important;
+  border-radius: 12px;
+  padding: 10px !important;
+}
+
+.times-container .ui.compact.items > .hover.item.time-item:hover {
+  background: var(--accent-color);
+  border-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(11, 134, 221, 0.18) !important;
+}
+
+.ui.compact.divided.link.hover.unstackable.items {
+  margin-bottom: 20px !important;
+}
+
+div#times-list {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+i.big.clock.outline.icon {
+  display: none;
+}
+
+.ui.compact.items > .item .content .description,
+.ui.form#contact-form .ui.header.order-number,
+.ui.form#contact-form .ui.header.tour-start-time {
+  display: none;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   TIME SEGMENTS
+   ════════════════════════════════════════════════════════════════ */
+
+.time-segments__flex {
+  box-shadow: var(--default-box-shadow) !important;
+  border-radius: var(--surface-radius);
+}
+
+.time-segments__background {
+  background-color: #f4f8fc !important;
+  width: 100%;
+  height: 326px;
+  border-radius: 10px !important;
+  overflow-y: auto;
+}
+
+.time-segments-time__ticket-left-font {
+  font-size: 0.9rem !important;
+  color: var(--cta-buttons-dark);
+  font-weight: 700;
+}
+
+/* Segment tab pills */
+.time-segments__tabs {
+  border: 1.5px solid var(--primary-color) !important;
+  border-radius: 99px !important;
+  overflow: hidden;
+  width: 98% !important;
+  display: flex;
+  justify-content: space-between;
+  height: 45px;
+  background: #fff;
+}
+
+.time-segments__tab-button {
+  flex: 1;
+  color: var(--primary-color) !important;
+  font-family: var(--primary-header-font-family);
+  font-weight: 600;
+  letter-spacing: var(--primary-letter-spacing);
+  border: none !important;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.time-segments__tab-button:not(:first-child) {
+  border-left: 1px solid #e3e9f2 !important;
+}
+
+a.item.time-segments__tab-button.active,
+.time-segments__tab-button.active,
+.time-segments__tab-button.active:hover {
+  color: #fff !important;
+  background-color: var(--primary-color) !important;
+}
+
+.time-segments__tab-button:not(.active):hover {
+  background: var(--accent-color);
+}
+
+.time-segments__border-left {
+  border-left: 1px solid #e3e9f2 !important;
+}
+
+/* Individual segment chips */
+.time-segments-time__container {
+  background-color: #fff;
+  border: 1.5px solid #e3e9f2;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(13, 34, 54, 0.08);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.time-segments-time__container:hover {
+  border-color: var(--secondary-color);
+  box-shadow: 0 6px 16px rgba(11, 134, 221, 0.18);
+}
+
+.time-segments-time__container.time-segments-time__details-container {
+  min-height: 75px;
+  min-width: 215px;
+}
+
+/* Selected segment — solid blue ring + gold tick of color */
+.time-segments-time__item-clicked {
+  border: 2.5px solid var(--primary-color) !important;
+  box-shadow: 0 0 0 4px rgba(0, 71, 186, 0.12) !important;
+}
+
+.time-segments__info-container {
+  background-color: var(--accent-color) !important;
+  color: var(--primary-color) !important;
+  border: 1px solid #bfe3f5;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+button.ui.big.button.time-segments-tabs__active-colour {
+  background: var(--cta-gradient) !important;
+  color: #fff !important;
+  border-radius: 10px;
+  border: none;
+}
+
+button.ui.big.button.time-segments-tabs__active-colour:hover {
+  background: var(--cta-gradient-hover) !important;
+  color: #fff !important;
+  transition: var(--transition-med);
+}
+
+/* Confirmation banner date/time chips */
+.time-confirmation__date,
+.time-confirmation__time {
+  color: var(--primary-color);
+  background: var(--accent-color);
+  border: 1px solid #bfe3f5;
+  border-radius: 99px;
+  font-weight: 700;
+  padding: 0.35em 1em;
+}
+
+nav.navigation-buttons.time-segments__confirmation-banner {
+  margin-bottom: 10px !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   CALENDAR
+   ════════════════════════════════════════════════════════════════ */
+
+.ui.ui.calendar .ui.table td.active {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+  border-radius: 8px;
+}
+
+.ui.calendar .ui.table tr td:hover {
+  background-color: var(--accent-color);
+  border-radius: 8px;
+}
+
+.ui.calendar .ui.table tr td.today {
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   FORMS & CHECKOUT
+   ════════════════════════════════════════════════════════════════ */
+
+form {
+  margin-top: 10px;
+}
+
+div#contact-form {
+  margin-top: 10px;
+}
+
+.ui.form .field > label {
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: var(--primary-letter-spacing);
+  color: var(--text-color);
+}
+
+.ui.form#contact-form .ui.header.section-header,
+.ui.form#questions-form .field > label {
+  color: var(--primary-color);
+}
+
+/* Input focus — blue ring instead of Semantic's default teal */
+.ui.form input:focus,
+.ui.form textarea:focus,
+.ui.selection.dropdown:focus,
+.ui.selection.dropdown.active {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(0, 71, 186, 0.12) !important;
+}
+
+.cart-summary__total {
+  margin-top: 1rem;
+  color: var(--primary-color) !important;
+  font-family: var(--primary-header-font-family);
+  font-weight: 800;
+}
+
+.terms-container {
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: var(--primary-letter-spacing);
+  margin-top: 10px;
+}
+
+.ui.warning.message {
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+  border-radius: 10px;
+  background: #fff8e1;
+  border: 1px solid var(--highlight-color);
+  box-shadow: none;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   MY ACCOUNT
+   ════════════════════════════════════════════════════════════════ */
+
+button.ui.small.button.back-home-button,
+button.ui.red.small.button.sign-out-button,
+button.ui.black.small.button,
+button.ui.green.small.button.my-account-button {
+  border-radius: 99px !important;
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.ui.top.attached.tabular.menu.my-account-menu .item {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 10px 10px 0 0 !important;
+  font-family: var(--primary-header-font-family);
+  font-weight: 600;
+}
+
+.ui.top.attached.tabular.menu.my-account-menu .item.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.ui.top.attached.tabular.menu.my-account-menu .item.active:focus-visible,
+.ui.top.attached.tabular.menu.my-account-menu .item.active:hover {
+  background-color: var(--secondary-color);
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   BUY TICKETS BUTTON (custom injected button)
+   ════════════════════════════════════════════════════════════════ */
+
+.BuyTicketsButton {
+  cursor: pointer;
+  min-height: 1em;
+  outline: 0;
+  border: none;
+  background: var(--cta-gradient);
+  color: white;
+  margin: 0 0.25em 0 0;
+  padding: 0.85em 1.6em;
+  text-transform: uppercase;
+  text-shadow: none;
+  line-height: 1em;
+  text-align: center;
+  border-radius: 10px;
+  user-select: none;
+  font-weight: 700;
+  font-family: var(--primary-header-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+  transition: background var(--transition-fast), transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.BuyTicketsButton:hover {
+  background: var(--cta-gradient-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(186, 56, 36, 0.35);
+}
+
+.quantity-items button.BuyTicketsButton,
+.cart-items button.BuyTicketsButton {
+  display: none;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   FOOTER & NAV
+   ════════════════════════════════════════════════════════════════ */
+
+footer#footer-container {
+  margin-bottom: 15px;
+}
+
+nav.navigation-buttons {
+  margin-top: 15px !important;
+  margin-bottom: 10px !important;
+}
+
+.powered-by {
+  margin-top: 10px;
+}
+
+footer img {
+  vertical-align: middle;
+  height: 64px;
+  opacity: 0.85;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   MOTION SAFETY
+   ════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
