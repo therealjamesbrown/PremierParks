@@ -301,6 +301,22 @@
     <p>&copy; 2026 Elitch Gardens &mdash; Demo environment powered by RocketRez. For demonstration purposes only.</p>
   </footer>
 
+  <script>
+    // Demo page: nav/footer links are decorative only. Keep guests inside
+    // the app — only the #tickets anchors (BUY TICKETS / SEASON PASSES /
+    // Tickets nav item) actually do anything, scrolling to the widget.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (href === '#tickets') {
+        e.preventDefault();
+        document.getElementById('tickets').scrollIntoView({ behavior: 'smooth' });
+      } else {
+        e.preventDefault();
+      }
+    });
+  </script>
   <script type="text/javascript" src="https://sales.rocket-rez.com/RocketWeb2/assets/scripts/webengine_load.js" async></script>
 </body>
 </html>

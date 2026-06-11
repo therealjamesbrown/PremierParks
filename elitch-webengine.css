@@ -1,17 +1,13 @@
 /**
-Name: Elitch Gardens — RocketRez Web Engine Theme
+Name: Elitch Gardens — RocketRez Web Engine Theme v2
 Author: James Brown
 Purpose: Elitch-branded styling for the RocketWeb2 engine (Semantic UI)
-Based on: Demo CSS - Sales (9/25/23)
+Based on: Demo CSS - Sales (9/25/23) + default engine theme overrides
 Last modified: 6/11/26
 */
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap");
-
-body, html {
-  background-color: transparent;
-}
 
 /* ════════════════════════════════════════════════════════════════
    ROOT VARIABLES — Elitch Gardens brand system
@@ -23,17 +19,19 @@ body, html {
   /** Primary theme color — Elitch nav blue **/
   --primary-color: #0047BA;
 
-  /** Secondary theme color — sky blue (links, labels) **/
+  /** Secondary theme color — sky blue (links, labels, hovers) **/
   --secondary-color: #0B86DD;
 
   /** Accent color — ice blue panels / hover washes **/
   --accent-color: #D6F0FA;
+  --accent-soft: #EEF7FC;
 
-  /** Highlight — Elitch gold (selected states, attention) **/
+  /** Highlight — Elitch gold (selected states, badges) **/
   --highlight-color: #FDD119;
 
-  /** Body text **/
+  /** Body text / dark ink **/
   --text-color: #3F4345;
+  --ink-dark: #0D2236;
 
   /** Call to action buttons ex: proceed to cart **/
   --cta-buttons-color: #D04D36;
@@ -56,7 +54,7 @@ body, html {
   --surface-radius: 14px;
   --surface-border: 1px solid #e3e9f2;
 
-  /** Shadows — soft layered, lighter than default **/
+  /** Shadows — soft layered **/
   --default-box-shadow: 0 2px 6px rgba(13, 34, 54, 0.08),
     0 12px 28px rgba(13, 34, 54, 0.10);
   --hover-box-shadow: 0 4px 10px rgba(13, 34, 54, 0.12),
@@ -70,8 +68,22 @@ body, html {
 
 
 /* ════════════════════════════════════════════════════════════════
-   PARENT LAYOUT
+   PAGE CANVAS
+   Default theme paints #eceef2 gray — replace with a faint ice tint
+   so the engine feels native to the Elitch site
    ════════════════════════════════════════════════════════════════ */
+
+body, html {
+  background-color: transparent;
+}
+
+body:not(.full-screen) {
+  background-color: var(--accent-soft);
+}
+
+.ui.inverted.dimmer {
+  background-color: rgba(238, 247, 252, 0.88);
+}
 
 /* This body.fullscreen class is only for modal experiences */
 body.full-screen main#main-container {
@@ -103,7 +115,7 @@ body.full-screen main#main-container {
   margin: 0 !important;
 }
 
-/* Smooth, branded scrollbars inside the engine */
+/* Branded slim scrollbars inside the engine */
 main#main-container::-webkit-scrollbar,
 .time-segments__background::-webkit-scrollbar {
   width: 8px;
@@ -148,14 +160,14 @@ label {
   letter-spacing: var(--primary-letter-spacing);
 }
 
-/* Page title — Montserrat heavy, Elitch blue, gold underline kick */
+/* Page title — Montserrat heavy, Elitch blue, centered gold kick
+   (default theme centers the header in a grid at ≥600px) */
 #header-container .ui.large.header {
   font-family: var(--primary-header-font-family);
   font-weight: 900;
-  font-size: 34px;
+  font-size: 1.75em;
   line-height: 1.2;
   color: var(--primary-color);
-  margin-bottom: 14px;
   position: relative;
   padding-bottom: 12px;
 }
@@ -163,9 +175,10 @@ label {
 #header-container .ui.large.header::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 0;
-  width: 56px;
+  width: 52px;
   height: 4px;
   border-radius: 99px;
   background: var(--highlight-color);
@@ -174,7 +187,6 @@ label {
 .ui.large.header {
   font-family: var(--primary-header-font-family);
   font-weight: var(--header-font-weight);
-  font-size: var(--header-font-size);
   color: var(--text-color);
 }
 
@@ -215,7 +227,6 @@ label {
   transition: transform var(--transition-med), box-shadow var(--transition-med);
 }
 
-/* Hover lift — makes product cards feel tactile */
 .ui.hover.card,
 .ui.segments > .ui.link.segment {
   transition: transform var(--transition-med), box-shadow var(--transition-med);
@@ -251,6 +262,22 @@ div#loading-dimmer {
   backdrop-filter: blur(2px);
 }
 
+/* Price pills — default theme paints gray/#2185d0; rebrand to ice/blue */
+.price__value,
+.rate-price__value {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  font-family: var(--primary-header-font-family);
+  font-weight: 800;
+  border-radius: 99px;
+  padding: 5px 14px;
+}
+
+.base-price,
+.starting-from {
+  color: #7a8794;
+}
+
 
 /* ════════════════════════════════════════════════════════════════
    LABELS & PRICE TAGS
@@ -273,8 +300,8 @@ div#loading-dimmer {
 
 
 /* ════════════════════════════════════════════════════════════════
-   BUTTONS — CTA, nav, quantity
-   CTAs use the Elitch split-gradient red; hover flips the gradient
+   PRIMARY CTA BUTTONS
+   Elitch split-gradient red; hover flips the gradient
    (same behavior as elitchgardens.com buttons)
    ════════════════════════════════════════════════════════════════ */
 
@@ -285,6 +312,7 @@ button.ui.fluid.right.labeled.icon.large.primary.button,
 button.ui.big.green.button,
 button.ui.disabled.big.green.button,
 button.ui.large.blue.button,
+.ui.button.cart-summary__checkout,
 .time-confirmation__button.ui.button {
   background: var(--cta-gradient) !important;
   color: #fff !important;
@@ -299,11 +327,15 @@ button.ui.large.blue.button,
 }
 
 .ui.primary.button:hover,
+.ui.primary.button:focus-visible,
 button.ui.right.labeled.icon.big.primary.button:hover,
 button.ui.fluid.right.labeled.icon.large.primary.button:hover,
 button.ui.big.green.button:hover,
 button.ui.large.blue.button:hover,
-.time-confirmation__button.ui.button:hover {
+.ui.button.cart-summary__checkout:hover,
+.ui.button.cart-summary__checkout:focus-visible,
+.time-confirmation__button.ui.button:hover,
+.time-confirmation__button.ui.button:focus-visible {
   background: var(--cta-gradient-hover) !important;
   color: #fff !important;
   transform: translateY(-1px);
@@ -312,6 +344,7 @@ button.ui.large.blue.button:hover,
 
 .ui.primary.button:active,
 button.ui.big.green.button:active,
+.ui.button.cart-summary__checkout:active,
 .time-confirmation__button.ui.button:active {
   transform: translateY(0);
   box-shadow: none;
@@ -329,49 +362,200 @@ button.ui.big.green.button:active,
   border-radius: 10px;
 }
 
-/* Quantity steppers — clean white with blue accents, blue fill on hover */
-button.ui.green.icon.button.quantity-right-button,
-button.ui.red.icon.button.quantity-left-button {
-  border: 1.5px solid var(--primary-color);
-  color: var(--primary-color) !important;
-  background: #fff !important;
-  border-radius: 10px !important;
+
+/* ════════════════════════════════════════════════════════════════
+   SECONDARY / UTILITY BUTTONS
+   Default theme paints these gray (#8e8e8e) — rebrand as clean
+   white-and-blue outline buttons
+   ════════════════════════════════════════════════════════════════ */
+
+.ui.button.navigation-buttons__back-to-cart,
+.ui.button.navigation-buttons__continue-shopping,
+.ui.button.navigation-buttons__no-donation,
+.ui.button.add-coupon__apply,
+.add-membership .ui.button,
+.secondary-payment-method-item-serial .ui.button {
+  background-color: #fff;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: var(--primary-font-family);
+  font-weight: 700;
+  letter-spacing: var(--primary-letter-spacing);
   transition: background var(--transition-fast), color var(--transition-fast);
 }
 
-button.ui.green.icon.button.quantity-right-button:hover,
-button.ui.red.icon.button.quantity-left-button:hover {
-  border: 1.5px solid var(--primary-color);
-  color: #fff !important;
-  background: var(--primary-color) !important;
+.ui.button.navigation-buttons__back-to-cart:hover,
+.ui.button.navigation-buttons__back-to-cart:focus-visible,
+.ui.button.navigation-buttons__continue-shopping:hover,
+.ui.button.navigation-buttons__continue-shopping:focus-visible,
+.ui.button.navigation-buttons__no-donation:hover,
+.ui.button.navigation-buttons__no-donation:focus-visible,
+.ui.button.add-coupon__apply:hover,
+.ui.button.add-coupon__apply:focus-visible,
+.add-membership .ui.button:hover,
+.add-membership .ui.button:focus-visible,
+.secondary-payment-method-item-serial .ui.button:hover,
+.secondary-payment-method-item-serial .ui.button:focus-visible {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
 }
 
-button.ui.small.button.cart-button,
-button.ui.big.default.button,
-button.ui.inverted.red.button,
-button.ui.big.labeled.icon.button.navigation-buttons__back-to-cart {
-  font-family: var(--primary-font-family);
-  letter-spacing: var(--primary-letter-spacing);
+/* Back button (top-left) — quiet blue outline pill instead of gray */
+.ui.big.button.back-button {
+  background-color: #fff;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 99px;
+  transition: background var(--transition-fast), color var(--transition-fast);
 }
 
-/* Cart pill — blue, with gold count badge so it always reads */
+.ui.big.button.back-button:hover,
+.ui.big.button.back-button:focus-visible {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   HEADER ACTIONS — CART & MY ACCOUNT
+   Fixes the squished count badge (default theme forces padding: 0)
+   ════════════════════════════════════════════════════════════════ */
+
 button.ui.small.button.cart-button {
   border-radius: 99px !important;
   background-color: var(--primary-color) !important;
   color: #fff !important;
-  transition: background var(--transition-fast);
+  font-family: var(--primary-font-family);
+  display: inline-flex;
+  align-items: center;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-button.ui.small.button.cart-button:hover {
+button.ui.small.button.cart-button:hover,
+button.ui.small.button.cart-button:focus-visible {
   background-color: var(--secondary-color) !important;
+  box-shadow: 0 4px 12px rgba(11, 134, 221, 0.35);
 }
 
+/* Count badge — proper gold circle, vertically centered, never squished */
 .ui.small.button.cart-button .ui.red.label.cart-item-count,
 .ui.small.button.cart-button .ui.red.label.cart-item-count:hover {
   background-color: var(--highlight-color) !important;
-  color: var(--text-color) !important;
+  color: var(--ink-dark) !important;
+  font-family: var(--primary-header-font-family);
   font-weight: 800;
+  font-size: 0.8rem;
+  line-height: 1;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 6px !important;
+  margin-left: 0.6em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 99px;
+  box-shadow: 0 1px 3px rgba(13, 34, 54, 0.25);
+}
+
+/* My account button — matching solid blue circle */
+button.ui.green.small.button.my-account-button,
+.ui.small.button.my-account-button {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+  border-radius: 99px !important;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ui.small.button.my-account-button:hover,
+.ui.small.button.my-account-button:focus-visible {
+  background-color: var(--secondary-color) !important;
+  box-shadow: 0 4px 12px rgba(11, 134, 221, 0.35);
+}
+
+button.ui.small.button.back-home-button,
+button.ui.black.small.button {
+  border-radius: 99px !important;
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+/* Sign out — keep the red outline pattern from default, rounder */
+button.ui.red.small.button.sign-out-button {
+  border-radius: 99px !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   QUANTITY STEPPER
+   One unified control: − [ qty ] + share one blue outline, identical
+   heights, and merged corners. Buttons fill blue on hover.
+   ════════════════════════════════════════════════════════════════ */
+
+button.ui.red.icon.button.quantity-left-button,
+button.ui.green.icon.button.quantity-right-button {
+  background: #fff !important;
+  color: var(--primary-color) !important;
+  border: 2px solid var(--primary-color);
+  width: 46px;
+  height: 44px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+button.ui.red.icon.button.quantity-left-button {
+  border-radius: 12px 0 0 12px !important;
+  border-right: none;
+}
+
+button.ui.green.icon.button.quantity-right-button {
+  border-radius: 0 12px 12px 0 !important;
+  border-left: none;
+}
+
+button.ui.red.icon.button.quantity-left-button:hover,
+button.ui.red.icon.button.quantity-left-button:focus-visible,
+button.ui.green.icon.button.quantity-right-button:hover,
+button.ui.green.icon.button.quantity-right-button:focus-visible {
+  background: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* The number field between the buttons — same border, same height,
+   bold Montserrat count, square corners so it merges seamlessly */
+.ui.action.input.quantity-input > input,
+.ui.form .ui.action.input.quantity-input input {
+  border: 2px solid var(--primary-color) !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0 !important;
+  height: 44px !important;
+  margin: 0 !important;
+  text-align: center;
+  font-family: var(--primary-header-font-family);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+.ui.action.input.quantity-input > input:focus,
+.ui.form .ui.action.input.quantity-input input:focus {
+  background: var(--accent-soft) !important;
+}
+
+/* Keep heights in sync at the ≥700px breakpoint where the default
+   theme forces 36px */
+.ui.form .quantity-form__field-container > .quantity-field.field > .ui.action.input.quantity-input > .ui.button,
+.ui.form .quantity-form__field-container > .quantity-field.field > .ui.action.input.quantity-input > input {
+  height: 44px !important;
+}
+
+.ui.items.quantity-items > .item input,
+.ui.items.quantity-items > .item label {
+  text-align: center;
 }
 
 
@@ -413,7 +597,6 @@ button.ui.small.button.cart-button:hover {
   padding: 10% !important;
 }
 
-/* Time slots — white chips that go ice-blue on hover, blue ring when picked */
 .time-item {
   background: #fff;
   border: 1.5px solid #e3e9f2;
@@ -458,6 +641,8 @@ i.big.clock.outline.icon {
 
 /* ════════════════════════════════════════════════════════════════
    TIME SEGMENTS
+   Default theme uses gray chips with GREEN selected states — rebrand
+   everything to the blue/gold system
    ════════════════════════════════════════════════════════════════ */
 
 .time-segments__flex {
@@ -481,23 +666,23 @@ i.big.clock.outline.icon {
 
 /* Segment tab pills */
 .time-segments__tabs {
-  border: 1.5px solid var(--primary-color) !important;
+  border: 2px solid var(--primary-color) !important;
   border-radius: 99px !important;
   overflow: hidden;
-  width: 98% !important;
   display: flex;
   justify-content: space-between;
-  height: 45px;
   background: #fff;
+  margin-bottom: 1em;
 }
 
 .time-segments__tab-button {
   flex: 1;
   color: var(--primary-color) !important;
   font-family: var(--primary-header-font-family);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: var(--primary-letter-spacing);
   border: none !important;
+  border-radius: 0 !important;
   transition: background var(--transition-fast), color var(--transition-fast);
 }
 
@@ -507,12 +692,14 @@ i.big.clock.outline.icon {
 
 a.item.time-segments__tab-button.active,
 .time-segments__tab-button.active,
-.time-segments__tab-button.active:hover {
+.time-segments__tab-button.active:hover,
+.time-segments__tab-button.active:focus-visible {
   color: #fff !important;
   background-color: var(--primary-color) !important;
 }
 
-.time-segments__tab-button:not(.active):hover {
+.time-segments__tab-button:not(.active):hover,
+.time-segments__tab-button:not(.active):focus-visible {
   background: var(--accent-color);
 }
 
@@ -520,16 +707,19 @@ a.item.time-segments__tab-button.active,
   border-left: 1px solid #e3e9f2 !important;
 }
 
-/* Individual segment chips */
+/* Individual segment chips — white cards, sky-blue hover */
 .time-segments-time__container {
   background-color: #fff;
   border: 1.5px solid #e3e9f2;
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(13, 34, 54, 0.08);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast), background var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
-.time-segments-time__container:hover {
+.time-segments-time__container:focus-visible,
+.time-segments-time__container:hover:not(.disabled) {
+  background-color: var(--accent-color);
   border-color: var(--secondary-color);
   box-shadow: 0 6px 16px rgba(11, 134, 221, 0.18);
 }
@@ -539,10 +729,17 @@ a.item.time-segments__tab-button.active,
   min-width: 215px;
 }
 
-/* Selected segment — solid blue ring + gold tick of color */
-.time-segments-time__item-clicked {
-  border: 2.5px solid var(--primary-color) !important;
-  box-shadow: 0 0 0 4px rgba(0, 71, 186, 0.12) !important;
+/* Selected segment — blue ring + soft glow (replaces default green) */
+.time-segments-time__item-clicked:not(.time-segments-time__item-locked) {
+  box-shadow: 0 0 0 2.5px var(--primary-color),
+    0 0 0 7px rgba(0, 71, 186, 0.12) !important;
+  border-color: var(--primary-color) !important;
+  background-color: #fff !important;
+  color: var(--primary-color) !important;
+}
+
+.time-segments-time__item-clicked:not(.time-segments-time__item-locked):hover {
+  background-color: #fff !important;
 }
 
 .time-segments__info-container {
@@ -551,30 +748,34 @@ a.item.time-segments__tab-button.active,
   border: 1px solid #bfe3f5;
   padding: 1rem;
   border-radius: 10px;
+  font-weight: 700;
 }
 
-button.ui.big.button.time-segments-tabs__active-colour {
+button.ui.big.button.time-segments-tabs__active-colour,
+.ui.button.time-segments-tabs__active-colour {
   background: var(--cta-gradient) !important;
   color: #fff !important;
   border-radius: 10px;
   border: none;
 }
 
-button.ui.big.button.time-segments-tabs__active-colour:hover {
+button.ui.big.button.time-segments-tabs__active-colour:hover,
+.ui.button.time-segments-tabs__active-colour:hover {
   background: var(--cta-gradient-hover) !important;
   color: #fff !important;
   transition: var(--transition-med);
 }
 
-/* Confirmation banner date/time chips */
+/* Confirmation banner date/time chips (default paints these green) */
 .time-confirmation__date,
 .time-confirmation__time {
   color: var(--primary-color);
-  background: var(--accent-color);
+  background-color: var(--accent-color);
   border: 1px solid #bfe3f5;
   border-radius: 99px;
   font-weight: 700;
-  padding: 0.35em 1em;
+  font-family: var(--primary-header-font-family);
+  padding: 5px 1em;
 }
 
 nav.navigation-buttons.time-segments__confirmation-banner {
@@ -584,22 +785,75 @@ nav.navigation-buttons.time-segments__confirmation-banner {
 
 /* ════════════════════════════════════════════════════════════════
    CALENDAR
+   Available days: ice blue (replaces default green) · selected: blue
    ════════════════════════════════════════════════════════════════ */
+
+.schedule-calendar-container {
+  border-radius: var(--surface-radius);
+  box-shadow: var(--default-box-shadow);
+}
+
+/* Today / clear buttons above the calendar — blue outline */
+.schedule-calendar-container > .ui.button {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 99px;
+  font-family: var(--primary-font-family);
+  font-weight: 700;
+}
+
+.schedule-calendar-container > .ui.button:hover,
+.schedule-calendar-container > .ui.button:focus-visible {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+}
+
+.ui.ui.calendar thead th {
+  font-family: var(--primary-header-font-family);
+  color: var(--primary-color);
+}
+
+.ui.ui.calendar .ui.table td {
+  border-radius: 8px;
+}
+
+.ui.ui.calendar .ui.table td.available {
+  background-color: var(--accent-color);
+  color: var(--ink-dark);
+}
+
+.ui.ui.calendar .ui.table td.available:hover,
+.ui.ui.calendar .ui.table td.available:focus-visible {
+  background-color: #aadcf2;
+}
+
+.ui.ui.calendar .ui.table td.available.adjacent:not(.disabled) {
+  background-color: var(--accent-soft);
+  color: #8ba3b5;
+}
+
+.ui.ui.calendar .ui.table td.available.adjacent:not(.disabled):hover,
+.ui.ui.calendar .ui.table td.available.adjacent:not(.disabled):focus-visible {
+  background-color: #aadcf2;
+}
 
 .ui.ui.calendar .ui.table td.active {
   background-color: var(--primary-color) !important;
   color: #fff !important;
-  border-radius: 8px;
 }
 
-.ui.calendar .ui.table tr td:hover {
-  background-color: var(--accent-color);
-  border-radius: 8px;
+.ui.ui.calendar .ui.table td.active:hover,
+.ui.ui.calendar .ui.table td.active:focus-visible {
+  background-color: var(--secondary-color) !important;
 }
 
 .ui.calendar .ui.table tr td.today {
   font-weight: 800;
-  color: var(--primary-color);
+}
+
+.availability-legend {
+  font-family: var(--primary-font-family);
 }
 
 
@@ -628,7 +882,11 @@ div#contact-form {
 }
 
 /* Input focus — blue ring instead of Semantic's default teal */
-.ui.form input:focus,
+.ui.form input[type=text]:focus,
+.ui.form input[type=email]:focus,
+.ui.form input[type=tel]:focus,
+.ui.form input[type=password]:focus,
+.ui.form input[type=date]:focus,
 .ui.form textarea:focus,
 .ui.selection.dropdown:focus,
 .ui.selection.dropdown.active {
@@ -641,6 +899,14 @@ div#contact-form {
   color: var(--primary-color) !important;
   font-family: var(--primary-header-font-family);
   font-weight: 800;
+}
+
+.cart-summary__total-paid .cart-summary__value {
+  color: var(--primary-color);
+}
+
+.multipass-item__total-value {
+  color: var(--primary-color);
 }
 
 .terms-container {
@@ -664,21 +930,16 @@ div#contact-form {
    MY ACCOUNT
    ════════════════════════════════════════════════════════════════ */
 
-button.ui.small.button.back-home-button,
-button.ui.red.small.button.sign-out-button,
-button.ui.black.small.button,
-button.ui.green.small.button.my-account-button {
-  border-radius: 99px !important;
-  font-family: var(--primary-font-family);
-  letter-spacing: var(--primary-letter-spacing);
-}
-
 .ui.top.attached.tabular.menu.my-account-menu .item {
   border: 2px solid var(--primary-color);
   color: var(--primary-color);
-  border-radius: 10px 10px 0 0 !important;
   font-family: var(--primary-header-font-family);
   font-weight: 600;
+}
+
+.ui.top.attached.tabular.menu.my-account-menu .item:hover,
+.ui.top.attached.tabular.menu.my-account-menu .item:focus-visible {
+  background-color: var(--accent-soft);
 }
 
 .ui.top.attached.tabular.menu.my-account-menu .item.active {
