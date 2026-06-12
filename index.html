@@ -4557,31 +4557,6 @@ function showRfpStack(index, btn) {
     .inv-h3 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 800; color: var(--color-text); margin: 0 0 var(--space-2); }
     .inv-sub { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0 0 var(--space-6); max-width: 68ch; line-height: 1.6; }
 
-    /* ── RFP fit — by provider ── */
-    .rff { padding: 0 0 var(--space-6); }
-    .rff-inner { max-width: 860px; margin: 0 auto; }
-    .rff-title { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); margin: 0 0 6px; text-align: center; }
-    .rff-legend { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; font-size: 0.7rem; color: var(--color-text-muted); margin: 0 0 16px; }
-    .rff-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-    .rff-table thead tr { border-bottom: 1px solid var(--color-border); }
-    .rff-table th { padding: 6px 4px; }
-    .rff-table th:first-child { text-align: left; padding: 6px 8px; }
-    .rff-h { font-size: 0.62rem; font-weight: 600; }
-    .rff-h.rff-rr { color: var(--color-success); width: 54px; }
-    .rff-h.rff-va { color: var(--color-blue); width: 46px; }
-    .rff-h.rff-to { color: var(--color-orange); width: 40px; }
-    .rff-notes-h { color: var(--color-text-muted); text-align: left; padding-left: 8px; }
-    .rff-cat td { padding: 13px 8px 5px; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-blue); }
-    .rff-row { border-bottom: 1px solid var(--color-divider); }
-    .rff-req { padding: 6px 8px; color: var(--color-text); }
-    .rff-cell { padding: 6px 4px; text-align: center; }
-    .rff-note { padding: 6px 8px; color: var(--color-text-muted); font-size: 0.66rem; font-style: italic; }
-    .rff-d { font-size: 0.85rem; }
-    .rff-rr { color: var(--color-success); }
-    .rff-va { color: var(--color-blue); }
-    .rff-to { color: var(--color-orange); }
-    .rff-cond { color: var(--color-text-muted); }
-
     /* ── Pricing: shared base + tier ladder ── */
     .iv-base { background: var(--color-surface); border: 1px solid var(--color-border); border-left: 3px solid var(--color-success); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: var(--space-5) var(--space-6); margin-bottom: var(--space-5); }
     .iv-base-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-success); margin-bottom: var(--space-3); }
@@ -4651,72 +4626,6 @@ function showRfpStack(index, btn) {
 
   <section class="inv">
     <div class="inv-inner">
-
-      <section class="rff">
-        <div class="rff-inner">
-          <h2 class="rff-title">RFP fit — by provider</h2>
-          <div class="rff-legend">
-            <span><span class="rff-d rff-rr">●</span> RocketRez</span>
-            <span><span class="rff-d rff-va">●</span> Vantage</span>
-            <span><span class="rff-d rff-to">●</span> Toast</span>
-            <span><span class="rff-d rff-cond">◯</span> via API / conditional</span>
-          </div>
-          <table class="rff-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th class="rff-h rff-rr">RocketRez</th>
-                <th class="rff-h rff-va">Vantage</th>
-                <th class="rff-h rff-to">Toast</th>
-                <th class="rff-h rff-notes-h">Notes</th>
-              </tr>
-            </thead>
-            <tbody id="rffBody"></tbody>
-          </table>
-        </div>
-      </section>
-      <script>
-      (function(){
-        function R(n,rr,va,to,note){ return {n:n, rr:rr||'', va:va||'', to:to||'', note:note||''}; }
-        var data=[
-          ['Mobile-First Experience',[R('Fully optimized mobile checkout','f'),R('Digital ticket display','f'),R('Mobile wallet compatibility','f'),R('Mobile scanning capability','f'),R('Tablet-friendly operational views','f')]],
-          ['Ticketing Commerce Core',[R('Unified cart — tickets, passes, events, packages, add-ons','f'),R('Calendar-based pricing & availability','f'),R('Time-slot inventory management','f'),R('Real-time capacity management','f'),R('Barcode & voucher issuance','f'),R('Flexible ticket modification','f'),R('Group & corporate booking support','f')]],
-          ['Advanced Merchandising',[R('Good-Better-Best packaging models','f'),R('Calendar-driven bundles','f'),R('Conditional upsell logic','f'),R('Cross-sell recommendations','f'),R('Inventory-aware pricing logic','f')]],
-          ['Revenue Optimization',[R('Demand-based pricing','f'),R('Inventory-based pricing triggers','f'),R('Quantity thresholds','f'),R('Promotional rule engine','f'),R('Revenue manager configuration control','f')]],
-          ['Guest Identity & CRM',[R('Persistent guest profile','f','f'),R('Household linking','','f'),R('Cross-property customer recognition','','f'),R('Benefit tracking & passholder logic','f','f','f'),R('CRM integration capability','f','f','f')]],
-          ['Reporting & Analytics',[R('Real-time dashboards','f','f','f'),R('Abandoned cart tracking','f'),R('Checkout funnel analytics','f'),R('Transaction-level data access','f','f','f'),R('Integration with enterprise Data Warehouse','o','o','o','via API to NetSuite — not native')]],
-          ['Guest Experience',[R('Post-purchase order access (login / confirmation)','f'),R('Guests modify visit dates','f'),R('Add products / upgrades after purchase','f'),R('Ticket assignment & transfer','','','','Capabilities to be confirmed in discovery'),R('Digital wallet ticket management','f'),R('Pre-visit communications & trip prep','f'),R('Calendar integration & social sharing','f')]],
-          ['Group Sales & Corporate',[R('Corporate accounts','f'),R('Contract pricing models','f'),R('Digital ticket distribution for groups','f'),R('Self-service ticket management for organizers','f'),R('Invoice-based payment workflows','f'),R('Employee-based ticket allocation models','f'),R('Group-level reporting & analytics','f','f','f')]],
-          ['Operational Workflow',[R('Integrated contract-to-ticket workflows','f'),R('Payment processing integrated in ticketing','f'),R('Tax-exempt workflows w/ document upload','f'),R('Voucher redemption automation','f'),R('POS integration for coupon / discount logic','f'),R('Mobile food ordering integrations','f','f','f')]],
-          ['Integration Requirements',[R('PMS integration','o','f','f','Opera / OHIP'),R('POS integration','f'),R('ERP integration — NetSuite','o','o','o','capability via API'),R('CRM integration','o','o','o','capability via API'),R('Payment processors','o','o','o','RocketRez & Vantage: unified · Toast: self'),R('Tax & compliance systems','o','o','o','discovery needed'),R('REST APIs, webhooks, real-time','o','o','o'),R('Full API documentation w/ schemas','f','f','f')]],
-          ['Technical Architecture',[R('Architecture, security, uptime, PCI, scalability, data residency','o','o','o','Available on request')]],
-          ['AI & Innovation',[R('AI-driven product recommendations','o','o','f','roadmap'),R('Predictive demand forecasting','o','o','f','roadmap'),R('AI-assisted analytics tools','o','o','f','roadmap'),R('Automated marketing segmentation','f'),R('Intelligent upsell & cross-sell logic','o','o','f','roadmap')]]
-        ];
-        var clsMap={rr:'rff-rr', va:'rff-va', to:'rff-to'};
-        function cell(state, key){
-          if(!state) return '';
-          var glyph = state==='o' ? '◯' : '●';
-          var cls = state==='o' ? 'rff-cond' : clsMap[key];
-          return '<span class="rff-d '+cls+'">'+glyph+'</span>';
-        }
-        var html='';
-        data.forEach(function(cat){
-          html+='<tr class="rff-cat"><td colspan="5">'+cat[0]+'</td></tr>';
-          cat[1].forEach(function(r){
-            html+='<tr class="rff-row">'
-              +'<td class="rff-req">'+r.n+'</td>'
-              +'<td class="rff-cell">'+cell(r.rr,'rr')+'</td>'
-              +'<td class="rff-cell">'+cell(r.va,'va')+'</td>'
-              +'<td class="rff-cell">'+cell(r.to,'to')+'</td>'
-              +'<td class="rff-note">'+r.note+'</td>'
-              +'</tr>';
-          });
-        });
-        document.getElementById('rffBody').innerHTML=html;
-      })();
-      </script>
-
-      <div class="inv-divider"></div>
 
       <h3 class="inv-h3">Pricing — choose your scope</h3>
       <p class="inv-sub">Every option starts from the same native base. You choose how far Vantage and Toast extend across the portfolio.</p>
