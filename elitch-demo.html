@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elitch Gardens Theme &amp; Water Park — Buy Tickets</title>
+<link rel="icon" href="https://elitchgardens.com/wp-content/uploads/2022/02/favicon-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.4em;
+    color: #3f4345;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { text-decoration: none; }
+  img { max-width: 100%; height: auto; }
+
+  /* ── Notification bar ─────────────────────────────── */
+  .notif-bar {
+    background: #BA3824;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px 30px;
+  }
+
+  /* ── Header ───────────────────────────────────────── */
+  .site-header {
+    background: #fff;
+    border-bottom: 1px solid #0B86DD;
+    padding: 10px 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .site-header .logo img {
+    width: 130px;
+    display: block;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .header-info {
+    font-weight: 700;
+    font-size: 15px;
+    color: #0047BA;
+    line-height: 1.35;
+  }
+  .header-info .hi-label { text-transform: uppercase; }
+
+  .header-btns { display: flex; gap: 14px; }
+
+  .eg-btn {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.2;
+    padding: 15px 22px;
+    border: none;
+    cursor: pointer;
+    background-image: linear-gradient(180deg, #d04d36 49%, #ba3824 51%);
+    transition: opacity .2s;
+  }
+  .eg-btn:hover { background-image: linear-gradient(180deg, #ba3824 51%, #d04d36 49%); }
+
+  /* ── Main nav ─────────────────────────────────────── */
+  .main-nav {
+    background: #0047BA;
+    padding: 6px 3%;
+  }
+  .main-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0 36px;
+  }
+  .main-nav a {
+    display: block;
+    color: #fff;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 1px;
+    line-height: 2.4em;
+    transition: opacity .3s;
+  }
+  .main-nav a:hover { opacity: .7; }
+  .main-nav a.nav-active { border-bottom: 3px solid #FDD119; }
+
+  /* ── Hero ─────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    background: url('https://elitchgardens.com/wp-content/uploads/2024/12/elitch-gardens-overview.jpg') center 35% / cover no-repeat;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,40,110,0.25) 0%, rgba(0,40,110,0.55) 100%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    padding: 40px 20px;
+  }
+  .hero-inner h1 {
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1.15;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  }
+  .hero-inner p {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 18px;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  }
+
+  /* ── Booking section ──────────────────────────────── */
+  .booking {
+    background: #d6f0fa;
+    padding: 50px 3% 70px;
+  }
+  .booking-intro {
+    max-width: 900px;
+    margin: 0 auto 30px;
+    text-align: center;
+  }
+  .booking-intro h2 {
+    font-weight: 700;
+    font-size: 30px;
+    color: #3F4345;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+  }
+  .booking-intro p {
+    font-size: 17px;
+    color: #3f4345;
+  }
+
+  .widget-shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 18px 0 rgba(0,0,0,0.1);
+    padding: 28px;
+    min-height: 420px;
+  }
+
+  /* ── Perks strip ──────────────────────────────────── */
+  .perks {
+    background: #0047BA;
+    color: #fff;
+    padding: 40px 3%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    max-width: 100%;
+  }
+  .perk h4 {
+    font-weight: 700;
+    font-size: 18px;
+    padding-bottom: 6px;
+  }
+  .perk p { font-size: 14px; line-height: 1.6; opacity: .9; }
+
+  /* ── Footer ───────────────────────────────────────── */
+  .site-footer {
+    background: #0D2236;
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    line-height: 1.6em;
+    padding: 36px 3%;
+    text-align: center;
+  }
+  .site-footer .foot-links {
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .site-footer .foot-links a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .site-footer .foot-links a:hover { color: #D6F0FA; }
+
+  @media (max-width: 767px) {
+    .main-nav ul { gap: 0 20px; }
+    .main-nav a { font-size: 14px; }
+    .hero-inner h1 { font-size: 30px; }
+    .header-info { display: none; }
+    .widget-shell { padding: 14px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="notif-bar">The Water Park is open 10:30am-6:00pm daily! Check our calendar for Theme Park hours!</div>
+
+  <header class="site-header">
+    <a class="logo" href="#"><img src="https://elitchgardens.com/wp-content/uploads/2022/01/logo.png" alt="Elitch Gardens Theme &amp; Water Park"></a>
+    <div class="header-right">
+      <div class="header-info">
+        <span class="hi-label">Calendar ›</span><br>10:30am - 7:00pm
+      </div>
+      <div class="header-btns">
+        <a class="eg-btn" href="#tickets">BUY TICKETS</a>
+        <a class="eg-btn" href="#tickets">SEASON PASSES</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#">Things To Do</a></li>
+      <li><a href="#">Plan A Visit</a></li>
+      <li><a href="#">Cabanas</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Fright Fest</a></li>
+      <li><a href="#">Elitch Holidays</a></li>
+      <li><a href="#tickets" class="nav-active">Tickets</a></li>
+      <li><a href="#">Season Passes</a></li>
+      <li><a href="#">Groups</a></li>
+      <li><a href="#">Jobs</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Colorado&rsquo;s Thrill Capital</h1>
+      <p>Celebrating 136 years of thrills! Go ride, slide and play!</p>
+    </div>
+  </section>
+
+  <section class="booking" id="tickets">
+    <div class="booking-intro">
+      <h2>Buy Tickets</h2>
+      <p>Get your daily tickets, season passes and add-ons below. Two parks. One price!</p>
+    </div>
+    <div class="widget-shell">
+      <!-- offset: when the engine auto-scrolls on step changes, keep 185px of
+           page above the widget visible (booking heading + card edge) -->
+      <div eid="51019f5bd8cda39a" id="FlatlandWebEngine" offset="30px"></div>
+    </div>
+  </section>
+
+  <section class="perks">
+    <div class="perk">
+      <h4>Two Parks. One Price!</h4>
+      <p>Every ticket includes unlimited same-day access to both the theme park and the water park.</p>
+    </div>
+    <div class="perk">
+      <h4>Go Digital</h4>
+      <p>Tickets and season passes are delivered straight to your phone for easy park entry.</p>
+    </div>
+    <div class="perk">
+      <h4>NO EXTRA FEES!</h4>
+      <p>The price you see is the price you pay — no surprise processing fees at checkout.</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="foot-links">
+      <a href="#">Park Hours</a>
+      <a href="#">Park Map</a>
+      <a href="#">Parking &amp; Directions</a>
+      <a href="#">FAQ</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <p>Prices do not include tax. Operating schedule, prices, availability of attractions and policies are subject to change without notice.</p>
+    <p>&copy; 2026 Elitch Gardens &mdash; Demo environment powered by RocketRez. For demonstration purposes only.</p>
+  </footer>
+
+  <script>
+    // Demo page: nav/footer links are decorative only. Keep guests inside
+    // the app — only the #tickets anchors (BUY TICKETS / SEASON PASSES /
+    // Tickets nav item) actually do anything, scrolling to the widget.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (href === '#tickets') {
+        e.preventDefault();
+        document.getElementById('tickets').scrollIntoView({ behavior: 'smooth' });
+      } else {
+        e.preventDefault();
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://sales.rocket-rez.com/RocketWeb2/assets/scripts/webengine_load.js" async></script>
+</body>
+</html>
