@@ -1151,8 +1151,10 @@
         color: var(--color-warning);
         background: var(--color-warning-bg);
         border-radius: var(--radius-sm);
-        padding: 2px 8px;
-        white-space: nowrap;
+        padding: 4px 8px;
+        white-space: normal;
+        max-width: 36ch;
+        line-height: 1.4;
         display: none;
       }
       .property-selector-note.visible {
@@ -4069,28 +4071,45 @@
             <div class="derisk-inner">
               <h2 class="derisk-title">What de-risks the transition</h2>
               <p class="derisk-lead">
-                We've stood this platform up across 200+ attractions and
-                multi-park portfolios — we're not learning transition on
-                Premier. A change this size carries real risk, and we run it on
-                a playbook that's already been through go-live.
+                A decision of this scale deserves to be made with confidence and
+                evidence, not assumptions. We propose beginning with a focused
+                pilot at one carefully selected location — the proven way leading
+                operators roll out platforms across a portfolio while keeping
+                risk low and momentum high. We've stood this platform up across
+                200+ attractions and multi-park portfolios, and we run every
+                rollout on a playbook that's already been through go-live.
               </p>
               <ul class="derisk-list">
                 <li>
+                  <strong>Start contained, expand proven.</strong> Deploying
+                  across every location simultaneously concentrates risk and
+                  disruption. A pilot contains that risk to one representative
+                  site, surfaces and resolves issues early, and builds a
+                  repeatable playbook before anything touches the wider
+                  portfolio.
+                </li>
+                <li>
+                  <strong>Manage change deliberately, not all at once.</strong>
+                  A phased start lets your teams adopt new tools at a manageable
+                  pace. Staff at the pilot site become internal champions and
+                  trainers for every property that follows — smoothing adoption
+                  across the portfolio before the broader rollout begins.
+                </li>
+                <li>
                   <strong>Aligned before anything moves.</strong> Product,
                   pricing, and entitlement structures are standardized up front,
-                  so you're migrating order — not chaos.
+                  so you're migrating order — not chaos. Every mapping and
+                  integration — NetSuite, payments, access control — has a named
+                  owner and is tested end-to-end against your real scenarios
+                  before launch.
                 </li>
                 <li>
-                  <strong>Owned and proven, not assumed.</strong> Every mapping
-                  and integration — NetSuite, payments, access control — has a
-                  named owner and is tested end-to-end against your real
-                  scenarios before launch.
-                </li>
-                <li>
-                  <strong>Rehearsed, with a way back.</strong> Frontline teams
-                  are trained and the cutover is dry-run with rollback options
-                  ready. Go-live is earned against readiness criteria — never a
-                  calendar date and a prayer.
+                  <strong>Decide with evidence, not a slide deck.</strong> At
+                  the end of the pilot, Premier Parks evaluates a working system
+                  against a capability scorecard agreed upfront — must-have
+                  criteria defined before any work begins. Full portfolio pricing
+                  is provided before the pilot concludes, so you proceed to the
+                  wider rollout with complete visibility and no surprises.
                 </li>
               </ul>
             </div>
@@ -6219,11 +6238,10 @@
                 </div>
                 <div class="outcome-card-title">Role-Based Access Controls</div>
                 <div class="outcome-card-desc">
-                  Granular per-user permissions enforced at both the
-                  infrastructure and application layer. Staff access is scoped
-                  to their role — no over-provisioning. MFA enforced for all
-                  infrastructure access, with SSO federation via Microsoft Entra
-                  ID.
+                  Granular per-user permissions enforced at the application
+                  layer. Staff access is scoped to their role — no
+                  over-provisioning. Login access is secured via IP whitelisting,
+                  ensuring only approved networks can reach the platform.
                 </div>
                 <div class="outcome-card-proof">
                   Per-user permission controls with company boundary enforcement
@@ -7743,11 +7761,11 @@
               "
             >
               RocketRez is the system of record for guest commerce and
-              operations — covering the vast majority of what Premier Parks
-              needs natively. Vantage is recommended to support Gold Pass Canada
-              properties. Toast provides optional dedicated restaurant F&amp;B
-              for properties that need it — RocketRez covers F&amp;B natively
-              for standard operations.
+              operations. Vantage is a required part of the stack — powering
+              cashless wallet, loyalty, guest identity, and the mobile app
+              across the portfolio. Toast provides optional dedicated restaurant
+              F&amp;B for properties that need it — RocketRez covers F&amp;B
+              natively for standard operations.
             </p>
             <div class="arch-stack-row" style="align-items: stretch">
               <!-- RocketRez — primary, dominant -->
@@ -7784,21 +7802,20 @@
                 </ul>
               </div>
               <div class="arch-stack-plus">+</div>
-              <!-- Vantage — secondary -->
+              <!-- Vantage — required -->
               <div
                 class="arch-stack-node"
                 style="
                   border-color: var(--color-purple);
                   background: var(--color-purple-bg);
                   flex: 1;
-                  opacity: 0.85;
                 "
               >
                 <div
                   class="arch-stack-node-role"
                   style="color: var(--color-purple)"
                 >
-                  Optional
+                  Required
                 </div>
                 <div
                   class="arch-stack-node-title"
@@ -7974,7 +7991,7 @@
                   across the portfolio.
                 </div>
               </div>
-              <div class="partner-summary-card is-optional">
+              <div class="partner-summary-card is-core">
                 <div class="partner-summary-header">
                   <div
                     class="partner-summary-icon"
@@ -7991,8 +8008,8 @@
                       Guest Identity / Cashless / Loyalty / Mobile
                     </div>
                   </div>
-                  <span class="partner-tier-badge badge-optional"
-                    >Optional</span
+                  <span class="partner-tier-badge badge-core"
+                    >Core</span
                   >
                 </div>
                 <div class="partner-summary-desc">
@@ -8152,6 +8169,9 @@
                   independently. Integration to Opera Cloud for room-charge
                   posting and to RocketRez for entitlement-based meal-plan
                   validation where applicable.
+                </div>
+                <div class="integ-domain-desc" style="margin-top:var(--space-2);color:var(--color-warning);font-weight:600;font-size:var(--text-xs)">
+                  ⚠ Village Vacances Valcartier: RocketRez is not pursuing Quebec government certification for F&amp;B fiscal reporting. Veloce remains the platform of record for government-mandated F&amp;B reporting at VVV.
                 </div>
               </div>
               <div class="integ-domain-card">
@@ -9431,7 +9451,7 @@
         var PROPERTY_CONFIGS = {
           vvv: {
             name: "Village Vacances Valcartier",
-            note: null,
+            note: "⚠ VVV: RocketRez is not pursuing Quebec government F&B reporting certification — Veloce remains the F&B platform of record for fiscal compliance",
             pms: true,
             campground: true,
             fnb: true,
@@ -9602,9 +9622,11 @@
           var flowEl = document.getElementById(flowId);
           if (!flowEl) return;
 
-          // For the executive diagram, update the note badge
-          if (flowId === "flow-ideal") {
-            var noteEl = document.getElementById("property-note");
+          // Update the note badge for whichever diagram is active
+          var noteIdMap = { "flow-ideal": "property-note", "flow-ideal-sa": "property-note-sa" };
+          var noteId = noteIdMap[flowId];
+          if (noteId) {
+            var noteEl = document.getElementById(noteId);
             if (noteEl) {
               var note = config && config.note ? config.note : null;
               noteEl.textContent = note || "";
@@ -10315,8 +10337,7 @@
                     <td><strong>Commerce</strong></td>
                     <td>Upsell / cross-sell in cart</td>
                     <td>
-                      RocketRez unified cart — any product type cross-sellable;
-                      AI-driven upsell prompts in Orion roadmap
+                      RocketRez unified cart — any product type cross-sellable
                     </td>
                     <td>Native</td>
                     <td><span class="tag tag-success">In Production</span></td>
@@ -10574,11 +10595,12 @@
                   >Building for tomorrow</span
                 >
                 <p>
-                  At the same time, we're building Orion — our next-generation
-                  platform, with AI-assisted insight at its core. The foundation
-                  you establish now carries straight into it, so your investment
-                  compounds forward — appreciating with every release, never
-                  depreciating or holding your growth back.
+                  The foundation you establish now is designed to grow with you.
+                  Every release builds on what's already live — AI-assisted
+                  insight, smarter automation, deeper integrations — so your
+                  investment compounds forward rather than requiring rework. The
+                  platform you go live on today is the one that gets better over
+                  time, not one you'll need to replace.
                 </p>
               </div>
             </div>
@@ -11530,6 +11552,20 @@
                   <td class="pcol yes">✓</td>
                   <td class="pcol yes">✓</td>
                 </tr>
+                <tr>
+                  <td class="invp-feat">
+                    Vantage — cashless wallet · loyalty · guest identity
+                  </td>
+                  <td class="prec yes">✓</td>
+                  <td class="pcol yes">✓</td>
+                  <td class="pcol yes">✓</td>
+                </tr>
+                <tr>
+                  <td class="invp-feat">Vantage — guest mobile app</td>
+                  <td class="prec yes">✓</td>
+                  <td class="pcol yes">✓</td>
+                  <td class="pcol yes">✓</td>
+                </tr>
                 <tr class="invp-group invp-group-opt">
                   <td colspan="4">Optional enhancements</td>
                 </tr>
@@ -11538,20 +11574,6 @@
                   <td class="prec opt">Optional</td>
                   <td class="pcol opt">Optional</td>
                   <td class="pcol opt">Optional</td>
-                </tr>
-                <tr>
-                  <td class="invp-feat">
-                    Vantage — cashless wallet · loyalty · guest identity
-                  </td>
-                  <td class="prec sq">Quebec (VVV)</td>
-                  <td class="pcol sf">Portfolio-wide</td>
-                  <td class="pcol sf">Portfolio-wide</td>
-                </tr>
-                <tr>
-                  <td class="invp-feat">Vantage — guest mobile app</td>
-                  <td class="prec sq">Quebec (VVV)</td>
-                  <td class="pcol sf">All parks</td>
-                  <td class="pcol sf">All parks</td>
                 </tr>
                 <tr>
                   <td class="invp-feat">
