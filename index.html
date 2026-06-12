@@ -4180,61 +4180,139 @@ function showRfpStack(index, btn) {
   <div class="arch-header">
     <div class="arch-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">RFP</div>
     <div class="arch-title-block">
-      <div class="arch-title">RFP Response: RocketRez + Vantage + Toast</div>
-      <div class="arch-subtitle">Line-by-line answers to Premier Parks' requirements for the recommended stack</div>
+      <div class="arch-title">RFP Fit — by Provider</div>
+      <div class="arch-subtitle">Capability coverage across RocketRez, Vantage, and Toast</div>
     </div>
   </div>
 
-  <div class="quick-deck" style="margin-bottom:var(--space-6);padding:0">
+  <style>
+    .rfp-fit-table { width:100%; border-collapse:collapse; font-size:var(--text-xs); }
+    .rfp-fit-table thead th { padding:var(--space-2) var(--space-3); background:var(--color-surface-offset); font-weight:700; text-align:left; border-bottom:2px solid var(--color-border); white-space:nowrap; }
+    .rfp-fit-table thead th.rft-provider { text-align:center; min-width:72px; }
+    .rfp-fit-table .rft-group td { background:var(--color-surface-offset); font-weight:800; font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.06em; color:var(--color-text-muted); padding:var(--space-2) var(--space-3); border-top:1px solid var(--color-border); }
+    .rfp-fit-table tr:not(.rft-group) td { padding:var(--space-2) var(--space-3); border-bottom:1px solid var(--color-divider); color:var(--color-text); }
+    .rfp-fit-table tr:not(.rft-group):hover td { background:var(--color-surface-offset); }
+    .rfp-fit-table .rft-feat { color:var(--color-text); }
+    .rfp-fit-table .rft-dot { text-align:center; font-size:1rem; }
+    .rfp-fit-table .rft-dot-filled { color:var(--color-success); }
+    .rfp-fit-table .rft-dot-api { color:var(--color-gold); }
+    .rfp-fit-table .rft-dot-none { color:var(--color-text-faint); }
+    .rfp-fit-table .rft-note { color:var(--color-text-faint); font-style:italic; }
+    .rfp-legend { display:flex; gap:var(--space-6); margin-bottom:var(--space-5); flex-wrap:wrap; }
+    .rfp-legend-item { display:flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); color:var(--color-text-muted); }
+    .rfp-legend-sym { font-size:1rem; line-height:1; }
+  </style>
 
-    <!-- STACK A -->
-    <div class="rfp-stack" id="rfp-stack-0" style="display:block">
-      <div style="margin-bottom:var(--space-4);padding:var(--space-4);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl)">
-        <div style="font-family:var(--font-display);font-weight:800;font-size:var(--text-base);margin-bottom:var(--space-2)">Stack A — RocketRez + Vantage + Toast</div>
-        <p style="color:var(--color-text-muted);font-size:var(--text-sm)">Native all-in-one ticketing + POS with Vantage dynamic pricing overlay and Toast for F&amp;B. Tightest integration surface, fewest API handoffs, fastest path to NetSuite.</p>
-      </div>
-      <div class="compare-table-wrap">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>RFP Category</th>
-              <th>Requirement</th>
-              <th>Stack A Answer</th>
-              <th>Native / Integration</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Ticketing</strong></td><td>Online ticket sales with dynamic pricing</td><td>RocketRez commerce engine (iframe or headless) + Vantage pricing algorithm driving calendar-based pricing</td><td>Native + Integration</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Ticketing</strong></td><td>Walk-up / gate sales</td><td>RocketRez POS — single interface for admissions, retail, and F&amp;B cross-sell. TouchScreen + iPad + Raspberry Pi compatible</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Ticketing</strong></td><td>Season passes &amp; memberships with payment plans</td><td>RocketRez Memberships module — auto-renew, payment plan schedules, Affirm/BNPL via Stripe SDK</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Ticketing</strong></td><td>Group sales &amp; contracts</td><td>RocketRez Groups — inquiry capture, digital contracts, e-signature, deposit links, package builder</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Ticketing</strong></td><td>Time-based / capacity ticketing</td><td>RocketRez tour/schedule engine — per-interval capacity control, availability indicators on calendar</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Ticketing</strong></td><td>Digital waivers</td><td>RocketRez waiver collection at checkout or gate — configurable per ticket type</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Dynamic Pricing</strong></td><td>Demand-based pricing engine</td><td>Vantage — pricing rules, floors/ceilings, blackout dates, weather-responsive pricing triggers</td><td>Integration</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Dynamic Pricing</strong></td><td>Centralized pricing management across parks</td><td>Vantage admin console — one operator (Jen equivalent) manages all 11 parks from single interface</td><td>Integration</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>F&amp;B / POS</strong></td><td>Food &amp; beverage POS</td><td>Toast — full F&amp;B POS, kitchen display, mobile ordering capability, kiosk mode</td><td>Integration (Toast)</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>F&amp;B / POS</strong></td><td>Member discounts at F&amp;B</td><td>RocketRez membership entitlements passed to Toast in real-time — auto-discount on scan</td><td>Native + Toast</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>F&amp;B / POS</strong></td><td>Arcade / Intercard integration</td><td>Intercard ↔ Toast integration (live Jan 2026) — game credits purchasable at F&amp;B POS</td><td>Toast ecosystem</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Access Control</strong></td><td>Scan / validate tickets at gate</td><td>RocketRez handheld scanning — sub-3-second throughput, offline mode with local queue</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Mobile / Digital</strong></td><td>Mobile wallet (Apple/Google Pay)</td><td>RocketRez checkout — Apple Wallet, Google Wallet ticket delivery post-purchase</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Mobile / Digital</strong></td><td>Mobile app</td><td>RocketRez Relay — SMS/push notifications, order lookup, basic in-park utility. Full native app = roadmap</td><td>Partial / Roadmap</td><td><span class="tag tag-gold">Roadmap</span></td></tr>
-            <tr><td><strong>Commerce</strong></td><td>Upsell / cross-sell in cart</td><td>RocketRez unified cart — any product type cross-sellable</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Commerce</strong></td><td>Weather / experiential insurance</td><td>Sensible integration — 3–5% cart add-on, automatic morning-of notification, operator keeps ticket revenue</td><td>Integration</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Commerce</strong></td><td>Buy Now Pay Later</td><td>Affirm via Stripe SDK — checkout messaging, soft credit check, 4–12 installment options</td><td>Integration</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>PMS Integration</strong></td><td>Opera PMS (Val Cartier)</td><td>RocketRez ↔ Opera API — real-time room charge, guest identity sync, entitlement validation</td><td>Integration</td><td><span class="tag tag-gold">In Build</span></td></tr>
-            <tr><td><strong>Reporting</strong></td><td>Real-time revenue reporting</td><td>RocketRez Power BI connector — live dashboards replace Door Report, park-level and portfolio-level</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Reporting</strong></td><td>GL / NetSuite feed</td><td>RocketRez API → NetSuite — summarized daily revenue by GL code and revenue center, no granular clutter</td><td>Integration</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Finance</strong></td><td>Accrual accounting (deferred revenue)</td><td>RocketRez recognizes revenue on redemption; NetSuite handles deferred liability for future-dated tickets &amp; passes</td><td>Native + NetSuite</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Quebec</strong></td><td>Canadian tax compliance (QST/GST, French language)</td><td>RocketRez Canada-certified — multi-tax engine, bilingual checkout, Quebec-specific fee handling</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Config / Admin</strong></td><td>Non-technical ticket configuration</td><td>RocketRez admin — single-page ticket builder, under 1 hour to train; Jen-equivalent can manage all parks</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-            <tr><td><strong>Config / Admin</strong></td><td>Role-based permission system</td><td>RocketRez security groups — 200+ granular permissions, park-level and portfolio-level scoping</td><td>Native</td><td><span class="tag tag-success">In Production</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <div class="rfp-legend">
+    <span class="rfp-legend-item"><span class="rfp-legend-sym" style="color:var(--color-success)">●</span> Native / supported</span>
+    <span class="rfp-legend-item"><span class="rfp-legend-sym" style="color:var(--color-gold)">◯</span> Via API / conditional</span>
+    <span class="rfp-legend-item"><span class="rfp-legend-sym" style="color:var(--color-text-faint)">—</span> Not applicable</span>
+  </div>
 
-  </div><!-- /quick-deck -->
+  <div class="compare-table-wrap">
+    <table class="rfp-fit-table">
+      <thead>
+        <tr>
+          <th style="width:38%">Capability</th>
+          <th class="rft-provider">RocketRez</th>
+          <th class="rft-provider">Vantage</th>
+          <th class="rft-provider">Toast</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="rft-group"><td colspan="5">Mobile-First Experience</td></tr>
+        <tr><td class="rft-feat">Fully optimized mobile checkout</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Digital ticket display</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Mobile wallet compatibility</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Mobile scanning capability</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Tablet-friendly operational views</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+
+        <tr class="rft-group"><td colspan="5">Ticketing Commerce Core</td></tr>
+        <tr><td class="rft-feat">Unified cart — tickets, passes, events, packages, add-ons</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Calendar-based pricing &amp; availability</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Time-slot inventory management</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Real-time capacity management</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Barcode &amp; voucher issuance</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Flexible ticket modification</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Group &amp; corporate booking support</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+
+        <tr class="rft-group"><td colspan="5">Advanced Merchandising</td></tr>
+        <tr><td class="rft-feat">Good-Better-Best packaging models</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Calendar-driven bundles</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Conditional upsell logic</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Cross-sell recommendations</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Inventory-aware pricing logic</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+
+        <tr class="rft-group"><td colspan="5">Revenue Optimization</td></tr>
+        <tr><td class="rft-feat">Demand-based pricing</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Inventory-based pricing triggers</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Quantity thresholds</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Promotional rule engine</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Revenue manager configuration control</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+
+        <tr class="rft-group"><td colspan="5">Guest Identity &amp; CRM</td></tr>
+        <tr><td class="rft-feat">Persistent guest profile</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Household linking</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Cross-property customer recognition</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Benefit tracking &amp; passholder logic</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">CRM integration capability</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note"></td></tr>
+
+        <tr class="rft-group"><td colspan="5">Reporting &amp; Analytics</td></tr>
+        <tr><td class="rft-feat">Real-time dashboards</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Abandoned cart tracking</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Checkout funnel analytics</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Transaction-level data access</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Integration with enterprise Data Warehouse</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">via API to NetSuite — not native</td></tr>
+
+        <tr class="rft-group"><td colspan="5">Guest Experience</td></tr>
+        <tr><td class="rft-feat">Post-purchase order access (login / confirmation)</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Guests modify visit dates</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Add products / upgrades after purchase</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Ticket assignment &amp; transfer</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note">Capabilities to be confirmed in discovery</td></tr>
+        <tr><td class="rft-feat">Digital wallet ticket management</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Pre-visit communications &amp; trip prep</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Calendar integration &amp; social sharing</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+
+        <tr class="rft-group"><td colspan="5">Group Sales &amp; Corporate</td></tr>
+        <tr><td class="rft-feat">Corporate accounts</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Contract pricing models</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Digital ticket distribution for groups</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Self-service ticket management for organizers</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Invoice-based payment workflows</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Employee-based ticket allocation models</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Group-level reporting &amp; analytics</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note"></td></tr>
+
+        <tr class="rft-group"><td colspan="5">Operational Workflow</td></tr>
+        <tr><td class="rft-feat">Integrated contract-to-ticket workflows</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Payment processing integrated in ticketing</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Tax-exempt workflows w/ document upload</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Voucher redemption automation</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">POS integration for coupon / discount logic</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Mobile food ordering integrations</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note"></td></tr>
+
+        <tr class="rft-group"><td colspan="5">Integration Requirements</td></tr>
+        <tr><td class="rft-feat">PMS integration</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">Opera / OHIP</td></tr>
+        <tr><td class="rft-feat">POS integration</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">ERP integration — NetSuite</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">capability via API</td></tr>
+        <tr><td class="rft-feat">CRM integration</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">capability via API</td></tr>
+        <tr><td class="rft-feat">Payment processors</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">RocketRez &amp; Vantage: unified · Toast: self</td></tr>
+        <tr><td class="rft-feat">Tax &amp; compliance systems</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">discovery needed</td></tr>
+        <tr><td class="rft-feat">REST APIs, webhooks, real-time</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Full API documentation w/ schemas</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note"></td></tr>
+
+        <tr class="rft-group"><td colspan="5">Technical Architecture</td></tr>
+        <tr><td class="rft-feat">Architecture, security, uptime, PCI, scalability, data residency</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">Available on request</td></tr>
+
+        <tr class="rft-group"><td colspan="5">AI &amp; Innovation</td></tr>
+        <tr><td class="rft-feat">AI-driven product recommendations</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
+        <tr><td class="rft-feat">Predictive demand forecasting</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
+        <tr><td class="rft-feat">AI-assisted analytics tools</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
+        <tr><td class="rft-feat">Automated marketing segmentation</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
+        <tr><td class="rft-feat">Intelligent upsell &amp; cross-sell logic</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="section-next">
     <button class="section-next-btn" onclick="showArch(6)">
