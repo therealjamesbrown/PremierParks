@@ -388,6 +388,44 @@ a { color: inherit; text-decoration: none; }
   .state-panel-cols.ideal-layout { grid-template-columns: 1fr; }
   .state-panel-cols.ideal-layout .state-ideal-bullets { order: -1; }
 }
+
+/* ── Solution Architecture: Integration Map + Delivery ── */
+.pilot-step-bar { display: grid; grid-template-columns: repeat(4, 1fr); }
+.delivery-cols  { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+.onboarding-callout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+
+@media (max-width: 640px) {
+  /* Tab nav — scroll instead of wrapping */
+  .solution-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
+  .solution-tab  { flex-shrink: 0; padding: var(--space-2) var(--space-3); font-size: var(--text-xs); }
+
+  /* Platform tab: stack nodes, hide + separators */
+  .arch-stack-row { flex-direction: column; gap: var(--space-3); }
+  .arch-stack-node { flex: 1 1 auto !important; min-width: 0; }
+  .arch-stack-node-items { grid-template-columns: 1fr !important; }
+  .arch-stack-plus { display: none; }
+
+  /* Delivery: 4-step bar → 2×2 */
+  .pilot-step-bar { grid-template-columns: repeat(2, 1fr); }
+  .pilot-step-bar > div { border-right: none !important; border-bottom: 1px solid var(--color-border); }
+  .pilot-step-bar > div:nth-child(odd)  { border-right: 1px solid var(--color-border) !important; }
+  .pilot-step-bar > div:nth-last-child(-n+2) { border-bottom: none; }
+
+  /* Delivery: 2-col grids → single column */
+  .delivery-cols      { grid-template-columns: 1fr; gap: var(--space-4); }
+  .onboarding-callout { grid-template-columns: 1fr; }
+  .onboarding-callout > div:last-child { min-height: 160px; }
+
+  /* Integration map: collapse orch wrapper to single column */
+  .hub-orch-wrapper { grid-template-columns: 1fr !important; gap: var(--space-2); }
+  .hub-orch-wrapper > .hub-full,
+  .hub-orch-wrapper > .hub-bidir-label,
+  .hub-orch-wrapper > .hub-payment-side { grid-column: 1 !important; grid-row: auto !important; align-self: auto; width: 100%; }
+
+  /* Ideal tabs — scroll */
+  .ideal-tabs { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+  .ideal-tab  { flex-shrink: 0; font-size: var(--text-xs); padding: var(--space-2) var(--space-3); }
+}
 .dataflow-caption {
   font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.6;
   margin-bottom: var(--space-4); padding-bottom: var(--space-3);
@@ -1746,6 +1784,73 @@ a { color: inherit; text-decoration: none; }
   .ppx .ppx-tcard-k { font-size: 0.65rem; }
   .ppx .ppx-tbig b { font-size: var(--text-lg); }
 }
+/* ── MOBILE NAV ─────────────────────────────────────── */
+.mob-nav-toggle {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  gap: 5px; width: 36px; height: 36px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+  border-radius: var(--radius-md);
+  transition: background var(--transition);
+}
+.mob-nav-toggle:hover { background: var(--color-surface-dynamic); }
+.mob-nav-bar {
+  display: block; width: 20px; height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease, width 0.2s ease;
+  transform-origin: center;
+}
+.mob-nav-toggle.is-open .mob-nav-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mob-nav-toggle.is-open .mob-nav-bar:nth-child(2) { opacity: 0; width: 0; }
+.mob-nav-toggle.is-open .mob-nav-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mob-nav-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 199;
+  background: rgba(0,0,0,0.4); backdrop-filter: blur(2px);
+  opacity: 0; transition: opacity 0.25s ease;
+}
+.mob-nav-backdrop.is-open { opacity: 1; }
+
+.mob-nav {
+  display: none; position: fixed; top: 60px; left: 0; right: 0;
+  z-index: 200; max-height: calc(100dvh - 60px); overflow-y: auto;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px); opacity: 0;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  -webkit-overflow-scrolling: touch;
+}
+.mob-nav.is-open { transform: translateY(0); opacity: 1; }
+
+.mob-nav-inner { padding: var(--space-4) var(--space-2) var(--space-6); }
+.mob-nav-section-label {
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--color-text-faint);
+  padding: 0 var(--space-4); margin-bottom: var(--space-2);
+}
+.mob-nav-item {
+  display: block; width: 100%; text-align: left;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm); font-weight: 600;
+  color: var(--color-text-muted);
+  background: none; border: none; border-radius: var(--radius-lg);
+  cursor: pointer; line-height: 1.3;
+  transition: color var(--transition), background var(--transition);
+}
+.mob-nav-item:hover { color: var(--color-text); background: var(--color-surface-dynamic); }
+.mob-nav-item.active { color: var(--color-primary); background: var(--color-primary-bg); font-weight: 700; }
+.mob-nav-item--demo { color: var(--color-gold); }
+.mob-nav-item--demo:hover { color: var(--color-gold); background: var(--color-gold-bg); }
+.mob-nav-item--demo.active { color: var(--color-gold); background: var(--color-gold-bg); }
+
+@media (max-width: 768px) {
+  .mob-nav-toggle   { display: flex; }
+  .mob-nav-backdrop { display: block; }
+  .mob-nav          { display: block; }
+}
+
 /* ── PASSWORD GATE ───────────────────────────────────── */
 #pw-gate {
   position: fixed; inset: 0; z-index: 9999;
@@ -1886,8 +1991,31 @@ a { color: inherit; text-decoration: none; }
     <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
+    <button class="mob-nav-toggle" id="mobNavToggle" aria-label="Open navigation" aria-expanded="false" onclick="toggleMobNav()">
+      <span class="mob-nav-bar"></span>
+      <span class="mob-nav-bar"></span>
+      <span class="mob-nav-bar"></span>
+    </button>
   </div>
 </header>
+
+<div class="mob-nav-backdrop" id="mobNavBackdrop" onclick="closeMobNav()"></div>
+<nav class="mob-nav" id="mobNav" aria-label="Mobile navigation">
+  <div class="mob-nav-inner">
+    <div class="mob-nav-section-label">Sections</div>
+    <button class="mob-nav-item active" onclick="showArch(0);closeMobNav()">Introduction</button>
+    <button class="mob-nav-item" onclick="showArch(1);closeMobNav()">About RocketRez</button>
+    <button class="mob-nav-item" onclick="showArch(2);closeMobNav()">Executive Case</button>
+    <button class="mob-nav-item" onclick="showArch(3);closeMobNav()">Platform Features</button>
+    <button class="mob-nav-item" onclick="showArch(4);closeMobNav()">Solutions Architecture</button>
+    <button class="mob-nav-item" onclick="showArch(5);closeMobNav()">RFP Solution Q&amp;A</button>
+    <button class="mob-nav-item" onclick="showArch(6);closeMobNav()">Closing</button>
+    <div class="mob-nav-section-label" style="margin-top:var(--space-4)">Demo</div>
+    <button class="mob-nav-item mob-nav-item--demo" onclick="showArch(7);closeMobNav()">Elitch Gardens</button>
+    <div class="mob-nav-section-label" style="margin-top:var(--space-4)">Investment</div>
+    <button class="mob-nav-item" onclick="showArch(8);closeMobNav()">Pricing</button>
+  </div>
+</nav>
 
 <main class="main">
 
@@ -3228,7 +3356,7 @@ a { color: inherit; text-decoration: none; }
     <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-6);line-height:1.6;max-width:80ch;font-style:italic">A pilot lets Premier Parks experience the platform in live operation, manage change deliberately, and shape the portfolio rollout around what actually works at your sites — before committing the wider organization.</p>
 
     <!-- Pilot step bar -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:var(--space-6);border:1px solid var(--color-border);border-radius:var(--radius-xl);overflow:hidden">
+    <div class="pilot-step-bar" style="margin-bottom:var(--space-6);border:1px solid var(--color-border);border-radius:var(--radius-xl);overflow:hidden">
       <div style="background:var(--color-primary-bg);padding:var(--space-2) var(--space-3);text-align:center;border-right:1px solid var(--color-border)">
         <div style="font-size:var(--text-xs);font-weight:800;color:var(--color-primary)">Step 1</div>
         <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Discovery &amp; Scoping</div>
@@ -3298,7 +3426,7 @@ a { color: inherit; text-decoration: none; }
     </div>
 
     <!-- Working together + next steps -->
-    <div style="margin-top:var(--space-6);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)">
+    <div class="delivery-cols" style="margin-top:var(--space-6)">
       <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-5)">
         <div style="font-family:var(--font-display);font-size:var(--text-xs);font-weight:800;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:var(--space-3)">Working Together</div>
         <p style="font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.6;margin-bottom:var(--space-3)">A successful pilot is a shared effort. To deliver on the timeline, we will partner with Premier Parks on:</p>
@@ -3322,7 +3450,7 @@ a { color: inherit; text-decoration: none; }
     </div>
 
     <!-- Onboarding software callout -->
-    <div style="margin-top:var(--space-8);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);align-items:center;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6)">
+    <div class="onboarding-callout" style="margin-top:var(--space-8);align-items:center;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6)">
       <div>
         <div style="font-family:var(--font-display);font-size:var(--text-xs);font-weight:800;color:var(--color-primary);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:var(--space-2)">Onboarding Software</div>
         <div style="font-family:var(--font-display);font-size:var(--text-base);font-weight:800;margin-bottom:var(--space-3)">Full Visibility Across Every Property</div>
@@ -3579,6 +3707,28 @@ function syncActiveNav(index) {
   document.querySelectorAll('.side-nav-btn').forEach((tab, i) => {
     tab.classList.toggle('active', i === index);
   });
+  document.querySelectorAll('.mob-nav-item').forEach((tab, i) => {
+    tab.classList.toggle('active', i === index);
+  });
+}
+
+function toggleMobNav() {
+  var open = document.getElementById('mobNav').classList.contains('is-open');
+  open ? closeMobNav() : openMobNav();
+}
+function openMobNav() {
+  document.getElementById('mobNav').classList.add('is-open');
+  document.getElementById('mobNavBackdrop').classList.add('is-open');
+  document.getElementById('mobNavToggle').classList.add('is-open');
+  document.getElementById('mobNavToggle').setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobNav() {
+  document.getElementById('mobNav').classList.remove('is-open');
+  document.getElementById('mobNavBackdrop').classList.remove('is-open');
+  document.getElementById('mobNavToggle').classList.remove('is-open');
+  document.getElementById('mobNavToggle').setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
 }
 
 function showFlowTab(containerId, tabId, btn) {
