@@ -4399,6 +4399,8 @@ function showRfpStack(index, btn) {
     .rfp-fit-table tr td.rft-dot-api { color:var(--color-gold); }
     .rfp-fit-table tr td.rft-dot-none { color:var(--color-text-faint); }
     .rfp-fit-table .rft-note { color:var(--color-text-faint); font-style:italic; }
+    .rfp-fit-table tr td.rft-dot-roadmap { color:color-mix(in oklch, var(--color-success) 45%, white); }
+    .rfp-fit-table tr.rft-roadmap .rft-note { font-style:normal; font-weight:700; font-size:0.65rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-success); }
     .rfp-legend { display:flex; gap:var(--space-6); margin-bottom:var(--space-5); flex-wrap:wrap; }
     .rfp-legend-item { display:flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); color:var(--color-text-muted); }
     .rfp-legend-sym { font-size:1rem; line-height:1; }
@@ -4408,6 +4410,7 @@ function showRfpStack(index, btn) {
     <span class="rfp-legend-item"><span class="rfp-legend-sym" style="color:var(--color-success)">●</span> Native / supported</span>
     <span class="rfp-legend-item"><span class="rfp-legend-sym" style="color:var(--color-gold)">◯</span> Via API / conditional</span>
     <span class="rfp-legend-item"><span class="rfp-legend-sym" style="color:var(--color-text-faint)">—</span> Not applicable</span>
+    <span class="rfp-legend-item"><span class="rfp-legend-sym" style="color:color-mix(in oklch, var(--color-success) 45%, white)">●</span> RocketRez roadmap</span>
   </div>
 
   <div class="compare-table-wrap">
@@ -4506,11 +4509,11 @@ function showRfpStack(index, btn) {
         <tr><td class="rft-feat">Architecture, security, uptime, PCI, scalability, data residency</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">Available on request</td></tr>
 
         <tr class="rft-group"><td colspan="5">AI &amp; Innovation</td></tr>
-        <tr><td class="rft-feat">AI-driven product recommendations</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
-        <tr><td class="rft-feat">Predictive demand forecasting</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
-        <tr><td class="rft-feat">AI-assisted analytics tools</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
+        <tr class="rft-roadmap"><td class="rft-feat">AI-driven product recommendations</td><td class="rft-dot rft-dot-roadmap">●</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
+        <tr class="rft-roadmap"><td class="rft-feat">Predictive demand forecasting</td><td class="rft-dot rft-dot-roadmap">●</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
+        <tr class="rft-roadmap"><td class="rft-feat">AI-assisted analytics tools</td><td class="rft-dot rft-dot-roadmap">●</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
         <tr><td class="rft-feat">Automated marketing segmentation</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
-        <tr><td class="rft-feat">Intelligent upsell &amp; cross-sell logic</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
+        <tr class="rft-roadmap"><td class="rft-feat">Intelligent upsell &amp; cross-sell logic</td><td class="rft-dot rft-dot-roadmap">●</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note">roadmap</td></tr>
       </tbody>
     </table>
   </div>
