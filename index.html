@@ -3104,6 +3104,17 @@ a { color: inherit; text-decoration: none; }
       </div>
       <div class="partner-summary-card is-property">
         <div class="partner-summary-header">
+          <div class="partner-summary-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">VE</div>
+          <div>
+            <div class="partner-summary-name">Veloce</div>
+            <div class="partner-summary-role">F&amp;B / Restaurant POS — Quebec</div>
+          </div>
+          <span class="partner-tier-badge badge-property">Property Specific</span>
+        </div>
+        <div class="partner-summary-desc">Established F&amp;B point-of-sale for the Quebec properties — Village Vacances Valcartier, La Ronde, and Calypso. If Toast is not yet Quebec-certified, Veloce stays in place to keep dining operations running and compliant, with a managed cutover to Toast available once certification lands.</div>
+      </div>
+      <div class="partner-summary-card is-property">
+        <div class="partner-summary-header">
           <div class="partner-summary-icon" style="background:var(--color-surface-offset);color:var(--color-text-muted)">BK</div>
           <div>
             <div class="partner-summary-name">Booker / Anemone</div>
@@ -4620,56 +4631,278 @@ function showRfpStack(index, btn) {
   <section class="inv">
     <div class="inv-inner">
 
-      <h3 class="inv-h3">Pricing — choose your scope</h3>
-      <p class="inv-sub">Every option starts from the same native base. You choose how far Vantage and Toast extend across the portfolio.</p>
-      <p class="invp-note" style="margin:0 0 var(--space-6);max-width:90ch;font-size:var(--text-sm);color:var(--color-text-muted)">The pricing and scope set out in this response are based on the information available to date and are preliminary in nature. Because full site-level discovery has not yet been completed, RocketRez reserves the right to revise scope, pricing, and implementation terms should material requirements, integrations, or site conditions emerge during the pilot or discovery process that differ from the assumptions underlying this response. Final terms will be established following discovery and set out in a definitive agreement executed by the parties.</p>
+      <div class="ppx">
+<style>
+.ppx{ max-width:100%; }
+.ppx *{ box-sizing:border-box; }
+.ppx .ppx-eyebrow{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); margin:0 0 var(--space-4); }
+.ppx .ppx-eyebrow::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--color-primary); }
+.ppx .ppx-h2{ font-size:var(--text-xl); font-weight:800; line-height:1.1; color:var(--color-text); margin:0 0 var(--space-3); }
+.ppx .ppx-sub{ font-size:var(--text-base); color:var(--color-text-muted); line-height:1.7; max-width:78ch; margin:0 0 var(--space-4); }
+.ppx .ppx-fine{ font-size:var(--text-xs); color:var(--color-text-faint); line-height:1.7; max-width:90ch; margin:var(--space-4) 0 0; }
+.ppx .ppx-block{ margin-bottom:var(--space-12); }
+.ppx .ppx-banner{ display:flex; gap:var(--space-4); align-items:flex-start; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-xl); padding:var(--space-5) var(--space-6); margin:0 0 var(--space-8); }
+.ppx .ppx-banner-ico{ flex:0 0 auto; width:40px; height:40px; border-radius:var(--radius-lg); background:var(--color-primary-bg); color:var(--color-primary); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:var(--text-base); }
+.ppx .ppx-banner h3{ font-size:var(--text-lg); font-weight:800; color:var(--color-text); margin:0 0 2px; }
+.ppx .ppx-banner p{ font-size:var(--text-sm); color:var(--color-text-muted); margin:0; }
+.ppx .ppx-clarify{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); margin:0 0 var(--space-8); }
+.ppx .ppx-cl{ background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-xl); padding:var(--space-4) var(--space-5); }
+.ppx .ppx-cl b{ display:block; font-size:var(--text-xs); font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin:0 0 4px; }
+.ppx .ppx-cl.is-opex b{ color:var(--color-primary); }
+.ppx .ppx-cl.is-capex b{ color:var(--color-gold); }
+.ppx .ppx-cl p{ font-size:var(--text-sm); color:var(--color-text-muted); line-height:1.55; margin:0; }
+.ppx .ppx-includes{ background:var(--color-surface); border:1px solid var(--color-border); border-left:4px solid var(--color-success); border-radius:var(--radius-xl); padding:var(--space-6); margin:0 0 var(--space-6); }
+.ppx .ppx-includes-t{ font-size:var(--text-sm); font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--color-success); margin:0 0 var(--space-4); }
+.ppx .ppx-chips{ display:flex; flex-wrap:wrap; gap:var(--space-2); margin:0; padding:0; list-style:none; }
+.ppx .ppx-chips li{ font-size:var(--text-sm); color:var(--color-text); background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-full); padding:.35rem .85rem; }
+.ppx .ppx-includes-note{ font-size:var(--text-xs); color:var(--color-text-faint); margin:var(--space-4) 0 0; }
+.ppx .ppx-options{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); margin:0 0 var(--space-6); }
+.ppx .ppx-opt{ position:relative; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-2xl); padding:var(--space-8) var(--space-6) var(--space-6); }
+.ppx .ppx-opt.is-rec{ border:2px solid var(--color-primary); }
+.ppx .ppx-badge{ position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--color-primary); color:#fff; font-size:var(--text-xs); font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.3rem .9rem; border-radius:var(--radius-full); }
+.ppx .ppx-opt-k{ font-size:var(--text-xs); font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--color-text-muted); margin:0 0 var(--space-2); }
+.ppx .ppx-opt-name{ font-size:var(--text-lg); font-weight:800; color:var(--color-text); margin:0 0 var(--space-3); }
+.ppx .ppx-price{ font-size:var(--text-2xl); font-weight:800; color:var(--color-primary); line-height:1; margin:0 0 var(--space-4); }
+.ppx .ppx-price span{ font-size:var(--text-sm); font-weight:600; color:var(--color-text-muted); }
+.ppx .ppx-opt-desc{ font-size:var(--text-sm); color:var(--color-text-muted); line-height:1.6; margin:0 0 var(--space-5); min-height:3em; }
+.ppx .ppx-incl-strip{ background:var(--color-success-bg); color:var(--color-success); font-size:var(--text-sm); font-weight:700; border-radius:var(--radius-lg); padding:var(--space-3) var(--space-4); margin:0 0 var(--space-4); }
+.ppx .ppx-incl-strip::before{ content:"✓ "; }
+.ppx .ppx-plus{ list-style:none; margin:0 0 var(--space-5); padding:0; display:flex; flex-direction:column; gap:var(--space-3); }
+.ppx .ppx-plus li{ font-size:var(--text-sm); color:var(--color-text); line-height:1.5; padding-left:1.4rem; position:relative; }
+.ppx .ppx-plus li::before{ content:"+"; position:absolute; left:0; color:var(--color-primary); font-weight:800; }
+.ppx .ppx-bd{ border-top:1px solid var(--color-divider); padding-top:var(--space-4); }
+.ppx .ppx-bd-k{ font-size:var(--text-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--color-text-muted); margin:0 0 var(--space-3); }
+.ppx .ppx-row{ display:flex; justify-content:space-between; gap:var(--space-3); padding:.3rem 0; font-size:var(--text-sm); color:var(--color-text-muted); line-height:1.4; }
+.ppx .ppx-row .ppx-amt{ white-space:nowrap; font-weight:700; color:var(--color-text); }
+.ppx .ppx-row.ppx-tot{ border-top:2px solid var(--color-border); margin-top:var(--space-2); padding-top:var(--space-3); font-weight:800; color:var(--color-text); }
+.ppx .ppx-row.ppx-tot .ppx-amt{ color:var(--color-primary); }
+.ppx .ppx-pay{ text-align:center; font-size:var(--text-base); color:var(--color-text); margin:var(--space-6) 0 var(--space-2); }
+.ppx .ppx-pay b{ color:var(--color-primary); }
+.ppx .ppx-grid3{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:var(--space-4); margin:0 0 var(--space-6); }
+.ppx .ppx-card{ background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-xl); padding:var(--space-6); }
+.ppx .ppx-card-k{ font-size:var(--text-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--color-text-muted); margin:0 0 4px; }
+.ppx .ppx-card h4{ font-size:var(--text-base); font-weight:800; color:var(--color-text); margin:0 0 var(--space-2); }
+.ppx .ppx-card-lede{ font-size:var(--text-sm); color:var(--color-text-muted); line-height:1.55; margin:0 0 var(--space-4); }
+.ppx .ppx-li{ padding:var(--space-3) 0; border-bottom:1px solid var(--color-divider); font-size:var(--text-sm); }
+.ppx .ppx-li:last-child{ border-bottom:none; }
+.ppx .ppx-li-top{ display:flex; justify-content:space-between; gap:var(--space-3); color:var(--color-text); font-weight:600; }
+.ppx .ppx-li-top .ppx-amt{ white-space:nowrap; }
+.ppx .ppx-li small{ display:block; color:var(--color-text-faint); font-weight:400; font-size:var(--text-xs); line-height:1.5; margin-top:3px; }
+.ppx .ppx-sub-row{ display:flex; justify-content:space-between; gap:var(--space-3); margin-top:var(--space-4); padding-top:var(--space-3); border-top:2px solid var(--color-border); font-weight:800; color:var(--color-text); font-size:var(--text-sm); }
+.ppx .ppx-totals{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); margin:0 0 var(--space-6); }
+.ppx .ppx-tcard{ background:var(--color-surface-offset); border:1px solid var(--color-border); border-radius:var(--radius-xl); padding:var(--space-5) var(--space-6); }
+.ppx .ppx-tcard.is-rec{ border:2px solid var(--color-primary); }
+.ppx .ppx-tcard-k{ font-size:var(--text-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--color-text-muted); margin:0 0 var(--space-3); }
+.ppx .ppx-tline{ display:flex; justify-content:space-between; font-size:var(--text-sm); color:var(--color-text-muted); padding:.25rem 0; }
+.ppx .ppx-tline b{ color:var(--color-text); font-weight:600; }
+.ppx .ppx-tbig{ display:flex; justify-content:space-between; align-items:baseline; margin-top:var(--space-3); padding-top:var(--space-3); border-top:2px solid var(--color-border); }
+.ppx .ppx-tbig span{ font-size:var(--text-sm); font-weight:800; color:var(--color-text); }
+.ppx .ppx-tbig b{ font-size:var(--text-xl); font-weight:800; color:var(--color-primary); }
+.ppx .ppx-tablewrap{ border:1px solid var(--color-border); border-radius:var(--radius-xl); overflow:hidden; margin:0 0 var(--space-6); }
+.ppx table.ppx-loc{ width:100%; border-collapse:collapse; font-size:var(--text-sm); }
+.ppx table.ppx-loc th{ text-align:left; font-size:var(--text-xs); font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--color-text-muted); background:var(--color-surface-offset); padding:var(--space-3) var(--space-5); border-bottom:1px solid var(--color-border); }
+.ppx table.ppx-loc th.num, .ppx table.ppx-loc td.num{ text-align:right; white-space:nowrap; }
+.ppx table.ppx-loc td{ padding:var(--space-3) var(--space-5); border-bottom:1px solid var(--color-divider); color:var(--color-text-muted); }
+.ppx table.ppx-loc td:first-child{ color:var(--color-text); font-weight:600; }
+.ppx table.ppx-loc tr:last-child td{ border-bottom:none; }
+.ppx table.ppx-loc tr.ppx-loc-tot td{ background:var(--color-primary-bg); color:var(--color-primary); font-weight:800; border-top:1px solid var(--color-border); }
+@media (max-width:820px){ .ppx .ppx-clarify, .ppx .ppx-options, .ppx .ppx-totals{ grid-template-columns:1fr; } }
+</style>
 
-      <div class="iv-base">
-        <div class="iv-base-label">Every option includes — native RocketRez, portfolio-wide</div>
-        <div class="iv-chips">
-          <span class="iv-chip">Ticketing &amp; gate</span>
-          <span class="iv-chip">POS &amp; retail</span>
-          <span class="iv-chip">Access control</span>
-          <span class="iv-chip">Season passes &amp; memberships</span>
-          <span class="iv-chip">Groups</span>
-          <span class="iv-chip">F&amp;B — concessions · counter · KDS · mobile order</span>
-          <span class="iv-chip">Dynamic pricing</span>
-          <span class="iv-chip">Unified cart upsell</span>
-          <span class="iv-chip">Power BI reporting</span>
-          <span class="iv-chip">Sub-ledger &rarr; NetSuite</span>
-        </div>
-        <p class="iv-base-note">Automated demand pricing via Spotlio is available as an option on any tier.</p>
-      </div>
+  <div class="ppx-block">
+<h2 class="ppx-h2">Pricing — choose your scope</h2>
+<p class="ppx-sub">Every option starts from the same native base. You choose how far Vantage and
+      Toast extend across the portfolio.</p>
 
-      <div class="iv-tiers">
-        <div class="iv-tier rec">
-          <div class="iv-rec-badge">Recommended</div>
-          <div class="iv-tier-eyebrow">Option 1</div>
-          <div class="iv-tier-name">RocketRez + Vantage (Full)</div>
-          <div class="iv-tier-price">$3.8M<span class="iv-tier-per"> /yr</span></div>
-          <p class="iv-tier-desc">The full platform across the portfolio, with Vantage wallet, loyalty and guest app at every park.</p>
-          <div class="iv-incl">✓&nbsp; Everything in the platform base</div>
-          <ul class="iv-adds">
-            <li><span class="iv-plus">+</span>Vantage wallet · loyalty · guest identity — all parks</li>
-            <li><span class="iv-plus">+</span>Vantage guest mobile app — all parks</li>
-          </ul>
-        </div>
-        <div class="iv-tier">
-          <div class="iv-tier-eyebrow">Option 2</div>
-          <div class="iv-tier-name">RocketRez + Vantage + Toast</div>
-          <div class="iv-tier-price">$4.1M<span class="iv-tier-per"> /yr</span></div>
-          <p class="iv-tier-desc">Adds Toast full-service, table-side dining at VVV on top of the portfolio-wide stack.</p>
-          <div class="iv-incl">✓&nbsp; Everything in Option 1</div>
-          <ul class="iv-adds">
-            <li><span class="iv-plus">+</span>Toast full-service dining &amp; table management (VVV)</li>
-          </ul>
-        </div>
-      </div>
-      <div style="margin-top:var(--space-5);text-align:center">
-        <p style="font-size:var(--text-base);color:var(--color-text);margin:0;line-height:1.6">Payment processing — <strong style="color:var(--color-primary)">2.22% + $0.15 / transaction</strong><sup>*</sup>, a blended rate via Stripe for RocketRez payments.</p>
-        <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin:var(--space-2) 0 0;line-height:1.6"><sup>*</sup> Credit card processing rates are indicative and subject to final review of merchant processing statements. Final rates will be confirmed following analysis of Premier Parks&rsquo; current statements and set out in the definitive agreement.</p>
-      </div>
-      <p class="invp-note">RocketRez powers attractions F&amp;B end to end — concessions, counter service, and mobile ordering. For full-service, table-side dining at properties like VVV, Toast is an optional specialist that adds table management and coursing. Toast is pending Quebec certification; our recommendation is to stay on Veloce until cutover makes sense. Pricing shown is illustrative.</p>
+    <div class="ppx-clarify">
+<div class="ppx-cl is-opex">
+<b>Annual · OpEx</b>
+<p>The headline figures below are <strong style="color:var(--color-text)">recurring annual operating cost</strong> —
+          software, licensing, hosting, and support. This is what Premier budgets each year.</p>
+</div>
+<div class="ppx-cl is-capex">
+<b>One-time · Year One</b>
+<p>What it takes to launch — hardware, implementation, set-up, and go-live — is itemized
+          separately below under <strong style="color:var(--color-text)">Cost to get started</strong>.</p>
+</div>
+</div>
+
+    <p class="ppx-fine">The pricing and scope set out in this response are based on the information
+      available to date and are preliminary in nature. Because full site-level discovery has not yet
+      been completed, RocketRez reserves the right to revise scope, pricing, and implementation terms
+      should material requirements, integrations, or site conditions emerge during the pilot or
+      discovery process that differ from the assumptions underlying this response. Final terms will be
+      established following discovery and set out in a definitive agreement executed by the parties.</p>
+</div>
+
+  <div class="ppx-includes">
+<div class="ppx-includes-t">Every option includes — native RocketRez, portfolio-wide</div>
+<ul class="ppx-chips">
+<li>Ticketing &amp; gate</li>
+<li>POS &amp; retail</li>
+<li>Access control</li>
+<li>Season passes &amp; memberships</li>
+<li>Groups</li>
+<li>F&amp;B — concessions · counter · KDS · mobile order</li>
+<li>Dynamic pricing</li>
+<li>Unified cart upsell</li>
+<li>Power BI reporting</li>
+<li>Sub-ledger → NetSuite</li>
+</ul>
+<p class="ppx-includes-note">Automated demand pricing via Spotlio is available as an option on any tier.</p>
+</div>
+
+  <div class="ppx-options">
+
+    <div class="ppx-opt is-rec">
+<div class="ppx-badge">Recommended</div>
+<div class="ppx-opt-k">Option 1</div>
+<div class="ppx-opt-name">RocketRez + Vantage (Full)</div>
+<div class="ppx-price">$3.7M<span> /yr</span></div>
+<p class="ppx-opt-desc">The full platform across the portfolio, with Vantage wallet, loyalty and
+        guest app at every park.</p>
+<div class="ppx-incl-strip">Everything in the platform base</div>
+<ul class="ppx-plus">
+<li>Vantage wallet · loyalty · guest identity — all parks</li>
+<li>Vantage guest mobile app — all parks</li>
+</ul>
+<div class="ppx-bd">
+<div class="ppx-bd-k">What's in the annual</div>
+<div class="ppx-row"><span>RocketRez — native platform, portfolio-wide</span><span class="ppx-amt">$2.4M</span></div>
+<div class="ppx-row"><span>Vantage — wallet, loyalty, identity, mobile app</span><span class="ppx-amt">$1.3M</span></div>
+<div class="ppx-row ppx-tot"><span>Total annual</span><span class="ppx-amt">$3.7M</span></div>
+</div>
+</div>
+
+    <div class="ppx-opt">
+<div class="ppx-opt-k">Option 2</div>
+<div class="ppx-opt-name">RocketRez + Vantage + Toast</div>
+<div class="ppx-price">$3.7M<span> /yr</span></div>
+<p class="ppx-opt-desc">Adds Toast enterprise F&amp;B — full-service dining, table management and
+        high-volume outlets — across applicable properties, at no incremental annual cost.</p>
+<div class="ppx-incl-strip">Everything in Option 1</div>
+<ul class="ppx-plus">
+<li>Toast full-service dining &amp; F&amp;B POS — portfolio outlets</li>
+</ul>
+<div class="ppx-bd">
+<div class="ppx-bd-k">What's in the annual</div>
+<div class="ppx-row"><span>RocketRez — native platform (net of Toast F&amp;B offset)</span><span class="ppx-amt">$2.10M</span></div>
+<div class="ppx-row"><span>Vantage — wallet, loyalty, identity, mobile app</span><span class="ppx-amt">$1.30M</span></div>
+<div class="ppx-row"><span>Toast — F&amp;B software (portfolio)</span><span class="ppx-amt">$0.30M</span></div>
+<div class="ppx-row ppx-tot"><span>Total annual</span><span class="ppx-amt">$3.7M</span></div>
+</div>
+</div>
+
+  </div>
+
+  <p class="ppx-fine" style="text-align:center;max-width:74ch;margin-left:auto;margin-right:auto">
+    Toast F&amp;B software (~$301K/yr across the portfolio) is offset within the RocketRez subscription —
+    both options total $3.7M/yr, so adding Toast carries <strong style="color:var(--color-text)">no incremental
+    annual cost</strong> to Premier. The one-time hardware and onboarding for Toast is shown below.</p>
+
+  <p class="ppx-pay">RocketRez payment processing — <b>2.22% + $0.15 / transaction</b><sup>*</sup>, a blended
+    rate via Stripe.</p>
+<p class="ppx-pay" style="margin-top:var(--space-2)">Toast F&amp;B payment processing — <b>interchange + $0.05 / transaction</b><sup>*</sup>
+    (Visa / Mastercard / Discover; $0.04 Amex), 0% processor markup and no monthly fee — for Toast
+    full-service outlets under Option 2.</p>
+<p class="ppx-fine" style="text-align:center;max-width:74ch;margin-left:auto;margin-right:auto">
+<sup>*</sup> Credit card processing rates are indicative and subject to final review of merchant
+    processing statements. Final rates will be confirmed following analysis of Premier Parks' current
+    statements and set out in the definitive agreement.</p>
+
+  <p class="ppx-fine" style="margin-top:var(--space-6)">RocketRez powers attractions F&amp;B end to
+    end — concessions, counter service, and mobile ordering. Toast is the enterprise specialist for
+    full-service, table-side dining and high-volume outlets. Toast is pending Quebec certification; our
+    recommendation is to keep Quebec properties (e.g. La Ronde) on Veloce until cutover makes sense, so
+    those locations may move out of Year-One scope.</p>
+
+  <div class="ppx-block" style="margin-top:4rem">
+<div class="ppx-eyebrow">One-time · Year One</div>
+<h2 class="ppx-h2">Cost to get started</h2>
+<p class="ppx-sub">A one-time investment to stand the platform up — hardware, implementation,
+      configuration, data migration, training, and on-site go-live. Separate from the annual OpEx
+      above, and incurred once. Hardware quantities and Toast figures are estimates and will be
+      confirmed at discovery before contracting.</p>
+
+    <div class="ppx-grid3">
+
+      <div class="ppx-card">
+<div class="ppx-card-k">Commerce &amp; data engine</div>
+<h4>RocketRez</h4>
+<p class="ppx-card-lede">RocketRez is the commerce and data engine the rest of the stack runs on.</p>
+<div class="ppx-li">
+<div class="ppx-li-top"><span>Implementation</span><span class="ppx-amt">$220,000</span></div>
+<small>Implementation, configuration, data migration, set-up, training, go-live, and
+            integrations to Vantage and Toast — no integration fees to Premier. On-site discovery,
+            in-person training, and go-live visits included. Based on estimates shared to date and
+            finalized after site assessment.</small>
+</div>
+<div class="ppx-li">
+<div class="ppx-li-top"><span>EMV payment hardware <em>($350 / device)</em></span><span class="ppx-amt">see total</span></div>
+<small>Option 1 — all payment terminals incl. F&amp;B: <b>~$210,000</b>.<br>
+            Option 2 — ticketing only (~40% of devices): <b>~$110,000</b>; Toast covers F&amp;B EMVs in its quote.</small>
+</div>
+</div>
+
+      <div class="ppx-card">
+<div class="ppx-card-k">Guest experience layer</div>
+<h4>Vantage</h4>
+<p class="ppx-card-lede">Takes Premier above where it is today — unified guest identity, online
+          lodging + activities at Valcartier, loyalty at launch, one mobile app across all parks.</p>
+<div class="ppx-li"><div class="ppx-li-top"><span>Platform implementation (one-time, fixed)</span><span class="ppx-amt">$125,000</span></div></div>
+<div class="ppx-li"><div class="ppx-li-top"><span>Per-site activation</span><span class="ppx-amt">$260,000</span></div><small>Travel, training, and on-site go-live across sites.</small></div>
+<div class="ppx-li"><div class="ppx-li-top"><span>Hardware <em>(estimated)</em></span><span class="ppx-amt">~$123,000</span></div><small>Scaled to 13 sites; finalized after site assessment.</small></div>
+<div class="ppx-sub-row"><span>Vantage one-time</span><span>~$508,000</span></div>
+</div>
+
+      <div class="ppx-card">
+<div class="ppx-card-k">Full-service F&amp;B</div>
+<h4>Toast <span style="font-size:var(--text-xs);font-weight:600;color:var(--color-text-faint)">— Option 2 only</span></h4>
+<p class="ppx-card-lede">Enterprise-grade for high-volume outlets — fine dining, table
+          management, dining reservations, offline mode, native RocketRez integration. Quoted across
+          12 F&amp;B locations; Wet 'n' Wild Toronto not yet quoted.</p>
+<div class="ppx-li"><div class="ppx-li-top"><span>Hardware <em>(estimated)</em></span><span class="ppx-amt">$570,738</span></div><small>Flex + guest display, Tap, MSR, printer, cash drawer, scanners — includes F&amp;B EMV. 2-yr warranty.</small></div>
+<div class="ppx-li"><div class="ppx-li-top"><span>Implementation</span><span class="ppx-amt">$151,191</span></div><small>Install &amp; config, multi-location menu build, on-site contractors.</small></div>
+<div class="ppx-li"><div class="ppx-li-top"><span>Wet 'n' Wild Toronto</span><span class="ppx-amt">quote to follow</span></div><small>Location not yet quoted by Toast — not included in the total below; figure will rise once priced.</small></div>
+<div class="ppx-sub-row"><span>Toast one-time (12 locations)</span><span>$721,929</span></div>
+</div>
+
+    </div>
+
+    <div class="ppx-totals">
+<div class="ppx-tcard is-rec">
+<div class="ppx-tcard-k">Option 1 — RocketRez + Vantage</div>
+<div class="ppx-tline"><span>RocketRez (impl $220k + EMV ~$210k)</span><b>~$430,000</b></div>
+<div class="ppx-tline"><span>Vantage (impl + activation + hardware)</span><b>~$508,000</b></div>
+<div class="ppx-tbig"><span>Year-One cost to get started</span><b>~$938,000</b></div>
+</div>
+<div class="ppx-tcard">
+<div class="ppx-tcard-k">Option 2 — + Toast</div>
+<div class="ppx-tline"><span>RocketRez (impl $220k + EMV ~$110k)</span><b>~$330,000</b></div>
+<div class="ppx-tline"><span>Vantage (impl + activation + hardware)</span><b>~$508,000</b></div>
+<div class="ppx-tline"><span>Toast (hardware + implementation, 12 sites)</span><b>~$721,929</b></div>
+<div class="ppx-tbig"><span>Year-One cost to get started</span><b>~$1,559,929</b></div>
+</div>
+</div>
+
+    <p class="ppx-fine">Year-One cost to get started covers hardware and onboarding only — it does not
+      include Year-One software, which is part of the annual OpEx above. Toast adds ~$622,000 to the
+      one-time investment (its portfolio F&amp;B hardware and implementation across 12 locations, net of
+      the ~$100,000 reduction in RocketRez EMV devices, since Toast covers F&amp;B payment terminals).
+      All hardware quantities, EMV device counts, and Toast figures are estimates based on the proposals
+      to date and will be confirmed during discovery before contracting. Wet 'n' Wild Toronto is not yet
+      quoted by Toast and will be added once priced, raising the Toast total. Quebec properties
+      (La Ronde, ValCartier) are pending Toast certification and may run on Veloce in the interim.
+      Vantage hardware and activation are portfolio-level estimates, finalized after site assessment.</p>
+
+    <p class="ppx-fine" style="margin-top:var(--space-4)"><strong style="color:var(--color-text)">Best-in-class
+      tools that talk to each other — and to NetSuite.</strong> RocketRez is the commerce and data
+      engine; Vantage adds the unified guest layer on top; Toast runs enterprise full-service F&amp;B.
+      Every one feeds the same financial source of truth in NetSuite — one guest identity, one
+      architecture, one set of numbers for finance.</p>
+</div>
+
+</div>
 
       <div class="inv-divider"></div>
 
