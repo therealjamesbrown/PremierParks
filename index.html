@@ -1255,7 +1255,7 @@ a { color: inherit; text-decoration: none; }
 .partner-summary-card.is-core { border-left-color: var(--color-success); }
 .partner-summary-card.is-optional { border-left-color: var(--color-border); }
 .partner-summary-card.is-property { border-left-color: var(--color-gold); }
-.partner-summary-header { display: flex; align-items: flex-start; gap: var(--space-3); flex-wrap: wrap; }
+.partner-summary-header { display: flex; flex-direction: column; gap: var(--space-2); position: relative; padding-right: 95px; }
 .partner-summary-icon {
   width: 32px; height: 32px; border-radius: var(--radius-md);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -1265,10 +1265,10 @@ a { color: inherit; text-decoration: none; }
 .partner-summary-role { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
 .partner-summary-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
 .partner-tier-badge {
-  margin-left: auto; flex-shrink: 0;
+  position: absolute; top: 0; right: 0;
   font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em;
   padding: 0.18rem 0.55rem; border-radius: var(--radius-full);
-  white-space: normal; text-align: center; max-width: 80px;
+  white-space: nowrap;
 }
 .partner-tier-badge.badge-core { background: var(--color-success-bg); color: var(--color-success); }
 .partner-tier-badge.badge-optional { background: var(--color-surface-dynamic); color: var(--color-text-muted); }
