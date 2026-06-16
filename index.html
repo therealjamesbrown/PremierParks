@@ -3936,6 +3936,9 @@ function applyPropertyConfig(key, scopeId, selectEl) {
     var noteEl = document.getElementById(noteId);
     if (noteEl) {
       var note = config && config.note ? config.note : null;
+      if (note && !selectEl) {
+        note = note.replace(/^⚠\s+[^:]+:\s*/, '⚠ ');
+      }
       noteEl.textContent = note || '';
       noteEl.classList.toggle('visible', !!note);
     }
