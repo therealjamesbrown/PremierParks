@@ -3,14 +3,14 @@
 ## Purpose
 
 Premier Parks is building a unified guest experience and operating model across its portfolio of parks and attractions.  
-The goal is to connect best-in-class systems into one modern ecosystem that improves guest journeys and enables enterprise-grade reporting into Oracle and NetSuite.
+The North Star of this initiative is NetSuite — consolidating fragmented financial data from across the portfolio into a single, enterprise-grade reporting and financial control layer.
 
 This initiative is not just a system replacement effort. It is a transformation program to:
 
+- deliver reliable roll-up reporting and financial visibility into NetSuite
 - unify fragmented guest interactions across web, mobile, and on-property touchpoints
 - modernize commerce and entitlement infrastructure
-- improve operational consistency across diverse properties
-- enable reliable roll-up reporting and financial visibility
+- improve operational consistency across diverse properties and support future acquisitions
 
 ## What Premier Parks Is Looking to Solve
 
@@ -194,9 +194,9 @@ POS primarily handles onsite purchases (F&B, retail, ancillary services). It int
 ### Vantage
 
 - Focus: cashless stored value, loyalty, integrated commerce, mobile app
-- Type: potential new partner
-- Strategic angle: opportunities in zoo and whitewater/park integrations
-- Risks/questions: bandwidth, Quebec constraints, Opera Cloud fit
+- Type: **confirmed partner — part of our joint proposal**
+- Strategic angle: complements our ticketing and entitlement layer with mobile app, stored value, and loyalty; zoo and whitewater/park integrations
+- Risks/questions: Quebec constraints, Opera Cloud fit
 - Website: <https://vantage.co/>
 
 ### Spotlio
@@ -207,14 +207,6 @@ POS primarily handles onsite purchases (F&B, retail, ancillary services). It int
 - Risks/questions: potential ownership changes
 - Website: <https://www.spotlio.com/>
 
-### Toast
-
-- Focus: F&B and restaurant operations
-- Type: new partner option
-- Strategic angle: offload F&B complexity with strong product ecosystem
-- Risks/questions: Quebec tax/stacking considerations
-- Website: <https://pos.toasttab.com/>
-
 ### Inntopia
 
 - Focus: integration and package commerce orchestration
@@ -222,13 +214,6 @@ POS primarily handles onsite purchases (F&B, retail, ancillary services). It int
 - Strategic angle: opens broader resort/package opportunities
 - Risks/questions: cost, UX concerns, integration complexity
 - Website: <https://corp.inntopia.com/>
-
-### Lightspeed
-
-- Focus: F&B alternative
-- Type: alternate F&B path
-- Strategic angle: Quebec readiness and potential fit
-- Risks/questions: pivot complexity vs existing Toast commercial path
 
 ## Supporting References
 
@@ -239,5 +224,8 @@ POS primarily handles onsite purchases (F&B, retail, ancillary services). It int
 
 ## Draft Positioning Statement
 
-Premier Parks is unifying the guest journey across lodging, admissions, activities, and onsite commerce by connecting best-in-class systems under a modern orchestration model.  
-Our platform serves as the entitlement and commerce backbone, enabling seamless guest experiences, operational efficiency, and enterprise-ready financial/reporting consolidation into NetSuite and Oracle.
+We are proposing a joint solution with Vantage — combining our ticketing and entitlement platform with Vantage's mobile, stored value, and loyalty capabilities — to serve as the guest experience and commerce backbone for Premier Parks.
+
+The goal is NetSuite. Everything we are building is in service of delivering clean, consolidated financial data and enterprise-grade reporting across the full portfolio. Premier Parks will own their F&B solution; that decision does not affect our scope or architecture.
+
+This is a platform play, not just a system swap. We are the orchestration and entitlement layer that makes NetSuite possible at scale.

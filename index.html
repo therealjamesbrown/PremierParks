@@ -2047,7 +2047,7 @@ a { color: inherit; text-decoration: none; }
   <div class="quick-grid" style="margin-bottom:var(--space-8)">
     <article class="quick-card">
       <h3>The Vision</h3>
-      <p>One seamless guest experience across every park — simplified from arrival to checkout, with every property running on the same platform.</p>
+      <p>NetSuite as the financial North Star — every dollar from every property flowing into a single, clean reporting layer. One unified guest experience built on top of it.</p>
     </article>
     <article class="quick-card">
       <h3>Our Role</h3>
@@ -2055,7 +2055,7 @@ a { color: inherit; text-decoration: none; }
     </article>
     <article class="quick-card">
       <h3>Recommended Architecture</h3>
-      <p>RocketRez + Vantage unify the ticketing backbone with the guest enablement layer — one identity, entitlement, and delivery model across web, mobile app, and in-park. Toast adds enterprise-grade F&B as a standardized integration; for all Quebec properties, Veloce remains the recommended F&B platform until Toast is certified for the market.</p>
+      <p>RocketRez + Vantage — ticketing, entitlements, mobile app, cashless wallet, and loyalty in one connected stack. Every transaction flows to NetSuite automatically. F&amp;B is Premier Parks' choice and sits outside our scope.</p>
     </article>
     <article class="quick-card">
       <h3>Milestones</h3>
@@ -2133,14 +2133,14 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <p class="about-blurb">RocketRez is a cloud-native ticketing, POS, and commerce platform built from the cloud, for the cloud, with a modern architecture that ships improvements weekly instead of in multi-year release cycles. We operate at the intersection of guest experience and operational control — powering online and onsite ticketing, season passes, access control and validation, food &amp; beverage, retail, groups, and events for venues ranging from waterparks and theme parks to zoos and aquariums. Our integration-first design connects cleanly with PMS, F&amp;B, loyalty, and finance systems, making RocketRez a reliable backbone rather than another siloed tool.</p>
+  <p class="about-blurb">RocketRez is a cloud-native ticketing, POS, and commerce platform built from the cloud, for the cloud, with a modern architecture that ships improvements weekly instead of in multi-year release cycles. We operate at the intersection of guest experience and operational control — powering online and onsite ticketing, season passes, access control and validation, food &amp; beverage, retail, groups, and events for venues ranging from waterparks and theme parks to zoos and aquariums.</p>
   <div class="footprint">
     <span class="footprint-label">Footprint</span>
     <ul class="footprint-pills">
       <li>Ticketing</li>
       <li>POS</li>
       <li>Access Control</li>
-      <li>Food &amp; Beverage</li>
+      <li>Food &amp; Beverage (US Properties)</li>
       <li>Retail</li>
       <li>Groups &amp; Events</li>
     </ul>
@@ -2317,7 +2317,7 @@ a { color: inherit; text-decoration: none; }
         <div class="outcome-card-icon" style="background:var(--color-success-bg);color:var(--color-success)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </div>
-        <div class="outcome-card-title">Real-Time Revenue Visibility</div>
+        <div class="outcome-card-title">Near Real-Time Revenue Visibility</div>
         <div class="outcome-card-desc">Performance data by property, channel, and product category available in near real time — not at end-of-month after three rounds of manual exports. Executive Level reporting backed by a single source of truth.</div>
         <div class="outcome-card-proof">NetSuite connectivity — no manual roll-up required</div>
       </div>
@@ -3172,7 +3172,7 @@ a { color: inherit; text-decoration: none; }
   <!-- ── TAB: PLATFORM ─────────────────────────────── -->
   <div class="solution-tab-content visible" id="soltab-platform">
     <div class="section-label" style="margin-bottom:var(--space-3)">Recommended Stack</div>
-    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5);line-height:1.6;max-width:72ch">RocketRez is the system of record for guest commerce and operations. Vantage is a required part of the stack — powering cashless wallet, loyalty, guest identity, and the mobile app across the portfolio. Toast provides optional dedicated restaurant F&amp;B for properties that need it — RocketRez covers F&amp;B natively for standard operations.</p>
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5);line-height:1.6;max-width:72ch">RocketRez is the system of record for guest commerce and operations. Vantage is a required part of the stack — powering cashless wallet, loyalty, guest identity, and the mobile app across the portfolio. Every transaction feeds NetSuite automatically. F&amp;B is Premier Parks' decision and sits outside this proposal.</p>
     <div class="arch-stack-row" style="align-items:stretch">
       <!-- RocketRez — primary, dominant -->
       <div class="arch-stack-node" style="border-color:var(--color-success);background:var(--color-success-bg);flex:2.5;border-width:2px;">
@@ -3199,25 +3199,11 @@ a { color: inherit; text-decoration: none; }
           <li>Guest identity</li>
         </ul>
       </div>
-      <div class="arch-stack-plus">+</div>
-      <!-- Toast — tertiary/optional -->
-      <div class="arch-stack-node" style="border-color:var(--color-warning);background:var(--color-warning-bg);flex:1;opacity:0.75;">
-        <div class="arch-stack-node-role" style="color:var(--color-warning)">Optional</div>
-        <div class="arch-stack-node-title" style="color:var(--color-warning)">Toast</div>
-        <ul class="arch-stack-node-items">
-          <li>Restaurant &amp; F&amp;B POS</li>
-          <li>Kitchen display system</li>
-          <li>Mobile ordering</li>
-          <li>Opera Cloud room charge bridge</li>
-          <li>Available: US &amp; Ontario</li>
-          <li>Quebec certification in flight</li>
-        </ul>
-      </div>
     </div>
     <div class="rec-bar" style="background:var(--color-success-bg);border-color:color-mix(in oklch,var(--color-success) 30%,transparent)">
       <div class="rec-content">
         <div class="rec-title" style="color:var(--color-success)">Architecture Principle</div>
-        <div class="rec-text">RocketRez owns the entitlement backbone end-to-end. Partner systems integrate through clean, documented APIs — no duplicated logic, no competing sources of truth. Every channel validates from RocketRez, and each system — RocketRez, Vantage, and Toast — pushes its financial data independently to NetSuite, giving your finance team a complete picture without manual consolidation.</div>
+        <div class="rec-text">RocketRez owns the entitlement backbone end-to-end. Vantage connects through clean, documented APIs for wallet, loyalty, and mobile — no duplicated logic, no competing sources of truth. Every channel validates from RocketRez, and all financial data flows automatically to NetSuite, giving your finance team a complete picture without manual consolidation.</div>
       </div>
     </div>
   </div>
@@ -3275,28 +3261,6 @@ a { color: inherit; text-decoration: none; }
         </div>
         <div class="partner-summary-desc">The only platform with native cashless wallet, loyalty, and mobile app in one architecture. Enchanted Parks (8 parks) selected Vantage for enterprise deployment Q2 2026 — direct comparable to Premier Parks' portfolio.</div>
       </div>
-      <div class="partner-summary-card is-optional">
-        <div class="partner-summary-header">
-          <div class="partner-summary-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">TO</div>
-          <div>
-            <div class="partner-summary-name">Toast</div>
-            <div class="partner-summary-role">F&amp;B / Restaurant POS</div>
-          </div>
-          <span class="partner-tier-badge badge-optional">Optional</span>
-        </div>
-        <div class="partner-summary-desc">Purpose-built restaurant POS for front-of-house, kitchen display, and mobile ordering. Keeps F&amp;B operations best-in-class without forcing RocketRez to manage dining complexity.</div>
-      </div>
-      <div class="partner-summary-card is-property">
-        <div class="partner-summary-header">
-          <div class="partner-summary-icon" style="background:var(--color-warning-bg);color:var(--color-warning)">VE</div>
-          <div>
-            <div class="partner-summary-name">Veloce</div>
-            <div class="partner-summary-role">F&amp;B / Restaurant POS — Quebec</div>
-          </div>
-          <span class="partner-tier-badge badge-property">Property Specific</span>
-        </div>
-        <div class="partner-summary-desc">Established F&amp;B point-of-sale for the Quebec properties — Village Vacances Valcartier, La Ronde, and Calypso. If Toast is not yet Quebec-certified, Veloce stays in place to keep dining operations running and compliant, with a managed cutover to Toast available once certification lands.</div>
-      </div>
       <div class="partner-summary-card is-property">
         <div class="partner-summary-header">
           <div class="partner-summary-icon" style="background:var(--color-surface-offset);color:var(--color-text-muted)">BK</div>
@@ -3342,9 +3306,9 @@ a { color: inherit; text-decoration: none; }
         <div class="integ-domain-desc">Vantage reads entitlement status from RocketRez to surface pass details in-app. Wallet transactions and loyalty events sync back. Guest identity is established at purchase and maintained through the visit lifecycle.</div>
       </div>
       <div class="integ-domain-card">
-        <div class="integ-domain-title">F&amp;B / Toast</div>
-        <div class="integ-domain-owner">Owner: Toast (POS) — optional integration</div>
-        <div class="integ-domain-desc">Toast handles F&amp;B ordering and kitchen operations independently. Integration to Opera Cloud for room-charge posting and to RocketRez for entitlement-based meal-plan validation where applicable.</div>
+        <div class="integ-domain-title">F&amp;B</div>
+        <div class="integ-domain-owner">Owner: Premier Parks — their choice of F&amp;B solution</div>
+        <div class="integ-domain-desc">F&amp;B platform selection is Premier Parks' decision and sits outside this proposal. RocketRez can support entitlement-based meal-plan validation via API where applicable, regardless of which F&amp;B system is chosen.</div>
       </div>
       <div class="integ-domain-card">
         <div class="integ-domain-title">Access Control / Gate Hardware</div>
@@ -3576,7 +3540,7 @@ a { color: inherit; text-decoration: none; }
                   <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Pass Display · QR<br>Entitlement Validation</span></div>
                   <div class="hub-connector">↔</div>
                   <div class="hub-side">
-                    <div class="hub-node node-green" data-comp="fnb">Retail &amp; F&amp;B POS<span class="hub-sub">Mobile Order &amp; Pay</span><span class="hub-partner-tag">Powered by RocketRez · Toast optional</span></div>
+                    <div class="hub-node node-gold" data-comp="fnb">F&amp;B POS<span class="hub-sub">Mobile Order &amp; Pay</span><span class="hub-partner-tag">Third-Party Platform</span></div>
                     <div class="hub-node node-gold comp-inactive" data-comp="spa">Spa &amp; Activities<span class="hub-sub">Spa · Rental</span><span class="hub-partner-tag">Partner — where applicable</span></div>
                   </div>
                 </div>
@@ -3586,7 +3550,7 @@ a { color: inherit; text-decoration: none; }
             </div>
 
             <div class="ideal-diagram" id="ideal-inperson-sa">
-              <p class="dataflow-caption">RocketRez powers every on-property touchpoint — admissions, retail, and F&amp;B all transact through a single commerce layer. Toast is available as an optional add-on for dedicated restaurant operations.</p>
+              <p class="dataflow-caption">RocketRez powers admissions, retail, and onsite commerce. F&amp;B is handled by Premier Parks' chosen third-party platform. All revenue flows to NetSuite automatically.</p>
               <div class="hub-full node-muted" style="max-width:220px">Guest Arrives On-Property<span class="hub-sub">Walk-Up · Lodging Guest · Group</span></div>
               <div class="hub-connector">↓</div>
               <div class="hub-ecosystem">
@@ -3594,7 +3558,7 @@ a { color: inherit; text-decoration: none; }
                 <div class="hub-row" style="gap:var(--space-2)">
                   <div class="hub-side">
                     <div class="hub-node node-green">Gate / Admissions<span class="hub-sub">Scan · Validate · Admit · Cabana</span><span class="hub-partner-tag">Powered by RocketRez</span></div>
-                    <div class="hub-node node-green" data-comp="fnb">Retail &amp; F&amp;B POS<span class="hub-sub">Onsite Commerce · Cashless</span><span class="hub-partner-tag">Powered by RocketRez · Toast optional</span></div>
+                    <div class="hub-node node-gold" data-comp="fnb">F&amp;B POS<span class="hub-sub">Onsite Commerce</span><span class="hub-partner-tag">Third-Party Platform</span></div>
                   </div>
                   <div class="hub-connector">↔</div>
                   <div class="hub-center node-green">RocketRez<span class="hub-sub" style="opacity:1">Commerce Layer<br>Entitlements · Access · POS</span></div>
@@ -4394,7 +4358,7 @@ function showRfpStack(index, btn) {
     <div class="arch-icon" style="background:var(--color-blue-bg);color:var(--color-blue)">RFP</div>
     <div class="arch-title-block">
       <div class="arch-title">RFP Fit — by Provider</div>
-      <div class="arch-subtitle">Capability coverage across RocketRez, Vantage, and Toast</div>
+      <div class="arch-subtitle">Capability coverage across RocketRez and Vantage</div>
     </div>
   </div>
 
@@ -4432,7 +4396,7 @@ function showRfpStack(index, btn) {
           <th style="width:38%">Capability</th>
           <th class="rft-provider">RocketRez</th>
           <th class="rft-provider">Vantage</th>
-          <th class="rft-provider">Toast</th>
+          <th class="rft-provider">F&amp;B (Client)</th>
           <th>Notes</th>
         </tr>
       </thead>
@@ -4512,7 +4476,7 @@ function showRfpStack(index, btn) {
         <tr><td class="rft-feat">POS integration</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-none">—</td><td class="rft-dot rft-dot-none">—</td><td class="rft-note"></td></tr>
         <tr><td class="rft-feat">ERP integration — NetSuite</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">capability via API</td></tr>
         <tr><td class="rft-feat">CRM integration</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">capability via API</td></tr>
-        <tr><td class="rft-feat">Payment processors</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">RocketRez &amp; Vantage: unified · Toast: self</td></tr>
+        <tr><td class="rft-feat">Payment processors</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">RocketRez &amp; Vantage: unified · F&amp;B platform: independent</td></tr>
         <tr><td class="rft-feat">Tax &amp; compliance systems</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note">discovery needed</td></tr>
         <tr><td class="rft-feat">REST APIs, webhooks, real-time</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-dot rft-dot-api">◯</td><td class="rft-note"></td></tr>
         <tr><td class="rft-feat">Full API documentation w/ schemas</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-dot rft-dot-filled">●</td><td class="rft-note"></td></tr>
@@ -4923,8 +4887,7 @@ function showRfpStack(index, btn) {
 
   <div class="ppx-block">
 <h2 class="ppx-h2">Pricing — choose your scope</h2>
-<p class="ppx-sub">Every option starts from the same native base. You choose how far Vantage and
-      Toast extend across the portfolio.</p>
+<p class="ppx-sub">Every option starts from the same native base. You choose how far Vantage extends across the portfolio.</p>
 
     <div class="ppx-clarify">
 <div class="ppx-cl is-opex">
@@ -4955,7 +4918,6 @@ function showRfpStack(index, btn) {
 <li>Access control</li>
 <li>Season passes &amp; memberships</li>
 <li>Groups</li>
-<li>F&amp;B — concessions · counter · KDS · mobile order</li>
 <li>Dynamic pricing</li>
 <li>Unified cart upsell</li>
 <li>Power BI reporting</li>
@@ -4986,55 +4948,21 @@ function showRfpStack(index, btn) {
 </div>
 </div>
 
-    <div class="ppx-opt">
-<div class="ppx-opt-k">Option 2</div>
-<div class="ppx-opt-name">RocketRez + Vantage + Toast</div>
-<div class="ppx-price">$3.7M<span> /yr</span></div>
-<p class="ppx-opt-desc">Adds Toast enterprise F&amp;B — full-service dining, table management and
-        high-volume outlets — across applicable properties, at no incremental annual cost.</p>
-<div class="ppx-incl-strip">Everything in Option 1</div>
-<ul class="ppx-plus">
-<li>Toast full-service dining &amp; F&amp;B POS — portfolio outlets</li>
-</ul>
-<div class="ppx-bd">
-<div class="ppx-bd-k">What's in the annual</div>
-<div class="ppx-row"><span>RocketRez — native platform (net of Toast F&amp;B offset)</span><span class="ppx-amt">$2.10M</span></div>
-<div class="ppx-row"><span>Vantage — wallet, loyalty, identity, mobile app</span><span class="ppx-amt">$1.30M</span></div>
-<div class="ppx-row"><span>Toast — F&amp;B software (portfolio)</span><span class="ppx-amt">$0.30M</span></div>
-<div class="ppx-row ppx-tot"><span>Total annual</span><span class="ppx-amt">$3.7M</span></div>
-</div>
-</div>
-
   </div>
-
-  <p class="ppx-fine" style="text-align:center;max-width:74ch;margin-left:auto;margin-right:auto">
-    Toast F&amp;B software (~$301K/yr across the portfolio) is offset within the RocketRez subscription —
-    both options total $3.7M/yr, so adding Toast carries <strong style="color:var(--color-text)">no incremental
-    annual cost</strong> to Premier. The one-time hardware and onboarding for Toast is shown below.</p>
 
   <p class="ppx-pay">RocketRez payment processing — <b>2.22% + $0.15 / transaction</b><sup>*</sup>, a blended
     rate via Stripe.</p>
-<p class="ppx-pay" style="margin-top:var(--space-2)">Toast F&amp;B payment processing — <b>interchange + $0.05 / transaction</b><sup>*</sup>
-    (Visa / Mastercard / Discover; $0.04 Amex), 0% processor markup and no monthly fee — for Toast
-    full-service outlets under Option 2.</p>
 <p class="ppx-fine" style="text-align:center;max-width:74ch;margin-left:auto;margin-right:auto">
 <sup>*</sup> Credit card processing rates are indicative and subject to final review of merchant
     processing statements. Final rates will be confirmed following analysis of Premier Parks' current
     statements and set out in the definitive agreement.</p>
-
-  <p class="ppx-fine" style="margin-top:var(--space-6)">RocketRez powers attractions F&amp;B end to
-    end — concessions, counter service, and mobile ordering. Toast is the enterprise specialist for
-    full-service, table-side dining and high-volume outlets. Toast is pending Quebec certification; our
-    recommendation is to keep Quebec properties (e.g. La Ronde) on Veloce until cutover makes sense, so
-    those locations may move out of Year-One scope.</p>
 
   <div class="ppx-block" style="margin-top:4rem">
 <div class="ppx-eyebrow">One-time · Year One</div>
 <h2 class="ppx-h2">Cost to get started</h2>
 <p class="ppx-sub">A one-time investment to stand the platform up — hardware, implementation,
       configuration, data migration, training, and on-site go-live. Separate from the annual OpEx
-      above, and incurred once. Hardware quantities and Toast figures are estimates and will be
-      confirmed at discovery before contracting.</p>
+      above, and incurred once. Hardware quantities are estimates and will be confirmed at discovery before contracting.</p>
 
     <div class="ppx-grid3">
 
@@ -5045,14 +4973,13 @@ function showRfpStack(index, btn) {
 <div class="ppx-li">
 <div class="ppx-li-top"><span>Implementation</span><span class="ppx-amt">$220,000</span></div>
 <small>Implementation, configuration, data migration, set-up, training, go-live, and
-            integrations to Vantage and Toast — no integration fees to Premier. On-site discovery,
+            integrations to Vantage — no integration fees to Premier. On-site discovery,
             in-person training, and go-live visits included. Based on estimates shared to date and
             finalized after site assessment.</small>
 </div>
 <div class="ppx-li">
 <div class="ppx-li-top"><span>EMV payment hardware <em>($350 / device)</em></span><span class="ppx-amt">see total</span></div>
-<small>Option 1 — all payment terminals incl. F&amp;B: <b>~$210,000</b>.<br>
-            Option 2 — ticketing only (~40% of devices): <b>~$110,000</b>; Toast covers F&amp;B EMVs in its quote.</small>
+<small>Payment terminals for ticketing and retail — F&amp;B EMV hardware is outside this proposal and managed by Premier Parks' chosen F&amp;B platform: <b>~$210,000</b>.</small>
 </div>
 <div class="ppx-sub-row"><span>RocketRez one-time</span><span>~$330–430k</span></div>
 </div>
@@ -5068,59 +4995,38 @@ function showRfpStack(index, btn) {
 <div class="ppx-sub-row"><span>Vantage one-time</span><span>~$508,000</span></div>
 </div>
 
-      <div class="ppx-card">
-<div class="ppx-card-k">Full-service F&amp;B</div>
-<h4>Toast <span style="font-size:var(--text-xs);font-weight:600;color:var(--color-text-faint)">— Option 2 only</span></h4>
-<p class="ppx-card-lede">Enterprise-grade for high-volume outlets — fine dining, table
-          management, dining reservations, offline mode, native RocketRez integration. Quoted across
-          12 F&amp;B locations; Wet 'n' Wild Toronto not yet quoted.</p>
-<div class="ppx-li"><div class="ppx-li-top"><span>Hardware <em>(estimated)</em></span><span class="ppx-amt">$570,738</span></div><small>Flex + guest display, Tap, MSR, printer, cash drawer, scanners — includes F&amp;B EMV. 2-yr warranty.</small></div>
-<div class="ppx-li"><div class="ppx-li-top"><span>Implementation</span><span class="ppx-amt">$151,191</span></div><small>Install &amp; config, multi-location menu build, on-site contractors.</small></div>
-<div class="ppx-li"><div class="ppx-li-top"><span>Wet 'n' Wild Toronto</span><span class="ppx-amt">quote to follow</span></div><small>Location not yet quoted by Toast — not included in the total below; figure will rise once priced.</small></div>
-<div class="ppx-sub-row"><span>Toast one-time (12 locations)</span><span>$721,929</span></div>
-</div>
-
     </div>
 
     <div class="ppx-totals">
 <div class="ppx-tcard is-rec">
-<div class="ppx-tcard-k">Option 1 — RocketRez + Vantage</div>
+<div class="ppx-tcard-k">RocketRez + Vantage</div>
 <div class="ppx-tline"><span>RocketRez (impl $220k + EMV ~$210k)</span><b>~$430,000</b></div>
 <div class="ppx-tline"><span>Vantage (impl + activation + hardware)</span><b>~$508,000</b></div>
 <div class="ppx-tbig"><span>Year-One cost to get started</span><b>~$938,000</b></div>
-</div>
-<div class="ppx-tcard">
-<div class="ppx-tcard-k">Option 2 — + Toast</div>
-<div class="ppx-tline"><span>RocketRez (impl $220k + EMV ~$110k)</span><b>~$330,000</b></div>
-<div class="ppx-tline"><span>Vantage (impl + activation + hardware)</span><b>~$508,000</b></div>
-<div class="ppx-tline"><span>Toast (hardware + implementation, 12 sites)</span><b>~$721,929</b></div>
-<div class="ppx-tbig"><span>Year-One cost to get started</span><b>~$1,559,929</b></div>
 </div>
 </div>
 
     <div style="background:var(--color-primary-bg);border:2px solid var(--color-primary);border-radius:var(--radius-xl);padding:var(--space-5) var(--space-6);margin:0 0 var(--space-6);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--space-3)">
       <div>
-        <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-primary);margin:0 0 4px">Total one-time CapEx range</div>
-        <div style="font-size:var(--text-sm);color:var(--color-text-muted)">Option 1 (RocketRez + Vantage) → Option 2 (+ Toast)</div>
+        <div style="font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-primary);margin:0 0 4px">Total one-time CapEx</div>
+        <div style="font-size:var(--text-sm);color:var(--color-text-muted)">RocketRez + Vantage — hardware and onboarding</div>
       </div>
-      <div style="font-size:var(--text-2xl);font-weight:800;color:var(--color-primary);white-space:nowrap">~$938K – ~$1.56M</div>
+      <div style="font-size:var(--text-2xl);font-weight:800;color:var(--color-primary);white-space:nowrap">~$938K</div>
     </div>
 
     <p class="ppx-fine">Year-One cost to get started covers hardware and onboarding only — it does not
-      include Year-One software, which is part of the annual OpEx above. Toast adds ~$622,000 to the
-      one-time investment (its portfolio F&amp;B hardware and implementation across 12 locations, net of
-      the ~$100,000 reduction in RocketRez EMV devices, since Toast covers F&amp;B payment terminals).
-      All hardware quantities, EMV device counts, and Toast figures are estimates based on the proposals
-      to date and will be confirmed during discovery before contracting. Wet 'n' Wild Toronto is not yet
-      quoted by Toast and will be added once priced, raising the Toast total. Quebec properties
-      (La Ronde, ValCartier) are pending Toast certification and may run on Veloce in the interim.
-      Vantage hardware and activation are portfolio-level estimates, finalized after site assessment.</p>
+      include Year-One software, which is part of the annual OpEx above. All hardware quantities and EMV
+      device counts are estimates based on proposals to date and will be confirmed during discovery before
+      contracting. Vantage hardware and activation are portfolio-level estimates, finalized after site
+      assessment. F&amp;B hardware and implementation is outside this proposal — Premier Parks will manage
+      their own F&amp;B platform selection and onboarding. For Quebec properties (VVV, La Ronde, Calypso),
+      Veloce remains the F&amp;B platform of record for fiscal compliance, as RocketRez is not pursuing
+      Quebec government F&amp;B reporting certification.</p>
 
     <p class="ppx-fine" style="margin-top:var(--space-4)"><strong style="color:var(--color-text)">Best-in-class
       tools that talk to each other — and to NetSuite.</strong> RocketRez is the commerce and data
-      engine; Vantage adds the unified guest layer on top; Toast runs enterprise full-service F&amp;B.
-      Every one feeds the same financial source of truth in NetSuite — one guest identity, one
-      architecture, one set of numbers for finance.</p>
+      engine; Vantage adds the unified guest layer on top. Every transaction feeds the same financial
+      source of truth in NetSuite — one guest identity, one architecture, one set of numbers for finance.</p>
 </div>
 
 </div>
